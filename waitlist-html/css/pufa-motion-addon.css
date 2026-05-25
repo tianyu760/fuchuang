@@ -1,0 +1,37 @@
+/**
+ * 普法宣传页 — 仅动效增强，不改变 DOM 结构与数据逻辑
+ */
+main.grow {
+  animation: pufa-page-in 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes pufa-page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pufa-card,
+.pufa-article-card {
+  will-change: transform;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pufa-tab {
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.pufa-tab:hover {
+  transform: translateY(-1px);
+}
+
+.pufa-res-link {
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pufa-res-link:hover {
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main.grow { animation: none; }
+  .pufa-card:hover,
+  .pufa-article-card:hover { transform: none; }
+}

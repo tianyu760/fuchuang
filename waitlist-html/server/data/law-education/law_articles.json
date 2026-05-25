@@ -1,0 +1,184 @@
+[
+  {
+    "id": "art_1",
+    "title": "网购七天无理由退货：边界与维权路径",
+    "categoryId": "consumer",
+    "tags": [
+      "消费维权",
+      "热点"
+    ],
+    "summary": "解析七天无理由适用范围、运费承担与商家拒绝退款时的投诉渠道。",
+    "cover": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=450&fit=crop",
+    "content": "《消费者权益保护法》第二十五条…",
+    "reads": 12840,
+    "likes": 892,
+    "featured": true,
+    "mediaType": "article",
+    "createdAt": "2026-05-01T08:00:00.000Z",
+    "updatedAt": "2026-05-10T08:00:00.000Z"
+  },
+  {
+    "id": "art_2",
+    "title": "个人信息保护法：APP 收集数据的合规红线",
+    "categoryId": "cyber",
+    "tags": [
+      "网络安全",
+      "隐私"
+    ],
+    "summary": "超范围收集、强制授权、泄露举报与赔偿请求权要点。",
+    "cover": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&h=450&fit=crop",
+    "content": "处理个人信息应当具有明确、合理的目的…",
+    "reads": 9560,
+    "likes": 654,
+    "featured": true,
+    "mediaType": "article",
+    "createdAt": "2026-05-02T08:00:00.000Z",
+    "updatedAt": "2026-05-11T08:00:00.000Z"
+  },
+  {
+    "id": "art_3",
+    "title": "劳动合同解除与经济补偿金 N、N+1、2N",
+    "categoryId": "labor",
+    "tags": [
+      "劳动法",
+      "职场"
+    ],
+    "summary": "合法解除、违法解除与经济补偿计算规则及仲裁时效。",
+    "cover": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=450&fit=crop",
+    "content": "《劳动合同法》第四十六条…",
+    "reads": 18200,
+    "likes": 1204,
+    "featured": true,
+    "mediaType": "article",
+    "createdAt": "2026-05-03T08:00:00.000Z",
+    "updatedAt": "2026-05-12T08:00:00.000Z"
+  },
+  {
+    "id": "art_4",
+    "title": "校园欺凌的法律责任与救济途径",
+    "categoryId": "campus",
+    "tags": [
+      "校园安全",
+      "未成年人"
+    ],
+    "summary": "学校、监护人与侵权人责任，以及向教育主管部门投诉的路径。",
+    "cover": "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=450&fit=crop",
+    "content": "《未成年人保护法》第三十九条…",
+    "reads": 7340,
+    "likes": 421,
+    "featured": false,
+    "mediaType": "article",
+    "createdAt": "2026-05-04T08:00:00.000Z",
+    "updatedAt": "2026-05-12T08:00:00.000Z"
+  },
+  {
+    "id": "art_5",
+    "title": "电信诈骗：止付、报案与资金追回",
+    "categoryId": "telecom",
+    "tags": [
+      "反诈",
+      "刑事"
+    ],
+    "summary": "接到诈骗电话后的紧急措施、证据固定与刑事立案要点。",
+    "cover": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=450&fit=crop",
+    "content": "《刑法》第二百六十六条…",
+    "reads": 22100,
+    "likes": 1890,
+    "featured": true,
+    "mediaType": "article",
+    "createdAt": "2026-05-05T08:00:00.000Z",
+    "updatedAt": "2026-05-13T08:00:00.000Z"
+  },
+  {
+    "id": "art_6",
+    "title": "离婚财产分割：共同债务与个人债务",
+    "categoryId": "marriage",
+    "tags": [
+      "婚姻法",
+      "家庭"
+    ],
+    "summary": "夫妻共同债务认定、婚前财产与子女抚养费的计算思路。",
+    "cover": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&h=450&fit=crop",
+    "content": "《民法典》婚姻家庭编…",
+    "reads": 11200,
+    "likes": 778,
+    "featured": false,
+    "mediaType": "article",
+    "createdAt": "2026-05-06T08:00:00.000Z",
+    "updatedAt": "2026-05-13T08:00:00.000Z"
+  },
+  {
+    "id": "art_7",
+    "title": "民法典人格权：肖像与名誉网络侵权",
+    "categoryId": "civil",
+    "tags": [
+      "民法",
+      "网络"
+    ],
+    "summary": "自媒体转载、恶意评论与平台通知删除规则。",
+    "cover": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=450&fit=crop",
+    "content": "《民法典》第一千零一十九条…",
+    "reads": 6800,
+    "likes": 312,
+    "featured": false,
+    "mediaType": "article",
+    "createdAt": "2026-05-07T08:00:00.000Z",
+    "updatedAt": "2026-05-14T08:00:00.000Z"
+  },
+  {
+    "id": "art_8",
+    "title": "宪法公民基本权利：言论、受教育与劳动权",
+    "categoryId": "constitution",
+    "tags": [
+      "宪法",
+      "入门"
+    ],
+    "summary": "以生活场景理解宪法权利与国家机关职权边界。",
+    "cover": "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=450&fit=crop",
+    "content": "中华人民共和国宪法 第二章…",
+    "reads": 5400,
+    "likes": 289,
+    "featured": false,
+    "mediaType": "article",
+    "createdAt": "2026-05-08T08:00:00.000Z",
+    "updatedAt": "2026-05-14T08:00:00.000Z"
+  },
+  {
+    "id": "art_v1",
+    "title": "3 分钟看懂：消费者退换货法定权利",
+    "categoryId": "consumer",
+    "tags": [
+      "视频普法",
+      "短视频"
+    ],
+    "summary": "视频解读七天无理由与运费规则。",
+    "cover": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=450&fit=crop",
+    "content": "",
+    "reads": 15600,
+    "likes": 2340,
+    "featured": true,
+    "mediaType": "video",
+    "videoUrl": "https://player.bilibili.com/player.html?bvid=BV16p4y1X7jT&high_quality=1&danmaku=0",
+    "createdAt": "2026-05-09T08:00:00.000Z",
+    "updatedAt": "2026-05-15T08:00:00.000Z"
+  },
+  {
+    "id": "art_v2",
+    "title": "直播带货翻车：能否主张退一赔三？",
+    "categoryId": "consumer",
+    "tags": [
+      "视频普法",
+      "直播"
+    ],
+    "summary": "虚假宣传、主播责任与平台连带责任。",
+    "cover": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=450&fit=crop",
+    "content": "",
+    "reads": 8900,
+    "likes": 1670,
+    "featured": false,
+    "mediaType": "video",
+    "videoUrl": "https://player.bilibili.com/player.html?bvid=BV19x421f7fh&high_quality=1&danmaku=0",
+    "createdAt": "2026-05-10T08:00:00.000Z",
+    "updatedAt": "2026-05-15T08:00:00.000Z"
+  }
+]

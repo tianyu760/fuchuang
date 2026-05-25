@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>文书与材料 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./css/legal-document.css" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script src="./js/auth.js"></script>
+    <script>
+        if (!FayiAuth.getCurrentUser()) {
+            window.location.replace('login.html?next=' + encodeURIComponent('wenshi.html'));
+        }
+    </script>
+    <style>
+    /* ===== 背景：文书签署场景 + 白色蒙层 ===== */
+    body {
+        background:
+            linear-gradient(rgba(248,250,252,0.93), rgba(248,250,252,0.93)),
+            url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&h=1080&fit=crop')
+            no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .dark body { background-color: #0f172a; }
+
+    /* ===== 主容器 ===== */
+    .ws-wrap { max-width: 980px; margin: 0 auto; padding: 44px 24px 72px; }
+    @media (max-width: 640px) { .ws-wrap { padding: 28px 16px 48px; } }
+
+    /* ===== 面包屑 ===== */
+    .ws-breadcrumb {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 12px; color: #94a3b8; margin-bottom: 14px;
+    }
+    .ws-breadcrumb a { color: #94a3b8; text-decoration: none; }
+    .ws-breadcrumb a:hover { color: #3b82f6; }
+    .ws-breadcrumb span { color: #64748b; }
+
+    /* ===== 页面标题 ===== */
+    .ws-hero { margin-bottom: 32px; }
+    .ws-hero h1 {
+        font-size: clamp(22px, 3vw, 28px); font-weight: 700;
+        color: #1e293b; margin: 0 0 8px; line-height: 1.25;
+    }
+    .dark .ws-hero h1 { color: #e2e8f0; }
+    .ws-hero p { font-size: 14px; color: #64748b; margin: 0; line-height: 1.7; }
+    .dark .ws-hero p { color: #94a3b8; }
+
+    /* ===== 文书类型入口卡片 ===== */
+    .ws-quick-label {
+        font-size: 13px; font-weight: 700; color: #475569;
+        margin-bottom: 12px; letter-spacing: .04em;
+    }
+    .dark .ws-quick-label { color: #94a3b8; }
+    .ws-quick-pills {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 28px;
+    }
+    @media (max-width: 980px) {
+      .ws-quick-pills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .ws-quick-pills { grid-template-columns: 1fr; }
+    }
+    .ws-pill {
+        display: block;
+        width: 100%;
+        text-align: left;
+        font-size: 14px;
+        line-height: 1.55;
+        padding: 24px;
+        border-radius: 18px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: rgba(255,255,255,0.92);
+        color: #1f2937;
+        cursor: pointer;
+        transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        font-weight: 600;
+    }
+    .dark .ws-pill {
+        background: rgba(30,41,59,.86); border-color: rgba(255,255,255,.12); color: #e2e8f0;
+    }
+    .ws-pill:hover {
+        transform: translateY(-4px);
+        border-color: rgba(59, 130, 246, 0.45);
+        box-shadow: 0 10px 24px rgba(59,130,246,0.15);
+    }
+    .dark .ws-pill:hover { border-color: rgba(129,140,248,.45); box-shadow: 0 10px 24px rgba(30,41,59,.4); }
+    .ws-pill small {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .dark .ws-pill small { color: #94a3b8; }
+
+    /* ===== 提问卡片 ===== */
+    .ws-form-card {
+        background: #ffffff; border: 1px solid #e2e8f0;
+        border-radius: 12px; padding: 24px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+    .dark .ws-form-card { background: rgba(30,41,59,.9); border-color: rgba(255,255,255,.08); }
+
+    .ws-form-label {
+        display: block; font-size: 14px; font-weight: 600;
+        color: #1e293b; margin-bottom: 10px;
+    }
+    .dark .ws-form-label { color: #e2e8f0; }
+
+    .ws-textarea {
+        width: 100%; box-sizing: border-box;
+        border: 1px solid #e2e8f0; border-radius: 8px;
+        padding: 10px 14px; font-size: 14px; color: #1f2937;
+        background: #f8fafc; outline: none; resize: vertical;
+        min-height: 90px; line-height: 1.6; font-family: inherit;
+        transition: border-color .18s, box-shadow .18s;
+    }
+    .dark .ws-textarea {
+        background: rgba(15,23,42,.5); border-color: rgba(255,255,255,.1); color: #e2e8f0;
+    }
+    .ws-textarea:focus {
+        border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.12);
+        background: #ffffff;
+    }
+    .ws-textarea::placeholder { color: #94a3b8; }
+
+    .ws-form-footer { display: flex; justify-content: flex-end; margin-top: 14px; }
+    .ws-submit-btn {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 10px 22px; border: none; border-radius: 8px;
+        background: #1e293b; color: #fff;
+        font-size: 14px; font-weight: 600; cursor: pointer;
+        transition: background .18s, transform .15s;
+    }
+    .ws-submit-btn:hover { background: #0f172a; transform: translateY(-2px); }
+    .ws-submit-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* ===== 结果卡片 ===== */
+    .ws-result-card {
+        background: #ffffff; border: 1px solid #e2e8f0;
+        border-radius: 12px; padding: 24px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+    .dark .ws-result-card { background: rgba(30,41,59,.9); border-color: rgba(255,255,255,.08); }
+
+    .ws-result-hd {
+        display: flex; align-items: center; gap: 10px;
+        margin-bottom: 16px; padding-bottom: 14px;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .dark .ws-result-hd { border-bottom-color: rgba(255,255,255,.06); }
+    .ws-result-hd__avatar {
+        width: 28px; height: 28px; border-radius: 50%;
+        object-fit: cover; border: 2px solid #e2e8f0;
+    }
+    .ws-result-hd__name { font-size: 13px; font-weight: 600; color: #64748b; }
+    .dark .ws-result-hd__name { color: #94a3b8; }
+
+    .ws-answer { font-size: 14px; color: #374151; line-height: 1.8; }
+    .dark .ws-answer { color: #d1d5db; }
+
+    .ws-disclaimer {
+        font-size: 12px; color: #9ca3af; margin-top: 16px; padding-top: 14px;
+        border-top: 1px solid #f1f5f9; line-height: 1.6;
+    }
+    .dark .ws-disclaimer { border-top-color: rgba(255,255,255,.06); }
+
+    /* ===== 追问选项 ===== */
+    .ws-followup-wrap { margin-top: 16px; padding-top: 14px; border-top: 1px solid #f1f5f9; }
+    .dark .ws-followup-wrap { border-top-color: rgba(255,255,255,.06); }
+    .ws-followup-label { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; }
+    .dark .ws-followup-label { color: #94a3b8; }
+    .ws-followup-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ws-followup-pill {
+        font-size: 12px; padding: 5px 12px; border-radius: 6px;
+        border: 1px solid #dbeafe; background: #eff6ff; color: #1d4ed8;
+        cursor: pointer; font-weight: 500;
+        transition: background .15s, border-color .15s;
+    }
+    .dark .ws-followup-pill {
+        background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.25); color: #93c5fd;
+    }
+    .ws-followup-pill:hover { background: #dbeafe; }
+    .dark .ws-followup-pill:hover { background: rgba(59,130,246,.2); }
+
+    /* ===== 加载态 ===== */
+    .ws-loading {
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 32px; font-size: 14px; color: #64748b;
+    }
+    .dark .ws-loading { color: #94a3b8; }
+
+    /* AI 结构化结果 */
+    .ai-result-title { font-size: 1.05rem; font-weight: 700; color: #1e293b; margin: 0 0 8px; }
+    .dark .ai-result-title { color: #e2e8f0; }
+    .ai-meta { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+    .ai-risk { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+    .ai-risk.risk-high { background: #fef2f2; color: #b91c1c; }
+    .ai-risk.risk-mid { background: #fffbeb; color: #b45309; }
+    .ai-risk.risk-low { background: #ecfdf5; color: #047857; }
+    .ai-section-h { font-size: 13px; font-weight: 600; color: #1e293b; margin: 16px 0 6px; }
+    .dark .ai-section-h { color: #e2e8f0; }
+    .ai-section-body, .ai-doc-block { font-size: 14px; line-height: 1.8; color: #374151; }
+    .dark .ai-section-body, .dark .ai-doc-block { color: #d1d5db; }
+    .ai-doc-block { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 14px; margin-top: 4px; }
+    .dark .ai-doc-block { background: rgba(15,23,42,.4); border-color: rgba(255,255,255,.08); }
+    .ai-list { margin: 6px 0 0; padding-left: 18px; font-size: 14px; line-height: 1.7; color: #374151; }
+    .dark .ai-list { color: #d1d5db; }
+    .ai-followup-wrap { margin-top: 16px; padding-top: 14px; border-top: 1px solid #f1f5f9; }
+    .ai-followup-label { font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 8px; }
+    .ai-followup-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ws-followup-pill.ai-followup-pill { font-size: 12px; }
+    </style>
+</head>
+
+<body class="font-inter antialiased text-gray-800 dark:text-gray-200 tracking-tight min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 w-full border-b border-gray-100 dark:border-gray-800 bg-white/85 dark:bg-gray-900/80 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" />
+                            <path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
+                        </svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="grow">
+        <div class="ws-wrap ws-wrap--doc">
+
+            <!-- 面包屑 -->
+            <div class="ws-breadcrumb">
+                <a href="index.html">首页</a>
+                <span>/</span>
+                <span>文书与材料</span>
+            </div>
+
+            <!-- 页面标题 -->
+            <div class="ws-hero">
+                <h1>文书与材料</h1>
+                <p>梳理起诉状、答辩状、律师函等常用法律文书结构要点，帮助您快速了解法律文书规范与核心要素。</p>
+            </div>
+
+            <!-- 快捷选择 -->
+            <div class="ws-quick-label">快速选择文书类型</div>
+            <div class="ws-quick-pills">
+                <button type="button" class="ws-pill wenshi-quick" data-q="请按中国法院文书规范，生成一份结构完整的民事起诉状模板，并说明每一部分需要填写的要点。">
+                    起诉状
+                    <small>适用于民事纠纷立案，包含当事人信息、诉讼请求、事实与理由。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。">
+                    答辩状
+                    <small>用于回应起诉请求，突出事实异议、法律抗辩与证据目录。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。">
+                    律师函
+                    <small>适用于催告履行、违约警示、侵权制止等非诉阶段沟通。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="授权委托书应如何撰写？请按诉讼代理场景列出必须条款和风险提示。">
+                    授权委托书
+                    <small>明确代理权限范围、期限与签章要求，避免权限争议。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="请生成仲裁申请书模板，包含仲裁请求、事实理由、证据清单和落款格式。">
+                    仲裁申请书
+                    <small>适用于仲裁条款争议，强调仲裁请求和合同证据链。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。">
+                    合同模板
+                    <small>聚焦权利义务、付款条件、违约责任与争议解决机制。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="调解协议书怎么写？请给出可执行、可落地的条款结构和履行保障建议。">
+                    调解协议
+                    <small>适用于民商事和劳动争议，重视履行条件与违约后果。</small>
+                </button>
+                <button type="button" class="ws-pill wenshi-quick" data-q="请给出上诉状的规范结构，包含上诉请求、理由、原判问题与证据目录。">
+                    上诉状
+                    <small>用于一审判决后救济，强调上诉请求和事实法律错误指向。</small>
+                </button>
+            </div>
+
+            <!-- 提问卡片 -->
+            <div class="ws-form-card">
+                <form id="wenshi-form">
+                    <label class="ws-form-label" for="wenshi-input">描述您的文书需求或问题</label>
+                    <textarea id="wenshi-input" class="ws-textarea"
+                        placeholder="例如：我要起诉前雇主拖欠工资，起诉状应该怎么写？需要哪些证据材料？"></textarea>
+                    <div class="ws-form-footer">
+                        <button type="submit" id="wenshi-submit" class="ws-submit-btn">
+                            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                            获取文书指引
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 加载态 -->
+            <div id="wenshi-loading" class="hidden">
+                <div class="ws-loading">
+                    <svg class="animate-spin w-4 h-4 text-gray-400" viewBox="0 0 24 24" fill="none">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                    </svg>
+                    正在分析，请稍候...
+                </div>
+            </div>
+
+            <!-- 结果区 -->
+            <div id="wenshi-result" class="hidden">
+                <div id="wenshi-answer" class="ws-answer"></div>
+                <div id="wenshi-followups"></div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 dark:border-gray-800">
+        <div class="px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto py-6">
+                <p class="text-sm text-gray-500 dark:text-gray-500" data-fayi-copyright data-fayi-copyright-suffix="法绎 · 法律服务平台"></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="legal-doc-export-target" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/html-docx-js@0.3.1/dist/html-docx.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/lib/legal-doc-sanitize.js"></script>
+    <script src="./js/lib/content-formatter.js"></script>
+    <script src="./js/lib/legal-doc-render.js"></script>
+    <script src="./js/utils/export-legal-doc.js"></script>
+    <script src="./js/lib/extract-ai-content.js"></script>
+    <script src="./js/lib/chat-text-style.js"></script>
+    <script src="./js/lib/clean-ai-response.js"></script>
+    <script src="./js/ai/intent-router.js"></script>
+    <script src="./js/services/conversation-context-manager.js"></script>
+    <script src="./js/services/ai-client.js"></script>
+    <script src="./js/modules/datav/realtime-store.js"></script>
+    <script src="./js/ai-legal.js"></script>
+    <script src="./js/lib/activity-log.js"></script>
+    <script src="./js/wenshi-page.js"></script>
+</body>
+
+</html>

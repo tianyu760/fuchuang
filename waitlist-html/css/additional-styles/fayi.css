@@ -1,0 +1,291 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Rajdhani:wght@600;700&display=swap');
+
+/* 首页主标题：科技感（几何无衬线 + 渐变字） */
+.fayi-hero-title {
+  font-family: 'Orbitron', 'Rajdhani', ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  background: linear-gradient(115deg, #1e1b4b 0%, #4338ca 38%, #0369a1 72%, #0891b2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.dark .fayi-hero-title {
+  background: linear-gradient(115deg, #e0e7ff 0%, #a5b4fc 35%, #38bdf8 70%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 顶部「智慧 AI 法律助手」立体标签 */
+.fayi-badge-3d {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.1rem 0.5rem;
+  border-radius: 0.65rem;
+  background: linear-gradient(165deg, #ffffff 0%, #eef2ff 45%, #e0e7ff 100%);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 10px 22px -8px rgba(67, 56, 202, 0.45),
+    0 4px 0 rgba(79, 70, 229, 0.12),
+    0 6px 0 rgba(79, 70, 229, 0.06);
+  transform: translateY(0);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fayi-badge-3d:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 14px 28px -8px rgba(67, 56, 202, 0.5),
+    0 5px 0 rgba(79, 70, 229, 0.14),
+    0 8px 0 rgba(79, 70, 229, 0.07);
+}
+
+.dark .fayi-badge-3d {
+  background: linear-gradient(165deg, #374151 0%, #312e81 55%, #1e1b4b 100%);
+  border-color: rgba(129, 140, 248, 0.45);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08) inset,
+    0 10px 24px -6px rgba(0, 0, 0, 0.55),
+    0 4px 0 rgba(0, 0, 0, 0.25),
+    0 6px 0 rgba(99, 102, 241, 0.15);
+}
+
+.dark .fayi-badge-3d:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    0 14px 28px -6px rgba(0, 0, 0, 0.6),
+    0 5px 0 rgba(0, 0, 0, 0.28),
+    0 8px 0 rgba(99, 102, 241, 0.2);
+}
+
+.fayi-badge-3d__text {
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: #312e81;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.dark .fayi-badge-3d__text {
+  color: #e0e7ff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+.fayi-badge-3d::before {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, transparent 42%);
+  pointer-events: none;
+}
+
+.dark .fayi-badge-3d::before {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, transparent 45%);
+}
+
+/* 首页功能卡片：新拟态（与 indigo-100 背景协调） */
+.fayi-home-features {
+  --fayi-neo-bg: #e0e7ff;
+}
+
+.dark .fayi-home-features {
+  --fayi-neo-bg: #1e293b;
+}
+
+.fayi-neo-card {
+  background: var(--fayi-neo-bg);
+  border-radius: 1rem;
+  border: none;
+  box-shadow:
+    8px 8px 18px rgba(79, 70, 229, 0.22),
+    -6px -6px 14px rgba(255, 255, 255, 0.95);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.dark .fayi-neo-card {
+  box-shadow:
+    8px 8px 20px rgba(0, 0, 0, 0.45),
+    -5px -5px 14px rgba(99, 102, 241, 0.12);
+}
+
+.fayi-neo-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    10px 10px 22px rgba(79, 70, 229, 0.28),
+    -7px -7px 16px rgba(255, 255, 255, 1);
+}
+
+.dark .fayi-neo-card:hover {
+  box-shadow:
+    10px 10px 24px rgba(0, 0, 0, 0.55),
+    -6px -6px 16px rgba(129, 140, 248, 0.15);
+}
+
+/* 视差背景层：位移由 main.js 在滚动时写入 transform（与 left-1/2 居中组合） */
+.fayi-parallax-bg,
+.fayi-parallax-lines {
+  will-change: transform;
+}
+
+/* Toast */
+.fayi-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 9999;
+  max-width: min(90vw, 22rem);
+  padding: 0.65rem 1.1rem;
+  border-radius: 0.65rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 500;
+  text-align: center;
+  box-shadow:
+    0 10px 28px -6px rgba(15, 23, 42, 0.35),
+    0 4px 0 rgba(99, 102, 241, 0.12);
+  opacity: 0;
+  transform: translate3d(-50%, 12px, 0) scale(0.96);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+  pointer-events: none;
+}
+
+.fayi-toast--visible {
+  opacity: 1;
+  transform: translate3d(-50%, 0, 0) scale(1);
+}
+
+.fayi-toast--info {
+  background: linear-gradient(165deg, #f8fafc 0%, #e0e7ff 100%);
+  color: #1e1b4b;
+  border: 1px solid rgba(99, 102, 241, 0.35);
+}
+
+.fayi-toast--success {
+  background: linear-gradient(165deg, #ecfdf5 0%, #d1fae5 100%);
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.fayi-toast--error {
+  background: linear-gradient(165deg, #fef2f2 0%, #fee2e2 100%);
+  color: #991b1b;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.dark .fayi-toast--info {
+  background: linear-gradient(165deg, #1f2937 0%, #312e81 100%);
+  color: #e0e7ff;
+}
+
+.dark .fayi-toast--success {
+  background: linear-gradient(165deg, #064e3b 0%, #134e4a 100%);
+  color: #a7f3d0;
+}
+
+.dark .fayi-toast--error {
+  background: linear-gradient(165deg, #450a0a 0%, #7f1d1d 100%);
+  color: #fecaca;
+}
+
+/* 主按钮 / 链接按钮：上浮 + 发光描边 */
+a.btn,
+button.btn {
+  will-change: transform, box-shadow;
+  transition:
+    transform 0.22s cubic-bezier(.34,1.56,.64,1),
+    box-shadow 0.22s ease,
+    background-color 0.18s ease,
+    color 0.18s ease,
+    filter 0.18s ease;
+}
+
+a.btn:hover,
+button.btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow:
+    0 12px 30px -8px rgba(79, 70, 229, 0.38),
+    0 0 0 2.5px rgba(99, 102, 241, 0.28);
+  filter: brightness(1.06);
+}
+
+.dark a.btn:hover,
+.dark button.btn:hover {
+  box-shadow:
+    0 12px 30px -6px rgba(0, 0, 0, 0.55),
+    0 0 0 2.5px rgba(129, 140, 248, 0.32);
+  filter: brightness(1.1);
+}
+
+a.btn:active,
+button.btn:active {
+  transform: translateY(-1px) scale(1.01);
+  transition-duration: 0.08s;
+}
+
+/* ===== 导航栏滚动过渡 ===== */
+header {
+  transition:
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+header.fayi-header--scrolled {
+  background-color: rgba(224, 231, 255, 0.97) !important;
+  box-shadow:
+    0 6px 28px -8px rgba(79, 70, 229, 0.22),
+    0 2px 8px -4px rgba(0, 0, 0, 0.08);
+}
+
+.dark header.fayi-header--scrolled {
+  background-color: rgba(17, 24, 39, 0.97) !important;
+  box-shadow:
+    0 6px 28px -8px rgba(0, 0, 0, 0.55),
+    0 2px 8px -4px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== 退出按钮：抡动 + 危险红色 ===== */
+@keyframes fayi-shake {
+  0%, 100% { transform: translateX(0); }
+  15%       { transform: translateX(-4px); }
+  35%       { transform: translateX(4px); }
+  55%       { transform: translateX(-3px); }
+  75%       { transform: translateX(2px); }
+}
+
+#app-logout-btn {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#app-logout-btn:hover {
+  background-color: #dc2626 !important;
+  color: #fff !important;
+  animation: fayi-shake 0.42s ease;
+  box-shadow:
+    0 6px 18px -6px rgba(220, 38, 38, 0.55),
+    0 0 0 2px rgba(239, 68, 68, 0.3);
+}
+
+.dark #app-logout-btn:hover {
+  background-color: #b91c1c !important;
+  color: #fff !important;
+  box-shadow:
+    0 6px 18px -6px rgba(185, 28, 28, 0.6),
+    0 0 0 2px rgba(239, 68, 68, 0.25);
+}

@@ -1,0 +1,114 @@
+/* 法绎全站动效 — GPU 友好 */
+:root {
+  --fayi-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --fayi-page-dur: 0.5s;
+}
+
+html.fayi-nav-pending body > main,
+html.fayi-nav-pending body > .grow,
+html.fayi-nav-pending .pc-layout {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+body.fayi-page-enter > main,
+body.fayi-page-enter > .grow,
+body.fayi-page-enter .pc-layout,
+body.fayi-page-enter .le-page {
+  animation: fayi-page-in var(--fayi-page-dur) var(--fayi-ease) forwards;
+  will-change: opacity, transform;
+}
+
+@keyframes fayi-page-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#fayi-main-nav a,
+.fayi-nav-extra a {
+  position: relative;
+  transition: color 0.25s var(--fayi-ease), background 0.25s var(--fayi-ease), transform 0.25s var(--fayi-ease);
+}
+
+#fayi-main-nav a:hover,
+.fayi-nav-extra a:hover {
+  transform: translateY(-1px);
+}
+
+.fayi-nav-extra a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(59, 130, 246, 0.05));
+}
+
+.dark .fayi-nav-extra a {
+  color: #7dd3fc;
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.fayi-nav-extra a:hover {
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.2);
+}
+
+.fayi-card,
+.idx-feat-card,
+.pc-card,
+.le-card,
+.pufa-card,
+.pufa-article-card {
+  transition: transform 0.28s var(--fayi-ease), box-shadow 0.28s var(--fayi-ease), border-color 0.28s;
+  will-change: transform;
+}
+
+.fayi-card:hover,
+.idx-feat-card:hover,
+.pc-card:hover,
+.le-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(79, 70, 229, 0.12);
+}
+
+.fayi-skeleton {
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.5) 0%, rgba(241, 245, 249, 0.9) 50%, rgba(226, 232, 240, 0.5) 100%);
+  background-size: 200% 100%;
+  animation: fayi-shimmer 1.2s ease infinite;
+}
+
+.dark .fayi-skeleton {
+  background: linear-gradient(90deg, rgba(51, 65, 85, 0.5) 0%, rgba(71, 85, 105, 0.7) 50%, rgba(51, 65, 85, 0.5) 100%);
+  background-size: 200% 100%;
+}
+
+@keyframes fayi-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.fayi-typing::after {
+  content: '▋';
+  animation: fayi-blink 0.8s step-end infinite;
+  margin-left: 2px;
+  opacity: 0.7;
+}
+
+@keyframes fayi-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.fayi-nav-pending body > main,
+  body.fayi-page-enter > main {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

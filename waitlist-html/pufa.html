@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>普法宣传 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./css/pufa-motion-addon.css" rel="stylesheet">
+    <script src="./js/auth.js?v=pufa-restore"></script>
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script>
+        if (!FayiAuth.getCurrentUser()) {
+            window.location.replace('login.html?next=' + encodeURIComponent('pufa.html'));
+        }
+    </script>
+    <style>
+    /* ===== 页面背景：法院大楼 + 白色蒙层 ===== */
+    body {
+        background:
+            linear-gradient(rgba(248,250,252,.90), rgba(248,250,252,.90)),
+            url('https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=1920&h=1080&fit=crop')
+            no-repeat center center;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    /* ===== 弹窗淡入动画 ===== */
+    @keyframes pufa-modal-in {
+        from { opacity:0; transform:translate(-50%,-50%) scale(.94); }
+        to   { opacity:1; transform:translate(-50%,-50%) scale(1); }
+    }
+    @keyframes pufa-overlay-in {
+        from { opacity:0; }
+        to   { opacity:1; }
+    }
+    #pufa-modal-close:hover { background:#dc2626 !important; color:#fff !important; }
+
+    /* ===== Tab 切换栏 ===== */
+    .pufa-tabs {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 24px;
+        padding-bottom: 2px;
+        border-bottom: 2px solid rgba(99,102,241,.12);
+    }
+
+    .pufa-tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 22px;
+        border-radius: 10px 10px 0 0;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        color: #6b7280;
+        background: transparent;
+        border: none;
+        position: relative;
+        bottom: -2px;
+        border-bottom: 2px solid transparent;
+        transition: color .18s, background .18s, border-color .18s;
+        user-select: none;
+    }
+
+    .pufa-tab:hover {
+        color: #4f46e5;
+        background: rgba(99,102,241,.07);
+    }
+
+    .pufa-tab.active {
+        color: #4f46e5;
+        border-bottom: 2px solid #4f46e5;
+        background: rgba(99,102,241,.08);
+        font-weight: 600;
+    }
+
+    .dark .pufa-tab { color: #9ca3af; }
+    .dark .pufa-tab:hover { color: #a5b4fc; background: rgba(99,102,241,.1); }
+    .dark .pufa-tab.active { color: #a5b4fc; border-bottom-color: #818cf8; background: rgba(99,102,241,.15); }
+
+    /* ===== Tab 内容淡入动画 ===== */
+    @keyframes pufa-tab-in {
+        from { opacity:0; transform:translateY(10px); }
+        to   { opacity:1; transform:translateY(0); }
+    }
+
+    .pufa-tab-content { display: none; }
+    .pufa-tab-content.active {
+        display: block;
+        animation: pufa-tab-in .25s ease forwards;
+    }
+
+    /* ===== 文章卡片网格 ===== */
+    .pufa-article-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 900px) {
+        .pufa-article-grid { grid-template-columns: 1fr; }
+    }
+
+    /* 文章卡片本体 */
+    .pufa-article-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        padding: 20px;
+        background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,255,255,.84));
+        box-shadow: 0 2px 12px rgba(79,70,229,.10), 0 1px 3px rgba(0,0,0,.06);
+        border: 1px solid rgba(99,102,241,.10);
+        transition: transform .22s ease, box-shadow .22s ease;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .dark .pufa-article-card {
+        background: linear-gradient(145deg, rgba(55,65,81,.88), rgba(31,41,55,.88));
+        border-color: rgba(99,102,241,.2);
+        box-shadow: 0 2px 12px rgba(0,0,0,.35);
+    }
+
+    .pufa-article-card:hover {
+        transform: translateY(-4px) scale(1.01);
+        box-shadow: 0 12px 28px rgba(79,70,229,.18), 0 4px 10px rgba(0,0,0,.1);
+    }
+
+    /* 标签 */
+    .pufa-article-card__tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+
+    .pufa-article-card__tag {
+        padding: 2px 11px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+        background: rgba(99,102,241,.11);
+        color: #4f46e5;
+    }
+
+    .dark .pufa-article-card__tag {
+        background: rgba(99,102,241,.22);
+        color: #a5b4fc;
+    }
+
+    /* 标题 */
+    .pufa-article-card__title {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.5;
+        color: #1f2937;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .dark .pufa-article-card__title { color: #f3f4f6; }
+
+    /* 摘要 */
+    .pufa-article-card__summary {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #4b5563;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        flex: 1;
+        margin-bottom: 14px;
+    }
+
+    .dark .pufa-article-card__summary { color: #9ca3af; }
+
+    /* 底部信息栏 */
+    .pufa-article-card__footer {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 11px;
+        color: #9ca3af;
+        border-top: 1px solid rgba(0,0,0,.06);
+        padding-top: 10px;
+        margin-top: auto;
+    }
+
+    .dark .pufa-article-card__footer { border-top-color: rgba(255,255,255,.07); color: #6b7280; }
+    .pufa-article-card__footer span { display: inline-flex; align-items: center; gap: 3px; }
+    .pufa-article-card__footer svg { width: 12px; height: 12px; }
+
+    /* ===== 资源面板弹窗 ===== */
+    @keyframes pufa-res-in {
+        from { opacity:0; transform:translate(-50%,-50%) scale(.93); }
+        to   { opacity:1; transform:translate(-50%,-50%) scale(1); }
+    }
+    @keyframes pufa-res-overlay-in {
+        from { opacity:0; }
+        to   { opacity:1; }
+    }
+
+    /* 资源链接按钮 */
+    .pufa-res-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 16px;
+        border-radius: 10px;
+        text-decoration: none;
+        background: rgba(99,102,241,.07);
+        border: 1px solid rgba(99,102,241,.18);
+        color: #4f46e5;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background .18s, border-color .18s, transform .15s;
+    }
+
+    .pufa-res-link:hover {
+        background: rgba(99,102,241,.16);
+        border-color: rgba(99,102,241,.45);
+        transform: translateX(5px);
+        text-decoration: none;
+    }
+
+    .pufa-res-link svg { flex-shrink:0; opacity:.65; }
+    #pufa-res-close:hover { background:#dc2626 !important; color:#fff !important; }
+
+    /* ===== 普法卡片网格 ===== */
+    .pufa-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 900px) {
+        .pufa-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 580px) {
+        .pufa-grid { grid-template-columns: 1fr; }
+    }
+
+    /* 单张普法卡片 */
+    .pufa-card {
+        display: flex;
+        flex-direction: column;
+        border-radius: 12px;
+        overflow: hidden;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(79,70,229,.12), 0 1px 4px rgba(0,0,0,.07);
+        transition: transform .22s ease, box-shadow .22s ease;
+        cursor: pointer;
+    }
+
+    .dark .pufa-card {
+        background: linear-gradient(145deg, rgba(55,65,81,.85), rgba(31,41,55,.85));
+        box-shadow: 0 2px 12px rgba(0,0,0,.35), 0 1px 3px rgba(0,0,0,.2);
+    }
+
+    .pufa-card:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 12px 28px rgba(79,70,229,.18), 0 4px 10px rgba(0,0,0,.1);
+    }
+
+    /* 卡片封面图 */
+    .pufa-card__cover {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+        flex-shrink: 0;
+    }
+
+    .dark .pufa-card__cover {
+        background: linear-gradient(135deg, #312e81, #1e1b4b);
+    }
+
+    .pufa-card__cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform .35s ease;
+    }
+
+    .pufa-card:hover .pufa-card__cover img {
+        transform: scale(1.05);
+    }
+
+    /* 封面图轻遮罩 */
+    .pufa-card__cover-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(0,0,0,.04) 0%,
+            rgba(0,0,0,.28) 100%
+        );
+        pointer-events: none;
+        z-index: 1;
+        border-radius: 0;
+    }
+
+    /* 播放按鈕 z-index 高于遙罩 */
+    .pufa-card__play { z-index: 2; }
+
+    /* 标签角标 z-index */
+    .pufa-card__tag { z-index: 3; }
+
+    /* 视频播放按钮 */
+    .pufa-card__play {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+    }
+
+    .pufa-card__play svg {
+        width: 52px;
+        height: 52px;
+        filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+        opacity: .92;
+        transition: transform .2s ease;
+    }
+
+    .pufa-card:hover .pufa-card__play svg {
+        transform: scale(1.12);
+    }
+
+    /* 标签角标 */
+    .pufa-card__tag {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 3px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .03em;
+        backdrop-filter: blur(8px);
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    /* 弹窗内隐藏卡片标签 */
+    #pufa-video-modal .pufa-card__tag {
+        display: none !important;
+    }
+
+    .pufa-tag--video { background: rgba(239,68,68,.85); color: #fff; }
+    .pufa-tag--news  { background: rgba(245,158,11,.85); color: #fff; }
+    .pufa-tag--article { background: rgba(99,102,241,.85); color: #fff; }
+
+    /* 底部信息区 */
+    .pufa-card__body {
+        padding: 12px 14px 14px;
+    }
+
+    .pufa-card__title {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.45;
+        color: #1f2937;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .dark .pufa-card__title { color: #e5e7eb; }
+
+    .pufa-card__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 6px;
+        font-size: 11px;
+        color: #9ca3af;
+    }
+
+    .dark .pufa-card__meta { color: #6b7280; }
+
+    .pufa-card__meta span { display: inline-flex; align-items: center; gap: 3px; }
+
+    .pufa-card__meta svg { width: 13px; height: 13px; }
+
+    </style>
+</head>
+
+<body class="font-inter antialiased text-gray-800 dark:text-gray-200 tracking-tight min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 shrink-0 border-b [border-image:linear-gradient(to_right,transparent,theme(colors.indigo.300/.4),transparent)1] dark:[border-image:linear-gradient(to_right,transparent,theme(colors.indigo.300/.16),transparent)1] bg-white/75 dark:bg-gray-900/90 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="pufa" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" /><path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" /></svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="grow px-4 sm:px-6 py-6 max-w-5xl mx-auto w-full">
+        <h1 class="font-inter-tight text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1">普法宣传</h1>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">以下为您推荐法律科普文献、解读视频与热点资讯，帮助您了解常用法律知识。</p>
+
+        <!-- Tab 切换栏 -->
+        <div class="pufa-tabs">
+            <button class="pufa-tab active" data-tab="video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                </svg>
+                热点事件与视频解读
+            </button>
+            <button class="pufa-tab" data-tab="article">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+                </svg>
+                法律文案与科普文献
+            </button>
+        </div>
+
+        <!-- Tab 1: 视频内容 -->
+        <div id="video-content" class="pufa-tab-content active">
+            <div id="pufa-grid" class="pufa-grid" style="grid-template-columns:repeat(3,1fr)"></div>
+        </div>
+
+        <!-- Tab 2: 文章内容 -->
+        <div id="article-content" class="pufa-tab-content">
+            <div id="pufa-article-grid" class="pufa-article-grid"></div>
+        </div>
+
+        <p class="text-xs text-gray-500 dark:text-gray-500 mt-6 text-center">以下内容仅供参考，不构成个案法律意见；重要事项请以执业律师或有权机关意见为准。</p>
+    </main>
+
+    <!-- ===== 资源面板遮罩 ===== -->
+    <div id="pufa-res-overlay"
+         style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+                background:rgba(0,0,0,0.60);backdrop-filter:blur(3px);z-index:9996"></div>
+
+    <!-- ===== 资源面板弹窗 ===== -->
+    <div id="pufa-res-modal"
+         style="display:none;position:fixed;top:50%;left:50%;
+                transform:translate(-50%,-50%);z-index:9997;
+                width:min(480px,90vw);flex-direction:column;
+                background:#1e293b;border-radius:14px;overflow:hidden;
+                box-shadow:0 24px 56px rgba(0,0,0,.65)">
+
+        <!-- 头部 -->
+        <div style="display:flex;align-items:center;justify-content:space-between;
+                    padding:16px 20px;background:#0f172a;
+                    border-bottom:1px solid rgba(99,102,241,.2)">
+            <div>
+                <h3 style="font-size:15px;font-weight:700;color:#f1f5f9;margin:0">
+                    相关法律资源
+                </h3>
+                <p id="pufa-res-subtitle"
+                   style="font-size:11px;color:#64748b;margin:3px 0 0">点击链接在新页面打开</p>
+            </div>
+            <button id="pufa-res-close" type="button"
+                    style="width:32px;height:32px;display:flex;align-items:center;
+                           justify-content:center;border-radius:8px;background:#334155;
+                           color:#94a3b8;cursor:pointer;border:none;
+                           transition:background .18s,color .18s;flex-shrink:0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 资源链接列表 -->
+        <div style="padding:20px;display:flex;flex-direction:column;gap:10px">
+            <div id="pufa-res-list" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+
+        <!-- 底部提示 -->
+        <div style="padding:12px 20px 16px;border-top:1px solid rgba(99,102,241,.12)">
+            <p style="font-size:11px;color:#475569;margin:0">
+                ⚠️ 以上资源均来自官方权威渠道，仅供参考，不构成个案法律意见。</p>
+        </div>
+    </div>
+
+    <!-- ===== 视频弹窗遮罩（独立 fixed 层） ===== -->
+    <div id="pufa-modal-overlay"
+         style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(4px);z-index:9998"></div>
+
+    <!-- ===== 视频弹窗主体（独立 fixed 层，精确居中） ===== -->
+    <div id="pufa-video-modal"
+         style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;
+                width:70vw;max-width:900px;max-height:90vh;
+                flex-direction:column;border-radius:14px;overflow:hidden;
+                background:#111827;box-shadow:0 30px 70px rgba(0,0,0,.7)">
+
+        <!-- 顶部栏：标题 + 关闭按钮 -->
+        <div style="display:flex;align-items:center;justify-content:space-between;
+                    padding:12px 20px;background:#1f2937;
+                    border-bottom:1px solid rgba(75,85,99,.45);flex-shrink:0">
+            <div style="flex:1;min-width:0;padding-right:16px">
+                <h3 id="pufa-modal-title"
+                    style="font-size:15px;font-weight:600;color:#fff;
+                           overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></h3>
+                <p id="pufa-modal-meta" style="font-size:11px;color:#9ca3af;margin-top:3px"></p>
+            </div>
+            <button id="pufa-modal-close" type="button"
+                    style="flex-shrink:0;width:34px;height:34px;display:flex;align-items:center;
+                           justify-content:center;border-radius:8px;background:#374151;
+                           color:#d1d5db;cursor:pointer;border:none;transition:background .18s,color .18s">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2.5" stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+
+        <!-- 视频播放区（16:9 自适应） -->
+        <div style="position:relative;width:100%;padding-top:56.25%;background:#000;flex-shrink:0">
+            <iframe id="pufa-video-player"
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;border:none"
+                    allowfullscreen
+                    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+        </div>
+
+        <!-- 备用视频列表 -->
+        <div id="pufa-extra-section"
+             style="padding:12px 20px;background:#1f2937;
+                    border-top:1px solid rgba(75,85,99,.45);flex-shrink:0;
+                    max-height:96px;overflow-y:auto">
+            <p style="font-size:11px;color:#9ca3af;margin-bottom:8px;font-weight:500">相关视频（点击切换）：</p>
+            <div id="pufa-extra-list" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+        </div>
+    </div>
+
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/lib/activity-log.js"></script>
+    <script src="./js/pufa.js"></script>
+</body>
+
+</html>

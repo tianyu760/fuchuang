@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="kb-root">
+<head>
+    <meta charset="utf-8">
+    <title>个人资料库 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./js/auth.js"></script>
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script>
+        if (!FayiAuth.getCurrentUser()) {
+            window.location.replace('login.html?next=' + encodeURIComponent('knowledge.html'));
+        }
+    </script>
+    <style>
+    /* ══ 资料库页面：双栏独立滚动布局 ══ */
+    html.kb-root,
+    body.kb-page {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body.kb-page {
+        background: #f7f8fa !important;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        max-height: 100vh;
+    }
+
+    .kb-page-header {
+        flex-shrink: 0;
+        z-index: 50;
+    }
+
+    .kb-page-main {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .kb-layout {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        gap: 20px;
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 16px 20px;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .kb-left,
+    .kb-right {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        min-width: 0;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #e8eaed;
+        border-radius: 14px;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .kb-left {
+        width: 38%;
+        max-width: 440px;
+        flex-shrink: 0;
+    }
+
+    .kb-right {
+        flex: 1 1 auto;
+    }
+
+    /* 各栏固定顶栏（标题 / 搜索 / 分类） */
+    .kb-panel-head {
+        flex-shrink: 0;
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid #eef0f3;
+        background: #fff;
+        border-radius: 14px 14px 0 0;
+    }
+
+    .kb-panel-head--right {
+        padding-bottom: 12px;
+    }
+
+    .kb-panel-head .kb-right-header {
+        margin-bottom: 12px;
+    }
+
+    .kb-panel-head .kb-search-wrap {
+        margin-bottom: 10px;
+    }
+
+    .kb-panel-head .kb-cat-row {
+        margin-bottom: 0;
+    }
+
+    /* 独立滚动容器 */
+    .kb-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        padding: 16px 18px 20px;
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 transparent;
+    }
+
+    .kb-scroll::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .kb-scroll::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .kb-scroll::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 999px;
+    }
+
+    .kb-scroll::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .kb-scroll-left {
+        padding-top: 12px;
+    }
+
+    .kb-scroll-right {
+        padding-top: 8px;
+    }
+
+    /* 卡片容器 */
+    .kb-card {
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #e8eaed;
+        padding: 20px;
+        margin-bottom: 14px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        transition: box-shadow 0.18s ease;
+    }
+
+    .kb-left .kb-card:hover {
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+    }
+
+    /* 字段标签 */
+    .kb-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+    }
+    .kb-label-opt {
+        font-weight: 400;
+        color: #9ca3af;
+        font-size: 12px;
+    }
+
+    /* 输入框 */
+    .kb-input {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #1e293b;
+        outline: none;
+        transition: border 0.15s;
+        box-sizing: border-box;
+        background: #fff;
+        font-family: inherit;
+    }
+    .kb-input:focus { border-color: #1e293b; }
+
+    /* 文本域 */
+    .kb-textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #1e293b;
+        outline: none;
+        resize: vertical;
+        line-height: 1.6;
+        min-height: 120px;
+        transition: border 0.15s;
+        box-sizing: border-box;
+        background: #fff;
+        font-family: inherit;
+    }
+    .kb-textarea:focus { border-color: #1e293b; }
+
+    /* 标签行 */
+    .kb-tags-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        align-items: center;
+        min-height: 34px;
+        padding: 4px 8px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        background: #fff;
+        cursor: text;
+    }
+    .kb-tags-row:focus-within { border-color: #1e293b; }
+    .kb-tag-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 2px 8px 2px 10px;
+        font-size: 12px;
+        color: #475569;
+    }
+    .kb-tag-chip button {
+        background: none; border: none;
+        padding: 0; cursor: pointer;
+        color: #94a3b8; font-size: 14px; line-height: 1;
+    }
+    .kb-tag-chip button:hover { color: #ef4444; }
+    .kb-tag-presets {
+        display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px;
+    }
+    .kb-tag-preset {
+        font-size: 12px; color: #64748b;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 20px;
+        padding: 3px 10px;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+    .kb-tag-preset:hover { background: #1e293b; color: #fff; border-color: #1e293b; }
+
+    /* 附件上传按钮 */
+    .kb-file-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #374151;
+        background: #f9fafb;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+    }
+    .kb-file-btn:hover { border-color: #1e293b; background: #f1f5f9; }
+    .kb-file-info {
+        display: none;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+        padding: 8px 12px;
+        background: #f8fafc;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        font-size: 13px;
+        color: #374151;
+    }
+    .kb-file-info button {
+        background: none; border: none;
+        color: #94a3b8; cursor: pointer;
+        font-size: 14px; padding: 0 2px; margin-left: auto;
+    }
+    .kb-file-info button:hover { color: #ef4444; }
+
+    /* 提交按钮 */
+    .kb-submit-btn {
+        width: 100%;
+        padding: 10px;
+        background: #1e293b;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+    }
+    .kb-submit-btn:hover { background: #0f172a; }
+    .kb-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* 右侧顶部 */
+    .kb-right-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+    }
+    .kb-right-title { font-size: 18px; font-weight: 700; color: #1e293b; }
+    .kb-count-badge {
+        font-size: 12px; color: #94a3b8;
+        background: #f1f5f9;
+        padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* 搜索栏 */
+    .kb-search-wrap { position: relative; margin-bottom: 14px; }
+    .kb-search-wrap .kb-search-icon {
+        position: absolute; left: 12px; top: 50%;
+        transform: translateY(-50%); color: #9ca3af; pointer-events: none;
+    }
+    .kb-search-input {
+        width: 100%;
+        padding: 9px 12px 9px 36px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 14px;
+        color: #1e293b;
+        background: #fff;
+        outline: none;
+        box-sizing: border-box;
+        transition: border 0.15s;
+        font-family: inherit;
+    }
+    .kb-search-input:focus { border-color: #1e293b; }
+
+    /* 最近使用 */
+    .kb-recent-title {
+        font-size: 11px; font-weight: 700;
+        color: #94a3b8; letter-spacing: 0.06em;
+        text-transform: uppercase; margin-bottom: 10px;
+    }
+    .kb-recent-chip {
+        display: inline-flex; align-items: center; gap: 5px;
+        background: #fff; border: 1px solid #e2e8f0; border-radius: 8px;
+        padding: 5px 10px; font-size: 12px; color: #374151;
+        cursor: pointer; transition: all 0.15s;
+        margin: 0 6px 6px 0;
+        max-width: 180px; white-space: nowrap;
+        overflow: hidden; text-overflow: ellipsis;
+    }
+    .kb-recent-chip:hover { border-color: #1e293b; background: #f8fafc; }
+
+    /* 条目卡片 */
+    .kb-item-card {
+        background: #fff;
+        border: 1px solid #e8eaed;
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        transition: box-shadow 0.18s, transform 0.18s;
+    }
+    .kb-item-card:hover {
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        transform: translateY(-1px);
+    }
+    .kb-item-title {
+        font-size: 15px; font-weight: 600;
+        color: #1e293b; margin-bottom: 5px; line-height: 1.4;
+    }
+    .kb-item-summary {
+        font-size: 13px; color: #64748b; line-height: 1.6;
+        display: -webkit-box; -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; overflow: hidden;
+        margin-bottom: 10px;
+    }
+    .kb-tag-list { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+    .kb-tag-badge {
+        font-size: 11px; padding: 2px 8px; border-radius: 20px;
+        background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0;
+    }
+    .kb-item-meta {
+        display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    }
+    .kb-item-meta-text {
+        font-size: 12px; color: #94a3b8;
+        display: inline-flex; align-items: center; gap: 4px;
+    }
+    .kb-item-actions { display: flex; gap: 6px; margin-left: auto; }
+    .kb-action-btn {
+        padding: 4px 12px; border-radius: 6px;
+        font-size: 12px; cursor: pointer;
+        border: 1px solid #e2e8f0; background: #f8fafc;
+        color: #374151; transition: all 0.15s;
+        font-family: inherit;
+    }
+    .kb-action-btn:hover { border-color: #1e293b; background: #1e293b; color: #fff; }
+    .kb-action-btn.del { color: #ef4444; border-color: #fecaca; background: #fff5f5; }
+    .kb-action-btn.del:hover { background: #ef4444; color: #fff; border-color: #ef4444; }
+    .kb-action-btn.view { color: #3b82f6; border-color: #bfdbfe; background: #eff6ff; }
+    .kb-action-btn.view:hover { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+
+    /* 空状态 */
+    .kb-empty {
+        text-align: center; padding: 56px 20px;
+        color: #94a3b8; font-size: 14px;
+    }
+
+    .kb-form-head { font-size: 17px; font-weight: 700; color: #1e293b; }
+    .kb-form-hint { font-size: 12px; color: #94a3b8; }
+
+    .kb-panel-head--left .kb-form-head {
+        margin-bottom: 4px;
+    }
+
+    .kb-panel-head--left .kb-form-hint {
+        margin-bottom: 0;
+    }
+
+    .kb-scroll-left .kb-form-card {
+        margin-bottom: 0;
+    }
+
+    /* 分隔线 */
+    .kb-divider { height: 1px; background: #f1f5f9; margin: 14px 0; }
+
+    /* 删除确认对话框 */
+    .kb-confirm-overlay {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,.45); z-index: 1000;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .kb-confirm-box {
+        background: #fff; border-radius: 14px;
+        padding: 28px 32px; max-width: 320px; width: 90%;
+        box-shadow: 0 24px 64px rgba(0,0,0,.15);
+    }
+    .kb-confirm-box h3 { font-size: 16px; font-weight: 700; color: #1e293b; margin-bottom: 8px; }
+    .kb-confirm-box p { font-size: 14px; color: #64748b; margin-bottom: 22px; }
+    .kb-confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .kb-confirm-cancel {
+        padding: 8px 16px; border: 1px solid #e2e8f0;
+        border-radius: 8px; background: #fff; font-size: 14px;
+        cursor: pointer; color: #374151; font-family: inherit;
+    }
+    .kb-confirm-ok {
+        padding: 8px 16px; border: none; border-radius: 8px;
+        background: #ef4444; color: #fff; font-size: 14px;
+        font-weight: 600; cursor: pointer; font-family: inherit;
+    }
+
+    /* 文件信息详情弹窗 */
+    .kb-detail-overlay {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,.5); z-index: 1000;
+        display: flex; align-items: center; justify-content: center;
+        padding: 20px;
+    }
+    .kb-detail-modal {
+        background: #fff; border-radius: 14px;
+        max-width: 700px; width: 100%; max-height: 85vh;
+        box-shadow: 0 24px 64px rgba(0,0,0,.2);
+        display: flex; flex-direction: column;
+        overflow: hidden;
+    }
+    .kb-detail-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid #e8eaed;
+        display: flex; align-items: center; justify-content: space-between;
+        flex-shrink: 0;
+    }
+    .kb-detail-header h3 {
+        font-size: 17px; font-weight: 700; color: #1e293b;
+        margin: 0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .kb-detail-close {
+        background: none; border: none; font-size: 22px;
+        color: #94a3b8; cursor: pointer; padding: 0 4px; line-height: 1;
+        margin-left: 12px; flex-shrink: 0;
+    }
+    .kb-detail-close:hover { color: #1e293b; }
+    .kb-detail-body {
+        padding: 20px 24px;
+        overflow-y: auto; flex: 1;
+    }
+    .kb-detail-section {
+        margin-bottom: 18px;
+    }
+    .kb-detail-section:last-child { margin-bottom: 0; }
+    .kb-detail-label {
+        font-size: 12px; font-weight: 600; color: #64748b;
+        text-transform: uppercase; letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+    .kb-detail-value {
+        font-size: 14px; color: #1e293b; line-height: 1.6;
+    }
+    .kb-detail-value pre {
+        background: #f8fafc; border: 1px solid #e2e8f0;
+        border-radius: 8px; padding: 12px; overflow-x: auto;
+        font-family: inherit; font-size: 13px; line-height: 1.7;
+        white-space: pre-wrap; word-wrap: break-word;
+    }
+    .kb-detail-meta-row {
+        display: flex; gap: 16px; flex-wrap: wrap;
+    }
+    .kb-detail-meta-item {
+        flex: 1; min-width: 140px;
+    }
+    .kb-detail-footer {
+        padding: 16px 24px;
+        border-top: 1px solid #e8eaed;
+        display: flex; gap: 8px; justify-content: flex-end;
+        flex-shrink: 0; background: #f9fafb;
+    }
+    .kb-detail-btn {
+        padding: 8px 16px; border-radius: 8px; font-size: 14px;
+        cursor: pointer; transition: all 0.15s; font-family: inherit;
+    }
+    .kb-detail-btn-primary {
+        background: #3b82f6; color: #fff; border: none; font-weight: 600;
+    }
+    .kb-detail-btn-primary:hover { background: #2563eb; }
+    .kb-detail-btn-secondary {
+        background: #fff; color: #374151; border: 1px solid #e2e8f0;
+    }
+    .kb-detail-btn-secondary:hover { border-color: #3b82f6; color: #3b82f6; }
+
+    /* 上传 loading */
+    @keyframes kb-spin { to { transform: rotate(360deg); } }
+    .kb-spin {
+        display: inline-block; width: 13px; height: 13px;
+        border: 2px solid #d1d5db; border-top-color: #1e293b;
+        border-radius: 50%; animation: kb-spin 0.6s linear infinite;
+        vertical-align: middle;
+    }
+
+    /* ══ 分类 Tabs ══ */
+    .kb-cat-row {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+    }
+    .kb-cat-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px 13px;
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        font-size: 13px;
+        color: #374151;
+        cursor: pointer;
+        transition: all 0.15s;
+        font-family: inherit;
+        white-space: nowrap;
+    }
+    .kb-cat-btn:hover { border-color: #3b82f6; color: #3b82f6; background: #eff6ff; }
+    .kb-cat-btn.active {
+        background: #3b82f6;
+        border-color: #3b82f6;
+        color: #fff;
+        font-weight: 600;
+    }
+    .kb-cat-btn.active:hover { background: #2563eb; border-color: #2563eb; }
+    .kb-cat-count {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 5px;
+        border-radius: 9px;
+        font-size: 11px;
+        font-weight: 600;
+        background: #e2e8f0;
+        color: #64748b;
+    }
+    .kb-cat-btn.active .kb-cat-count { background: rgba(255,255,255,.28); color: #fff; }
+
+    /* ══ 条目左色条 ══ */
+    .kb-item-card { position: relative; overflow: hidden; }
+    .kb-type-bar {
+        position: absolute;
+        left: 0; top: 0; bottom: 0;
+        width: 4px;
+        border-radius: 12px 0 0 12px;
+    }
+    .kb-item-body { padding-left: 12px; }
+
+    /* ══ 文件类型徽章 ══ */
+    .kb-type-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        border: 1px solid transparent;
+        flex-shrink: 0;
+        letter-spacing: 0.02em;
+    }
+
+    /* ══ 最近使用彩点 ══ */
+    .kb-recent-dot {
+        display: inline-block;
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    /* ══ 列表切换淡入动画 ══ */
+    @keyframes kb-fadein {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .kb-list-anim .kb-item-card,
+    .kb-list-anim .kb-empty {
+        animation: kb-fadein 0.22s ease both;
+    }
+    .kb-list-anim .kb-item-card:nth-child(2) { animation-delay: .04s; }
+    .kb-list-anim .kb-item-card:nth-child(3) { animation-delay: .08s; }
+    .kb-list-anim .kb-item-card:nth-child(4) { animation-delay: .12s; }
+    .kb-list-anim .kb-item-card:nth-child(5) { animation-delay: .16s; }
+
+    /* 响应式：上下分栏，各自独立滚动 */
+    @media (max-width: 960px) {
+        .kb-layout {
+            flex-direction: column;
+            gap: 12px;
+            padding: 12px 14px;
+        }
+        .kb-left {
+            width: 100%;
+            max-width: none;
+            flex: 0 0 42%;
+            min-height: 0;
+        }
+        .kb-right {
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .kb-left {
+            flex: 0 0 48%;
+        }
+        .kb-panel-head {
+            padding: 14px 16px 10px;
+        }
+        .kb-scroll {
+            padding: 12px 14px 16px;
+        }
+    }
+    </style>
+</head>
+
+<body class="kb-page font-inter antialiased tracking-tight flex flex-col">
+
+    <header class="kb-page-header border-b bg-white/90 backdrop-blur-md" style="border-bottom:1px solid #e8eaed">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="knowledge" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" /><path class="fill-gray-800" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" /></svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="kb-page-main">
+        <div class="kb-layout">
+
+            <!-- ══ 左侧：新增资料（独立滚动） ══ -->
+            <aside class="kb-left">
+                <div class="kb-panel-head kb-panel-head--left">
+                    <div class="kb-form-head">新增资料</div>
+                    <div class="kb-form-hint">记录案件要点或法律条文，方便咨询时调用</div>
+                </div>
+                <div class="kb-scroll kb-scroll-left" id="kb-left-scroll">
+
+                <!-- 最近使用（动态注入，初始隐藏） -->
+                <div id="kb-recent-section" class="kb-card" style="display:none;padding:18px 22px">
+                    <div class="kb-recent-title">最近使用</div>
+                    <div id="kb-recent-list"></div>
+                </div>
+
+                <!-- 新增资料表单 -->
+                <div class="kb-card kb-form-card">
+                    <form id="kb-form">
+                        <!-- 标题 -->
+                        <div style="margin-bottom:14px">
+                            <label class="kb-label" for="kb-title">标题</label>
+                            <input id="kb-title" class="kb-input" type="text" required
+                                placeholder="例如：《劳动合同法》第38条摘录" />
+                        </div>
+
+                        <!-- 内容 -->
+                        <div style="margin-bottom:14px">
+                            <label class="kb-label" for="kb-content">
+                                内容 <span class="kb-label-opt">（可选）</span>
+                            </label>
+                            <textarea id="kb-content" class="kb-textarea" rows="5"
+                                placeholder="粘贴或输入法条、案件备忘、沟通要点…"></textarea>
+                        </div>
+
+                        <!-- 标签 -->
+                        <div style="margin-bottom:14px">
+                            <label class="kb-label">
+                                标签 <span class="kb-label-opt">（可选，回车确认）</span>
+                            </label>
+                            <div class="kb-tags-row" id="kb-tags-row">
+                                <input id="kb-tag-input" type="text"
+                                    style="border:none;outline:none;font-size:12px;color:#1e293b;background:transparent;flex:1;min-width:80px;font-family:inherit"
+                                    placeholder="输入后回车" maxlength="12" />
+                            </div>
+                            <div class="kb-tag-presets">
+                                <button type="button" class="kb-tag-preset" data-tag="劳动纠纷">劳动纠纷</button>
+                                <button type="button" class="kb-tag-preset" data-tag="合同">合同</button>
+                                <button type="button" class="kb-tag-preset" data-tag="借贷">借贷</button>
+                                <button type="button" class="kb-tag-preset" data-tag="婚姻家庭">婚姻家庭</button>
+                                <button type="button" class="kb-tag-preset" data-tag="侵权">侵权</button>
+                            </div>
+                        </div>
+
+                        <div class="kb-divider"></div>
+
+                        <!-- 附件 -->
+                        <div style="margin-bottom:20px">
+                            <label class="kb-label">
+                                附件 <span class="kb-label-opt">（可选）</span>
+                            </label>
+                            <input type="file" id="kb-file-input" class="sr-only"
+                                accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif" />
+                            <button type="button" class="kb-file-btn" id="kb-file-trigger">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                                上传附件
+                            </button>
+                            <div id="kb-file-info" class="kb-file-info">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                                <span id="kb-file-name" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:13px"></span>
+                                <span id="kb-file-status" style="font-size:12px;color:#94a3b8;flex-shrink:0"></span>
+                                <button type="button" id="kb-file-clear" title="移除附件">✕</button>
+                            </div>
+                            <div style="font-size:11px;color:#94a3b8;margin-top:6px">
+                                支持 PDF、Word、TXT、图片，最大 10 MB
+                            </div>
+                        </div>
+
+                        <button type="submit" class="kb-submit-btn" id="kb-submit-btn">保存资料</button>
+                    </form>
+                </div>
+                </div>
+            </aside>
+
+            <!-- ══ 右侧：资料列表（独立滚动） ══ -->
+            <section class="kb-right">
+                <div class="kb-panel-head kb-panel-head--right">
+                    <div class="kb-right-header">
+                        <div class="kb-right-title">我的资料库</div>
+                        <span id="kb-count-badge" class="kb-count-badge">0 条</span>
+                    </div>
+
+                    <div class="kb-search-wrap">
+                    <svg class="kb-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                    <input id="kb-search-input" class="kb-search-input" type="text" placeholder="搜索资料标题或内容…" />
+                    </div>
+
+                    <div id="kb-cat-tabs"></div>
+                </div>
+
+                <div class="kb-scroll kb-scroll-right" id="kb-list-scroll">
+                    <div id="kb-list"></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/lib/activity-log.js"></script>
+    <script src="./js/knowledge.js"></script>
+</body>
+</html>

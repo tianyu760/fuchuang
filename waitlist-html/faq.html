@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>法绎 · 专业法律AI帮助中心</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./css/faq-page.css" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script src="./js/auth.js"></script>
+</head>
+<body class="help-page font-inter antialiased text-gray-800 dark:text-gray-200 tracking-tight">
+    <header class="sticky top-0 z-50 w-full border-b border-gray-100 dark:border-gray-800 bg-white/85 dark:bg-gray-900/85 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="faq" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" /><path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" /></svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="help-main">
+        <section class="docs-layout">
+            <button id="help-nav-toggle" class="help-nav-toggle" type="button">帮助目录</button>
+
+            <aside id="help-drawer" class="help-drawer">
+                <div class="help-drawer__mask" id="help-drawer-mask"></div>
+                <div class="docs-sidebar" id="faq-sidebar">
+                    <div class="docs-sidebar__title">帮助目录</div>
+                    <div id="faq-category-nav" class="docs-nav"></div>
+                </div>
+            </aside>
+
+            <section class="docs-content" id="help-content-scroll">
+                <header class="docs-topbar">
+                    <div class="docs-breadcrumb">
+                        <a href="index.html">首页</a>
+                        <span>/</span>
+                        <span>帮助中心</span>
+                    </div>
+                    <h1>帮助中心</h1>
+                    <p>按功能模块查阅平台使用文档，快速定位常见问题并查看处理方法。</p>
+                    <div class="docs-search">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        <input id="faq-search-input" type="text" placeholder="搜索帮助内容：文书、导出、法规、账户…" autocomplete="off" />
+                    </div>
+                    <div id="faq-hot-list" class="docs-hot"></div>
+                </header>
+
+                <div class="content-container">
+                    <div id="faq-empty" class="faq-empty hidden">
+                        <h3>未找到匹配内容</h3>
+                        <p>请更换关键词，或返回目录查看对应模块文档。</p>
+                    </div>
+                    <div id="faq-sections"></div>
+
+                    <footer class="help-footer-note">
+                        <h3>联系与反馈</h3>
+                        <p>如仍未解决，可前往在线咨询提交问题，我们会根据工单顺序处理。</p>
+                        <a href="contact.html">提交反馈</a>
+                    </footer>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/faq-page.js"></script>
+</body>
+</html>
+

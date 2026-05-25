@@ -1,0 +1,10 @@
+[
+  {
+    "id": "admin_1",
+    "email": "admin@fayi.local",
+    "name": "系统管理员",
+    "password": "891546d385685ae501108271417859ab99a2d9c91342feb30d45ee57f84c672c",
+    "role": "super_admin",
+    "createdAt": "2026-05-20T08:02:23.546Z"
+  }
+]

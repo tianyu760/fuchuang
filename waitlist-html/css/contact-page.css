@@ -1,0 +1,334 @@
+/* 联系我们 · 法律机构官网风 */
+*, *::before, *::after { box-sizing: border-box; }
+
+.ct-page {
+  min-height: 100vh;
+  background: #f5f3ef;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  color: #1f2937;
+}
+
+.dark .ct-page {
+  background: #111827;
+  color: #e5e7eb;
+}
+
+.ct-wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 42px 20px 64px;
+}
+
+.ct-hero {
+  text-align: left;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d6d3d1;
+}
+
+.dark .ct-hero {
+  border-color: #374151;
+}
+
+.contact-hero-section {
+  padding-top: 64px;
+  padding-bottom: 48px;
+  margin-bottom: 10px;
+  border-bottom: none;
+  animation: contactFadeUp .5s ease-out;
+}
+
+.contact-hero-kicker {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b7280;
+  margin-bottom: 14px;
+  padding-left: 1px;
+}
+
+.contact-hero-title {
+  margin: 0;
+  font-size: clamp(36px, 4vw, 42px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #1f2937;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+}
+
+.dark .contact-hero-title {
+  color: #f3f4f6;
+}
+
+.contact-hero-subtitle {
+  margin: 14px 0 0;
+  max-width: 620px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #6b7280;
+  font-family: "Inter", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", sans-serif;
+}
+
+.dark .contact-hero-subtitle {
+  color: #9ca3af;
+}
+
+.contact-hero-divider {
+  width: 100%;
+  max-width: 320px;
+  height: 1px;
+  margin-top: 18px;
+  background: #d1d5db;
+}
+
+.dark .contact-hero-divider {
+  background: #4b5563;
+}
+
+@keyframes contactFadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ct-hero h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 700;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  color: #111827;
+}
+
+.dark .ct-hero h1 { color: #f9fafb; }
+
+.ct-hero p {
+  margin: 0;
+  max-width: 760px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #4b5563;
+}
+
+.dark .ct-hero p { color: #9ca3af; }
+
+.ct-info,
+.ct-feedback,
+.ct-note {
+  margin-top: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+
+.dark .ct-info,
+.dark .ct-feedback,
+.dark .ct-note {
+  background: #1f2937;
+  border-color: #374151;
+}
+
+.ct-info h2,
+.ct-feedback h2,
+.ct-note h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  color: #111827;
+}
+
+.dark .ct-info h2,
+.dark .ct-feedback h2,
+.dark .ct-note h2 {
+  color: #f9fafb;
+}
+
+.ct-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 22px;
+}
+
+.ct-info-item {
+  padding: 9px 0;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.dark .ct-info-item {
+  border-color: #374151;
+}
+
+.ct-info-item span {
+  font-size: 13px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.ct-info-item strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: right;
+}
+
+.dark .ct-info-item strong { color: #e5e7eb; }
+
+.ct-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ct-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ct-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ct-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.dark .ct-field label { color: #d1d5db; }
+
+.ct-field input,
+.ct-field select,
+.ct-field textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  font-size: 14px;
+  padding: 10px 12px;
+  outline: none;
+  font-family: inherit;
+  transition: border-color .15s ease;
+}
+
+.ct-field textarea {
+  min-height: 150px;
+  line-height: 1.75;
+  resize: vertical;
+}
+
+.ct-field input:focus,
+.ct-field select:focus,
+.ct-field textarea:focus {
+  border-color: #6b7280;
+}
+
+.dark .ct-field input,
+.dark .ct-field select,
+.dark .ct-field textarea {
+  background: #111827;
+  border-color: #4b5563;
+  color: #f3f4f6;
+}
+
+.ct-file-hint {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.dark .ct-file-hint { color: #9ca3af; }
+
+.ct-submit-wrap {
+  margin-top: 4px;
+}
+
+.ct-submit-btn {
+  min-width: 180px;
+  height: 42px;
+  border: 1px solid #111827;
+  border-radius: 8px;
+  background: #111827;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ct-submit-btn:hover:not(:disabled) { background: #000; border-color: #000; }
+.ct-submit-btn:disabled { opacity: .65; cursor: not-allowed; }
+
+.ct-note ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.ct-note li {
+  margin: 6px 0;
+  line-height: 1.8;
+  font-size: 13px;
+  color: #4b5563;
+}
+
+.dark .ct-note li { color: #cbd5e1; }
+
+@media (max-width: 860px) {
+  .ct-info-grid,
+  .ct-row {
+    grid-template-columns: 1fr;
+  }
+
+  .ct-info-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ct-info-item strong {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .ct-wrap { padding: 24px 12px 72px; }
+  .ct-hero h1 { font-size: 26px; }
+  .contact-hero-section {
+    padding-top: 56px;
+    padding-bottom: 40px;
+  }
+  .contact-hero-title {
+    font-size: clamp(28px, 8vw, 32px);
+  }
+  .contact-hero-subtitle {
+    font-size: 16px;
+    max-width: none;
+  }
+  .ct-feedback { padding-bottom: 86px; position: relative; }
+  .ct-submit-wrap {
+    position: sticky;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 10px;
+    margin-top: 8px;
+  }
+  .dark .ct-submit-wrap {
+    background: #1f2937;
+    border-color: #374151;
+  }
+  .ct-submit-btn { width: 100%; }
+}

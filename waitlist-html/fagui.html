@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <title>法规与案例检索 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script src="./js/auth.js"></script>
+    <script>
+        if (!FayiAuth.getCurrentUser()) {
+            window.location.replace('login.html?next=' + encodeURIComponent('fagui.html'));
+        }
+    </script>
+    <style>
+        body {
+            background:
+                linear-gradient(rgba(248,250,252,0.93), rgba(248,250,252,0.93)),
+                url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=1920&h=1080&fit=crop&q=80')
+                no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        /* 面包屑 */
+        .fg-breadcrumb { display:flex; align-items:center; gap:6px; margin-bottom:12px; }
+        .fg-breadcrumb a { font-size:12px; color:#94a3b8; text-decoration:none; transition:color .15s; }
+        .fg-breadcrumb a:hover { color:#1e293b; }
+        .fg-breadcrumb span { font-size:12px; color:#cbd5e1; }
+        .fg-breadcrumb .fg-current { font-size:12px; color:#64748b; }
+        /* Hero 标题区 */
+        .fg-hero { margin-bottom:24px; }
+        .fg-hero__tag {
+            display:inline-block; font-size:11px; font-weight:600;
+            color:#64748b; background:#f1f5f9; border:1px solid #e2e8f0;
+            border-radius:4px; padding:2px 8px; margin-bottom:10px;
+            letter-spacing:.04em; text-transform:uppercase;
+        }
+        .fg-hero h1 { font-size:26px; font-weight:700; color:#1e293b; margin:0 0 6px; line-height:1.25; }
+        .fg-hero p  { font-size:13px; color:#64748b; margin:0; line-height:1.6; }
+        /* 快捷场景按钮 */
+        .fg-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+        .fg-pills-label { font-size:12px; color:#94a3b8; font-weight:500; margin-bottom:8px; }
+        .fg-pill {
+            font-size:12px; padding:5px 12px; border-radius:6px;
+            border:1px solid #e2e8f0; background:#ffffff;
+            color:#475569; cursor:pointer; transition:all .15s;
+        }
+        .fg-pill:hover { border-color:#1e293b; color:#1e293b; background:#f8fafc; }
+        /* 表单卡片 */
+        .fg-form-card {
+            background:#ffffff; border:1px solid #e2e8f0;
+            border-radius:12px; padding:24px;
+            box-shadow:0 4px 16px rgba(0,0,0,0.05); margin-bottom:20px;
+        }
+        .fg-form-label { font-size:13px; font-weight:600; color:#374151; display:block; margin-bottom:10px; }
+        .fg-textarea {
+            width:100%; min-height:90px; resize:none;
+            border:1px solid #e2e8f0; border-radius:8px;
+            padding:12px; font-size:13px; color:#1e293b;
+            background:#fafafa; outline:none; box-sizing:border-box;
+            transition:border-color .15s;
+            font-family:inherit; line-height:1.6;
+        }
+        .fg-textarea:focus { border-color:#1e293b; background:#fff; }
+        .fg-textarea::placeholder { color:#cbd5e1; }
+        .fg-submit-btn {
+            background:#1e293b; color:#fff;
+            border:none; border-radius:8px;
+            padding:9px 22px; font-size:13px; font-weight:600;
+            cursor:pointer; transition:all .18s;
+            display:inline-flex; align-items:center; gap:6px;
+        }
+        .fg-submit-btn:hover { background:#334155; transform:translateY(-1px); box-shadow:0 4px 12px rgba(30,41,59,0.2); }
+        .fg-submit-btn:disabled { opacity:.55; transform:none; cursor:not-allowed; }
+        /* 结果卡片 */
+        .fg-result-card {
+            background:#ffffff; border:1px solid #e2e8f0;
+            border-radius:12px; padding:24px;
+            box-shadow:0 4px 16px rgba(0,0,0,0.05);
+        }
+        .fg-result-hd { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+        .fg-result-hd img { width:28px; height:28px; border-radius:50%; object-fit:cover; border:2px solid #e2e8f0; }
+        .fg-result-hd span { font-size:12px; font-weight:500; color:#64748b; }
+        .fg-answer { font-size:13px; color:#374151; line-height:1.7; }
+        .fg-answer h4 { font-weight:600; color:#1e293b; margin:16px 0 6px; font-size:13px; }
+        .fg-answer h4:first-child { margin-top:0; }
+        .fg-answer ul { margin:6px 0; padding-left:16px; }
+        .fg-answer li { margin-bottom:4px; }
+        .fg-answer p { margin:8px 0; }
+        .fg-answer p:first-child { margin-top:0; }
+        .fg-disclaimer {
+            font-size:11px; color:#94a3b8; margin-top:16px; padding-top:14px;
+            border-top:1px solid #f1f5f9; line-height:1.6;
+        }
+        .fg-disclaimer a { color:#3b82f6; text-decoration:none; }
+        .fg-disclaimer a:hover { text-decoration:underline; }
+        /* 追问按钮 */
+        .fg-followup-wrap { margin-top:16px; padding-top:14px; border-top:1px solid #f1f5f9; }
+        .fg-followup-label { font-size:11px; color:#94a3b8; font-weight:500; margin-bottom:8px; }
+        .fg-followup-btn {
+            font-size:12px; padding:5px 12px; border-radius:6px;
+            border:1px solid #e2e8f0; background:#f8fafc;
+            color:#475569; cursor:pointer; transition:all .15s;
+            margin:0 6px 6px 0;
+        }
+        .fg-followup-btn:hover { border-color:#1e293b; color:#1e293b; background:#fff; }
+        /* 加载中 */
+        .fg-loading { text-align:center; padding:32px 0; }
+        .fg-loading-inner { display:inline-flex; align-items:center; gap:8px; font-size:13px; color:#94a3b8; }
+        /* 分隔线 */
+        .fg-divider { border:none; border-top:1px solid #f1f5f9; margin:0 0 28px; }
+        /* AI 结构化法规检索结果 */
+        .ai-meta { font-size:13px; color:#64748b; margin-bottom:12px; }
+        .ai-section-h { font-size:13px; font-weight:600; color:#1e293b; margin:16px 0 8px; }
+        .ai-law-list { display:flex; flex-direction:column; gap:10px; }
+        .ai-law-card { border:1px solid #e2e8f0; border-radius:8px; padding:12px 14px; background:#f8fafc; }
+        .ai-law-card__hd { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:6px; font-size:13px; }
+        .ai-law-idx { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:#1e293b; color:#fff; font-size:11px; font-weight:700; }
+        .ai-law-article { color:#64748b; font-weight:500; }
+        .ai-law-card__body { font-size:13px; color:#475569; line-height:1.65; margin:0; }
+        .ai-section-body { font-size:13px; line-height:1.7; color:#374151; }
+        .ai-warning { font-size:13px; color:#b45309; background:#fffbeb; border:1px solid #fde68a; border-radius:8px; padding:10px 12px; line-height:1.6; }
+        .ai-followup-wrap { margin-top:16px; padding-top:14px; border-top:1px solid #f1f5f9; }
+        .ai-followup-label { font-size:11px; color:#94a3b8; font-weight:500; margin-bottom:8px; }
+        .ai-followup-pills { display:flex; flex-wrap:wrap; gap:8px; }
+    </style>
+</head>
+
+<body class="font-inter antialiased text-gray-800 dark:bg-gray-900 dark:text-gray-200 tracking-tight min-h-screen flex flex-col">
+
+    <header class="sticky top-0 z-50 shrink-0 border-b border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" /><path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" /></svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="grow px-4 sm:px-6 py-8 max-w-3xl mx-auto w-full">
+        <!-- 面包屑 -->
+        <div class="fg-breadcrumb">
+            <a href="index.html">首页</a>
+            <span>/</span>
+            <span class="fg-current">法规与案例检索</span>
+        </div>
+
+        <!-- Hero 标题区 -->
+        <div class="fg-hero">
+            <div class="fg-hero__tag">法规检索</div>
+            <h1>法规与案例检索</h1>
+            <p>输入案情关键词，快速归纳相关法律法规名称、条款提示及典型案例思路。正式引用请以权威数据库为准。</p>
+        </div>
+
+        <hr class="fg-divider" />
+
+        <!-- 常见检索场景 -->
+        <p class="fg-pills-label">常见检索场景</p>
+        <div class="fg-pills">
+            <button type="button" class="fg-pill fagui-quick" data-q="劳动合同纠纷，用人单位拖欠工资，相关法规和维权途径">劳动合同纠纷</button>
+            <button type="button" class="fg-pill fagui-quick" data-q="网络购物消费者权益保护，商家虚假宣传，相关法律条款">消费者权益</button>
+            <button type="button" class="fg-pill fagui-quick" data-q="房屋租赁纠纷，房东无故解除合同，押金不退，相关法规">房屋租赁纠纷</button>
+            <button type="button" class="fg-pill fagui-quick" data-q="交通事故责任认定和赔偿标准，相关法律法规">交通事故赔偿</button>
+            <button type="button" class="fg-pill fagui-quick" data-q="离婚财产分割，夫妻共同财产认定，子女抚养权">婚姻家庭纠纷</button>
+            <button type="button" class="fg-pill fagui-quick" data-q="借贷纠纷，民间借贷合法利率范围，催收注意事项">民间借贷</button>
+        </div>
+
+        <!-- 检索输入区 -->
+        <form id="fagui-form" class="fg-form-card">
+            <label class="fg-form-label" for="fagui-input">描述案情与检索关键词</label>
+            <textarea id="fagui-input" class="fg-textarea"
+                placeholder="例如：我被公司违法解除劳动合同，想了解相关的法律条款和赔偿标准。"></textarea>
+            <div style="display:flex; justify-content:flex-end; margin-top:14px;">
+                <button type="submit" id="fagui-submit" class="fg-submit-btn">开始检索</button>
+            </div>
+        </form>
+
+        <!-- 加载中 -->
+        <div id="fagui-loading" class="hidden fg-loading">
+            <div class="fg-loading-inner">
+                <svg class="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                正在检索，请稍候…
+            </div>
+        </div>
+
+        <!-- 结果区 -->
+        <div id="fagui-result" class="hidden">
+            <div class="fg-result-card">
+                <div class="fg-result-hd">
+                    <img src="./1775920295347.png" alt="" />
+                    <span>法绎法规检索助手</span>
+                </div>
+                <div id="fagui-answer" class="fg-answer"></div>
+                <div id="fagui-followups"></div>
+                <p class="fg-disclaimer">
+                    以上内容仅供参考，不构成正式法律意见。正式引用法规请以
+                    <a href="https://www.pkulaw.com" target="_blank" rel="noopener">北大法宝</a>、
+                    <a href="https://wenshu.court.gov.cn" target="_blank" rel="noopener">中国裁判文书网</a>
+                    等权威数据库为准。
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 dark:border-gray-800" style="padding:18px 0; text-align:center;">
+        <p style="font-size:12px; color:#94a3b8;" data-fayi-copyright data-fayi-copyright-suffix="法绎 · 法律服务平台"></p>
+    </footer>
+
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/lib/extract-ai-content.js"></script>
+    <script src="./js/lib/chat-text-style.js"></script>
+    <script src="./js/lib/clean-ai-response.js"></script>
+    <script src="./js/ai/intent-router.js"></script>
+    <script src="./js/services/conversation-context-manager.js"></script>
+    <script src="./js/services/ai-client.js"></script>
+    <script src="./js/modules/datav/realtime-store.js"></script>
+    <script src="./js/ai-legal.js"></script>
+    <script src="./js/lib/activity-log.js"></script>
+    <script src="./js/fagui-page.js"></script>
+</body>
+
+</html>

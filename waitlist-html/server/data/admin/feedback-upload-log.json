@@ -1,0 +1,30 @@
+[
+  {
+    "uploadTime": "2026-05-25T03:23:25.708Z",
+    "fileNames": [
+      "æ¡ä¾1.docx"
+    ],
+    "fileSizes": [
+      13751
+    ],
+    "userId": "3837498182@qq.com",
+    "contact": "1222222222",
+    "identity": "功能问题",
+    "status": "sent",
+    "messageId": "<a4efa96e-dcc8-d8ff-2fbb-740093331ac3@qq.com>"
+  },
+  {
+    "uploadTime": "2026-05-25T03:22:07.541Z",
+    "fileNames": [
+      "åè½4.docx"
+    ],
+    "fileSizes": [
+      11419
+    ],
+    "userId": "3837498182@qq.com",
+    "contact": "1222222222",
+    "identity": "功能问题",
+    "status": "sent",
+    "messageId": "<f354d049-d190-c3e2-c5c9-39730eb76c98@qq.com>"
+  }
+]

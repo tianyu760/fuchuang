@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>联系我们 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./css/contact-page.css" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script src="./js/auth.js"></script>
+</head>
+
+<body class="ct-page font-inter antialiased text-gray-800 dark:text-gray-200 tracking-tight flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-50 w-full border-b border-gray-100 dark:border-gray-800 bg-white/85 dark:bg-gray-900/80 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="contact" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" />
+                            <path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
+                        </svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="grow">
+        <div class="ct-wrap">
+            <section class="ct-hero contact-hero-section">
+                <div class="contact-hero-kicker">法绎 · 服务支持</div>
+                <h1 class="contact-hero-title">联系我们</h1>
+                <p class="contact-hero-subtitle">如您在使用过程中遇到问题，可通过留言反馈方式提交建议与问题，我们会按照处理流程尽快响应。</p>
+                <div class="contact-hero-divider" aria-hidden="true"></div>
+            </section>
+
+            <section class="ct-info">
+                <h2>服务说明</h2>
+                <div class="ct-info-grid">
+                    <div class="ct-info-item"><span>办公时间</span><strong>工作日 09:30 - 18:00（北京时间）</strong></div>
+                    <div class="ct-info-item"><span>服务范围</span><strong>平台使用咨询、文书生成异常、账号与权限问题</strong></div>
+                    <div class="ct-info-item"><span>反馈响应</span><strong>一般问题 1-2 个工作日内回复，复杂问题顺延</strong></div>
+                    <div class="ct-info-item"><span>系统版本</span><strong id="ct-version">法绎平台 · v1.2.0</strong></div>
+                </div>
+            </section>
+
+            <section class="ct-feedback" aria-labelledby="ct-feedback-title">
+                <h2 id="ct-feedback-title">意见反馈表单</h2>
+                <form id="ct-form" class="ct-form" novalidate>
+                    <div class="ct-row">
+                        <div class="ct-field">
+                            <label for="ct-type">反馈类型</label>
+                            <select id="ct-type" name="type" required>
+                                <option value="">请选择反馈类型</option>
+                                <option value="功能问题">功能问题</option>
+                                <option value="文书排版">文书排版</option>
+                                <option value="账号与权限">账号与权限</option>
+                                <option value="建议与改进">建议与改进</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                        <div class="ct-field">
+                            <label for="ct-contact">联系方式（可选）</label>
+                            <input id="ct-contact" name="contact" type="text" placeholder="手机号 / 邮箱 / 微信号（可选）" />
+                        </div>
+                    </div>
+
+                    <div class="ct-field">
+                        <label for="ct-message">问题描述</label>
+                        <textarea id="ct-message" name="message" placeholder="请描述问题场景、出现时间、复现步骤和期望结果。" required></textarea>
+                    </div>
+
+                    <div class="ct-field">
+                        <label for="ct-files">附件上传（可选）</label>
+                        <input id="ct-files" name="files" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.doc,.docx,.zip,.txt" />
+                        <p id="ct-file-hint" class="ct-file-hint">未选择附件</p>
+                    </div>
+
+                    <div class="ct-submit-wrap">
+                        <button type="submit" id="ct-submit-btn" class="ct-submit-btn">
+                            <span id="ct-btn-text">提交反馈</span>
+                            <svg id="ct-btn-spinner" class="hidden animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="ct-note">
+                <h2>常见说明</h2>
+                <ul>
+                    <li>请尽量提供完整问题描述与截图信息，以便快速定位。</li>
+                    <li>涉及案件实体法律意见的请求，请在法律咨询模块提交。</li>
+                    <li>提交反馈后请留意站内通知或后续回复消息。</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 dark:border-gray-800">
+        <div class="px-4 sm:px-6">
+            <div class="max-w-6xl mx-auto py-6">
+                <p class="text-sm text-gray-500 dark:text-gray-500 text-center" data-fayi-copyright data-fayi-copyright-suffix="法绎 · 法律服务平台"></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/contact-page.js"></script>
+</body>
+</html>

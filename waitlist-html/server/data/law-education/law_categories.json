@@ -1,0 +1,47 @@
+[
+  {
+    "id": "constitution",
+    "name": "宪法",
+    "sort": 1
+  },
+  {
+    "id": "civil",
+    "name": "民法",
+    "sort": 2
+  },
+  {
+    "id": "criminal",
+    "name": "刑法",
+    "sort": 3
+  },
+  {
+    "id": "labor",
+    "name": "劳动法",
+    "sort": 4
+  },
+  {
+    "id": "marriage",
+    "name": "婚姻法",
+    "sort": 5
+  },
+  {
+    "id": "cyber",
+    "name": "网络安全",
+    "sort": 6
+  },
+  {
+    "id": "campus",
+    "name": "校园安全",
+    "sort": 7
+  },
+  {
+    "id": "consumer",
+    "name": "消费维权",
+    "sort": 8
+  },
+  {
+    "id": "telecom",
+    "name": "电信诈骗",
+    "sort": 9
+  }
+]

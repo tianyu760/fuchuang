@@ -1,0 +1,325 @@
+/* 法绎 · 商业级 AI 法律数据驾驶舱 */
+:root {
+  --dv-bg: #060b16;
+  --dv-bg2: #0c1528;
+  --dv-surface: rgba(14, 26, 48, 0.72);
+  --dv-glass: rgba(18, 32, 58, 0.55);
+  --dv-border: rgba(79, 156, 249, 0.22);
+  --dv-accent: #4f9cf9;
+  --dv-accent2: #38bdf8;
+  --dv-text: #e2e8f0;
+  --dv-muted: #8b9cb3;
+  --dv-gap: 18px;
+  --dv-radius: 14px;
+  --dv-shadow: 0 12px 40px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(79, 156, 249, 0.08);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+
+.datav-body {
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--dv-bg);
+  color: var(--dv-text);
+}
+
+.datav-bg-glow {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 10%, rgba(79, 156, 249, 0.14), transparent 55%),
+    radial-gradient(ellipse 40% 35% at 85% 20%, rgba(129, 140, 248, 0.1), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(45, 212, 191, 0.06), transparent 55%);
+  animation: dv-bg-shift 18s ease-in-out infinite alternate;
+}
+@keyframes dv-bg-shift {
+  from { opacity: 0.85; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.02); }
+}
+
+#particles {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.65;
+}
+
+.datav-scale {
+  position: relative; z-index: 1;
+  width: 1920px; height: 1080px;
+  transform-origin: 0 0;
+  padding: 20px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--dv-gap);
+}
+
+/* —— 顶栏 —— */
+.datav-top {
+  display: grid;
+  grid-template-columns: 220px 1fr auto;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--dv-border);
+}
+.datav-logo {
+  font-size: 1.35rem; font-weight: 800; letter-spacing: 0.2em;
+  background: linear-gradient(135deg, #f8fafc, var(--dv-accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.datav-top__tag {
+  display: block; font-size: 0.65rem; color: var(--dv-muted);
+  letter-spacing: 0.28em; margin-top: 4px;
+}
+.datav-top__center { text-align: center; }
+.datav-top__center h1 {
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 0.14em;
+  color: #f1f5f9;
+}
+.datav-subtitle {
+  font-size: 0.78rem; color: var(--dv-muted); margin-top: 6px; letter-spacing: 0.06em;
+}
+.datav-top__right {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end;
+}
+.datav-meta-chip {
+  padding: 6px 12px; border-radius: 999px;
+  background: var(--dv-glass); border: 1px solid var(--dv-border);
+  font-size: 0.72rem; color: var(--dv-muted);
+}
+.datav-meta-chip em { font-style: normal; margin-right: 6px; }
+.datav-meta-chip strong { color: var(--dv-accent2); font-variant-numeric: tabular-nums; }
+.datav-meta-chip--time { min-width: 168px; text-align: center; color: #cbd5e1; }
+
+/* —— KPI 条 —— */
+.datav-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+.datav-kpi-card {
+  padding: 14px 16px;
+  background: var(--dv-surface);
+  border: 1px solid var(--dv-border);
+  border-radius: var(--dv-radius);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--dv-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: dv-float-in 0.7s ease backwards;
+}
+.datav-kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 24px rgba(79, 156, 249, 0.12);
+}
+.datav-kpi-card__label { font-size: 0.72rem; color: var(--dv-muted); }
+.datav-kpi-card__val {
+  font-size: 1.65rem; font-weight: 700; margin-top: 6px;
+  color: #fff; font-variant-numeric: tabular-nums;
+}
+.datav-kpi-card__val small { font-size: 0.75rem; color: var(--dv-accent2); font-weight: 500; }
+
+/* —— 三栏网格 —— */
+.datav-grid {
+  flex: 1; min-height: 0;
+  display: grid;
+  grid-template-columns: 400px 1fr 400px;
+  gap: var(--dv-gap);
+}
+.datav-col {
+  display: flex; flex-direction: column; gap: var(--dv-gap);
+  min-height: 0;
+}
+
+.datav-panel {
+  flex: 1; min-height: 0;
+  display: flex; flex-direction: column;
+  padding: 16px 18px;
+  background: var(--dv-surface);
+  border: 1px solid var(--dv-border);
+  border-radius: var(--dv-radius);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--dv-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  animation: dv-panel-in 0.85s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+.datav-panel::after {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(79, 156, 249, 0.5), transparent);
+  opacity: 0.6;
+}
+.datav-panel:hover {
+  border-color: rgba(79, 156, 249, 0.38);
+  transform: translateY(-2px);
+}
+.datav-panel[data-tier="1"] { animation-delay: 0.05s; }
+.datav-panel[data-tier="2"] { animation-delay: 0.12s; }
+.datav-panel[data-tier="3"] { animation-delay: 0.18s; }
+
+.datav-panel__head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px; flex-shrink: 0;
+}
+.datav-panel__head h3 {
+  font-size: 0.82rem; font-weight: 600; color: var(--dv-accent2);
+  letter-spacing: 0.1em;
+}
+.datav-panel__hint { font-size: 0.68rem; color: var(--dv-muted); }
+.datav-live-dot {
+  font-size: 0.65rem; color: #34d399; letter-spacing: 0.12em;
+  animation: dv-pulse 2s ease infinite;
+}
+.datav-live-dot::before {
+  content: ""; display: inline-block; width: 6px; height: 6px;
+  background: #34d399; border-radius: 50%; margin-right: 6px;
+  box-shadow: 0 0 10px #34d399;
+}
+
+.datav-panel--metrics {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 20px;
+}
+.datav-metric { text-align: center; }
+.datav-metric__val {
+  font-size: 2.6rem; font-weight: 800; line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(180deg, #fff 30%, var(--dv-accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.25));
+}
+.datav-metric__lbl { font-size: 0.75rem; color: var(--dv-muted); margin-top: 8px; }
+
+.datav-panel--module { flex: 1.15; }
+.datav-panel--feed { flex: 0.95; min-height: 0; }
+.datav-panel--compact { flex: 0 0 auto; }
+
+.datav-chart { width: 100%; flex: 1; min-height: 120px; }
+.datav-chart--trend { min-height: 200px; }
+.datav-chart--risk, .datav-chart--pie, .datav-chart--heat { min-height: 150px; }
+.datav-chart--module { min-height: 300px; }
+.datav-chart--word { min-height: 200px; }
+
+.datav-feed-wrap {
+  flex: 1; min-height: 0; overflow: hidden;
+  mask-image: linear-gradient(180deg, #000 85%, transparent);
+}
+.datav-feed {
+  list-style: none;
+  animation: dv-feed-scroll 28s linear infinite;
+}
+.datav-feed:hover { animation-play-state: paused; }
+.datav-feed li {
+  display: grid;
+  grid-template-columns: 58px 72px 1fr;
+  gap: 10px; align-items: start;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(51, 65, 85, 0.35);
+  font-size: 0.74rem;
+}
+.datav-feed time { color: #64748b; font-variant-numeric: tabular-nums; }
+.datav-feed__type {
+  padding: 2px 8px; border-radius: 4px; font-size: 0.65rem;
+  background: rgba(79, 156, 249, 0.15); color: var(--dv-accent2);
+  text-align: center;
+}
+.datav-feed__msg { color: #cbd5e1; line-height: 1.45; }
+.datav-feed__tags { margin-top: 4px; font-size: 0.65rem; color: #64748b; }
+.datav-feed__risk--high { color: #f87171; }
+.datav-feed__risk--mid { color: #fbbf24; }
+.datav-feed__risk--low { color: #34d399; }
+
+.datav-topq {
+  list-style: none; font-size: 0.76rem; flex: 1; overflow: auto;
+}
+.datav-topq li {
+  display: flex; gap: 10px; padding: 8px 0;
+  border-bottom: 1px dashed rgba(51, 65, 85, 0.35);
+}
+.datav-topq__rank {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 6px;
+  background: rgba(79, 156, 249, 0.2); color: var(--dv-accent2);
+  font-size: 0.7rem; font-weight: 700; text-align: center; line-height: 22px;
+}
+.datav-topq__text { flex: 1; color: #cbd5e1; line-height: 1.4; }
+.datav-topq__cnt { color: var(--dv-accent2); font-weight: 600; }
+
+.datav-kpi { list-style: none; font-size: 0.78rem; }
+.datav-kpi li {
+  display: flex; justify-content: space-between; padding: 7px 0;
+  border-bottom: 1px dashed rgba(51, 65, 85, 0.3);
+}
+.datav-kpi span:last-child { color: var(--dv-accent2); font-weight: 600; }
+
+/* 工具栏按钮 */
+.datav-status {
+  font-size: 0.7rem; padding: 5px 10px; border-radius: 999px;
+  border: 1px solid var(--dv-border); color: var(--dv-muted);
+}
+.datav-status--ok { color: #67e8f9; border-color: rgba(56, 189, 248, 0.4); }
+.datav-status--ok::before {
+  content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: #22d3ee; margin-right: 5px; animation: dv-pulse 2s ease infinite;
+}
+.datav-status--err { color: #fca5a5; }
+.datav-btn {
+  background: var(--dv-glass); border: 1px solid var(--dv-border);
+  color: var(--dv-accent2); padding: 6px 14px; border-radius: 8px;
+  cursor: pointer; font-size: 0.75rem; transition: all 0.2s ease;
+}
+.datav-btn:hover {
+  background: rgba(79, 156, 249, 0.15);
+  box-shadow: 0 0 20px rgba(79, 156, 249, 0.2);
+}
+.datav-btn--exit {
+  color: #fecaca; border-color: rgba(248, 113, 113, 0.35);
+}
+
+/* 离线层 */
+.datav-offline {
+  position: fixed; inset: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(6, 11, 22, 0.9); backdrop-filter: blur(10px);
+}
+.datav-offline.hidden { display: none; }
+.datav-offline__panel {
+  max-width: 480px; padding: 32px; text-align: center;
+  background: var(--dv-surface); border: 1px solid var(--dv-border);
+  border-radius: var(--dv-radius);
+}
+.datav-offline__cmd {
+  text-align: left; margin: 16px 0; padding: 12px;
+  background: rgba(0,0,0,.3); border-radius: 8px; color: #67e8f9; font-size: 0.8rem;
+}
+.datav-offline__actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+
+/* 动画 */
+@keyframes dv-panel-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes dv-float-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes dv-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes dv-feed-scroll {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+.datav-body.datav-entering .datav-scale {
+  animation: dv-page-in 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.datav-body.datav-exiting .datav-scale {
+  animation: dv-page-out 0.35s ease forwards;
+}
+.datav-body.datav-exiting { filter: blur(3px); }
+@keyframes dv-page-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes dv-page-out {
+  to { opacity: 0; transform: scale(0.98); }
+}

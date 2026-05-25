@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <title>法绎 · 智慧法务数据驾驶舱</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="./css/datav.css">
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js" defer></script>
+</head>
+<body class="datav-body">
+  <div id="datav-service-offline" class="datav-offline hidden" role="alert">
+    <div class="datav-offline__panel">
+      <h2>数据服务未就绪</h2>
+      <p>请先启动 <strong>http://localhost:3002</strong> 后再刷新。</p>
+      <pre class="datav-offline__cmd">cd waitlist-html
+npm run server:3002</pre>
+      <div class="datav-offline__actions">
+        <button type="button" class="datav-btn" id="btn-retry-service">重新检测</button>
+        <button type="button" class="datav-btn" id="btn-offline-home">返回主页</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="datav-bg-glow" aria-hidden="true"></div>
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <div class="datav-scale" id="datav-scale">
+    <header class="datav-top">
+      <div class="datav-top__brand">
+        <span class="datav-logo">法绎</span>
+        <span class="datav-top__tag">AI LEGAL OPS</span>
+      </div>
+      <div class="datav-top__center">
+        <h1>智慧法务 · 实时数据驾驶舱</h1>
+        <p class="datav-subtitle">全链路业务数据 · 智能分析 · 风险预警</p>
+      </div>
+      <div class="datav-top__right">
+        <div class="datav-meta-chip"><em>在线</em><strong id="kpi-online">0</strong></div>
+        <div class="datav-meta-chip datav-meta-chip--time" id="datav-clock">—</div>
+        <span class="datav-status" id="datav-status">连接中…</span>
+        <button type="button" class="datav-btn" id="btn-home">主页</button>
+        <button type="button" class="datav-btn" id="btn-fs">全屏</button>
+        <button type="button" class="datav-btn datav-btn--exit" id="btn-exit">退出</button>
+      </div>
+    </header>
+
+    <section class="datav-kpi-row" id="kpi-row" aria-label="核心指标"></section>
+
+    <section class="datav-grid">
+      <aside class="datav-col datav-col--left">
+        <article class="datav-panel" data-tier="1">
+          <header class="datav-panel__head"><span class="datav-panel__icon"></span><h3>业务趋势（7日）</h3></header>
+          <div id="chart-trend" class="datav-chart datav-chart--trend"></div>
+        </article>
+        <article class="datav-panel" data-tier="2">
+          <header class="datav-panel__head"><h3>风险等级分布</h3></header>
+          <div id="chart-risk" class="datav-chart datav-chart--risk"></div>
+        </article>
+        <article class="datav-panel" data-tier="2">
+          <header class="datav-panel__head"><h3>案件分类统计</h3></header>
+          <div id="chart-pie" class="datav-chart datav-chart--pie"></div>
+        </article>
+      </aside>
+
+      <main class="datav-col datav-col--center">
+        <article class="datav-panel datav-panel--metrics" data-tier="1">
+          <div class="datav-metric">
+            <div class="datav-metric__val" id="hero-consult">0</div>
+            <div class="datav-metric__lbl">今日法律咨询</div>
+          </div>
+          <div class="datav-metric">
+            <div class="datav-metric__val" id="hero-ocr">0</div>
+            <div class="datav-metric__lbl">今日 OCR 识别</div>
+          </div>
+          <div class="datav-metric">
+            <div class="datav-metric__val" id="hero-doc">0</div>
+            <div class="datav-metric__lbl">今日文书生成</div>
+          </div>
+          <div class="datav-metric">
+            <div class="datav-metric__val" id="hero-fagui">0</div>
+            <div class="datav-metric__lbl">今日法规检索</div>
+          </div>
+        </article>
+        <article class="datav-panel datav-panel--module" data-tier="1">
+          <header class="datav-panel__head"><h3>模块使用排行</h3><span class="datav-panel__hint">统一事件流统计</span></header>
+          <div id="chart-module" class="datav-chart datav-chart--module"></div>
+        </article>
+        <article class="datav-panel datav-panel--feed" data-tier="2">
+          <header class="datav-panel__head"><h3>AI 实时分析流</h3><span class="datav-live-dot">LIVE</span></header>
+          <div class="datav-feed-wrap">
+            <ul class="datav-feed" id="datav-feed"></ul>
+          </div>
+        </article>
+      </main>
+
+      <aside class="datav-col datav-col--right">
+        <article class="datav-panel" data-tier="1">
+          <header class="datav-panel__head"><h3>关键词热度</h3></header>
+          <div id="chart-word" class="datav-chart datav-chart--word"></div>
+        </article>
+        <article class="datav-panel" data-tier="2">
+          <header class="datav-panel__head"><h3>分类热力</h3></header>
+          <div id="chart-heat" class="datav-chart datav-chart--heat"></div>
+        </article>
+        <article class="datav-panel" data-tier="2">
+          <header class="datav-panel__head"><h3>高频法律问题</h3></header>
+          <ol class="datav-topq" id="datav-topq"></ol>
+        </article>
+        <article class="datav-panel datav-panel--compact" data-tier="3">
+          <header class="datav-panel__head"><h3>普法传播</h3></header>
+          <ul class="datav-kpi datav-kpi--compact" id="datav-publicity"></ul>
+        </article>
+      </aside>
+    </section>
+  </div>
+
+  <script src="../js/modules/datav/realtimeDataStore.js"></script>
+  <script src="../js/modules/datav/realtime-store.js"></script>
+  <script src="./js/datav-theme.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/lib/activity-log.js"></script>
+  <script src="./js/datav.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+2026-04-12 16:11:46.842473+08:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDoAAAJ3CAYAAAB1OzExAAAAAXNSR0IAr... (797850)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:11:51.194812+08:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDoAAAJ3CAYAAAB1OzExAAAAAXNSR0IAr... (797850)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:11:52.644633+08:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDoAAAJ3CAYAAAB1OzExAAAAAXNSR0IAr... (797850)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:11:53.424565+08:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDoAAAJ3CAYAAAB1OzExAAAAAXNSR0IAr... (797850)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:11:54.105571+08:00 jdbc[23]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDoAAAJ3CAYAAAB1OzExAAAAAXNSR0IAr... (797850)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:27:07.551145+08:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXAAAABzCAIAAAAOmM5yAAAACXBIWXMAA... (64770)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:28:58.011169+08:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXAAAABzCAIAAAAOmM5yAAAACXBIWXMAA... (64770)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 16:29:43.558640+08:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FILE_TYPE CHARACTER VARYING(50)": "'application/vnd.openxmlformats-officedocument.wordprocessingml.document' (71)"; SQL statement:
+insert into knowledge_items (content,created_at,file_data,file_name,file_type,title,user_id,id) values (?,?,?,?,?,?,?,?) [22001-224]
+2026-04-12 16:29:51.385499+08:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FILE_TYPE CHARACTER VARYING(50)": "'application/vnd.openxmlformats-officedocument.wordprocessingml.document' (71)"; SQL statement:
+insert into knowledge_items (content,created_at,file_data,file_name,file_type,title,user_id,id) values (?,?,?,?,?,?,?,?) [22001-224]
+2026-04-12 17:39:24.158598+08:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIgAAAIACAYAAADpH1dMAAAAAXNSR0IAr... (80238)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]
+2026-04-12 19:26:04.935495+08:00 jdbc[43]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "AVATAR CHARACTER VARYING(500)": "'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXAAAABzCAIAAAAOmM5yAAAACXBIWXMAA... (64770)"; SQL statement:
+update users set avatar=?,email=?,name=?,password=?,persona=? where id=? [22001-224]

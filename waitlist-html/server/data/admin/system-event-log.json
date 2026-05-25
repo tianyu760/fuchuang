@@ -1,0 +1,4443 @@
+[
+  {
+    "id": "evt_1779268591742_94x9",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny"
+      }
+    },
+    "timestamp": "2026-05-20T09:16:31.742Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779268680411_e70n",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析："
+      }
+    },
+    "timestamp": "2026-05-20T09:18:00.411Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779268723386_8qip",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "劳动合同必备条款分析",
+        "preview": "劳动合同的必备条款有哪些？"
+      }
+    },
+    "timestamp": "2026-05-20T09:18:43.386Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779268737366_d2d6",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割 夫妻共同财产认定 子女抚养权",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权"
+      }
+    },
+    "timestamp": "2026-05-20T09:18:57.366Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779268751419_v68h",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa"
+      }
+    },
+    "timestamp": "2026-05-20T09:19:11.419Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779268752118_r0z3",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa"
+      }
+    },
+    "timestamp": "2026-05-20T09:19:12.118Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779377522682_4ko5",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "早上吃饭了吗",
+        "question": "早上吃饭了吗",
+        "category": "other",
+        "keywords": [
+          "早上吃饭了吗"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-21T15:32:02.682Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779377523102_vtlg",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-21T15:32:03.102Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779377524777_vt2n",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-21T15:32:04.777Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779377541895_bdtz",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-21T15:32:21.895Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779377554415_vrmn",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "劳动合同必备条款分析",
+        "preview": "劳动合同的必备条款有哪些？",
+        "question": "劳动合同的必备条款有哪些？",
+        "risk_level": "低",
+        "summary": "用户询问劳动合同的必备条款，根据《劳动合同法》第十七条，劳动合同应当具备以下条款：用人单位的名称、住所和法定代表人或者主要负责人；劳动者的姓名、住址和居民身份证或者其他有效身份证件号码；劳动合同期限；工作内容和工作地点；工作时间和休息休假；劳动报酬；社会保险；劳动保护、劳动条件和职业危害防护；以及法律、法规规定应当纳入劳动合同的其他事项。",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同的必",
+          "备条款有哪些",
+          "劳动合同必备",
+          "条款分析",
+          "用户询问劳动",
+          "合同的必备条",
+          "根据",
+          "劳动合同法",
+          "第十七条"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-21T15:32:34.415Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779377566075_xn67",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "民间借贷 利率 催收",
+        "preview": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "query": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "analysis": "根据《最高人民法院关于审理民间借贷案件适用法律若干问题的规定》，民间借贷的合法利率上限为合同成立时一年期贷款市场报价利率（LPR）的四倍。超过此上限的利息部分，法院不予支持。催收时，债权人应避免暴力、威胁、骚扰等非法手段，不得泄露债务人隐私，否则可能构成侵权或犯罪。同时，债务人有权就超出法定利率的利息提出抗辩。",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "借贷纠纷",
+          "民间借贷合法",
+          "利率范围",
+          "催收注意事项",
+          "利率",
+          "催收",
+          "根据",
+          "最高人民法院",
+          "关于审理民间"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-21T15:32:46.075Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779378554773_g0m2",
+    "user_id": "1779378554746st7s",
+    "module": "auth",
+    "action": "register",
+    "detail": {
+      "type": "user_register",
+      "payload": {
+        "email": "3837498122@qq.com",
+        "userId": "1779378554746st7s",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "湖北"
+      }
+    },
+    "timestamp": "2026-05-21T15:49:14.773Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779378591053_3s1g",
+    "user_id": "1779378554746st7s",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498122@qq.com",
+        "userId": "1779378554746st7s",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "湖北"
+      }
+    },
+    "timestamp": "2026-05-21T15:49:51.053Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779378875257_qjw5",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-21T15:54:35.257Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779378974679_a55d",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "你好呀",
+        "question": "你好呀",
+        "category": "other",
+        "keywords": [
+          "你好呀"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-21T15:56:14.679Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779379139008_blte",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-21T15:58:59.008Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779472015218_r8iw",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-22T17:46:55.218Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779517411797_j9ri",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T06:23:31.797Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779518182948_d0o2",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "category": "other",
+        "keywords": [
+          "房东退租后不",
+          "退押金",
+          "我想先看看这",
+          "件事有哪些法",
+          "律风险"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T06:36:22.949Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779518971083_8up0",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "回答",
+        "question": "回答",
+        "category": "other",
+        "keywords": [
+          "回答"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T06:49:31.083Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779519119429_rlto",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T06:51:59.429Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779521327580_mdl0",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我是租客，对方是房东。2024年9月签订租房合同，2026年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+        "question": "我是租客，对方是房东。2024年9月签订租房合同，2026年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+        "category": "contract",
+        "keywords": [
+          "我是租客",
+          "对方是房东",
+          "月签订租房合",
+          "月退租",
+          "合同里约定押",
+          "退租时如果房",
+          "屋和屋内物品",
+          "没有明显人为",
+          "损坏",
+          "应当退还押金"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T07:28:47.582Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779521423437_1iz9",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我是租客，对方是房东。2024年9月签订租房合同，2026年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+        "question": "我是租客，对方是房东。2024年9月签订租房合同，2026年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+        "category": "contract",
+        "keywords": [
+          "我是租客",
+          "对方是房东",
+          "月签订租房合",
+          "月退租",
+          "合同里约定押",
+          "退租时如果房",
+          "屋和屋内物品",
+          "没有明显人为",
+          "损坏",
+          "应当退还押金"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T07:30:23.437Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779521950440_h6to",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "risk": "中",
+        "riskDesc": "",
+        "preview": "中",
+        "summary": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T07:39:10.440Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779521951029_b13z",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-20 123319.png",
+        "success": true,
+        "ocrText": "【图片OCR识别内容】\n在\n获取文书指引\n请求失败:Prompt must contain the word 'json'in\nsome form to use 'response_format' of type\n'json_object'.",
+        "source": "process_case",
+        "category": "other",
+        "keywords": [
+          "图片",
+          "识别内容",
+          "获取文书指引",
+          "请求失败"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "【图片OCR识别内容】\n在\n获取文书指引\n请求失败:Prompt must contain the word 'json'in\nsome form to use 'response_format' of type\n'json_object'"
+      }
+    },
+    "timestamp": "2026-05-23T07:39:11.030Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779523624265_7h94",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "根据我刚上传的材料，开始证据体检",
+        "question": "根据我刚上传的材料，开始证据体检",
+        "category": "other",
+        "keywords": [
+          "根据我刚上传",
+          "的材料",
+          "开始证据体检"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T08:07:04.267Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779523716820_9ise",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T08:08:36.824Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779523737438_xkt1",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "授权委托书撰写指南",
+        "preview": "授权委托书如何撰写？需要包含哪些内容？",
+        "question": "授权委托书如何撰写？需要包含哪些内容？",
+        "risk_level": "低",
+        "summary": "用户询问授权委托书的撰写方法及必备内容，需要提供法律依据和具体建议。",
+        "category": "other",
+        "keywords": [
+          "授权委托书如",
+          "何撰写",
+          "需要包含哪些",
+          "内容",
+          "授权委托书撰",
+          "写指南",
+          "用户询问授权",
+          "委托书的撰写",
+          "方法及必备内",
+          "需要提供法律"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T08:08:57.438Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779523749947_tqvp",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "劳动合同必备条款分析",
+        "preview": "劳动合同的必备条款有哪些？",
+        "question": "劳动合同的必备条款有哪些？",
+        "risk_level": "低",
+        "summary": "用户询问劳动合同的必备条款，根据《劳动合同法》规定，劳动合同应当具备以下条款。",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同的必",
+          "备条款有哪些",
+          "劳动合同必备",
+          "条款分析",
+          "用户询问劳动",
+          "合同的必备条",
+          "根据",
+          "劳动合同法",
+          "规定"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T08:09:09.947Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779523773374_cyel",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "交通事故责任认定 赔偿标准",
+        "preview": "交通事故责任认定和赔偿标准，相关法律法规",
+        "query": "交通事故责任认定和赔偿标准，相关法律法规",
+        "analysis": "交通事故责任认定依据《道路交通安全法》及其实施条例，根据当事人行为对事故的作用及过错程度确定责任。赔偿标准主要依据《民法典》第1179条及《人身损害赔偿司法解释》，赔偿项目包括医疗费、误工费、护理费、残疾赔偿金等，具体计算标准参照受诉法院所在地收入数据。",
+        "category": "other",
+        "keywords": [
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规",
+          "认定",
+          "赔偿标准",
+          "认定依据",
+          "道路交通安全",
+          "及其实施条例",
+          "根据当事人行",
+          "为对事故的作"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T08:09:33.374Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779523823236_4t4g",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "性侵犯",
+        "preview": "有关性侵犯的相关法律条文",
+        "query": "有关性侵犯的相关法律条文",
+        "analysis": "性侵犯相关法律主要规定在《中华人民共和国刑法》中，包括强奸罪（第236条）、强制猥亵、侮辱罪（第237条）以及负有特殊职责人员性侵罪（第236条之一）。强奸罪针对违背妇女意志的性行为，奸淫幼女则从重处罚；强制猥亵罪涵盖猥亵他人（包括男性）和侮辱妇女；特殊职责人员性侵罪针对特定关系中的性行为。此外，性侵犯还可能涉及治安管理处罚法或民法典中的侵权责任。",
+        "category": "other",
+        "keywords": [
+          "有关性侵犯的",
+          "相关法律条文",
+          "性侵犯",
+          "性侵犯相关法",
+          "律主要规定在",
+          "中华人民共和",
+          "国刑法",
+          "包括强奸罪",
+          "强制猥亵",
+          "侮辱罪"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T08:10:23.236Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779524372377_xma4",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T08:19:32.378Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779524462740_4bns",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "category": "other",
+        "keywords": [
+          "房东退租后不",
+          "退押金",
+          "我想先看看这",
+          "件事有哪些法",
+          "律风险"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T08:21:02.740Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779525390519_2nmj",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "category": "other",
+        "keywords": [
+          "房东退租后不",
+          "退押金",
+          "我想先看看这",
+          "件事有哪些法",
+          "律风险"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T08:36:30.521Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779526217105_sniw",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "category": "other",
+        "keywords": [
+          "房东退租后不",
+          "退押金",
+          "我想先看看这",
+          "件事有哪些法",
+          "律风险"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T08:50:17.105Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779526968174_3cxu",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "根据我刚上传的材料，开始证据体检。",
+        "question": "根据我刚上传的材料，开始证据体检。",
+        "category": "other",
+        "keywords": [
+          "根据我刚上传",
+          "的材料",
+          "开始证据体检"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T09:02:48.175Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779527352930_cj5o",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T09:09:12.937Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779527547674_268f",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T09:12:27.674Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779527874042_3wor",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-23T09:17:54.042Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779528021584_cw1m",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-23T09:20:21.614Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779608613802_qpyl",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": null,
+        "email": null,
+        "preview": "??,??????????",
+        "question": "??,??????????",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T07:43:33.802Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779608807398_bsjt",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T07:46:47.398Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779608968630_xkml",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T07:49:28.630Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611278502_nmnk",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T08:27:58.502Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611419388_rnr1",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "为了更准确地分析你的案件，我还需要补充几个关键信息。我目前初步理解为：用户遇到了劳动纠纷问题。当前还缺少的信息主要有：关键时间线、涉及金额或争议对象、是否存在合同、借条、聊天约定等、当前已有证据材料、用户当前希望达到的目标。请你按事实补充回",
+        "question": "分析图片中涉及到的内容",
+        "category": "labor",
+        "keywords": [
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理",
+          "解为",
+          "用户遇到了劳",
+          "动纠纷问题",
+          "当前还缺少的",
+          "信息主要有"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T08:30:19.388Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611419426_rc4x",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 154702.png",
+        "success": true,
+        "ocrText": "分析图片中涉及到的内容\n\n我遇到了劳动纠纷问题，请帮我分析:\n为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为:\n用户遇到了劳动纠纷问题\n当前还缺少的信息主要有:\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\"当前已有证据材料\",\"用户当前希望达到\n的目标\"]\n请你按事实补充回答;如果确实不清楚，可以直接回复\"不清楚\"\n请您描述一下纠纷双方的关系，例如:我是谁，对方是谁，双方是什么关系?",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "分析图片中涉",
+          "及到的内容",
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "分析图片中涉及到的内容\n\n我遇到了劳动纠纷问题，请帮我分析:\n为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为:\n用户遇到了劳动纠纷问题\n当前还缺少的信息主要有:\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合"
+      }
+    },
+    "timestamp": "2026-05-24T08:30:19.426Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611618648_0bws",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。李某作为出借人，张某作为借款人，双方之间存在明确的借贷合意（通过聊天记录等体现）、资金交付事实（转账记录）以及还款期限约定（三个月后归还），符合民间借贷纠纷的基本特征。",
+        "question": "分析图片中的案件",
+        "category": "fraud",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案纠纷类型",
+          "为民间借贷纠",
+          "李某作为出借",
+          "张某作为借款",
+          "双方之间存在",
+          "明确的借贷合"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T08:33:38.648Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611618687_1119",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "分析图片中的案件\n\n民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "分析图片中的",
+          "案件",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "分析图片中的案件\n\n民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n"
+      }
+    },
+    "timestamp": "2026-05-24T08:33:38.687Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611737332_b01i",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T08:35:37.332Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611803804_mv86",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。李某作为出借人，张某作为借款人，双方形成了借贷合意，张某未按约定期限归还借款，构成违约，符合民间借贷纠纷的基本特征。\n二、主要法律风险\n点\n1. **借款合同有效性风险",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案纠纷类型",
+          "为民间借贷纠",
+          "李某作为出借",
+          "张某作为借款",
+          "双方形成了借",
+          "贷合意"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T08:36:43.804Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611803850_mg4g",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-24T08:36:43.850Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779611838190_z4it",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "分析文件内容",
+        "question": "分析文件内容",
+        "category": "other",
+        "keywords": [
+          "分析文件内容"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T08:37:18.190Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779612852126_939c",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T08:54:12.126Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779612972170_ey34",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T08:56:12.170Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613030753_q06c",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T08:57:10.753Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613651540_p6nm",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "劳动仲裁申请书",
+        "question": "劳动仲裁申请书",
+        "risk_level": "中",
+        "summary": "劳动仲裁申请书",
+        "category": "labor",
+        "keywords": [
+          "劳动仲裁",
+          "劳动仲裁申请",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:07:31.542Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613652707_tzbe",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "劳动合同法第38条",
+        "preview": "劳动合同法第38条",
+        "query": "劳动合同法第38条",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户咨询劳动合同法第38条\n当前还缺少的信息主要有：\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\"当前已有证据材料\",\"用户当前希望达到的目标\"]\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请问您能具体说明一下纠纷双方的关系吗？例如，您是租客还是房东，是员工还是公司等。",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同法第",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理",
+          "解为",
+          "用户咨询劳动",
+          "合同法第"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:07:32.707Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613751719_lcov",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了租房纠纷问题，请帮我分析：",
+        "question": "我遇到了租房纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "我遇到了租房",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T09:09:11.719Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613764312_cxid",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:09:24.312Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613780627_nzuf",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "授权委托书如何撰写？需要包含哪些内容？",
+        "question": "授权委托书如何撰写？需要包含哪些内容？",
+        "risk_level": "中",
+        "summary": "授权委托书如何撰写？需要包含哪些内容？",
+        "category": "other",
+        "keywords": [
+          "授权委托书如",
+          "何撰写",
+          "需要包含哪些",
+          "内容",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:09:40.627Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613874373_v3jt",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "交通事故责任认定和赔偿标准，相关法律法规",
+        "preview": "交通事故责任认定和赔偿标准，相关法律法规",
+        "query": "交通事故责任认定和赔偿标准，相关法律法规",
+        "analysis": "交通事故责任认定和赔偿标准主要涉及《中华人民共和国道路交通安全法》、《中华人民共和国侵权责任法》以及相关的司法解释和地方性法规。以下是一些关键点：\n1. **责任认定**：\n· **交通事故责任认定书**：事故发生后，交警部门会出具交通事故责任认定书，明确各方的责任比例。\n· **责任划分**：根据事故的具体情况，责任可能被划分为全部责任、主要责任、同等责任和次要责任。\n2. **赔偿标准**：\n",
+        "category": "other",
+        "keywords": [
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规",
+          "中华人民共和",
+          "准主要涉及",
+          "国道路交通安",
+          "全法",
+          "国侵权责任法",
+          "以及相关的司",
+          "法解释和地方"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:11:14.373Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779613916107_bmyi",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "授权委托书如何撰写？需要包含哪些内容？",
+        "question": "授权委托书如何撰写？需要包含哪些内容？",
+        "risk_level": "中",
+        "summary": "授权委托书如何撰写？需要包含哪些内容？",
+        "category": "other",
+        "keywords": [
+          "授权委托书如",
+          "何撰写",
+          "需要包含哪些",
+          "内容",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:11:56.107Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779614146259_r213",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:15:46.259Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615071273_mkfy",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:31:11.274Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615115014_2dvq",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "劳动合同的必备条款有哪些？",
+        "question": "劳动合同的必备条款有哪些？",
+        "risk_level": "中",
+        "summary": "劳动合同的必备条款有哪些？",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同的必",
+          "备条款有哪些",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:31:55.014Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615160714_bat1",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "授权委托书如何撰写？需要包含哪些内容？",
+        "question": "授权委托书如何撰写？需要包含哪些内容？",
+        "risk_level": "中",
+        "summary": "授权委托书如何撰写？需要包含哪些内容？",
+        "category": "other",
+        "keywords": [
+          "授权委托书如",
+          "何撰写",
+          "需要包含哪些",
+          "内容",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:32:40.714Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615197888_wjco",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "preview": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "query": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户咨询民间借贷纠纷中的合法利率范围和催收注意事项\n当前还缺少的信息主要有：\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\"当前已有证据材料\"]\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请您先说明纠纷双方的关系，例如：我是谁，对方是谁，双方是什么关系？",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "借贷纠纷",
+          "民间借贷合法",
+          "利率范围",
+          "催收注意事项",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:33:17.888Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615230193_vyug",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:33:50.193Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615418451_uqln",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:36:58.453Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779615430632_vr8h",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户主张房东无故解除合同且不退还押金\n当前还缺少的信息主要有：\n[\"关键时间线\",\"合同情况\",\"现有证据材料\"]\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请您提供事情发生的大致时间线，包括开始时间、关键节点时间和最近一次沟通或催告时间。",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T09:37:10.632Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779616497979_crnb",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了租房纠纷问题，请帮我分析：",
+        "question": "我遇到了租房纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "我遇到了租房",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T09:54:57.979Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617138199_vsu9",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T10:05:38.199Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617199805_xcpu",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案初步判断为民间借贷纠纷。出借人张某与借款人李某之间存在明确的借款合意（通过微信聊天记录等体现），借款金额为50000元，并约定了还款期限（三个月）。借款人李某未按约定归还借款，符合民间借贷纠纷",
+        "question": "",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案初步判断",
+          "为民间借贷纠",
+          "出借人张某与",
+          "借款人李某之",
+          "间存在明确的",
+          "借款合意"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T10:06:39.805Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617199846_yi88",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-24T10:06:39.846Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617223789_bqxx",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T10:07:03.789Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617252984_h53y",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:07:32.984Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617254752_aaxu",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:07:34.752Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617289433_deuk",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "preview": "网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "query": "网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户主张商家虚假宣传，涉及网络购物消费者权益保护\n当前还缺少的信息主要有：\n[\"关键时间线\",\"涉及金额或争议对象\",\"合同或约定情况\",\"现有证据材料\"]\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请您提供事情发生的大致时间线，包括开始时间、关键节点时间和最近一次沟通或催告时间。",
+        "category": "contract",
+        "keywords": [
+          "网络购物消费",
+          "者权益保护",
+          "商家虚假宣传",
+          "相关法律条款",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理",
+          "解为"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:08:09.433Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617398370_gi6a",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:09:58.370Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617407831_h0zq",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "劳动合同的必备条款有哪些？",
+        "question": "劳动合同的必备条款有哪些？",
+        "risk_level": "中",
+        "summary": "劳动合同的必备条款有哪些？",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同的必",
+          "备条款有哪些",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:10:07.832Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617429361_86m1",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "仲裁申请书的写作格式和注意事项？",
+        "question": "仲裁申请书的写作格式和注意事项？",
+        "risk_level": "中",
+        "summary": "仲裁申请书的写作格式和注意事项？",
+        "category": "other",
+        "keywords": [
+          "仲裁申请书的",
+          "写作格式和注",
+          "意事项",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:10:29.361Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779617460752_xmij",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "律师函的格式要求和常见用途是什么？",
+        "question": "律师函的格式要求和常见用途是什么？",
+        "risk_level": "中",
+        "summary": "律师函的格式要求和常见用途是什么？",
+        "category": "other",
+        "keywords": [
+          "律师函的格式",
+          "要求和常见用",
+          "途是什么",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:11:00.752Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618227050_2kj4",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "????????:??????1??",
+        "question": "????????:??????1??",
+        "risk_level": "中",
+        "summary": "????????:??????1??",
+        "category": "other",
+        "keywords": [
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:23:47.050Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618321502_55sk",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函",
+        "preview": "请起草简短律师函：催告支付货款1万元",
+        "question": "请起草简短律师函：催告支付货款1万元",
+        "risk_level": "低",
+        "summary": "委托人与收函方存在买卖合同关系，收函方尚欠货款人民币10,000元未付，经多次催告仍未履行付款义务。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "请起草简短律",
+          "师函",
+          "催告支付货款",
+          "万元",
+          "律师函",
+          "委托人与收函",
+          "方存在买卖合",
+          "同关系",
+          "收函方尚欠货",
+          "款人民币"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:25:21.502Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618438469_yqpo",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书生成测试确认函",
+        "preview": "测试",
+        "question": "测试",
+        "risk_level": "低",
+        "summary": "本函用于验证法绎平台法律文书生成功能的结构化输出能力，不涉及真实法律关系或权利义务，仅作系统测试用途。",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "测试",
+          "法律文书生成",
+          "测试确认函",
+          "本函用于验证",
+          "法绎平台法律",
+          "文书生成功能",
+          "的结构化输出",
+          "能力",
+          "不涉及真实法",
+          "律关系或权利"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:27:18.469Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618523946_m0iu",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:28:43.946Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618790882_13zz",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "仲裁申请书",
+        "preview": "仲裁申请书的写作格式和注意事项？",
+        "question": "仲裁申请书的写作格式和注意事项？",
+        "risk_level": "中",
+        "summary": "申请人与被申请人于2022年6月签订《建设工程施工合同》，约定由被申请人承建申请人发包的某产业园厂房项目。工程于2023年10月竣工，但被申请人拒不提交竣工资料、拒绝配合验收，且就结算款587万元存在争议。双方合同第22.1条明确约定：因本合同引起的或与本合同有关的任何争议，均应提交XX仲裁委员会仲裁。",
+        "provider": "dashscope",
+        "category": "labor",
+        "keywords": [
+          "仲裁申请书的",
+          "写作格式和注",
+          "意事项",
+          "仲裁申请书",
+          "申请人与被申",
+          "请人于",
+          "月签订",
+          "建设工程施工",
+          "合同",
+          "约定由被申请"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:33:10.882Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618830371_3si1",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "交通事故责任认定与赔偿标准",
+        "preview": "交通事故责任认定和赔偿标准，相关法律法规",
+        "query": "交通事故责任认定和赔偿标准，相关法律法规",
+        "analysis": "## 责任认定的法定基础\n《道路交通安全法》第七十六条确立了交强险优先赔付、过错责任与优者危险负担相结合的基本原则，尤其对机动车与非机动车/行人事故实行过错推定与倾斜保护。\n\n## 赔偿范围的司法界定\n《道交事故赔偿司法解释》第十二条明确财产损失类型及可赔性标准，强调‘合理性’与‘必要性’双重审查，排除扩大化或主观性主张。",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规",
+          "认定与赔偿标",
+          "责任认定的法",
+          "定基础",
+          "道路交通安全",
+          "第七十六条确",
+          "立了交强险优",
+          "先赔付"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T10:33:50.371Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779618944990_dfde",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T10:35:44.990Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779630713013_75lq",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T13:51:53.013Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779630806888_ymj4",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。出借人李某与借款人张某之间存在明确的借贷合意（通过微信聊天记录等体现）和资金交付事实（转账记录），张某未按约定时间归还借款，符合民间借贷纠纷的核心特征。\n二、主要法律风",
+        "question": "",
+        "category": "fraud",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案纠纷类型",
+          "为民间借贷纠",
+          "出借人李某与",
+          "借款人张某之",
+          "间存在明确的",
+          "借贷合意"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T13:53:26.888Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779630806931_95a7",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-24T13:53:26.931Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779630911215_qttp",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "1",
+        "question": "1",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T13:55:11.215Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631004844_9jzr",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "2",
+        "question": "2",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T13:56:44.844Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631039023_cnou",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "123",
+        "question": "123",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T13:57:19.023Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631058784_xd08",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T13:57:38.784Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631064236_s18x",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T13:57:44.236Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631092183_5dwj",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "授权委托书",
+        "preview": "授权委托书如何撰写？需要包含哪些内容？",
+        "question": "授权委托书如何撰写？需要包含哪些内容？",
+        "risk_level": "中",
+        "summary": "委托人因涉及民事诉讼/仲裁/行政程序等法律事务，自愿委托受托人代为处理相关法律行为，包括但不限于出庭、提交证据、签署文书、和解谈判等。",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "授权委托书如",
+          "何撰写",
+          "需要包含哪些",
+          "内容",
+          "授权委托书",
+          "委托人因涉及",
+          "民事诉讼",
+          "仲裁",
+          "行政程序等法",
+          "律事务"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T13:58:12.183Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631141303_fmzc",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "劳动合同",
+        "preview": "劳动合同的必备条款有哪些？",
+        "question": "劳动合同的必备条款有哪些？",
+        "risk_level": "中",
+        "summary": "本合同为用人单位与劳动者订立的书面劳动合同，明确双方在劳动关系中的权利义务，涵盖合同期限、工作内容、劳动报酬、社会保险、劳动保护等法定必备条款。",
+        "provider": "dashscope",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同的必",
+          "备条款有哪些",
+          "本合同为用人",
+          "单位与劳动者",
+          "订立的书面劳",
+          "动合同",
+          "明确双方在劳",
+          "动关系中的权",
+          "利义务"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T13:59:01.303Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779631186034_bl8c",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "query": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "analysis": "## 夫妻共同财产认定标准\n依据《民法典》第1062条，共同财产以‘婚姻关系存续期间取得’为时间基准，以‘劳动性、经营性、被动性收益’为实质判断标准，但明确排除一方专用生活用品及遗嘱/赠与中确定只归一方的财产（参见第1063条）。\n\n## 子女抚养权裁判规则\n《民法典》第1084条确立‘最有利于未成年子女’为根本原则，区分不同年龄阶段设置推定规则：不满两周岁原则上随母生活；已满两周岁则综合考量父母",
+        "provider": "dashscope",
+        "category": "labor",
+        "keywords": [
+          "离婚财产分割",
+          "夫妻共同财产",
+          "认定",
+          "子女抚养权",
+          "民法典",
+          "认定标准",
+          "依据",
+          "共同财产以",
+          "婚姻关系存续",
+          "期间取得"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T13:59:46.034Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779632650632_txeu",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T14:24:10.633Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779632699213_d14k",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事起诉状",
+        "preview": "起诉状的结构与要素是什么？需要注意哪些事项？",
+        "question": "起诉状的结构与要素是什么？需要注意哪些事项？",
+        "risk_level": "中",
+        "summary": "原告因与被告就房屋买卖合同履行发生争议，主张被告未依约交付房产并办理过户登记，诉请判令继续履行合同、协助办理产权转移登记，并赔偿逾期违约金。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "起诉状的结构",
+          "与要素是什么",
+          "需要注意哪些",
+          "事项",
+          "民事起诉状",
+          "原告因与被告",
+          "就房屋买卖合",
+          "同履行发生争",
+          "主张被告未依",
+          "约交付房产并"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T14:24:59.213Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779632765429_n7qj",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事答辩状",
+        "preview": "答辩状的写作格式和注意事项是什么？",
+        "question": "答辩状的写作格式和注意事项是什么？",
+        "risk_level": "中",
+        "summary": "被告就原告提起的民事诉讼，在法定期限内针对起诉事实、理由及诉讼请求，提出反驳意见、抗辩事由及证据说明的法律文书。",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "答辩状的写作",
+          "格式和注意事",
+          "项是什么",
+          "民事答辩状",
+          "被告就原告提",
+          "起的民事诉讼",
+          "在法定期限内",
+          "针对起诉事实",
+          "理由及诉讼请",
+          "提出反驳意见"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T14:26:05.429Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779633698328_67xl",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T14:41:38.345Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779633729941_mwzp",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T14:42:09.942Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634068530_oh85",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T14:47:48.530Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634128999_caan",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案属于典型的民间借贷纠纷。出借人李某与借款人张某之间形成了借贷合意，并实际发生了资金交付，借款人未按约定期限归还借款，符合民间借贷纠纷的核心特征。\n二、主要法律风险\n点\n1. **借款合同的有效",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案属于典型",
+          "的民间借贷纠",
+          "出借人李某与",
+          "借款人张某之",
+          "间形成了借贷",
+          "合意"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T14:48:48.999Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634129145_xiqq",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2026年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-24T14:48:49.145Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634328525_xjhw",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T14:52:08.525Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634564605_5yjp",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遭遇了抢劫 我该如何维护自己的权利",
+        "question": "我遭遇了抢劫 我该如何维护自己的权利",
+        "category": "other",
+        "keywords": [
+          "我遭遇了抢劫",
+          "我该如何维护",
+          "自己的权利"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T14:56:04.605Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634884738_b5ot",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T15:01:24.761Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779634889063_7pjc",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T15:01:29.063Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779635790816_8r1z",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T15:16:30.827Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779635856549_8iaf",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事答辩状",
+        "preview": "答辩状的写作格式和注意事项是什么？",
+        "question": "答辩状的写作格式和注意事项是什么？",
+        "risk_level": "中",
+        "summary": "被告就原告提起的民事诉讼，在法定期限内针对起诉事实、理由及诉讼请求，提出反驳意见、抗辩事由及证据说明的法律文书。",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "答辩状的写作",
+          "格式和注意事",
+          "项是什么",
+          "民事答辩状",
+          "被告就原告提",
+          "起的民事诉讼",
+          "在法定期限内",
+          "针对起诉事实",
+          "理由及诉讼请",
+          "提出反驳意见"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T15:17:36.549Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779636118537_7rdq",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:21:58.537Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779636266069_s60i",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T15:24:26.069Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779636301937_uo6f",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁合同解除 押金返还",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "## 合同解除权的法定与约定边界\n依据《民法典》第五百六十二条、第五百六十三条，合同解除须以法定事由或约定事由成就为前提。房东单方无故解除合同，缺乏正当性基础，构成根本违约。\n\n## 押金的法律性质与返还义务\n押金系为担保承租人依约履行合同义务而设定的金钱担保，非预付租金或违约金。承租人无违约行为且房屋无损毁、欠费等情形的，出租人负有全额返还义务，拒不返还构成不当得利及违约责任竞合。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规",
+          "房屋租赁合同",
+          "解除",
+          "押金返还",
+          "合同解除权的"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T15:25:01.937Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779636828881_mypk",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遭遇抢劫该如何维权",
+        "question": "我遭遇抢劫该如何维权",
+        "category": "consumer",
+        "keywords": [
+          "我遭遇抢劫该",
+          "如何维权"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:33:48.883Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779637143493_9k1t",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。出借人李某与借款人张某之间因借款本金50000元的偿还问题产生争议，符合民间借贷纠纷的法律特征。\n二、主要法律风险\n点\n1. 借款合同的有效性和具体条款：需审查双方是否",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案纠纷类型",
+          "为民间借贷纠",
+          "出借人李某与",
+          "借款人张某之",
+          "间因借款本金",
+          "元的偿还问题"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:39:03.493Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779637143540_p4qv",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-24T15:39:03.540Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779637220971_onpq",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、案件与诉求概况\n本案为一起房屋租赁合同纠纷。承租人张某与出租人杨某因租赁期满后押金退还问题产生争议。租赁期限为2024年9月5日至2025年2月28日。承租人张某的诉求是要求出租人杨某返还押金2000元。\n二、当前已提交证据清单\n根据",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "房屋租赁",
+          "案件与诉求概",
+          "本案为一起房",
+          "屋租赁合同纠",
+          "承租人张某与",
+          "出租人杨某因",
+          "租赁期满后押",
+          "金退还问题产",
+          "生争议"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:40:20.971Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779637221086_ex6t",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 160008.png",
+        "success": true,
+        "ocrText": "C\n 0 127.0.0.1:8080/chat.htm\n总结安\n \n聊天\n法绎\n首页\n法律咨询\n资料库\n普法宣传\n文书生成\n法规检索\n帮助\n联系\n动态\n数字大国\n哔哔哔\n退出\n+新建对话\n[文件]证据材料.docx\n史对话\n证据材料.docx\n分析图片内容\n2026/4/19 13:39\n证据材料体检报告\n分析图片内容\n2026/4/19 13:53\n一、案件与诉求概况\n劳动合同纠纷\n2026/4/19 14:06\n.纠纷类型:房屋租赁纠纷\n[文件]证据材料.docx\n.当事人:承租人张某(用户)、出租人杨某\n2026/5/24 15:49\n.核心诉求:要求出租人杨某返还押金2000元。\n我遇到了劳动纠纷问题，请..\n.案情简述:双方因租赁期满后押金退还问题产生争议。租赁期限为2024年9月5日至2025年2月28日。根据合同约\n定，租赁期满后，如房屋及附属物品无明显人为损坏，出租人应退还押金。\n2026/5/24 15:46\n我遇到了劳动纠纷问题，请..\n二、当前已提交证据清单\n2026/5/24 15:39\n我遇到了民间借贷纠纷问题..\n1.合同\n2026/5/20 17:18\n",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "合同纠纷",
+          "民间借贷",
+          "房屋租赁",
+          "证据材料",
+          "文件",
+          "分析图片内容",
+          "我遇到了劳动",
+          "纠纷问题",
+          "总结安"
+        ],
+        "riskLevel": "low",
+        "region": "内蒙古",
+        "preview": "C\n 0 127.0.0.1:8080/chat.htm\n总结安\n \n聊天\n法绎\n首页\n法律咨询\n资料库\n普法宣传\n文书生成\n法规检索\n帮助\n联系\n动态\n数字大国\n哔哔哔\n退出\n+新建对话\n[文件]证据材料.docx\n史对话\n证据材料.do"
+      }
+    },
+    "timestamp": "2026-05-24T15:40:21.086Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779637521644_seuf",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:45:21.645Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779638271458_wu9h",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:57:51.458Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779638375335_xhso",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T15:59:35.335Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779638720473_c5cx",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:05:20.474Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779638722764_rhkw",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:05:22.764Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779639010964_zfw9",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:10:10.966Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779639052300_trnw",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:10:52.300Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779639138174_96vb",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:12:18.174Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779639234269_sg89",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:13:54.270Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779639466436_cli9",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "通用民事合同模板",
+        "preview": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "question": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "risk_level": "中",
+        "summary": "本合同为适用于平等民事主体之间就货物买卖、服务提供、知识产权许可等非专属法定类型交易的通用框架性协议，重点规范权利义务、风险分配、违约救济及争议解决机制。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "请给我一份通",
+          "用合同模板结",
+          "重点说明风险",
+          "条款",
+          "违约责任和争",
+          "议解决条款",
+          "通用民事合同",
+          "模板",
+          "本合同为适用",
+          "于平等民事主"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:17:46.442Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779639641448_rfon",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁合同解除",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "## 合同解除权的法定边界\n依据《民法典》第七百一十一条，出租人仅在承租人存在根本违约（如擅自拆改结构、拒不支付租金、擅自转租等）情形下，方可依法解除合同。无正当理由单方解约构成违约。\n\n## 押金的法律性质与返还义务\n押金系担保承租人履行合同义务（含合理使用、结清费用、返还房屋等）的金钱担保，非预付租金。合同正常终止或因出租人违约终止时，出租人无正当理由扣留押金，违反《民法典》第五百六十六条关于",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "合同",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "押金不退",
+          "相关法规",
+          "民法典",
+          "房屋租赁合同",
+          "解除",
+          "合同解除权的"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:20:41.448Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779640727905_dz27",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:38:47.905Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779640748693_q1p4",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:39:08.693Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779640873984_8iou",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:41:13.984Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779641084471_bktw",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:44:44.471Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779641193592_8mdl",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:46:33.592Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779641227850_943l",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事调解协议书",
+        "preview": "调解协议书怎么写？请给出可执行、可落地的条款结构和履行保障建议。",
+        "question": "调解协议书怎么写？请给出可执行、可落地的条款结构和履行保障建议。",
+        "risk_level": "中",
+        "summary": "当事人就民间借贷纠纷经自行协商达成和解，约定分期还款、违约责任、司法确认及强制执行效力等核心内容，旨在形成具有法律约束力与可强制执行性的书面协议。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "调解协议书怎",
+          "么写",
+          "请给出可执行",
+          "可落地的条款",
+          "结构和履行保",
+          "障建议",
+          "民事调解协议",
+          "当事人就民间",
+          "借贷纠纷经自"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:47:07.850Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779641286437_wibm",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "交通事故责任认定与赔偿标准",
+        "preview": "交通事故责任认定和赔偿标准，相关法律法规",
+        "query": "交通事故责任认定和赔偿标准，相关法律法规",
+        "analysis": "## 责任认定的法定基础\n《道路交通安全法》第七十六条确立了交强险优先赔付、过错责任补充的基本规则，不以事故双方是否为机动车为唯一判断标准，而以‘通行状态’和‘因果关系’为核心。\n\n## 赔偿标准的统一化趋势\n2022年修正的《人身损害赔偿解释》取消城乡户籍差异，统一适用城镇居民标准计算残疾/死亡赔偿金及被扶养人生活费，体现平等保护原则。\n\n## 交警责任认定书的证据效力\n根据《道路交通事故处理程",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规",
+          "认定与赔偿标",
+          "责任认定的法",
+          "定基础",
+          "道路交通安全",
+          "第七十六条确",
+          "立了交强险优",
+          "先赔付"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T16:48:06.437Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779641967920_tzx4",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。出借人张某与借款人李某之间存在明确的借款合意及资金交付事实，因借款人未按约定归还借款而产生争议。\n二、主要法律风险\n点\n1. 借款合同的有效性及条款的明确性：本案借款合",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案纠纷类型",
+          "为民间借贷纠",
+          "出借人张某与",
+          "借款人李某之",
+          "间存在明确的",
+          "借款合意及资"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T16:59:27.920Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779641967972_bksy",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-24T16:59:27.972Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642058145_8mwo",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "针对上述我的问题进行总结",
+        "question": "针对上述我的问题进行总结",
+        "category": "other",
+        "keywords": [
+          "针对上述我的",
+          "问题进行总结"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T17:00:58.146Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642194257_ht90",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T17:03:14.257Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642340909_dlh8",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "综合以上两个案例来进行分析",
+        "question": "综合以上两个案例来进行分析",
+        "category": "other",
+        "keywords": [
+          "综合以上两个",
+          "案例来进行分"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T17:05:40.909Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642478669_mqh4",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T17:07:58.669Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642540750_tthn",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-24T17:09:00.750Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642570494_u21u",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:09:30.494Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779642964424_30zx",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁合同解除 押金返还",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "## 押金的法律性质\n押金系承租人为担保租赁合同项下义务（如返还房屋、结清费用、赔偿损毁等）而向出租人交付的金钱，具有质押担保属性，不等同于违约金或定金。\\n\\n## 单方解除权的法定与约定边界\n出租人仅在承租人根本违约（如拖欠租金超合理期限、擅自转租、破坏房屋结构等）或合同明确约定解除事由成就时，方可行使单方解除权；‘无故解除’即缺乏法定或约定依据，构成违约。\\n\\n## 押金返还义务的触发条件",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规",
+          "房屋租赁合同",
+          "解除",
+          "押金返还",
+          "押金的法律性"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:16:04.424Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779643245266_44uv",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事答辩状",
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "question": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "risk_level": "中",
+        "summary": "被告就原告提起的民事诉讼，在法定期限内针对起诉事实、理由及诉讼请求，提出否认、反驳或抗辩意见，并说明事实与法律依据的正式法律文书。",
+        "provider": "dashscope",
+        "category": "other",
+        "keywords": [
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项",
+          "民事答辩状",
+          "被告就原告提",
+          "起的民事诉讼",
+          "在法定期限内",
+          "针对起诉事实"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:20:45.266Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779644204303_2ken",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事起诉状",
+        "preview": "请按中国法院文书规范，生成一份结构完整的民事起诉状模板，并说明每一部分需要填写的要点。",
+        "question": "请按中国法院文书规范，生成一份结构完整的民事起诉状模板，并说明每一部分需要填写的要点。",
+        "risk_level": "中",
+        "summary": "原告因与被告就合同履行、侵权责任或财产纠纷等民事权益争议未能协商解决，依据《中华人民共和国民事诉讼法》第一百二十二条向有管辖权的人民法院提起诉讼，请求判令被告承担相应民事责任。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "请按中国法院",
+          "文书规范",
+          "生成一份结构",
+          "完整的民事起",
+          "诉状模板",
+          "并说明每一部",
+          "分需要填写的",
+          "要点",
+          "民事起诉状",
+          "原告因与被告"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:36:44.303Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779644659297_zd8o",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:44:19.300Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779644697430_vlja",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:44:57.430Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779644857961_x09i",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函",
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "question": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "risk_level": "中",
+        "summary": "本函系受委托人委托，就收函人未依约履行合同项下付款/交付/配合义务之事实，依法进行催告并明确违约责任及履行宽限期。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议",
+          "律师函",
+          "本函系受委托",
+          "人委托",
+          "就收函人未依"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T17:47:37.961Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779645979117_r2xl",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T18:06:19.118Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779646025303_k7hs",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "通用民事合同模板",
+        "preview": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "question": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "risk_level": "中",
+        "summary": "本合同为适用于平等民事主体之间就货物买卖、服务提供、知识产权许可等非专属法定类型交易的通用框架性协议，重点规范权利义务、风险分配、违约救济及争议解决机制。",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "请给我一份通",
+          "用合同模板结",
+          "重点说明风险",
+          "条款",
+          "违约责任和争",
+          "议解决条款",
+          "通用民事合同",
+          "模板",
+          "本合同为适用",
+          "于平等民事主"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T18:07:05.303Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779646227461_amg3",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "民间借贷利率与催收规范",
+        "preview": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "query": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "analysis": "## 利率合法性边界\n依据《民间借贷司法解释》第二十五条，合法利率上限以合同成立时一年期LPR的四倍为司法保护上限，超出部分法院不予支持。该标准动态调整，需以中国人民银行授权全国银行间同业拆借中心每月发布的一年期LPR为准。\n\n## 催收行为的刑事红线\n《刑法》第二百九十三条之一明确将暴力、软暴力等非法催收手段纳入刑法规制，尤其针对‘高利放贷等产生的非法债务’，即使债权本身部分合法，若催收方式违法",
+        "provider": "dashscope",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "借贷纠纷",
+          "民间借贷合法",
+          "利率范围",
+          "催收注意事项",
+          "民间借贷利率",
+          "与催收规范",
+          "利率合法性边",
+          "依据",
+          "民间借贷司法"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T18:10:27.461Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "evt_1779646767173_ooeb",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-24T18:19:27.174Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679051687_dj44",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:17:31.687Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679071066_waw9",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "请给出上诉状的规范结构，包含上诉请求、理由、原判问题与证据目录。",
+        "question": "请给出上诉状的规范结构，包含上诉请求、理由、原判问题与证据目录。",
+        "risk_level": "中",
+        "summary": "请给出上诉状的规范结构，包含上诉请求、理由、原判问题与证据目录。",
+        "category": "other",
+        "keywords": [
+          "请给出上诉状",
+          "的规范结构",
+          "包含上诉请求",
+          "理由",
+          "原判问题与证",
+          "据目录",
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:17:51.066Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679149136_c1a1",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "交通事故责任认定和赔偿标准，相关法律法规",
+        "preview": "交通事故责任认定和赔偿标准，相关法律法规",
+        "query": "交通事故责任认定和赔偿标准，相关法律法规",
+        "analysis": "交通事故责任认定和赔偿标准主要依据《中华人民共和国道路交通安全法》及其实施条例、《道路交通事故处理程序规定》等法律法规。以下是一些关键点：\n【交通事故责任认定】\n1. **责任认定依据**：\n· **现场勘查**：交警会进行现场勘查，收集证据。\n· **证人证言**：收集现场目击者的证言。\n· **监控录像**：如果有监控录像，可以作为重要证据。\n· **车辆检验**：对事故车辆进行技术检验，确定",
+        "category": "other",
+        "keywords": [
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规",
+          "准主要依据",
+          "中华人民共和",
+          "国道路交通安",
+          "全法",
+          "及其实施条例",
+          "道路交通事故",
+          "处理程序规定"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:19:09.136Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679182161_zfv2",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-25T03:19:42.161Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679216749_6r4i",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-25T03:20:16.749Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679237990_10p5",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了租房纠纷问题，请帮我分析：",
+        "question": "我遇到了租房纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "我遇到了租房",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-25T03:20:37.990Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679247577_dera",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:20:47.577Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679263049_usrr",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "合同",
+        "preview": "调解协议书怎么写？请给出可执行、可落地的条款结构和履行保障建议。",
+        "question": "调解协议书怎么写？请给出可执行、可落地的条款结构和履行保障建议。",
+        "risk_level": "中",
+        "summary": "调解协议书怎么写？请给出可执行、可落地的条款结构和履行保障建议。",
+        "category": "contract",
+        "keywords": [
+          "调解协议书怎",
+          "么写",
+          "请给出可执行",
+          "可落地的条款",
+          "结构和履行保",
+          "障建议",
+          "合同"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:21:03.049Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679490197_aeqi",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户主张房东无故解除合同且不退还押金\n当前还缺少的信息主要有：________________\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请您提供事情发生的大致时间线，包括开始时间、关键节点时间和最近一次沟通或催告时间。",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:24:50.197Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779679610727_gsf2",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T03:26:50.727Z",
+    "status": "success",
+    "duration": 0
+  }
+]

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>法律服务动态 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./css/updates-page.css" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script src="./js/auth.js"></script>
+</head>
+<body class="wb-page font-inter antialiased text-gray-800 dark:text-gray-200 tracking-tight flex flex-col min-h-screen">
+
+    <header class="wb-header sticky top-0 z-50 w-full border-b border-gray-100 dark:border-gray-800 bg-white/85 dark:bg-gray-900/80 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-[1600px] mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="updates" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+                            <path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" />
+                            <path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" />
+                        </svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="wb-workbench" id="wb-workbench">
+        <aside class="wb-sidebar" id="wb-sidebar">
+            <div class="wb-sidebar__head">
+                <h1>法律服务动态</h1>
+                <p id="wb-sidebar-sub">您的 AI 法律服务工作台</p>
+            </div>
+            <div class="wb-sidebar__search">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="wb-search" placeholder="搜索记录…" autocomplete="off" />
+            </div>
+            <div class="wb-sidebar__filters">
+                <select id="wb-filter-type" aria-label="类型筛选">
+                    <option value="">全部类型</option>
+                    <option value="consult">法律咨询</option>
+                    <option value="case">案件分析</option>
+                    <option value="document">文书生成</option>
+                    <option value="law_search">法规检索</option>
+                    <option value="upload">资料上传</option>
+                    <option value="pufa">普法学习</option>
+                    <option value="datav">数字大屏</option>
+                </select>
+                <select id="wb-filter-status" aria-label="状态筛选">
+                    <option value="">全部状态</option>
+                    <option value="completed">已完成</option>
+                    <option value="processing">分析中</option>
+                    <option value="failed">失败</option>
+                    <option value="exported">已导出</option>
+                </select>
+                <button type="button" class="wb-filter-star" id="wb-filter-star" title="仅收藏">☆</button>
+            </div>
+            <div class="wb-sidebar__stats" id="wb-stats-mini"></div>
+            <div class="wb-sidebar__list" id="wb-list-root"></div>
+        </aside>
+
+        <section class="wb-detail" id="wb-detail-root">
+            <!-- 由 JS 渲染 -->
+        </section>
+
+        <div class="wb-drawer-backdrop" id="wb-drawer-backdrop"></div>
+    </main>
+
+    <div id="wb-export-target" class="wb-export-target" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://unpkg.com/html-docx-js@0.3.1/dist/html-docx.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+    <script src="./js/lib/activity-log.js"></script>
+    <script src="./js/updates-page.js"></script>
+</body>
+</html>

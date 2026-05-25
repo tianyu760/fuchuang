@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>登录 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <script src="./js/auth.js"></script>
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+
+    /* ===== 页面壳 ===== */
+    .lg-shell {
+        min-height: 100vh; display: flex; flex-direction: column;
+        background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #ede9fe 100%);
+    }
+    .dark .lg-shell {
+        background: linear-gradient(135deg, #0f0f1a 0%, #111827 60%, #1a1030 100%);
+    }
+
+    /* ===== 主卡片 ===== */
+    .lg-card {
+        display: flex; width: 100%; max-width: 1000px;
+        border-radius: 20px; overflow: hidden;
+        box-shadow: 0 24px 64px rgba(79,70,229,.14), 0 4px 16px rgba(0,0,0,.08);
+        animation: lg-appear .5s ease both;
+        min-height: 580px;
+    }
+    .dark .lg-card { box-shadow: 0 24px 64px rgba(0,0,0,.45); }
+    @media (max-width: 720px) {
+        .lg-card { flex-direction: column; border-radius: 0; min-height: unset; }
+    }
+    @keyframes lg-appear {
+        from { opacity: 0; transform: translateY(16px) scale(.985); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ===== 左侧品牌区 ===== */
+    .lg-brand {
+        width: 42%; flex-shrink: 0; position: relative; overflow: hidden;
+        background: linear-gradient(150deg, #312e81 0%, #4c1d95 45%, #5b21b6 100%);
+        display: flex; flex-direction: column; justify-content: center;
+        padding: 52px 40px; color: #fff;
+    }
+    @media (max-width: 720px) { .lg-brand { width: 100%; padding: 40px 28px 36px; } }
+
+    .lg-orb1 {
+        position: absolute; width: 280px; height: 280px; border-radius: 50%;
+        background: rgba(255,255,255,.04); top: -80px; right: -100px;
+        pointer-events: none;
+    }
+    .lg-orb2 {
+        position: absolute; width: 200px; height: 200px; border-radius: 50%;
+        background: rgba(255,255,255,.05); bottom: -60px; left: -60px;
+        pointer-events: none;
+    }
+    /* 品牌 Logo 行 */
+    .lg-logo-row {
+        display: flex; align-items: center; gap: 10px;
+        font-size: 22px; font-weight: 800; margin-bottom: 32px; position: relative;
+    }
+    .lg-slogan {
+        font-size: 28px; font-weight: 800; line-height: 1.3;
+        margin-bottom: 10px; position: relative;
+    }
+    .lg-slogan-sub {
+        font-size: 13px; color: rgba(255,255,255,.6);
+        margin-bottom: 36px; line-height: 1.6; position: relative;
+    }
+    /* 能力卡片 */
+    .lg-features { display: flex; flex-direction: column; gap: 12px; position: relative; }
+    .lg-feature {
+        display: flex; align-items: center; gap: 12px;
+        background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.11);
+        border-radius: 12px; padding: 11px 14px;
+    }
+    .lg-feat-icon {
+        width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+        background: rgba(255,255,255,.14);
+        display: flex; align-items: center; justify-content: center;
+    }
+    .lg-feat-title { font-size: 13px; font-weight: 700; }
+    .lg-feat-desc  { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 1px; }
+    /* 安全说明 */
+    .lg-security {
+        position: relative; margin-top: 28px;
+        display: flex; align-items: center; gap: 8px;
+        font-size: 11px; color: rgba(255,255,255,.45);
+    }
+
+    /* ===== 右侧表单区 ===== */
+    .lg-form-area {
+        flex: 1; background: #fff; overflow-y: auto;
+        display: flex; align-items: center; justify-content: center;
+        padding: 52px 44px;
+    }
+    .dark .lg-form-area { background: #111827; }
+    @media (max-width: 720px) { .lg-form-area { padding: 32px 22px 44px; } }
+
+    .lg-form-inner { width: 100%; max-width: 380px; }
+
+    /* 标题 */
+    .lg-title {
+        font-size: 26px; font-weight: 800; color: #1e1b4b;
+        letter-spacing: -.5px; margin-bottom: 4px;
+    }
+    .dark .lg-title { color: #e0e7ff; }
+    .lg-subtitle { font-size: 13px; color: #9ca3af; margin-bottom: 28px; }
+
+    /* 成功/错误提示 */
+    .lg-success-bar {
+        display: none; background: #f0fdf4; border: 1px solid #bbf7d0;
+        border-radius: 10px; padding: 10px 14px; margin-bottom: 14px;
+        font-size: 12px; color: #16a34a;
+        align-items: center; gap: 8px;
+    }
+    .dark .lg-success-bar { background: rgba(22,163,74,.1); border-color: rgba(22,163,74,.3); color: #4ade80; }
+    .lg-error-bar {
+        display: none; background: #fef2f2; border: 1px solid #fecaca;
+        border-radius: 10px; padding: 10px 14px; margin-bottom: 14px;
+        font-size: 12px; color: #dc2626;
+    }
+    .dark .lg-error-bar { background: rgba(220,38,38,.1); border-color: rgba(220,38,38,.3); color: #f87171; }
+
+    /* 表单字段 */
+    .lg-field { margin-bottom: 16px; }
+    .lg-label {
+        display: block; font-size: 12px; font-weight: 700; color: #374151;
+        letter-spacing: .03em; margin-bottom: 6px;
+    }
+    .dark .lg-label { color: #9ca3af; }
+    .lg-input-wrap { position: relative; display: flex; align-items: center; }
+    .lg-input-icon {
+        position: absolute; left: 13px; pointer-events: none;
+        color: #9ca3af; display: flex; align-items: center;
+    }
+    .lg-input {
+        width: 100%; padding: 11px 12px 11px 40px;
+        border-radius: 11px; border: 1.5px solid #e5e7eb;
+        background: #f9fafb; font-size: 13px; color: #1f2937;
+        outline: none; transition: border-color .18s, box-shadow .18s, background .18s;
+    }
+    .lg-input:focus {
+        border-color: #6366f1; background: #fff;
+        box-shadow: 0 0 0 3px rgba(99,102,241,.13);
+    }
+    .lg-input.error { border-color: #f87171; box-shadow: 0 0 0 3px rgba(248,113,113,.1); }
+    .dark .lg-input {
+        background: #1f2937; border-color: #374151; color: #e5e7eb;
+    }
+    .dark .lg-input:focus {
+        border-color: #818cf8; background: #111827;
+        box-shadow: 0 0 0 3px rgba(129,140,248,.15);
+    }
+    .lg-eye {
+        position: absolute; right: 12px; cursor: pointer;
+        color: #9ca3af; padding: 4px; transition: color .15s;
+    }
+    .lg-eye:hover { color: #4f46e5; }
+
+    /* 记住我 + 忘记密码 行 */
+    .lg-remember-row {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: 20px; margin-top: -4px;
+    }
+    .lg-remember {
+        display: flex; align-items: center; gap: 6px;
+        font-size: 12px; color: #6b7280; cursor: pointer;
+    }
+    .dark .lg-remember { color: #9ca3af; }
+    .lg-remember input[type="checkbox"] { accent-color: #6366f1; width: 14px; height: 14px; cursor: pointer; }
+    .lg-forgot { font-size: 12px; color: #4f46e5; text-decoration: none; font-weight: 600; }
+    .lg-forgot:hover { text-decoration: underline; }
+
+    /* 登录按钮 */
+    .lg-submit-btn {
+        width: 100%; padding: 13px; border-radius: 12px;
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: #fff; font-size: 14px; font-weight: 700;
+        border: none; cursor: pointer; letter-spacing: .02em;
+        box-shadow: 0 4px 16px rgba(99,102,241,.3);
+        transition: transform .15s, box-shadow .15s, opacity .15s;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        margin-bottom: 16px;
+    }
+    .lg-submit-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(99,102,241,.4);
+    }
+    .lg-submit-btn:active { transform: scale(.98); }
+    .lg-submit-btn:disabled { opacity: .68; cursor: not-allowed; transform: none; }
+
+    /* 分割线 */
+    .lg-divider {
+        display: flex; align-items: center; gap: 10px;
+        margin-bottom: 16px;
+    }
+    .lg-divider::before, .lg-divider::after {
+        content: ''; flex: 1; height: 1px; background: #e5e7eb;
+    }
+    .dark .lg-divider::before, .dark .lg-divider::after { background: #374151; }
+    .lg-divider span { font-size: 11px; color: #9ca3af; white-space: nowrap; }
+
+    /* 第三方登录 */
+    .lg-social-row {
+        display: flex; gap: 10px; margin-bottom: 18px;
+    }
+    .lg-social-btn {
+        flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+        padding: 10px; border-radius: 10px; border: 1.5px solid #e5e7eb;
+        background: #fff; font-size: 12px; font-weight: 600; color: #374151;
+        cursor: pointer; transition: background .15s, border-color .15s, transform .12s;
+    }
+    .dark .lg-social-btn { background: #1f2937; border-color: #374151; color: #d1d5db; }
+    .lg-social-btn:hover {
+        border-color: #6366f1; background: rgba(99,102,241,.04);
+        transform: translateY(-1px);
+    }
+    .dark .lg-social-btn:hover { background: rgba(99,102,241,.1); border-color: #818cf8; }
+    .lg-social-btn:active { transform: scale(.97); }
+    .lg-social-icon {
+        width: 18px; height: 18px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+    }
+
+    /* 注册链接 */
+    .lg-register-link {
+        text-align: center; font-size: 13px; color: #9ca3af;
+    }
+    .lg-register-link a {
+        color: #4f46e5; font-weight: 600; text-decoration: none;
+    }
+    .lg-register-link a:hover { text-decoration: underline; }
+    .dark .lg-register-link { color: #6b7280; }
+
+    /* loading spinner */
+    .lg-spinner {
+        width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.4);
+        border-top-color: #fff; border-radius: 50%;
+        animation: spin .7s linear infinite; flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* 忘记密码弹窗 */
+    .lg-modal-overlay {
+        position: fixed; inset: 0; background: rgba(0,0,0,.45);
+        display: flex; align-items: center; justify-content: center;
+        z-index: 1000; opacity: 0; pointer-events: none;
+        transition: opacity .2s;
+    }
+    .lg-modal-overlay.open { opacity: 1; pointer-events: auto; }
+    .lg-modal {
+        background: #fff; border-radius: 16px; padding: 28px 28px 24px;
+        width: 90%; max-width: 380px;
+        box-shadow: 0 20px 60px rgba(0,0,0,.18);
+        transform: scale(.94) translateY(10px);
+        transition: transform .25s ease;
+    }
+    .dark .lg-modal { background: #1f2937; }
+    .lg-modal-overlay.open .lg-modal { transform: scale(1) translateY(0); }
+    .lg-modal-title { font-size: 18px; font-weight: 800; color: #1e1b4b; margin-bottom: 6px; }
+    .dark .lg-modal-title { color: #e0e7ff; }
+    .lg-modal-sub { font-size: 12px; color: #9ca3af; margin-bottom: 18px; }
+    .lg-modal-close {
+        position: absolute; top: 14px; right: 14px;
+        width: 28px; height: 28px; border-radius: 50%;
+        background: rgba(99,102,241,.08); border: none; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        color: #6b7280; font-size: 16px; transition: background .15s;
+    }
+    .lg-modal-close:hover { background: rgba(99,102,241,.15); }
+    .lg-modal-inner { position: relative; }
+    </style>
+</head>
+
+<body>
+<div class="lg-shell">
+
+    <!-- 顶部最小导航 -->
+    <header style="position:absolute;top:0;left:0;right:0;z-index:10;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;">
+        <a href="index.html" style="display:flex;align-items:center;gap:8px;text-decoration:none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" aria-hidden="true">
+                <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+            </svg>
+        </a>
+        <div>
+            <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+            <label class="cursor-pointer" for="light-switch" style="padding:6px;display:inline-block;">
+                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" /><path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" /></svg>
+            </label>
+        </div>
+    </header>
+
+    <!-- 主内容 -->
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:28px 16px;">
+        <div class="lg-card">
+
+            <!-- ====== 左侧品牌区 ====== -->
+            <div class="lg-brand">
+                <div class="lg-orb1"></div>
+                <div class="lg-orb2"></div>
+
+                <div class="lg-logo-row">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+                        <path fill="rgba(255,255,255,.45)" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path fill="rgba(255,255,255,.92)" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    法绎
+                </div>
+
+                <div class="lg-slogan">你的 AI<br>法律助手</div>
+                <div class="lg-slogan-sub">登录后可使用法律咨询、文书生成、<br>知识库等全部核心功能</div>
+
+                <div class="lg-features">
+                    <div class="lg-feature">
+                        <div class="lg-feat-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        </div>
+                        <div>
+                            <div class="lg-feat-title">AI 法律咨询</div>
+                            <div class="lg-feat-desc">智能分析案情，精准解答法律问题</div>
+                        </div>
+                    </div>
+                    <div class="lg-feature">
+                        <div class="lg-feat-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <div>
+                            <div class="lg-feat-title">文书生成</div>
+                            <div class="lg-feat-desc">自动生成起诉状、合同等法律文书</div>
+                        </div>
+                    </div>
+                    <div class="lg-feature">
+                        <div class="lg-feat-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        </div>
+                        <div>
+                            <div class="lg-feat-title">知识库</div>
+                            <div class="lg-feat-desc">案例与法条解读，个性化内容推送</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg-security">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    我们严格保护您的隐私数据
+                </div>
+            </div>
+
+            <!-- ====== 右侧表单区 ====== -->
+            <div class="lg-form-area">
+                <div class="lg-form-inner">
+
+                    <div class="lg-title">欢迎回来</div>
+                    <div class="lg-subtitle">登录您的法绎账号，继续使用</div>
+
+                    <!-- 注册成功提示 -->
+                    <div class="lg-success-bar" id="login-success" style="display:flex;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                        注册成功，请使用刚才的邮箱与密码登录。
+                    </div>
+
+                    <!-- 错误提示 -->
+                    <div class="lg-error-bar" id="login-error"></div>
+
+                    <form id="login-form" novalidate>
+
+                        <!-- 邮箱 -->
+                        <div class="lg-field">
+                            <label class="lg-label" for="login-email">邮箱</label>
+                            <div class="lg-input-wrap">
+                                <span class="lg-input-icon">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </span>
+                                <input id="login-email" class="lg-input" type="email"
+                                    autocomplete="username" placeholder="请输入您的邮箱" />
+                            </div>
+                        </div>
+
+                        <!-- 密码 -->
+                        <div class="lg-field">
+                            <label class="lg-label" for="login-password">密码</label>
+                            <div class="lg-input-wrap">
+                                <span class="lg-input-icon">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                </span>
+                                <input id="login-password" class="lg-input" type="password"
+                                    autocomplete="current-password" placeholder="请输入密码"
+                                    style="padding-right:40px" />
+                                <span class="lg-eye" id="eye-pw" title="显示/隐藏密码">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- 记住我 + 忘记密码 -->
+                        <div class="lg-remember-row">
+                            <label class="lg-remember">
+                                <input type="checkbox" id="remember-me" />
+                                记住我
+                            </label>
+                            <a class="lg-forgot" href="#" id="forgot-link">忘记密码？</a>
+                        </div>
+
+                        <!-- 登录按钮 -->
+                        <button type="submit" class="lg-submit-btn" id="lg-submit-btn">
+                            <span id="lg-btn-text">登录</span>
+                        </button>
+
+                    </form>
+
+                    <!-- 分割线 -->
+                    <div class="lg-divider"><span>其他登录方式</span></div>
+
+                    <!-- 第三方登录（占位） -->
+                    <div class="lg-social-row">
+                        <button class="lg-social-btn" type="button" id="btn-qq-login">
+                            <div class="lg-social-icon" style="background:#12b7f5;">
+                                <svg width="10" height="10" viewBox="0 0 40 40" fill="#fff"><path d="M20 2C10.1 2 2 10.1 2 20s8.1 18 18 18 18-8.1 18-18S29.9 2 20 2zm6.6 26.3c-.4.8-1.4 1.1-2.3.7l-4.3-2.1-4.3 2.1c-.9.4-1.9.1-2.3-.7-.4-.8-.1-1.8.7-2.3l1.4-.7v-8.6l-1.4-.7c-.8-.4-1.1-1.4-.7-2.3.4-.9 1.4-1.1 2.3-.7L20 15.2l4.3-2.1c.9-.4 1.9-.1 2.3.7.4.8.1 1.8-.7 2.3l-1.4.7v8.6l1.4.7c.8.5 1.1 1.5.7 2.2z"/></svg>
+                            </div>
+                            QQ 登录
+                        </button>
+                        <button class="lg-social-btn" type="button" onclick="showSocialTip('微信')">
+                            <div class="lg-social-icon" style="background:#07c160;">
+                                <svg width="11" height="11" viewBox="0 0 40 40" fill="#fff"><path d="M16 8C9.4 8 4 12.7 4 18.5c0 3.3 1.7 6.3 4.4 8.3l-1.1 3.3 3.8-1.9c1.3.4 2.8.6 4.3.6.4 0 .8 0 1.2-.1-.3-.8-.4-1.7-.4-2.6 0-5.3 4.8-9.6 10.8-9.6.4 0 .8 0 1.2.1C27.4 12.1 22.2 8 16 8zm-3.5 5.5c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5zm7 0c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5z"/><path d="M27 20c-5 0-9 3.6-9 8s4 8 9 8c1.2 0 2.4-.2 3.4-.6l3 1.5-.9-2.7c2.2-1.6 3.5-4 3.5-6.2 0-4.4-4-8-9-8zm-2.5 5c-.7 0-1.2-.6-1.2-1.2s.5-1.2 1.2-1.2 1.2.6 1.2 1.2-.5 1.2-1.2 1.2zm5 0c-.7 0-1.2-.6-1.2-1.2s.5-1.2 1.2-1.2 1.2.6 1.2 1.2-.5 1.2-1.2 1.2z"/></svg>
+                            </div>
+                            微信登录
+                        </button>
+                    </div>
+
+                    <!-- 注册入口 -->
+                    <div class="lg-register-link">
+                        还没有账号？<a href="register.html">立即注册</a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- /lg-card -->
+    </div>
+
+    <!-- 忘记密码弹窗 -->
+    <div class="lg-modal-overlay" id="forgot-modal">
+        <div class="lg-modal">
+            <div class="lg-modal-inner">
+                <button class="lg-modal-close" id="forgot-close">✕</button>
+                <div class="lg-modal-title">找回密码</div>
+                <div class="lg-modal-sub">请输入注册邮箱，我们将发送重置说明（功能建设中）</div>
+                <div style="margin-bottom:14px;">
+                    <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:6px;" class="dark:text-gray-400">邮箱</div>
+                    <input type="email" placeholder="请输入您的邮箱"
+                        style="width:100%;padding:10px 12px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:13px;outline:none;" />
+                </div>
+                <button type="button"
+                    style="width:100%;padding:11px;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer;"
+                    onclick="document.getElementById('forgot-modal').classList.remove('open');if(window.FayiToast)FayiToast('功能建设中，请联系客服找回','success');">
+                    发送重置邮件
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /lg-shell -->
+
+<script src="./js/config/system.js"></script>
+    <script src="./js/main.js"></script>
+<script>
+(function () {
+
+    /* 注册成功提示 */
+    var successBar = document.getElementById('login-success');
+    successBar.style.display = new URLSearchParams(location.search).get('registered') === '1' ? 'flex' : 'none';
+
+    /* 密码显示/隐藏 */
+    var eyeBtn = document.getElementById('eye-pw');
+    var pwInp  = document.getElementById('login-password');
+    eyeBtn.addEventListener('click', function () {
+        pwInp.type = pwInp.type === 'password' ? 'text' : 'password';
+    });
+
+    /* 错误提示 */
+    var errBar = document.getElementById('login-error');
+    function showErr(msg) { errBar.textContent = msg; errBar.style.display = 'block'; }
+    function hideErr()    { errBar.style.display = 'none'; }
+
+    /* 忘记密码弹窗 */
+    var modal     = document.getElementById('forgot-modal');
+    var forgotLink = document.getElementById('forgot-link');
+    var closeBtn   = document.getElementById('forgot-close');
+    forgotLink.addEventListener('click', function (e) { e.preventDefault(); modal.classList.add('open'); });
+    closeBtn.addEventListener('click', function () { modal.classList.remove('open'); });
+    modal.addEventListener('click', function (e) { if (e.target === modal) modal.classList.remove('open'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') modal.classList.remove('open'); });
+
+    /* 第三方登录占位提示 */
+    window.showSocialTip = function (platform) {
+        if (window.FayiToast) FayiToast(platform + ' 登录功能建设中', 'success');
+        else alert(platform + ' 登录功能建设中');
+    };
+
+    /* === QQ OAuth 回调处理 ===
+     * 后端登录成功后会重定向到:
+     *   login.html?qq_token=JWT&qq_name=NAME&qq_avatar=URL&qq_email=EMAIL
+     * 此处读取参数、写入 localStorage、跳转首页
+     */
+    (function handleQqCallback() {
+        var p = new URLSearchParams(location.search);
+        var qqToken = p.get('qq_token');
+        if (!qqToken) return;  // 非 QQ 回调跳过
+
+        localStorage.setItem('fayi_token', qqToken);
+        localStorage.setItem('fayi_current_user', JSON.stringify({
+            email:   p.get('qq_email')  || '',
+            name:    p.get('qq_name')   || 'QQ用户',
+            avatar:  p.get('qq_avatar') || './images/avatars/1.svg',
+            persona: 'life_consume'
+        }));
+
+        // 清除 URL 参数并跳转
+        if (window.FayiToast) FayiToast('QQ 登录成功！', 'success');
+        setTimeout(function () {
+            window.location.replace('chat.html');
+        }, 800);
+    })();
+
+    /* === QQ 登录按钮绑定 === */
+    var btnQq = document.getElementById('btn-qq-login');
+    if (btnQq) {
+        btnQq.addEventListener('click', function () {
+            window.location.href = 'http://localhost:8081/api/auth/qq/login';
+        });
+    }
+
+    /* 登录按钮 loading 状态 */
+    var form      = document.getElementById('login-form');
+    var submitBtn = document.getElementById('lg-submit-btn');
+    var btnText   = document.getElementById('lg-btn-text');
+
+    form.addEventListener('submit', function (e) {
+        hideErr();
+        var email = document.getElementById('login-email').value.trim();
+        var pw    = document.getElementById('login-password').value;
+        if (!email || !pw) { e.preventDefault(); showErr('请填写邮箱和密码'); return; }
+
+        /* loading UI */
+        submitBtn.disabled = true;
+        btnText.textContent = '登录中...';
+        var spinner = document.createElement('div');
+        spinner.className = 'lg-spinner';
+        submitBtn.appendChild(spinner);
+
+        /* auth.js 会接管 submit 实际处理，这里仅做 UI；若失败自动恢复 */
+        setTimeout(function () {
+            if (submitBtn.disabled) {
+                submitBtn.disabled = false;
+                btnText.textContent = '登录';
+                var s = submitBtn.querySelector('.lg-spinner');
+                if (s) s.remove();
+            }
+        }, 5000);
+    });
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>个人中心 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <link href="./css/modules/admin.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+    <script src="./js/auth.js?v=3"></script>
+    <script>
+        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.remove('dark');
+        } else {
+            document.querySelector('html').classList.add('dark');
+        }
+    </script>
+    <script>
+        if (!FayiAuth.getCurrentUser()) {
+            window.location.replace('login.html?next=' + encodeURIComponent('profile.html'));
+        }
+    </script>
+    <style>
+    /* ===== 布局容器 ===== */
+    .pc-layout {
+        display: flex; gap: 24px; max-width: 1060px;
+        margin: 0 auto; padding: 28px 20px 60px; min-height: calc(100vh - 60px);
+    }
+    @media (max-width: 700px) { .pc-layout { flex-direction: column; padding: 16px 12px 40px; } }
+
+    /* ===== 左侧导航 ===== */
+    .pc-sidebar {
+        width: 220px; flex-shrink: 0;
+    }
+    @media (max-width: 700px) { .pc-sidebar { width: 100%; } }
+
+    .pc-avatar-block {
+        display: flex; flex-direction: column; align-items: center;
+        padding: 20px 16px 16px;
+        background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,255,255,.8));
+        border: 1px solid rgba(99,102,241,.1);
+        border-radius: 16px; margin-bottom: 12px;
+        box-shadow: 0 2px 12px rgba(79,70,229,.06);
+    }
+    .dark .pc-avatar-block {
+        background: linear-gradient(145deg, rgba(55,65,81,.9), rgba(31,41,55,.88));
+        border-color: rgba(99,102,241,.2);
+    }
+    .pc-avatar-img {
+        width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+        border: 3px solid rgba(99,102,241,.25); margin-bottom: 10px;
+        background: #e0e7ff;
+    }
+    .pc-sidebar-name {
+        font-size: 14px; font-weight: 700; color: #1e1b4b; text-align: center; margin-bottom: 3px;
+    }
+    .dark .pc-sidebar-name { color: #c7d2fe; }
+    .pc-sidebar-email {
+        font-size: 11px; color: #9ca3af; text-align: center; word-break: break-all;
+    }
+
+    /* 导航菜单 */
+    .pc-nav {
+        background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(255,255,255,.8));
+        border: 1px solid rgba(99,102,241,.1);
+        border-radius: 16px; overflow: hidden;
+        box-shadow: 0 2px 12px rgba(79,70,229,.06);
+    }
+    .dark .pc-nav {
+        background: linear-gradient(145deg, rgba(55,65,81,.9), rgba(31,41,55,.88));
+        border-color: rgba(99,102,241,.2);
+    }
+    .pc-nav-item {
+        display: flex; align-items: center; gap: 10px;
+        padding: 12px 16px; cursor: pointer;
+        font-size: 13px; font-weight: 600; color: #6b7280;
+        transition: background .15s, color .15s;
+        border-left: 3px solid transparent;
+        user-select: none;
+    }
+    .dark .pc-nav-item { color: #9ca3af; }
+    .pc-nav-item:hover { background: rgba(99,102,241,.06); color: #4f46e5; }
+    .dark .pc-nav-item:hover { background: rgba(99,102,241,.1); color: #a5b4fc; }
+    .pc-nav-item.active {
+        background: rgba(99,102,241,.08); color: #4f46e5;
+        border-left-color: #4f46e5;
+    }
+    .dark .pc-nav-item.active { background: rgba(99,102,241,.15); color: #a5b4fc; border-left-color: #818cf8; }
+    .pc-nav-item .ni { font-size: 16px; width: 20px; text-align: center; }
+
+    /* 退出登录 */
+    .pc-logout-btn {
+        margin-top: 12px; width: 100%; padding: 10px; border-radius: 12px;
+        background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.15);
+        color: #dc2626; font-size: 13px; font-weight: 600; cursor: pointer;
+        transition: background .15s;
+    }
+    .pc-logout-btn:hover { background: rgba(239,68,68,.12); }
+    .dark .pc-logout-btn { background: rgba(239,68,68,.1); border-color: rgba(239,68,68,.2); color: #f87171; }
+
+    /* ===== 右侧内容区 ===== */
+    .pc-content { flex: 1; min-width: 0; }
+
+    .pc-panel { display: none; }
+    .pc-panel.active { display: block; }
+
+    /* ===== 通用卡片 ===== */
+    .pc-card {
+        background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(255,255,255,.86));
+        border: 1px solid rgba(99,102,241,.09);
+        border-radius: 16px; padding: 22px 20px; margin-bottom: 20px;
+        box-shadow: 0 2px 12px rgba(79,70,229,.06), 0 1px 3px rgba(0,0,0,.04);
+    }
+    .dark .pc-card {
+        background: linear-gradient(145deg, rgba(55,65,81,.88), rgba(31,41,55,.85));
+        border-color: rgba(99,102,241,.18);
+        box-shadow: 0 2px 12px rgba(0,0,0,.2);
+    }
+    .pc-card-title {
+        font-size: 15px; font-weight: 700; color: #1f2937; margin-bottom: 18px;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .dark .pc-card-title { color: #e5e7eb; }
+    .pc-card-title .ct-icon { font-size: 17px; }
+    .pc-card-desc {
+        font-size: 12px; color: #9ca3af; margin-bottom: 14px; margin-top: -10px;
+    }
+
+    /* 表单项 */
+    .pc-field { margin-bottom: 16px; }
+    .pc-label {
+        display: block; font-size: 11px; font-weight: 700; color: #6b7280;
+        text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+    }
+    .dark .pc-label { color: #9ca3af; }
+    .pc-input {
+        width: 100%; max-width: 440px; padding: 9px 12px; border-radius: 10px;
+        border: 1.5px solid rgba(99,102,241,.2); background: rgba(255,255,255,.8);
+        font-size: 13px; color: #1f2937; outline: none;
+        transition: border-color .15s, box-shadow .15s;
+    }
+    .pc-input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,.12); }
+    .pc-input:disabled { background: rgba(99,102,241,.04); color: #9ca3af; cursor: not-allowed; }
+    .dark .pc-input {
+        background: rgba(31,41,55,.8); border-color: rgba(99,102,241,.25);
+        color: #e5e7eb;
+    }
+    .dark .pc-input:disabled { background: rgba(31,41,55,.5); }
+    .pc-readonly-val {
+        font-size: 13px; color: #374151; padding: 9px 0;
+        display: flex; align-items: center; gap: 8px;
+    }
+    .dark .pc-readonly-val { color: #d1d5db; }
+    .pc-badge {
+        font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+        background: rgba(16,185,129,.1); color: #059669;
+    }
+    .dark .pc-badge { background: rgba(16,185,129,.15); color: #34d399; }
+
+    /* 按钮 */
+    .pc-btn-primary {
+        padding: 9px 22px; border-radius: 10px; font-size: 13px; font-weight: 700;
+        background: #4f46e5; color: #fff; border: none; cursor: pointer;
+        transition: background .15s, transform .12s;
+    }
+    .pc-btn-primary:hover { background: #4338ca; }
+    .pc-btn-primary:active { transform: scale(.97); }
+    .pc-btn-ghost {
+        padding: 9px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+        background: rgba(99,102,241,.08); color: #4f46e5;
+        border: 1.5px solid rgba(99,102,241,.2); cursor: pointer;
+        transition: background .15s;
+    }
+    .pc-btn-ghost:hover { background: rgba(99,102,241,.14); }
+    .dark .pc-btn-ghost { color: #a5b4fc; background: rgba(99,102,241,.1); border-color: rgba(99,102,241,.25); }
+
+    /* ===== 头像上传区 ===== */
+    .pc-avatar-upload-row {
+        display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 14px;
+    }
+    .pc-avatar-big {
+        width: 72px; height: 72px; border-radius: 50%; object-fit: cover;
+        border: 3px solid rgba(99,102,241,.25); background: #e0e7ff;
+    }
+    .pc-avatar-presets { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pc-avatar-presets label { cursor: pointer; }
+    .pc-avatar-presets img {
+        width: 38px; height: 38px; border-radius: 50%; object-fit: cover;
+        border: 2px solid transparent; transition: border-color .15s;
+    }
+    .pc-avatar-presets input[type="radio"]:checked + img { border-color: #6366f1; }
+    .pc-upload-label {
+        display: inline-block; padding: 6px 14px; border-radius: 8px; cursor: pointer;
+        font-size: 12px; font-weight: 600; color: #4f46e5;
+        background: rgba(99,102,241,.08); border: 1px solid rgba(99,102,241,.2);
+        transition: background .15s;
+    }
+    .pc-upload-label:hover { background: rgba(99,102,241,.14); }
+
+    /* ===== 使用记录 ===== */
+    .pc-record-item {
+        display: flex; align-items: center; gap: 12px;
+        padding: 11px 14px; border-radius: 10px; cursor: pointer;
+        transition: background .15s; border-bottom: 1px solid rgba(99,102,241,.06);
+    }
+    .pc-record-item:last-child { border-bottom: none; }
+    .pc-record-item:hover { background: rgba(99,102,241,.05); }
+    .dark .pc-record-item:hover { background: rgba(99,102,241,.08); }
+    .pc-record-icon {
+        width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(99,102,241,.08); font-size: 16px;
+    }
+    .pc-record-title { font-size: 13px; font-weight: 600; color: #1f2937; }
+    .dark .pc-record-title { color: #e5e7eb; }
+    .pc-record-time { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+    .pc-record-empty { text-align: center; padding: 20px 0; font-size: 13px; color: #9ca3af; }
+
+    /* ===== 安全模块 ===== */
+    .pc-session-item {
+        display: flex; align-items: center; gap: 12px; padding: 10px 0;
+        border-bottom: 1px solid rgba(99,102,241,.07);
+    }
+    .pc-session-item:last-child { border-bottom: none; }
+    .pc-session-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: #10b981; flex-shrink: 0;
+    }
+    .pc-session-info { flex: 1; }
+    .pc-session-name { font-size: 13px; font-weight: 600; color: #1f2937; }
+    .dark .pc-session-name { color: #e5e7eb; }
+    .pc-session-sub { font-size: 11px; color: #9ca3af; }
+    .pc-session-cur {
+        font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
+        background: rgba(99,102,241,.1); color: #4f46e5;
+    }
+    .dark .pc-session-cur { background: rgba(99,102,241,.18); color: #a5b4fc; }
+
+    /* ===== 偏好开关 ===== */
+    .pc-pref-row {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 12px 0; border-bottom: 1px solid rgba(99,102,241,.07);
+    }
+    .pc-pref-row:last-child { border-bottom: none; }
+    .pc-pref-label { font-size: 13px; font-weight: 600; color: #374151; }
+    .dark .pc-pref-label { color: #d1d5db; }
+    .pc-pref-sub { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+    .pc-toggle {
+        position: relative; width: 40px; height: 22px; flex-shrink: 0;
+    }
+    .pc-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .pc-toggle-track {
+        position: absolute; inset: 0; border-radius: 11px;
+        background: #d1d5db; cursor: pointer; transition: background .2s;
+    }
+    .pc-toggle input:checked ~ .pc-toggle-track { background: #4f46e5; }
+    .pc-toggle-thumb {
+        position: absolute; left: 3px; top: 3px;
+        width: 16px; height: 16px; border-radius: 50%;
+        background: #fff; transition: transform .2s;
+        pointer-events: none;
+    }
+    .pc-toggle input:checked ~ .pc-toggle-thumb { transform: translateX(18px); }
+    </style>
+</head>
+
+<body class="font-inter antialiased bg-indigo-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 tracking-tight min-h-screen flex flex-col">
+
+    <!-- 导航栏 -->
+    <header class="sticky top-0 z-50 shrink-0 border-b [border-image:linear-gradient(to_right,transparent,theme(colors.indigo.300/.4),transparent)1] dark:[border-image:linear-gradient(to_right,transparent,theme(colors.indigo.300/.16),transparent)1] bg-white/75 dark:bg-gray-900/90 backdrop-blur-md">
+        <div class="px-4 sm:px-6 py-3">
+            <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+                <a href="index.html" class="flex items-center gap-2 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+                        <path class="fill-indigo-300" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z" />
+                        <path class="fill-indigo-500" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z" />
+                    </svg>
+                    <span class="font-inter-tight font-semibold text-gray-800 dark:text-gray-200">法绎</span>
+                </a>
+                <nav class="flex flex-1 justify-center min-w-0 order-last basis-full sm:order-none sm:basis-auto">
+                    <ul id="fayi-main-nav" data-active="" class="flex flex-wrap items-center justify-center gap-x-1 sm:gap-x-2 text-xs sm:text-sm font-medium"></ul>
+                </nav>
+                <div id="app-nav-auth" class="flex items-center gap-1 shrink-0"></div>
+                <div class="flex items-center shrink-0">
+                    <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only" />
+                    <label class="cursor-pointer p-2" for="light-switch">
+                        <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400 dark:fill-gray-500" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z" /><path class="fill-gray-800 dark:fill-gray-200" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z" /></svg>
+                        <span class="sr-only">切换浅色 / 深色</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="grow">
+        <div class="pc-layout">
+
+            <!-- ===== 左侧导航 ===== -->
+            <aside class="pc-sidebar">
+                <!-- 用户头像块 -->
+                <div class="pc-avatar-block">
+                    <img id="pc-side-avatar" src="./images/avatars/1.svg" alt="头像" class="pc-avatar-img" />
+                    <div class="pc-sidebar-name" id="pc-side-name">加载中...</div>
+                    <div class="pc-sidebar-email" id="pc-side-email">—</div>
+                    <button type="button" class="pc-admin-entry hidden" id="btn-enter-admin" title="管理控制台">⚙ 进入管理端</button>
+                </div>
+                <!-- 导航 -->
+                <div class="pc-nav">
+                    <div class="pc-nav-item active" data-panel="profile">个人资料</div>
+                    <div class="pc-nav-item" data-panel="security">账号安全</div>
+                    <div class="pc-nav-item" data-panel="history">使用记录</div>
+                    <div class="pc-nav-item" data-panel="prefs">偏好设置</div>
+                    <div class="pc-nav-item hidden" id="pc-nav-admin" data-panel="admin">管理端</div>
+                </div>
+                <!-- 退出登录 -->
+                <button class="pc-logout-btn" id="profile-logout">退出登录</button>
+            </aside>
+
+            <!-- ===== 右侧内容区 ===== -->
+            <div class="pc-content">
+
+                <!-- ====== 面板1：个人资料 ====== -->
+                <div class="pc-panel active" id="panel-profile">
+                    <div class="pc-card">
+                        <div class="pc-card-title">个人资料</div>
+
+                        <!-- 头像 -->
+                        <div class="pc-field">
+                            <div class="pc-label">头像</div>
+                            <div class="pc-avatar-upload-row">
+                                <img id="profile-avatar-big" src="./images/avatars/1.svg" alt="当前头像" class="pc-avatar-big" />
+                                <div>
+                                    <div class="pc-avatar-presets" id="avatar-presets-row">
+                                        <label><input type="radio" name="profile-avatar" value="./images/avatars/1.svg" class="sr-only" /><img src="./images/avatars/1.svg" alt="1" width="38" height="38" /></label>
+                                        <label><input type="radio" name="profile-avatar" value="./images/avatars/2.svg" class="sr-only" /><img src="./images/avatars/2.svg" alt="2" width="38" height="38" /></label>
+                                        <label><input type="radio" name="profile-avatar" value="./images/avatars/3.svg" class="sr-only" /><img src="./images/avatars/3.svg" alt="3" width="38" height="38" /></label>
+                                        <label><input type="radio" name="profile-avatar" value="./images/avatars/4.svg" class="sr-only" /><img src="./images/avatars/4.svg" alt="4" width="38" height="38" /></label>
+                                        <label><input type="radio" name="profile-avatar" value="./images/avatars/5.svg" class="sr-only" /><img src="./images/avatars/5.svg" alt="5" width="38" height="38" /></label>
+                                        <label><input type="radio" name="profile-avatar" value="./images/avatars/6.svg" class="sr-only" /><img src="./images/avatars/6.svg" alt="6" width="38" height="38" /></label>
+                                    </div>
+                                    <div style="margin-top:8px;display:flex;align-items:center;gap:10px;">
+                                        <label class="pc-upload-label" for="profile-avatar-file">上传图片</label>
+                                        <input type="file" id="profile-avatar-file" accept="image/jpeg,image/png" class="sr-only" />
+                                        <span style="font-size:11px;color:#9ca3af">JPG / PNG</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 昵称 -->
+                        <div class="pc-field">
+                            <label class="pc-label" for="profile-name-input">昵称</label>
+                            <input id="profile-name-input" class="pc-input" type="text" placeholder="请输入昵称" maxlength="20" />
+                        </div>
+
+                        <!-- 邮箱（只读） -->
+                        <div class="pc-field">
+                            <div class="pc-label">登录邮箱</div>
+                            <div class="pc-readonly-val">
+                                <span id="profile-email">—</span>
+                                <span class="pc-badge">✓ 已验证</span>
+                            </div>
+                        </div>
+
+                        <!-- 用户ID（只读） -->
+                        <div class="pc-field" style="display:flex;gap:24px;flex-wrap:wrap;">
+                            <div style="flex:1;min-width:160px;">
+                                <div class="pc-label">用户 ID</div>
+                                <div class="pc-readonly-val" id="profile-uid">—</div>
+                            </div>
+                            <div style="flex:1;min-width:160px;">
+                                <div class="pc-label">注册时间</div>
+                                <div class="pc-readonly-val" id="profile-reg-date">—</div>
+                            </div>
+                        </div>
+
+                        <!-- 生活场景 -->
+                        <div class="pc-field">
+                            <label class="pc-label" for="profile-persona">默认法律领域 / 生活场景</label>
+                            <select id="profile-persona" class="pc-input" style="max-width:440px">
+                                <option value="life_consume">日常生活与消费维权</option>
+                                <option value="work_labor">劳动就业与职场</option>
+                                <option value="privacy_data">个人隐私与数据保护</option>
+                                <option value="rent_housing">租房与房屋居住</option>
+                                <option value="traffic">道路交通与出行</option>
+                                <option value="minor_elder">未成年人与老年人照护</option>
+                                <option value="startup_micro">小微主体与开店经营</option>
+                            </select>
+                        </div>
+
+                        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;">
+                            <button class="pc-btn-primary" id="profile-save">保存资料</button>
+                            <a href="chat.html" class="pc-btn-ghost" style="text-decoration:none;">去法律咨询 →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== 面板2：账号安全 ====== -->
+                <div class="pc-panel" id="panel-security">
+
+                    <!-- 修改密码 -->
+                    <div class="pc-card">
+                        <div class="pc-card-title">修改密码</div>
+                        <div class="pc-card-desc">为保护账号安全，建议定期更换密码。</div>
+                        <div class="pc-field">
+                            <label class="pc-label" for="pw-old">当前密码</label>
+                            <input id="pw-old" class="pc-input" type="password" autocomplete="current-password" placeholder="请输入当前密码" />
+                        </div>
+                        <div class="pc-field">
+                            <label class="pc-label" for="pw-new">新密码</label>
+                            <input id="pw-new" class="pc-input" type="password" autocomplete="new-password" placeholder="至少 6 位" />
+                        </div>
+                        <div class="pc-field">
+                            <label class="pc-label" for="pw-new2">确认新密码</label>
+                            <input id="pw-new2" class="pc-input" type="password" autocomplete="new-password" placeholder="再次输入新密码" />
+                        </div>
+                        <p id="pw-msg" class="hidden" style="font-size:12px;margin-bottom:10px;"></p>
+                        <button class="pc-btn-primary" id="pw-save">确认修改</button>
+                    </div>
+
+                    <!-- 当前登录状态 -->
+                    <div class="pc-card">
+                        <div class="pc-card-title">登录状态</div>
+                        <div class="pc-card-desc">当前登录设备与最近访问记录。</div>
+                        <div>
+                            <div class="pc-session-item">
+                                <div class="pc-session-dot" style="background:#10b981"></div>
+                                <div class="pc-session-info">
+                                    <div class="pc-session-name">当前设备（浏览器）</div>
+                                    <div class="pc-session-sub">刚刚活跃 · Web / Chrome</div>
+                                </div>
+                                <span class="pc-session-cur">当前</span>
+                            </div>
+                            <div class="pc-session-item">
+                                <div class="pc-session-dot" style="background:#d1d5db"></div>
+                                <div class="pc-session-info">
+                                    <div class="pc-session-name">移动端（模拟）</div>
+                                    <div class="pc-session-sub">2天前 · Mobile / Safari</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 最近登录 -->
+                    <div class="pc-card">
+                        <div class="pc-card-title">最近登录记录</div>
+                        <div id="login-history-list">
+                            <div class="pc-session-item">
+                                <div class="pc-session-info">
+                                    <div class="pc-session-name">今天 14:32</div>
+                                    <div class="pc-session-sub">登录成功 · Web · 北京</div>
+                                </div>
+                            </div>
+                            <div class="pc-session-item">
+                                <div class="pc-session-info">
+                                    <div class="pc-session-name">昨天 09:17</div>
+                                    <div class="pc-session-sub">登录成功 · Web · 北京</div>
+                                </div>
+                            </div>
+                            <div class="pc-session-item">
+                                <div class="pc-session-info">
+                                    <div class="pc-session-name">2天前 20:55</div>
+                                    <div class="pc-session-sub">登录成功 · Mobile · 上海</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== 面板3：使用记录 ====== -->
+                <div class="pc-panel" id="panel-history">
+
+                    <!-- 最近咨询 -->
+                    <div class="pc-card">
+                        <div class="pc-card-title">最近咨询记录</div>
+                        <div id="history-consult"></div>
+                    </div>
+
+                    <!-- 文书生成 -->
+                    <div class="pc-card">
+                        <div class="pc-card-title">最近文书生成</div>
+                        <div id="history-wenshi"></div>
+                    </div>
+
+                    <!-- 普法浏览 -->
+                    <div class="pc-card">
+                        <div class="pc-card-title">最近浏览普法内容</div>
+                        <div id="history-pufa"></div>
+                    </div>
+                </div>
+
+                <!-- ====== 面板4：偏好设置 ====== -->
+                <div class="pc-panel" id="panel-prefs">
+                    <div class="pc-card">
+                        <div class="pc-card-title">偏好设置</div>
+
+                        <!-- 深色模式 -->
+                        <div class="pc-pref-row">
+                            <div>
+                                <div class="pc-pref-label">深色模式</div>
+                                <div class="pc-pref-sub">切换深色 / 浅色界面</div>
+                            </div>
+                            <label class="pc-toggle">
+                                <input type="checkbox" id="pref-dark-mode" />
+                                <div class="pc-toggle-track"></div>
+                                <div class="pc-toggle-thumb"></div>
+                            </label>
+                        </div>
+
+                        <!-- 智能推荐 -->
+                        <div class="pc-pref-row">
+                            <div>
+                                <div class="pc-pref-label">智能推荐</div>
+                                <div class="pc-pref-sub">根据使用行为推荐相关法律内容</div>
+                            </div>
+                            <label class="pc-toggle">
+                                <input type="checkbox" id="pref-smart-recommend" checked />
+                                <div class="pc-toggle-track"></div>
+                                <div class="pc-toggle-thumb"></div>
+                            </label>
+                        </div>
+
+                        <!-- 新手引导 -->
+                        <div class="pc-pref-row">
+                            <div>
+                                <div class="pc-pref-label">重置新手引导</div>
+                                <div class="pc-pref-sub">下次进入时重新显示引导弹窗</div>
+                            </div>
+                            <button class="pc-btn-ghost" id="reset-guide-btn" style="font-size:12px;padding:6px 14px;">重置</button>
+                        </div>
+
+                        <!-- 快捷跳转 -->
+                        <div class="pc-pref-row" style="border-top:1px solid rgba(99,102,241,.07);margin-top:8px;padding-top:16px;flex-wrap:wrap;gap:10px;">
+                            <div class="pc-pref-label" style="width:100%;margin-bottom:4px;">快速导航</div>
+                            <a href="chat.html" class="pc-btn-ghost" style="text-decoration:none;font-size:12px;">法律咨询</a>
+                            <a href="knowledge.html" class="pc-btn-ghost" style="text-decoration:none;font-size:12px;">知识库</a>
+                            <a href="pufa.html" class="pc-btn-ghost" style="text-decoration:none;font-size:12px;">普法宣传</a>
+                            <a href="wenshi.html" class="pc-btn-ghost" style="text-decoration:none;font-size:12px;">文书生成</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ====== 面板：管理端（管理员） ====== -->
+                <div class="pc-panel" id="panel-admin">
+                    <div class="adm-embed-wrap">
+                        <div id="admin-login-box">
+                            <div class="admin-login-card">
+                                <h3>管理员验证</h3>
+                                <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:14px">请输入管理端账号（与用户账号独立）</p>
+                                <div class="adm-field" style="margin-bottom:12px">
+                                    <input id="admin-login-email" class="adm-input" style="width:100%" type="email" value="admin@fayi.local" placeholder="管理员邮箱">
+                                </div>
+                                <div class="adm-field" style="margin-bottom:12px">
+                                    <input id="admin-login-password" class="adm-input" style="width:100%" type="password" placeholder="密码">
+                                </div>
+                                <p id="admin-login-err" style="display:none;color:#f87171;font-size:0.75rem;margin-bottom:10px"></p>
+                                <button type="button" class="adm-btn adm-btn--primary" id="admin-login-btn" style="width:100%">登录管理端</button>
+                            </div>
+                        </div>
+                        <div class="adm-embed-shell" id="adm-embed-shell" style="display:none">
+                            <aside class="adm-embed-side">
+                                <div class="adm-brand">法绎 <span>Admin</span></div>
+                                <nav class="adm-embed-nav" id="adm-nav">
+                                    <a href="#overview" data-route="overview">数据总览</a>
+                                    <a href="#users" data-route="users">用户管理</a>
+                                    <a href="#consultations" data-route="consultations">咨询记录</a>
+                                    <a href="#documents" data-route="documents">法律文书</a>
+                                    <a href="#ocr" data-route="ocr">OCR 记录</a>
+                                    <a href="#law-education" data-route="law-education">普法内容</a>
+                                    <a href="#regulations" data-route="regulations">法规库</a>
+                                    <a href="#logs" data-route="logs">系统日志</a>
+                                </nav>
+                            </aside>
+                            <div class="adm-embed-main">
+                                <div class="adm-embed-top">
+                                    <div>
+                                        <h2 id="page-title">数据总览</h2>
+                                        <span id="admin-embed-name"></span>
+                                    </div>
+                                    <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="admin-embed-exit">返回个人中心</button>
+                                </div>
+                                <div class="adm-embed-body">
+                                    <div id="page-root" class="adm-page"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /pc-content -->
+        </div><!-- /pc-layout -->
+    </main>
+
+    <script src="./js/config/system.js"></script>
+    <script src="./js/main.js?v=3"></script>
+    <script src="./js/modules/admin/admin-api.js"></script>
+    <script src="./js/modules/admin/admin-panel.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var u = FayiAuth.getCurrentUser();
+        if (!u) { window.location.href = 'login.html?next=' + encodeURIComponent('profile.html'); return; }
+
+        /* 管理员入口可见性 */
+        fetch('http://localhost:3002/api/admin/auth/check-email?email=' + encodeURIComponent(u.email || ''))
+          .then(function (r) { return r.json(); })
+          .then(function (res) {
+            if (res.success && res.data && res.data.isAdmin) {
+              var btn = document.getElementById('btn-enter-admin');
+              var nav = document.getElementById('pc-nav-admin');
+              if (btn) btn.classList.remove('hidden');
+              if (nav) nav.classList.remove('hidden');
+            }
+          }).catch(function () {});
+
+        document.getElementById('btn-enter-admin').addEventListener('click', function () {
+          document.querySelectorAll('.pc-nav-item').forEach(function (n) { n.classList.remove('active'); });
+          var navAdmin = document.getElementById('pc-nav-admin');
+          if (navAdmin) navAdmin.classList.add('active');
+          document.querySelectorAll('.pc-panel').forEach(function (p) { p.classList.remove('active'); });
+          document.getElementById('panel-admin').classList.add('active');
+          if (window.FayiAdminPanel) FayiAdminPanel.init();
+        });
+
+        document.getElementById('admin-embed-exit').addEventListener('click', function () {
+          document.getElementById('panel-admin').classList.remove('active');
+          document.getElementById('panel-profile').classList.add('active');
+          document.querySelectorAll('.pc-nav-item').forEach(function (n) { n.classList.remove('active'); });
+          document.querySelector('.pc-nav-item[data-panel="profile"]').classList.add('active');
+        });
+
+        if (location.hash === '#admin') {
+          var btn = document.getElementById('btn-enter-admin');
+          if (btn && !btn.classList.contains('hidden')) btn.click();
+        }
+
+        /* ============================
+           工具：生成用户ID / 注册日期
+        ============================ */
+        function genUid(email) {
+            var hash = 0;
+            for (var i = 0; i < email.length; i++) { hash = (hash * 31 + email.charCodeAt(i)) & 0xffffffff; }
+            return 'USR-' + Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
+        }
+        function genRegDate(email) {
+            var d = new Date();
+            return d.getFullYear() + ' 年 ' + (d.getMonth() + 1) + ' 月 ' + d.getDate() + ' 日';
+        }
+
+        /* ============================
+           填充侧边栏
+        ============================ */
+        var sideAvatar = document.getElementById('pc-side-avatar');
+        var sideName   = document.getElementById('pc-side-name');
+        var sideEmail  = document.getElementById('pc-side-email');
+        var bigAvatar  = document.getElementById('profile-avatar-big');
+
+        var av = u.avatar || FayiAuth.DEFAULT_AVATAR || './images/avatars/1.svg';
+        sideAvatar.src = av;
+        bigAvatar.src  = av;
+        sideName.textContent  = u.name || u.email.split('@')[0];
+        sideEmail.textContent = u.email || '—';
+
+        /* ============================
+           填充个人资料面板
+        ============================ */
+        document.getElementById('profile-name-input').value = u.name || '';
+        document.getElementById('profile-email').textContent = u.email || '—';
+        document.getElementById('profile-uid').textContent = genUid(u.email || 'guest');
+        document.getElementById('profile-reg-date').textContent = genRegDate(u.email || 'guest');
+        document.getElementById('profile-persona').value = u.persona || FayiAuth.DEFAULT_PERSONA || 'life_consume';
+
+        /* 头像预设选中 */
+        var radios = document.querySelectorAll('input[name="profile-avatar"]');
+        var selectedCustomAvatar = null;
+        var isCustom = av.startsWith('data:') || (av.indexOf('/images/avatars/') === -1);
+        if (isCustom) {
+            selectedCustomAvatar = av;
+        } else {
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].value === av) { radios[i].checked = true; break; }
+            }
+        }
+        if (!document.querySelector('input[name="profile-avatar"]:checked') && !isCustom && radios[0]) radios[0].checked = true;
+
+        /* 预设头像切换 */
+        radios.forEach(function (r) {
+            r.addEventListener('change', function () {
+                selectedCustomAvatar = null;
+                bigAvatar.src = r.value;
+                sideAvatar.src = r.value;
+            });
+        });
+
+        /* 头像文件上传 */
+        document.getElementById('profile-avatar-file').addEventListener('change', function (e) {
+            var file = e.target.files && e.target.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function (ev) {
+                selectedCustomAvatar = ev.target.result;
+                bigAvatar.src = selectedCustomAvatar;
+                sideAvatar.src = selectedCustomAvatar;
+                radios.forEach(function (r) { r.checked = false; });
+            };
+            reader.readAsDataURL(file);
+        });
+
+        /* 保存资料 */
+        document.getElementById('profile-save').addEventListener('click', function () {
+            var name    = document.getElementById('profile-name-input').value.trim();
+            var persona = document.getElementById('profile-persona').value;
+            var avIn    = document.querySelector('input[name="profile-avatar"]:checked');
+            var chosen  = selectedCustomAvatar || (avIn ? avIn.value : FayiAuth.DEFAULT_AVATAR);
+            if (!name) { if (window.FayiToast) FayiToast('昵称不能为空', 'error'); return; }
+            if (!FayiAuth.getToken()) {
+                if (window.FayiToast) FayiToast('登录已过期', 'error');
+                setTimeout(function () { window.location.href = 'login.html?next=profile.html'; }, 1200);
+                return;
+            }
+            FayiAuth.updateProfile({ name: name, avatar: chosen, persona: persona })
+                .then(function (res) {
+                    if (res && res.ok) {
+                        sideName.textContent = name;
+                        if (window.FayiToast) FayiToast('资料已保存', 'success');
+                    } else {
+                        if (window.FayiToast) FayiToast((res && res.message) || '保存失败', 'error');
+                    }
+                })
+                .catch(function () { if (window.FayiToast) FayiToast('无法连接到服务器', 'error'); });
+        });
+
+        /* ============================
+           修改密码
+        ============================ */
+        document.getElementById('pw-save').addEventListener('click', function () {
+            var oldPw  = document.getElementById('pw-old').value;
+            var newPw  = document.getElementById('pw-new').value;
+            var newPw2 = document.getElementById('pw-new2').value;
+            var msg    = document.getElementById('pw-msg');
+            msg.className = 'hidden';
+            if (!oldPw || !newPw || !newPw2) { showMsg(msg, '请填写所有密码字段', 'error'); return; }
+            if (newPw !== newPw2) { showMsg(msg, '两次新密码不一致', 'error'); return; }
+            if (newPw.length < 6)  { showMsg(msg, '新密码不少于 6 位', 'error'); return; }
+            FayiAuth.changePassword(oldPw, newPw)
+                .then(function (res) {
+                    if (res.ok) {
+                        showMsg(msg, '密码修改成功', 'success');
+                        document.getElementById('pw-old').value = '';
+                        document.getElementById('pw-new').value = '';
+                        document.getElementById('pw-new2').value = '';
+                        if (window.FayiToast) FayiToast('密码已修改', 'success');
+                    } else { showMsg(msg, res.message || '修改失败', 'error'); }
+                })
+                .catch(function () { showMsg(msg, '网络错误，请检查服务', 'error'); });
+        });
+
+        function showMsg(el, text, type) {
+            el.textContent = text;
+            el.style.color = type === 'error' ? '#dc2626' : '#059669';
+            el.classList.remove('hidden');
+        }
+
+        /* ============================
+           使用记录 Mock 数据
+        ============================ */
+        var mockHistory = {
+            consult: [
+                { title: '劳动合同纠纷咨询', time: '今天 11:24' },
+                { title: '房屋租赁押金退还', time: '昨天 16:02' },
+                { title: '消费者权益维权', time: '3天前' }
+            ],
+            wenshi: [
+                { title: '起诉状草稿生成', time: '2天前' },
+                { title: '劳动仲裁申请书', time: '5天前' }
+            ],
+            pufa: [
+                { title: '网络暴力侵权如何维权', time: '今天 10:31' },
+                { title: '个人信息保护法解读', time: '昨天 19:45' },
+                { title: '职场性骚扰法律救济', time: '3天前' }
+            ]
+        };
+        var historyIcons = { consult: '', wenshi: '', pufa: '' };
+        var historyLinks = { consult: 'chat.html', wenshi: 'wenshi.html', pufa: 'pufa.html' };
+        ['consult', 'wenshi', 'pufa'].forEach(function (type) {
+            var container = document.getElementById('history-' + type);
+            var items = mockHistory[type];
+            if (!items.length) { container.innerHTML = '<div class="pc-record-empty">暂无记录</div>'; return; }
+            container.innerHTML = items.map(function (item) {
+                return '<a href="' + historyLinks[type] + '" style="display:flex;align-items:center;gap:12px;padding:10px 8px;border-radius:10px;text-decoration:none;transition:background .15s;cursor:pointer;" onmouseover="this.style.background=\'rgba(99,102,241,.05)\'" onmouseout="this.style.background=\'transparent\'">'
+                    + '<div style="flex:1"><div class="pc-record-title">' + item.title + '</div>'
+                    + '<div class="pc-record-time">' + item.time + '</div></div>'
+                    + '</a>';
+            }).join('');
+        });
+
+        /* ============================
+           偏好设置
+        ============================ */
+        /* 深色模式开关 */
+        var darkToggle = document.getElementById('pref-dark-mode');
+        darkToggle.checked = document.querySelector('html').classList.contains('dark');
+        darkToggle.addEventListener('change', function () {
+            document.querySelector('html').classList.toggle('dark', darkToggle.checked);
+            localStorage.setItem('dark-mode', darkToggle.checked ? 'true' : 'false');
+            var lightSwitch = document.getElementById('light-switch');
+            if (lightSwitch) lightSwitch.checked = darkToggle.checked;
+            if (window.FayiToast) FayiToast(darkToggle.checked ? '已切换深色模式' : '已切换浅色模式', 'success');
+        });
+
+        /* 智能推荐开关持久化 */
+        var smartToggle = document.getElementById('pref-smart-recommend');
+        smartToggle.checked = localStorage.getItem('pref-smart-recommend') !== 'false';
+        smartToggle.addEventListener('change', function () {
+            localStorage.setItem('pref-smart-recommend', smartToggle.checked ? 'true' : 'false');
+            if (window.FayiToast) FayiToast(smartToggle.checked ? '智能推荐已开启' : '智能推荐已关闭', 'success');
+        });
+
+        /* 重置引导 */
+        document.getElementById('reset-guide-btn').addEventListener('click', function () {
+            localStorage.removeItem('hasSeenGuide');
+            if (window.FayiToast) FayiToast('引导已重置，刷新页面即可看到', 'success');
+        });
+
+        /* ============================
+           退出登录
+        ============================ */
+        document.getElementById('profile-logout').addEventListener('click', function () {
+            FayiAuth.logout();
+        });
+
+        /* ============================
+           导航切换
+        ============================ */
+        var navItems = document.querySelectorAll('.pc-nav-item');
+        var panels   = document.querySelectorAll('.pc-panel');
+        navItems.forEach(function (item) {
+            item.addEventListener('click', function () {
+                navItems.forEach(function (n) { n.classList.remove('active'); });
+                panels.forEach(function (p)   { p.classList.remove('active'); });
+                item.classList.add('active');
+                var target = document.getElementById('panel-' + item.getAttribute('data-panel'));
+                if (target) target.classList.add('active');
+            });
+        });
+    });
+    </script>
+</body>
+</html>

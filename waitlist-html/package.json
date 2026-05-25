@@ -1,0 +1,20 @@
+{
+  "name": "fayi-legal-ai-frontend",
+  "description": "法绎 · 智慧法律咨询服务平台前端（基于 Cruip Waitlist HTML）",
+  "version": "1.2.0",
+  "homepage": "",
+  "author": "",
+  "license": "https://cruip.com/terms/",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./css/style.css -o ./style.css --watch",
+    "build": "npx tailwindcss -i ./css/style.css -o ./style.css",
+    "serve": "npx http-server . -p 8080 -c-1 --cors -o /chat.html",
+    "server:3002": "npm --prefix server start",
+    "server:3002:dev": "npm --prefix server run dev",
+    "datav": "npm run server:3002"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "tailwindcss": "^3.3.6"
+  }
+}
