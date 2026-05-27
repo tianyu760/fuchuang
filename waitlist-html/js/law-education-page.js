@@ -75,6 +75,14 @@
         api('/articles/' + id).then(function (res) {
           if (!res.success) return;
           var a = res.data;
+          if (window.FayiPufaStats && FayiPufaStats.increaseReadCount) {
+            FayiPufaStats.increaseReadCount({
+              kind: type === 'video' ? 'video' : 'article',
+              title: a.title,
+              category: catName(a.categoryId),
+              articleId: a.id
+            });
+          }
           if (type === 'video' && a.videoUrl) openVideo(a);
           else openArticleModal(a);
         });

@@ -14,24 +14,22 @@
 
   function collectFilesText(fileInput) {
     if (!fileInput || !fileInput.files || !fileInput.files.length) return '无';
-    return Array.prototype.map.call(fileInput.files, function (f) { return f.name; }).join('、');
+    return fileInput.files[0].name || '未命名附件';
   }
 
   function validateFiles(fileInput) {
     if (!fileInput || !fileInput.files || !fileInput.files.length) return null;
-    var allowedExt = ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg', 'zip', 'txt'];
-    for (var i = 0; i < fileInput.files.length; i++) {
-      var f = fileInput.files[i];
-      if (f.size > MAX_UPLOAD_SIZE) {
-        return '附件大小不能超过10MB';
-      }
-      var name = String(f.name || '').toLowerCase();
-      var ext = '';
-      var idx = name.lastIndexOf('.');
-      if (idx >= 0) ext = name.slice(idx + 1);
-      if (allowedExt.indexOf(ext) === -1) {
-        return '附件类型不支持，仅支持 pdf/doc/docx/png/jpg/jpeg/zip/txt';
-      }
+    var allowedExt = ['pdf', 'doc', 'docx', 'png', 'jpg', 'jpeg'];
+    var f = fileInput.files[0];
+    if (f.size > MAX_UPLOAD_SIZE) {
+      return '附件大小不能超过10MB';
+    }
+    var name = String(f.name || '').toLowerCase();
+    var ext = '';
+    var idx = name.lastIndexOf('.');
+    if (idx >= 0) ext = name.slice(idx + 1);
+    if (allowedExt.indexOf(ext) === -1) {
+      return '附件类型不支持，仅支持 pdf/doc/docx/png/jpg/jpeg';
     }
     return null;
   }
@@ -63,6 +61,8 @@
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       var type = (document.getElementById('ct-type').value || '').trim();
+      var name = (document.getElementById('ct-name').value || '').trim();
+      var email = (document.getElementById('ct-email').value || '').trim();
       var contact = (document.getElementById('ct-contact').value || '').trim();
       var message = (document.getElementById('ct-message').value || '').trim();
       var fileInput = document.getElementById('ct-files');
@@ -70,6 +70,14 @@
 
       if (!type) {
         if (window.FayiToast) FayiToast('请选择反馈类型', 'error');
+        return;
+      }
+      if (!name) {
+        if (window.FayiToast) FayiToast('请填写姓名', 'error');
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        if (window.FayiToast) FayiToast('请填写有效邮箱', 'error');
         return;
       }
       if (!message) {
@@ -83,14 +91,14 @@
       }
 
       submitBtn.disabled = true;
-      if (btnText) btnText.textContent = '正在上传附件并提交反馈...';
+      if (btnText) btnText.textContent = '正在发送...';
       if (btnSpinner) btnSpinner.classList.remove('hidden');
-      if (window.FayiToast) FayiToast('正在上传附件并提交反馈…', 'success');
+      if (window.FayiToast) FayiToast('正在发送反馈…', 'success');
 
       try {
         var formData = new FormData();
-        formData.append('name', '平台用户反馈');
-        formData.append('email', toEmailIfPossible(contact));
+        formData.append('name', name);
+        formData.append('email', email);
         formData.append('contact', contact || '');
         formData.append('identity', type);
         formData.append('message', message);
@@ -100,9 +108,8 @@
           if (u && u.email) formData.append('userEmail', u.email);
         }
         if (fileInput && fileInput.files && fileInput.files.length) {
-          Array.prototype.forEach.call(fileInput.files, function (file) {
-            formData.append('files', file);
-          });
+          var uploadFile = fileInput.files[0];
+          formData.append('file', uploadFile, uploadFile.name);
         }
         var resp = await fetch(CONTACT_API, {
           method: 'POST',
@@ -110,7 +117,7 @@
         });
         var data = await resp.json();
         if (data && data.success) {
-          if (window.FayiToast) FayiToast('反馈已提交，附件已发送成功。', 'success');
+          if (window.FayiToast) FayiToast('反馈提交成功', 'success');
           resetForm();
         } else {
           if (window.FayiToast) FayiToast((data && data.message) || '附件发送失败，请稍后重试。', 'error');
@@ -126,6 +133,15 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    if (window.FayiAuth && FayiAuth.getCurrentUser) {
+      var u = FayiAuth.getCurrentUser();
+      if (u) {
+        var nameInput = document.getElementById('ct-name');
+        var emailInput = document.getElementById('ct-email');
+        if (nameInput && !nameInput.value) nameInput.value = u.name || (u.email ? u.email.split('@')[0] : '');
+        if (emailInput && !emailInput.value) emailInput.value = u.email || '';
+      }
+    }
     bindFileHint();
     bindSubmit();
   });

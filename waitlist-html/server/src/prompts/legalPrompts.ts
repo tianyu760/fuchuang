@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 export const DOCUMENT_TYPES = [
   '起诉状',
   '答辩状',
@@ -15,6 +18,7 @@ const JSON_RULES = `
 3. 不得编造具体案号、虚构法院名称；不确定处使用下划线占位。
 4. 不得使用口语化、网络用语；文风正式、严谨、克制。
 5. 法条引用应准确到法律名称及条次；无法确认时注明「建议核对官方法条库」。
+6. 严禁输出 Markdown 标题符号（#、##、###）及聊天口吻（如“以下是”“当然可以”）。
 
 【占位符规范 — 严禁违反】
 禁止输出以下任何内容：
@@ -33,6 +37,33 @@ const JSON_RULES = `
 错误：原告：⟦B:⟧
 `.trim();
 
+const TEMPLATE_MAP: Record<string, string> = {
+  起诉状: '起诉状.template.json',
+  答辩状: '答辩状.template.json',
+  律师函: '律师函.template.json',
+  合同: '合同.template.json',
+  仲裁申请书: '仲裁申请.template.json',
+};
+
+function loadTemplatePrompt(docType: string): string {
+  try {
+    const file = TEMPLATE_MAP[docType] || TEMPLATE_MAP.起诉状;
+    const templatePath = path.join(process.cwd(), 'templates', file);
+    if (!fs.existsSync(templatePath)) return '';
+    const raw = fs.readFileSync(templatePath, 'utf8');
+    const json = JSON.parse(raw);
+    const sections = Array.isArray(json.sections) ? json.sections : [];
+    const fields = Array.isArray(json.required_fields) ? json.required_fields : [];
+    return [
+      `【文书模板】${json.title || docType}`,
+      `章节顺序：${sections.join('、')}`,
+      `必填字段：${fields.join('、')}`
+    ].join('\n');
+  } catch {
+    return '';
+  }
+}
+
 export const LEGAL_DOCUMENT_SYSTEM_PROMPT = `
 你是一名资深诉讼律师兼法律文书起草专家，服务于「法绎」智慧法律平台。
 依据用户案情生成可直接打印、可提交法院参考的专业法律文书。
@@ -48,27 +79,31 @@ ${JSON_RULES}
   "legal_basis": ["《法律名称》第X条：要点摘要"],
   "risk_notes": ["重点风险1", "重点风险2"],
   "evidence_list": ["证据1：说明", "证据2：说明"],
-  "body_markdown": "完整文书正文（Markdown）",
+  "body_markdown": "完整文书正文（纯文本，不含Markdown标记）",
+  "parties": "当事人信息（纯文本）",
+  "claims": "诉讼请求/请求事项（纯文本）",
+  "facts": "事实与理由（纯文本）",
+  "laws": "法律依据说明（纯文本）",
+  "evidence": "证据目录（纯文本）",
   "signature": "此致\\nXXX人民法院\\n\\n具状人：________________\\n二〇二六年X月X日",
   "followups": ["用户可能追问1", "用户可能追问2"]
 }
 
-【body_markdown 必须包含以下章节（按顺序，使用 ## 二级标题）】
+【正文强制结构（必须按顺序输出，不得缺项）】
 1. 当事人信息（原告/被告/申请人等，字段后用 ________________ 占位）
 2. 案件摘要
 3. 诉讼请求（或合同主要条款/律师函要求事项）
 4. 事实与理由
-5. 法律依据（> blockquote 引用法条）
-6. 风险提示（**【风险】** 前缀）
+5. 法律依据（写明法律名称及条次）
+6. 法律风险提示（使用“【法律风险提示】”抬头）
 7. 证据目录（有序列表）
 8. 落款说明（正文末尾右对齐段落：此致、法院、具状人、日期）
 
 【排版要求】
-- 第一行 # 一级标题为文书名称，居中语义（如：# 民事起诉状）
-- 法条原文使用 > blockquote
-- 段落之间空一行，正文首行缩进使用全角空格或明确分段
+- 标题仅输出文本，如“民事起诉状”，不要 # 开头
+- 段落正文应可直接用于 A4 排版，首行缩进语义清晰
 - 日期使用中文大写：二〇二六年五月二十四日
-- 禁止「作为AI」「我认为」等表述
+- 禁止「作为AI」「我认为」「以下是」「当然可以」等表述
 `.trim();
 
 export const LEGAL_SEARCH_SYSTEM_PROMPT = `
@@ -97,9 +132,12 @@ export function buildDocumentUserPrompt(question: string, docType: string, histo
     .join('\n');
   return [
     `请生成文书类型：${docType}`,
+    loadTemplatePrompt(docType),
     `用户需求：${question}`,
     hist ? `对话上下文：\n${hist}` : '',
-    '请按 Schema 输出完整 JSON。body_markdown 须为可直接使用的正式法律文书，所有空白项用下划线 ________________ 表示，严禁 ⟦B:⟧ 等符号。',
+    '请按 Schema 输出完整 JSON。必须是正式法律文书语体，不得出现Markdown符号，不得聊天化表达。',
+    '输出必须使用“一、二、三、”与“（一）（二）（三）”层级，正文不得出现#、##、###。',
+    '当信息不足时使用“________________”占位，不得留空，不得输出 TODO/TBD。'
   ].filter(Boolean).join('\n\n');
 }
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>管理后台 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./css/modules/admin.css" rel="stylesheet">
+    <link href="./css/admin-console.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+    <script src="./js/admin-permission.js"></script>
+    <script src="./js/modules/admin/admin-api.js"></script>
+    <script src="./js/admin-guard.js"></script>
+</head>
+<body class="adm-console">
+    <div class="adm-layout" id="adm-shell" style="opacity:0;transition:opacity .3s ease">
+        <aside class="adm-side">
+            <div class="adm-brand">
+                法绎管理后台
+                <span>Legal Service Console</span>
+            </div>
+            <nav class="adm-nav" id="adm-nav">
+                <a href="#overview" data-route="overview" class="is-active">数据总览</a>
+                <a href="#users" data-route="users">用户管理</a>
+                <a href="#consultations" data-route="consultations">法律咨询</a>
+                <a href="#documents" data-route="documents">文书生成</a>
+                <a href="#ocr" data-route="ocr">OCR 识别</a>
+                <a href="#law-education" data-route="law-education">普法内容</a>
+                <a href="#regulations" data-route="regulations">法规库</a>
+                <a href="#logs" data-route="logs">系统日志</a>
+            </nav>
+            <div class="adm-side-foot">
+                <div id="admin-name">管理员</div>
+                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-logout" style="margin-top:10px;width:100%">退出登录</button>
+            </div>
+        </aside>
+        <div class="adm-main">
+            <header class="adm-topbar">
+                <div>
+                    <h1 id="page-title">数据总览</h1>
+                    <div class="adm-topbar-meta">法绎法律服务运营与管理</div>
+                </div>
+                <a href="index.html" class="adm-btn adm-btn--ghost adm-btn--sm">返回前台</a>
+            </header>
+            <div class="adm-body adm-embed-body">
+                <div id="page-root"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./admin/js/admin-app.js"></script>
+</body>
+</html>

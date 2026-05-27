@@ -36,3 +36,9 @@ server/.env
 server/*.pem
 server/*.key
 server/*secret*.json
+server/tokens.json
+server/uploads/
+**/fayidb.lock.db
+**/fayidb.mv.db
+*.lock.db
+*.mv.db

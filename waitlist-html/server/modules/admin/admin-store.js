@@ -18,7 +18,8 @@ const FILES = {
   docRecords: path.join(DATA_DIR, 'document-records.json'),
   regulations: path.join(DATA_DIR, 'regulations.json'),
   visits: path.join(DATA_DIR, 'visit-stats.json'),
-  revision: path.join(DATA_DIR, 'data-revision.json')
+  revision: path.join(DATA_DIR, 'data-revision.json'),
+  pufaReadStats: path.join(DATA_DIR, 'pufa-read-stats.json')
 };
 
 function ensureDataDir() {
@@ -117,6 +118,7 @@ function pickEventType(module, action, detail) {
   if (module === 'document' && action === 'generate') return 'ai_wenshi';
   if (module === 'regulation' && action === 'search') return 'ai_fagui';
   if (module === 'ocr' && action === 'recognize') return 'ocr';
+  if (module === 'upload' && action === 'upload') return 'file_upload';
   if (module === 'pufa' && action === 'visit') return 'law_edu_visit';
   if (module === 'auth' && action === 'login') return 'user_login';
   if (module === 'auth' && action === 'register') return 'user_register';
@@ -279,8 +281,15 @@ function statsOverview() {
   const ocrSuccess = ocrList.filter(function (r) { return r.success !== false; }).length;
   const ocrRate = ocrList.length ? Math.round((ocrSuccess / ocrList.length) * 100) : 100;
 
+  const risk = riskBreakdown();
+  const riskMid = (risk.find(function (r) { return r.name === 'mid'; }) || {}).value || 0;
+  const riskHigh = (risk.find(function (r) { return r.name === 'high'; }) || {}).value || 0;
+  const platformUsers = users.filter(function (u) { return (u.userType || 'user') !== 'admin'; });
+
   return {
-    totalUsers: users.length,
+    totalUsers: platformUsers.length,
+    riskMid: riskMid,
+    riskHigh: riskHigh,
     todayVisits: visits.daily[today] || countTypeToday('page_visit') || 0,
     aiCalls: countType('ai_chat') + countType('ai_wenshi') + countType('ai_fagui') + countType('ai_case'),
     aiCallsToday: countTypeToday('ai_chat') + countTypeToday('ai_wenshi') + countTypeToday('ai_fagui') + countTypeToday('ai_case'),
@@ -350,10 +359,80 @@ function topQuestions(limit) {
     .map(function (q) { return { question: q, count: freq[q] }; });
 }
 
-function buildRealtimePayload(lawStore) {
-  const publicity = lawStore && lawStore.getPublicityStats
+function bumpPufaRead(entry) {
+  const st = readJson(FILES.pufaReadStats, {
+    todayReadCount: 0,
+    totalReadCount: 0,
+    videoPlayCount: 0,
+    articleViewCount: 0,
+    todayVisitors: 0,
+    lastDay: '',
+    topics: {}
+  });
+  const today = new Date().toISOString().slice(0, 10);
+  if (st.lastDay !== today) {
+    st.todayReadCount = 0;
+    st.todayVisitors = 0;
+    st.lastDay = today;
+  }
+  const kind = (entry && entry.kind) || 'page';
+  st.todayReadCount = (st.todayReadCount || 0) + 1;
+  st.totalReadCount = (st.totalReadCount || 0) + 1;
+  if (kind === 'video') st.videoPlayCount = (st.videoPlayCount || 0) + 1;
+  if (kind === 'article') st.articleViewCount = (st.articleViewCount || 0) + 1;
+  if (kind === 'page') st.todayVisitors = (st.todayVisitors || 0) + 1;
+  const topicKey = String((entry && (entry.category || entry.title)) || '普法浏览').trim();
+  if (topicKey) {
+    st.topics = st.topics || {};
+    st.topics[topicKey] = (st.topics[topicKey] || 0) + 1;
+  }
+  writeJson(FILES.pufaReadStats, st);
+  logEvent('law_edu_visit', {
+    title: (entry && entry.title) || '',
+    category: (entry && entry.category) || '',
+    kind: kind
+  });
+  bumpDataRevision();
+  return st;
+}
+
+function getMergedPublicityStats(lawStore) {
+  const law = lawStore && lawStore.getPublicityStats
     ? lawStore.getPublicityStats()
     : { todayReads: 0, totalReads: 0, hotTopics: [], topArticles: [] };
+  const local = readJson(FILES.pufaReadStats, {
+    todayReadCount: 0,
+    totalReadCount: 0,
+    videoPlayCount: 0,
+    articleViewCount: 0,
+    topics: {}
+  });
+  const topicMap = {};
+  (law.hotTopics || []).forEach(function (t) {
+    if (t) topicMap[t] = (topicMap[t] || 0) + 10;
+  });
+  Object.keys(local.topics || {}).forEach(function (k) {
+    topicMap[k] = (topicMap[k] || 0) + local.topics[k];
+  });
+  const hotTopics = Object.keys(topicMap)
+    .sort(function (a, b) { return topicMap[b] - topicMap[a]; })
+    .slice(0, 3)
+    .map(function (k) {
+      return k.length > 14 ? k.slice(0, 12) + '…' : k;
+    });
+  return {
+    todayReads: Math.max(law.todayReads || 0, local.todayReadCount || 0),
+    totalReads: (law.totalReads || 0) + (local.totalReadCount || 0),
+    videoPlayCount: local.videoPlayCount || 0,
+    articleViewCount: local.articleViewCount || 0,
+    todayVisitors: local.todayVisitors || 0,
+    hotTopics: hotTopics.length ? hotTopics : (law.hotTopics || []).slice(0, 3),
+    topArticles: law.topArticles || []
+  };
+}
+
+function buildRealtimePayload(lawStore) {
+  const publicity = getMergedPublicityStats(lawStore);
   const stats = statsOverview();
   return {
     revision: stats.revision,
@@ -372,7 +451,10 @@ function buildRealtimePayload(lawStore) {
       todayReads: publicity.todayReads,
       hotTopics: publicity.hotTopics,
       topArticles: publicity.topArticles,
-      totalReads: publicity.totalReads
+      totalReads: publicity.totalReads,
+      videoPlayCount: publicity.videoPlayCount,
+      articleViewCount: publicity.articleViewCount,
+      todayVisitors: publicity.todayVisitors
     },
     system: {
       apiStatus: 'online',
@@ -459,26 +541,62 @@ function moduleUsageRanking(limit) {
     });
 }
 
+const MODULE_SOURCE_LABEL = {
+  consult: '法律咨询',
+  case: '案件分析',
+  document: '文书生成',
+  regulation: '法规检索',
+  ocr: 'OCR识别',
+  pufa: '普法学习',
+  page: '页面访问',
+  auth: '用户认证',
+  system: '系统'
+};
+
+function riskLevelLabel(lv) {
+  if (lv === 'high') return '高风险';
+  if (lv === 'low') return '低风险';
+  return '中风险';
+}
+
 function realtimeFeed(limit) {
   const TYPE_LABEL = {
-    ai_chat: 'AI咨询', ai_case: '案件分析', ai_wenshi: '文书生成',
-    ai_fagui: '法规检索', ocr: 'OCR识别', law_edu_visit: '普法访问',
-    user_login: '用户登录', user_register: '用户注册', page_visit: '页面访问'
+    ai_chat: '法律咨询', ai_case: '案件分析', ai_wenshi: '文书生成',
+    ai_fagui: '法规检索', ocr: 'OCR识别', law_edu_visit: '普法学习',
+    file_upload: '资料上传', user_login: '用户登录', user_register: '用户注册',
+    page_visit: '页面访问', system_event: '系统事件'
   };
   return readEventStream().slice(-(limit || 20)).reverse().map(function (e) {
     const p = e.payload || {};
+    const risk = p.riskLevel || 'mid';
     return {
       id: e.id,
       type: e.type,
       typeLabel: TYPE_LABEL[e.type] || e.type,
+      moduleSource: MODULE_SOURCE_LABEL[e.module] || TYPE_LABEL[e.type] || e.module,
       message: formatEventMessage(e),
       time: e.createdAt,
-      riskLevel: p.riskLevel,
+      riskLevel: risk,
+      riskLabel: riskLevelLabel(risk),
       category: p.category,
       categoryLabel: analytics.categoryLabel(p.category),
       keywords: (p.keywords || []).slice(0, 3)
     };
   });
+}
+
+function logOperationFromClient(body) {
+  const type = (body && body.type) || 'system_event';
+  const content = String((body && body.content) || '').trim();
+  const level = (body && body.level) || 'mid';
+  const meta = (body && body.meta) || {};
+  return logEvent(type, Object.assign({}, meta, {
+    preview: content,
+    keyword: content,
+    title: content,
+    fileName: meta.fileName,
+    riskLevel: level === 'low' || level === 'high' ? level : 'mid'
+  }));
 }
 
 function formatEventMessage(e) {
@@ -488,8 +606,12 @@ function formatEventMessage(e) {
     case 'ai_wenshi': return '法律文书生成：' + (p.title || '文书');
     case 'ai_fagui': return '法规检索：' + (p.keyword || '');
     case 'ai_case': return '案件分析完成，风险 ' + (p.risk || '—');
-    case 'ocr': return 'OCR识别 ' + (p.fileName || '文件');
-    case 'law_edu_visit': return '访问普法宣传中心';
+    case 'ocr': return '上传' + (p.fileName ? '「' + p.fileName + '」' : '文件') + '并完成文字提取';
+    case 'file_upload': return '用户上传资料：' + (p.fileName || p.title || '文件');
+    case 'law_edu_visit':
+      if (p.title) return '浏览普法内容《' + p.title + '》';
+      return '访问普法宣传页面';
+    case 'page_visit': return '访问页面：' + (p.page || '站点');
     case 'user_register': return '新用户注册：' + (p.email || '');
     case 'user_login': return '用户登录：' + (p.email || '');
     case 'admin_login': return '管理员登录控制台';
@@ -514,5 +636,6 @@ module.exports = {
   appendOcrRecord, appendDocRecord, statsOverview, chartSeries,
   categoryBreakdown, consultationHotspots, moduleUsageRanking, realtimeFeed, listLogs, initDefaults,
   bumpDataRevision, getDataRevision, buildRealtimePayload,
-  riskBreakdown, keywordCloud, topQuestions
+  riskBreakdown, keywordCloud, topQuestions,
+  bumpPufaRead, getMergedPublicityStats, logOperationFromClient
 };

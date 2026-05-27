@@ -1,0 +1,4 @@
+# 本地数据库运行时文件
+data/*.db
+data/*.lock.db
+data/*.mv.db

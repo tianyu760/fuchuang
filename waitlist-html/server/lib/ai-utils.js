@@ -6,6 +6,9 @@ const {
   chineseDate,
   PLACEHOLDER_LINE
 } = require('./legal-text-sanitize');
+const {
+  formatLegalDocumentPayload
+} = require('./legal-document-formatter');
 
 function detectDocumentType(question) {
   const q = question || '';
@@ -87,14 +90,24 @@ function normalizeWenshiData(raw, question) {
     d.body_markdown || d.document_content || d.markdown,
     asNonEmptyString(d.summary, '暂无文书正文，请补充案情后重新生成')
   );
-  const body = sanitizeLegalPlaceholders(bodyRaw);
+  const formatted = formatLegalDocumentPayload({
+    title: d.title,
+    body_markdown: sanitizeLegalPlaceholders(bodyRaw),
+    parties: d.parties,
+    claims: d.claims,
+    facts: d.facts,
+    laws: d.laws,
+    evidence: d.evidence,
+    signature: d.signature
+  });
+  const body = sanitizeLegalPlaceholders(formatted.body_markdown);
   const riskNotes = asStringArray(d.risk_notes);
   const suggestions = asStringArray(d.suggestions, riskNotes.length ? riskNotes : ['建议咨询执业律师完善文书细节']);
   const evidence = asStringArray(d.evidence_list);
 
   return {
     doc_type: asNonEmptyString(d.doc_type, detectDocumentType(q)),
-    title: sanitizeLegalPlaceholders(asNonEmptyString(d.title, '法律文书')),
+    title: sanitizeLegalPlaceholders(asNonEmptyString(formatted.title || d.title, '法律文书')),
     summary: sanitizeLegalPlaceholders(asNonEmptyString(d.summary, q.slice(0, 200))),
     risk_level: asNonEmptyString(d.risk_level, '中'),
     legal_basis: asStringArray(d.legal_basis, '请结合具体案由进一步检索法律依据')
@@ -105,7 +118,9 @@ function normalizeWenshiData(raw, question) {
     evidence_list: evidence.map(sanitizeLegalPlaceholders),
     body_markdown: body,
     document_content: body,
-    signature: sanitizeLegalPlaceholders(asNonEmptyString(d.signature, defaultSignature())),
+    signature: sanitizeLegalPlaceholders(asNonEmptyString(d.signature || (formatted.sections.signature || []).join('\n'), defaultSignature())),
+    document_sections: formatted.sections,
+    section_order: formatted.section_order,
     followups: asStringArray(d.followups)
   };
 }

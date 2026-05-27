@@ -190,6 +190,16 @@
       global.dispatchEvent(new CustomEvent('fayi-activity-added', { detail: log }));
     } catch (e) { /* ignore */ }
 
+    if (global.FayiOperationLog && FayiOperationLog.createOperationLog) {
+      var risk = entry.riskLevel || (entry.type === 'case' ? 'mid' : 'low');
+      FayiOperationLog.createOperationLog(
+        entry.type,
+        entry.type,
+        summary || log.title,
+        risk
+      );
+    }
+
     return log;
   }
 

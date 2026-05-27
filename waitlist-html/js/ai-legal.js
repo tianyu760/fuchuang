@@ -54,6 +54,15 @@
         }
         return json;
       });
+    }).catch(function (err) {
+      var msg = (err && err.message) || '';
+      if (/failed to fetch|networkerror|network error|load failed/i.test(msg)) {
+        if (path.indexOf('/legal/search') >= 0 || path.indexOf('/fagui/search') >= 0) {
+          throw new Error('法规检索服务未启动，请先运行 server/multimodal-server.js（端口 3002）');
+        }
+        throw new Error('AI 服务未连接，请先启动 server/multimodal-server.js（端口 3002）');
+      }
+      throw err;
     });
   }
 
@@ -79,28 +88,18 @@
 
   function renderWenshiResult(data) {
     var d = data || {};
-    if (global.FayiContentFormatter && FayiContentFormatter.sanitizeLegalText) {
-      d = Object.assign({}, d, {
-        title: FayiContentFormatter.sanitizeLegalText(d.title || ''),
-        summary: FayiContentFormatter.sanitizeLegalText(d.summary || ''),
-        body_markdown: FayiContentFormatter.sanitizeLegalText(d.body_markdown || d.document_content || ''),
-        document_content: FayiContentFormatter.sanitizeLegalText(d.document_content || d.body_markdown || ''),
-        signature: FayiContentFormatter.sanitizeLegalText(d.signature || '')
-      });
-    }
     if (global.FayiLegalRender && FayiLegalRender.renderWenshiDocument) {
       var title = escHtml(d.title || '法律文书');
       var html = '<' + D + ' class="legal-doc-stage">';
-      html += '<' + D + ' class="legal-doc-toolbar">';
+      html += '<' + D + ' class="legal-doc-toolbar legal-doc-toolbar--sticky">';
       html += '<span class="legal-doc-toolbar__title">' + title + '</span>';
       html += '<' + D + ' class="legal-doc-toolbar__actions">';
-      html += '<button type="button" id="legal-btn-pdf" class="legal-tool-btn legal-tool-btn--primary">导出 PDF</button>';
-      html += '<button type="button" id="legal-btn-word" class="legal-tool-btn">另存为 Word</button>';
+      html += '<button type="button" id="legal-btn-word" class="legal-tool-btn">下载 Word</button>';
+      html += '<button type="button" id="legal-btn-pdf" class="legal-tool-btn legal-tool-btn--primary">下载 PDF</button>';
       html += '<button type="button" id="legal-btn-copy" class="legal-tool-btn">复制内容</button>';
-      html += '<button type="button" id="legal-btn-regen" class="legal-tool-btn">重新生成</button>';
       html += '</' + D + '></' + D + '>';
       html += FayiLegalRender.renderWenshiDocument(d);
-      html += '<p class="legal-doc-disclaimer">本内容仅供参考，不构成正式法律意见。提交法院前请咨询执业律师审核。</p>';
+      html += '<p class="legal-doc-disclaimer">本内容由模型生成，仅供参考，提交前请由专业律师复核。</p>';
       html += '</' + D + '>';
       return html;
     }
@@ -126,19 +125,14 @@
 
   function renderFaguiResult(data) {
     var d = data || {};
-    var html = '<p class="ai-meta"><strong>检索关键词：</strong>' + escHtml(d.keyword) + '</p>';
-    if (d.matched_laws && d.matched_laws.length) {
-      html += '<h4 class="ai-section-h">匹配法条（' + d.matched_laws.length + ' 条）</h4><' + D + ' class="ai-law-list">';
-      d.matched_laws.forEach(function (law, idx) {
-        html += '<article class="ai-law-card"><' + D + ' class="ai-law-card__hd"><span class="ai-law-idx">' + (idx + 1) + '</span>';
-        html += '<strong>' + escHtml(law.law_name) + '</strong>';
-        if (law.article) html += ' <span class="ai-law-article">' + escHtml(law.article) + '</span>';
-        html += '</' + D + '><p class="ai-law-card__body">' + escHtml(law.content) + '</p></article>';
-      });
-      html += '</' + D + '>';
+    if (global.FayiLegalSearchFormatter && FayiLegalSearchFormatter.renderLegalSearch) {
+      var rendered = FayiLegalSearchFormatter.renderLegalSearch(d);
+      var head = '<p class="ai-meta"><strong>检索关键词：</strong>' + escHtml(rendered.normalized.keyword || d.keyword || '') + '</p>';
+      return head + rendered.html;
     }
-    html += '<h4 class="ai-section-h">综合分析</h4><' + D + ' class="ai-section-body">' + md2html(d.analysis) + '</' + D + '>';
-    html += '<h4 class="ai-section-h">风险提示</h4><p class="ai-warning">' + escHtml(d.risk_warning) + '</p>';
+    var html = '<p class="ai-meta"><strong>检索关键词：</strong>' + escHtml(d.keyword || '') + '</p>';
+    html += '<h4 class="ai-section-h">【法条解析】</h4><' + D + ' class="ai-section-body">' + md2html(d.analysis || '') + '</' + D + '>';
+    html += '<h4 class="ai-section-h">【风险提示】</h4><p class="ai-warning">' + escHtml(d.riskNotice || d.risk_notice || d.risk_warning || '') + '</p>';
     return html;
   }
 
@@ -170,19 +164,22 @@
 
   function faguiToMarkdown(data, query) {
     var d = data || {};
+    var laws = Array.isArray(d.laws) ? d.laws : (Array.isArray(d.matched_laws) ? d.matched_laws : []);
     var lines = [];
     lines.push('# 法规检索报告');
     if (query) lines.push('\n> 检索问题：' + query);
     if (d.keyword) lines.push('\n**关键词：** ' + d.keyword);
-    if (d.matched_laws && d.matched_laws.length) {
+    if (laws.length) {
       lines.push('\n## 匹配法条');
-      d.matched_laws.forEach(function (law, idx) {
-        lines.push('\n### ' + (idx + 1) + '. ' + (law.law_name || '') + (law.article ? ' ' + law.article : ''));
+      laws.forEach(function (law, idx) {
+        var lawName = law.law_name || law.lawName || '';
+        lines.push('\n### ' + (idx + 1) + '. ' + lawName + (law.article ? ' ' + law.article : ''));
         if (law.content) lines.push('\n> ' + law.content.replace(/\n/g, '\n> '));
       });
     }
-    if (d.analysis) lines.push('\n## 综合分析\n\n' + d.analysis);
-    if (d.risk_warning) lines.push('\n## 风险提示\n\n' + d.risk_warning);
+    if (d.analysis) lines.push('\n## 法条解析\n\n' + d.analysis);
+    if (d.practicalAdvice || d.practical_advice) lines.push('\n## 适用说明\n\n' + (d.practicalAdvice || d.practical_advice));
+    if (d.riskNotice || d.risk_notice || d.risk_warning) lines.push('\n## 风险提示\n\n' + (d.riskNotice || d.risk_notice || d.risk_warning));
     return lines.join('\n');
   }
 
@@ -205,9 +202,8 @@
     },
     searchFagui: function (query, history, options) {
       if (global.FayiAI) return FayiAI.searchFagui(query, history, options);
-      return postJson('/api/fagui/search', {
+      return postJson('/api/legal/search', {
         query: query,
-        history: history || [],
         conversationId: options && options.conversationId
       });
     }

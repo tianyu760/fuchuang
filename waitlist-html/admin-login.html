@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>管理端登录 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="./css/admin-login.css" rel="stylesheet">
+</head>
+<body>
+    <div class="al-root">
+        <aside class="al-brand">
+            <div class="al-brand-logo">法绎 · 管理控制台</div>
+            <h1>企业级法律服务<br>运营管理平台</h1>
+            <p>输入管理端身份验证码即可进入后台。与普通用户系统完全隔离。</p>
+            <div class="al-features">
+                <div class="al-feature">数据总览与业务趋势分析</div>
+                <div class="al-feature">用户与风险案件统一管理</div>
+                <div class="al-feature">咨询、文书、OCR 全链路记录</div>
+            </div>
+        </aside>
+        <section class="al-form-panel">
+            <div class="al-form-box">
+                <h2>管理端验证</h2>
+                <p class="al-sub">请输入身份验证码以进入管理后台</p>
+                <div id="al-error" class="al-error" role="alert"></div>
+                <form id="al-login-form" autocomplete="off">
+                    <div class="al-field">
+                        <label class="al-label" for="al-identity">身份验证码</label>
+                        <input id="al-identity" class="al-input" type="text" name="identityCode" placeholder="请输入管理员权限验证码" required autocomplete="off" autofocus />
+                    </div>
+                    <button type="submit" class="al-submit" id="al-submit">进入管理后台</button>
+                </form>
+                <p class="al-foot">
+                    普通用户请 <a href="login.html">前往用户登录</a>
+                </p>
+            </div>
+        </section>
+    </div>
+    <script src="./js/admin-permission.js"></script>
+    <script src="./js/modules/admin/admin-api.js"></script>
+    <script src="./js/admin-login.js"></script>
+</body>
+</html>

@@ -16,6 +16,45 @@ function login(email, password) {
   return { admin: { id: admin.id, email: admin.email, name: admin.name, role: admin.role }, token: issueToken(admin) };
 }
 
+function loginPlatformUser(user) {
+  const token = crypto.randomBytes(24).toString('hex');
+  adminTokens.set(token, {
+    id: user.id,
+    email: user.email,
+    name: user.name,
+    role: 'platform_admin',
+    userType: 'admin'
+  });
+  return token;
+}
+
+const FIXED_ADMIN_CODE = 'manager';
+
+/** 仅凭身份验证码进入（演示/运营门禁） */
+function loginByCode(identityCode) {
+  if (String(identityCode) !== FIXED_ADMIN_CODE) {
+    return null;
+  }
+  const admins = store.readJson(store.FILES.admins, []);
+  const base = admins[0] || {
+    id: 'sys_admin',
+    email: 'admin@fayi.local',
+    name: '系统管理员',
+    role: 'super_admin'
+  };
+  const admin = {
+    id: base.id,
+    email: base.email,
+    name: base.name,
+    nickname: base.name,
+    role: base.role || 'super_admin',
+    userType: 'admin',
+    identityCode: FIXED_ADMIN_CODE
+  };
+  const token = issueToken(admin);
+  return { admin, token };
+}
+
 function requireAdmin(req, res, next) {
   const auth = req.headers.authorization || '';
   const token = auth.replace(/^Bearer\s+/i, '').trim();
@@ -27,4 +66,11 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-module.exports = { login, requireAdmin, issueToken };
+module.exports = {
+  login,
+  loginPlatformUser,
+  loginByCode,
+  requireAdmin,
+  issueToken,
+  FIXED_ADMIN_CODE
+};

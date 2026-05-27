@@ -1,7 +1,7 @@
 /* 法绎 · 法律服务动态工作台 */
 :root {
   --wb-header-h: 57px;
-  --wb-sidebar-w: 340px;
+  --wb-sidebar-w: clamp(260px, 18%, 280px);
   --wb-accent: #7c83fd;
   --wb-accent2: #5b6dff;
 }
@@ -20,22 +20,34 @@
 
 .wb-header { flex-shrink: 0; height: var(--wb-header-h); }
 
+.wb-header > div {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
 .wb-workbench {
   display: flex;
+  align-items: flex-start;
+  gap: 20px;
   height: calc(100vh - var(--wb-header-h));
   max-width: 1600px;
   margin: 0 auto;
   width: 100%;
+  padding: 24px 28px;
   position: relative;
 }
 
 .wb-sidebar {
   width: var(--wb-sidebar-w);
+  max-width: 280px;
   flex-shrink: 0;
+  height: 100%;
   background: rgba(255, 255, 255, 0.92);
-  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.12);
+  border-radius: 22px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
   overflow-y: auto;
   overflow-x: hidden;
   padding: 20px 14px;
@@ -46,7 +58,7 @@
 
 .dark .wb-sidebar {
   background: rgba(15, 23, 42, 0.92);
-  border-right-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(99, 102, 241, 0.2);
 }
 
 .wb-sidebar__head h1 {
@@ -208,13 +220,19 @@
 .wb-record:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(92, 109, 255, 0.1);
-  border-color: rgba(124, 131, 253, 0.2);
+  border-color: rgba(99, 102, 241, 0.26);
+  background: rgba(99, 102, 241, 0.08);
 }
 
 .wb-record.is-active {
-  background: rgba(124, 131, 253, 0.08);
-  border: 1px solid rgba(124, 131, 253, 0.25);
-  box-shadow: 0 4px 16px rgba(92, 109, 255, 0.12);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.28);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.16);
+}
+
+.wb-record.is-active .wb-record__title,
+.wb-record.is-active .wb-record__summary {
+  color: #4f46e5;
 }
 
 .wb-record__title {
@@ -281,17 +299,23 @@
 .wb-detail {
   flex: 1;
   min-width: 0;
-  padding: 24px 40px;
+  width: 100%;
+  height: 100%;
+  padding: 22px 24px 26px;
   overflow-y: auto;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #f8faff, #eef2ff);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(99, 102, 241, 0.1);
 }
 
 .dark .wb-detail {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(99, 102, 241, 0.22);
 }
 
-.wb-detail-inner { max-width: 920px; margin: 0 auto; animation: wb-fade-in 0.35s ease; }
+.wb-detail-inner { max-width: 1080px; margin: 0 auto; animation: wb-fade-in 0.35s ease; }
 
 @keyframes wb-fade-in {
   from { opacity: 0; transform: translateY(8px); }
@@ -390,9 +414,9 @@
 .wb-detail-card {
   background: rgba(255, 255, 255, 0.92);
   border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
-  padding: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  padding: 32px;
+  border: 1px solid rgba(99, 102, 241, 0.1);
 }
 
 .dark .wb-detail-card {
@@ -487,15 +511,59 @@
 
 .wb-drawer-backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); z-index: 40; }
 
+.wb-sidebar::-webkit-scrollbar,
+.wb-detail::-webkit-scrollbar {
+  width: 4px;
+}
+
+.wb-sidebar::-webkit-scrollbar-track,
+.wb-detail::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.wb-sidebar::-webkit-scrollbar-thumb,
+.wb-detail::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.12);
+  border-radius: 999px;
+}
+
+.wb-sidebar::-webkit-scrollbar-thumb:hover,
+.wb-detail::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+.wb-sidebar,
+.wb-detail {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.18) transparent;
+}
+
 @media (max-width: 900px) {
+  .wb-header > div {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .wb-workbench {
+    padding: 0;
+    gap: 0;
+  }
+
   .wb-sidebar {
     position: fixed; left: 0; top: var(--wb-header-h); bottom: 0; z-index: 50;
     transform: translateX(-100%); transition: transform 0.3s ease;
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+    border-radius: 0 18px 18px 0;
   }
   .wb-sidebar.is-open { transform: translateX(0); }
   .wb-drawer-backdrop.is-visible { display: block; }
-  .wb-detail { padding: 16px; width: 100%; }
+  .wb-detail {
+    padding: 16px;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+  }
   .wb-detail-card { padding: 24px 18px; border-radius: 18px; }
   .wb-back-btn { display: inline-flex; }
   .wb-toolbar__right .wb-btn-label { display: none; }

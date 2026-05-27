@@ -46,6 +46,30 @@
       String(d.getMinutes()).padStart(2, '0');
   }
 
+  function formatDateOnly(iso) {
+    var d = iso ? new Date(iso) : new Date();
+    if (isNaN(d.getTime())) d = new Date();
+    return d.getFullYear() + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+
+  function sanitizeFilenamePart(name, fallback) {
+    var raw = String(name || '').trim();
+    var cleaned = raw
+      .replace(/[\\/:*?"<>|]/g, '_')
+      .replace(/\s+/g, ' ')
+      .replace(/[. ]+$/g, '')
+      .trim();
+    if (!cleaned) cleaned = fallback || '法律服务记录';
+    return cleaned.slice(0, 80);
+  }
+
+  function buildExportFilename(log, ext) {
+    var base = sanitizeFilenamePart((log && log.title) || '法律服务记录', '法律服务记录');
+    return base + '_' + formatDateOnly(log && log.createTime) + '.' + ext;
+  }
+
   function isMobile() {
     return window.innerWidth <= 900;
   }
@@ -312,10 +336,12 @@
   }
 
   function downloadBlob(blob, filename) {
+    var safeName = sanitizeFilenamePart(filename, '法律服务记录').replace(/\.+$/, '');
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url;
-    a.download = filename;
+    a.download = safeName;
+    a.setAttribute('download', safeName);
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -337,8 +363,7 @@
         orientation: 'portrait',
         margins: { top: 720, right: 720, bottom: 720, left: 720 }
       });
-      var name = (log.title || '法律服务记录').replace(/[/\\?%*:|"<>]/g, '_').slice(0, 40);
-      downloadBlob(blob, name + '.docx');
+      downloadBlob(blob, buildExportFilename(log, 'docx'));
       FayiActivity.markExported(log.id);
       refresh();
       if (window.FayiToast) FayiToast('Word 文档已导出', 'success');
@@ -393,8 +418,7 @@
         page++;
       }
 
-      var fname = (log.title || '法律服务记录').replace(/[/\\?%*:|"<>]/g, '_').slice(0, 40);
-      pdf.save(fname + '.pdf');
+      pdf.save(buildExportFilename(log, 'pdf'));
       FayiActivity.markExported(log.id);
       refresh();
       if (window.FayiToast) FayiToast('PDF 已导出', 'success');

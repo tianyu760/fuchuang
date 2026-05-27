@@ -4439,5 +4439,5562 @@
     "timestamp": "2026-05-25T03:26:50.727Z",
     "status": "success",
     "duration": 0
+  },
+  {
+    "id": "sel_1779717612919_p2at",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-25T14:00:12.919Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779717752707_icct",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:02:32.707Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779717770431_2joy",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "合同",
+        "preview": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "question": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "risk_level": "中",
+        "summary": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "category": "contract",
+        "keywords": [
+          "请给我一份通",
+          "用合同模板结",
+          "重点说明风险",
+          "条款",
+          "违约责任和争",
+          "议解决条款",
+          "合同"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:02:50.431Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779718034743_tlxu",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户主张房东无故解除合同且不退还押金\n当前还缺少的信息主要有：________________\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请您提供事情发生的大致时间线，包括开始时间、关键节点时间和最近一次沟通或催告时间。",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:07:14.743Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779718075433_p4yp",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "preview": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "query": "借贷纠纷，民间借贷合法利率范围，催收注意事项",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户咨询民间借贷纠纷中的合法利率范围和催收注意事项\n当前还缺少的信息主要有：________________\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请您先说明纠纷双方的关系，例如：我是借款人，对方是出借人。",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "借贷纠纷",
+          "民间借贷合法",
+          "利率范围",
+          "催收注意事项",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:07:55.433Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779718112291_so05",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "query": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "analysis": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户涉及离婚财产分割、夫妻共同财产认定和子女抚养权问题\n当前还缺少的信息主要有：________________\n请你按事实补充回答；如果确实不清楚，可以直接回复“不清楚”。\n请问您是希望咨询离婚财产分割、夫妻共同财产认定还是子女抚养权的问题？请具体说明您希望解决的问题。",
+        "category": "marriage",
+        "keywords": [
+          "夫妻共同财产",
+          "离婚财产分割",
+          "认定",
+          "子女抚养权",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理",
+          "解为"
+        ],
+        "riskLevel": "low",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:08:32.291Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779718664528_bmne",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "????????????,??????",
+        "question": "????????????,??????",
+        "risk_level": "中",
+        "summary": "????????????,??????",
+        "category": "other",
+        "keywords": [
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:17:44.528Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779719471455_11qw",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:31:11.455Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779719487893_zvlp",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函",
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "question": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "risk_level": "中",
+        "summary": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议",
+          "律师函"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:31:27.893Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779719825623_8bem",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:37:05.623Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779720154756_8ndl",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "????????????????",
+        "question": "????????????????",
+        "risk_level": "中",
+        "summary": "????????????????",
+        "category": "other",
+        "keywords": [
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:42:34.757Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779720182197_kaij",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "????????????????",
+        "question": "????????????????",
+        "risk_level": "中",
+        "summary": "????????????????",
+        "category": "other",
+        "keywords": [
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:43:02.197Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779720295955_ukzj",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "法律文书参考",
+        "preview": "????????????????",
+        "question": "????????????????",
+        "risk_level": "中",
+        "summary": "????????????????",
+        "category": "other",
+        "keywords": [
+          "法律文书参考"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T14:44:55.956Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779721644796_q5on",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "请提供具体法律文书类型及内容要求，例如起诉状、答辩状、合同、授权委托书等，并说明相关事实、当事人信息及诉求，以便为您拟定规范文本。",
+        "preview": "????????????????",
+        "question": "????????????????",
+        "summary": "请提供具体法律文书类型及内容要求，例如起诉状、答辩状、合同、授权委托书等，并说明相关事实、当事人信息及诉求，以便为您拟定规范文本。",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请提供具体法",
+          "律文书类型及",
+          "内容要求",
+          "例如起诉状",
+          "答辩状",
+          "合同",
+          "授权委托书等",
+          "并说明相关事",
+          "当事人信息及",
+          "诉求"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:07:24.796Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779721647679_8vm1",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "??????????????????????",
+        "preview": "??????????????????????",
+        "query": "??????????????????????",
+        "analysis": "用户输入内容为不可识别的乱码字符，未包含明确的法律问题、法规名称、条文关键词或具体场景描述，无法匹配中国现行有效法律法规。",
+        "source": "qwen_direct",
+        "category": "other",
+        "keywords": [
+          "用户输入内容",
+          "为不可识别的",
+          "乱码字符",
+          "未包含明确的",
+          "法律问题",
+          "法规名称",
+          "条文关键词或",
+          "具体场景描述",
+          "无法匹配中国",
+          "现行有效法律"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:07:27.679Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779721689092_mvc2",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:08:09.092Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779721713874_pebz",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函标准格式如下：",
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "question": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "summary": "律师函标准格式如下：\n\n致：×××（自然人姓名/法人全称）  \n身份证号/统一社会信用代码：×××  \n地址：×××  \n\n发函人：×××律师事务所  \n执业律师：××× 律师  \n律师执业证号：×××  \n通讯地址：×××  \n联系电话：×××  \n电子邮箱：×××  \n\n日期：××××年××月××日  \n\n事由：关于贵方违反《×××合同》（签订日期：××××年××月××日）相关义务的严正催告  \n\n正文：  \n\n一、事实陈述  \n简明、客观、准确列明基础法律关系（如合同订立时间、主体、标的、核心权利义务），并依据证据（合同条款、付款凭证、往来函件、履约记录等）指出对方具体违约行为。例如：“",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议",
+          "律师函标准格",
+          "式如下",
+          "自然人姓名",
+          "法人全称"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:08:33.874Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779722228511_so7p",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-25T15:17:08.511Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779722324660_rva6",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-25T15:18:44.663Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779722352733_rl76",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:19:12.735Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779722379336_3ucr",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "答辩状",
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "question": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "summary": "答辩状\n\n答辩人：（姓名/名称），性别，出生年月日，民族，职业，住址/住所地，身份证号码/统一社会信用代码，联系电话。\n\n被答辩人：（姓名/名称），性别，出生年月日，民族，职业，住址/住所地，身份证号码/统一社会信用代码，联系电话。\n\n案由：（例如：民间借贷纠纷、房屋买卖合同纠纷、劳动争议等）\n\n贵院受理的（案号）一案，答辩人依法提出如下答辩意见：\n\n一、程序性抗辩（如适用）  \n1. 管辖异议：主张本案不属于贵院管辖，应移送至有管辖权的人民法院；  \n2. 当事人不适格：指出原告/申请人不具备诉讼主体资格，或被告/被申请人非适格责任主体；  \n3. 起诉/申请超过法定期限：援引《民事诉讼法》",
+        "source": "qwen_direct",
+        "category": "labor",
+        "keywords": [
+          "合同纠纷",
+          "民间借贷",
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项",
+          "答辩状",
+          "姓名",
+          "名称"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:19:39.336Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779722496312_uqtr",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "query": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "analysis": "夫妻共同财产认定以‘婚姻关系存续期间所得’为核心标准，兼顾意思自治（书面约定）与法定例外；财产分割坚持协议优先、依法裁量，体现对弱势方与子女利益的实质保障；抚养权归属严格遵循‘最有利于未成年人’原则，依年龄分层适用推定规则与综合评估机制。",
+        "source": "qwen_direct",
+        "category": "marriage",
+        "keywords": [
+          "夫妻共同财产",
+          "离婚财产分割",
+          "认定",
+          "子女抚养权",
+          "认定以",
+          "婚姻关系存续",
+          "期间所得",
+          "为核心标准",
+          "兼顾意思自治",
+          "书面约定"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:21:36.312Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779722628947_wz7o",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:23:48.949Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779723996040_52xw",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "答辩状标准结构及要点说明如下：",
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "question": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "summary": "答辩状标准结构及要点说明如下：\n\n一、首部  \n（一）标题：民事答辩状（或行政答辩状、刑事附带民事答辩状，依案件性质确定）  \n（二）答辩人基本信息：姓名、性别、出生年月日、民族、身份证号码、住址、联系电话；如系法人或其他组织，列明名称、统一社会信用代码、住所地、法定代表人/负责人姓名及职务。  \n（三）被答辩人基本信息：同上，与起诉状所列一致。  \n（四）案由及案号：写明“贵院受理的（××××）××民初字第××号××纠纷一案”。\n\n二、正文  \n（一）答辩请求  \n明确、具体、可执行，例如：“依法驳回原告全部诉讼请求”或“驳回原告关于××项的诉讼请求，支持答辩人关于××的反诉请求”等。\n\n（",
+        "source": "qwen_direct",
+        "category": "other",
+        "keywords": [
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项",
+          "答辩状标准结",
+          "构及要点说明",
+          "如下",
+          "首部",
+          "标题"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:46:36.040Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779724063694_86xx",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "query": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "analysis": "夫妻共同财产认定以‘婚姻关系存续期间所得’为核心标准，兼顾意思自治（书面约定）与法定例外；财产分割在协议基础上，依法体现对弱势方与无过错方的倾斜保护；子女抚养权则严格贯彻‘未成年人利益最大化’原则，按年龄分层适用不同裁判规则。",
+        "source": "qwen_direct",
+        "category": "marriage",
+        "keywords": [
+          "夫妻共同财产",
+          "离婚财产分割",
+          "认定",
+          "子女抚养权",
+          "认定以",
+          "婚姻关系存续",
+          "期间所得",
+          "为核心标准",
+          "兼顾意思自治",
+          "书面约定"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:47:43.694Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779724174215_yylz",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函标准格式如下：",
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "question": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "summary": "律师函标准格式如下：\n\n致：×××（自然人姓名/法人全称）  \n身份证号/统一社会信用代码：×××  \n地址：×××  \n\n发函人：×××律师事务所  \n执业律师：××× 律师  \n律师执业证号：×××  \n通讯地址：×××  \n联系电话：×××  \n电子邮箱：×××  \n\n日期：××××年××月××日  \n\n事由：关于贵方违反《×××合同》（签订日期：××××年××月××日）相关义务的严正催告  \n\n正文：  \n\n一、事实陈述  \n简明、客观、准确列明基础法律关系（如合同订立时间、主体、标的、核心权利义务），并依据证据（合同条款、付款凭证、往来函件、履约记录等）指出对方具体违约行为。例如：“",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议",
+          "律师函标准格",
+          "式如下",
+          "自然人姓名",
+          "法人全称"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:49:34.215Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779724785333_vomn",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T15:59:45.334Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779724812317_egub",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函标准格式如下：",
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "question": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "summary": "律师函标准格式如下：\n\n致：×××（自然人姓名/法人全称）  \n身份证号/统一社会信用代码：×××  \n地址：×××  \n\n发函人：×××律师事务所  \n执业律师：××× 律师  \n律师执业证号：×××  \n通讯地址：×××  \n联系电话：×××  \n电子邮箱：×××  \n\n日期：××××年××月××日  \n\n事由：关于贵方违反《×××合同》（签订日期：××××年××月××日）相关义务的严正催告  \n\n正文：  \n\n一、事实陈述  \n简明、客观、准确列明基础法律关系（如合同订立时间、主体、标的、主要权利义务），并依据证据（合同文本、付款凭证、往来函件、履约记录等）指出对方具体违约行为。例如：“",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议",
+          "律师函标准格",
+          "式如下",
+          "自然人姓名",
+          "法人全称"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-25T16:00:12.317Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779755849801_2p2w",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T00:37:29.801Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779755869866_0pim",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户遇到了劳动纠纷问题\n当前还缺少的信息主要有：\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\"当前已有证据材料\",\"用户当前希望达",
+        "question": "",
+        "category": "labor",
+        "keywords": [
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理",
+          "解为",
+          "用户遇到了劳",
+          "动纠纷问题",
+          "当前还缺少的",
+          "信息主要有"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T00:37:49.866Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779755869927_5hlt",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 154702.png",
+        "success": true,
+        "ocrText": "我遇到了劳动纠纷问题，请帮我分析:\n为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为:\n用户遇到了劳动纠纷问题\n当前还缺少的信息主要有:\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\"当前已有证据材料\",\"用户当前希望达到\n的目标\"]\n请你按事实补充回答;如果确实不清楚，可以直接回复\"不清楚\"\n请您描述一下纠纷双方的关系，例如:我是谁，对方是谁，双方是什么关系?",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析",
+          "为了更准确地",
+          "分析你的案件",
+          "我还需要补充",
+          "几个关键信息",
+          "我目前初步理",
+          "解为",
+          "用户遇到了劳"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析:\n为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为:\n用户遇到了劳动纠纷问题\n当前还缺少的信息主要有:\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\""
+      }
+    },
+    "timestamp": "2026-05-26T00:37:49.927Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779755944691_z57h",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案为典型的民间借贷纠纷。出借人李某与借款人张某之间存在借款合同关系，张某未按约定归还借款，符合民间借贷纠纷的核心特征。\n二、主要法律风险\n点\n1. **诉讼时效风险**：借款约定于2025年6月",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案为典型的",
+          "民间借贷纠纷",
+          "出借人李某与",
+          "借款人张某之",
+          "间存在借款合",
+          "同关系"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T00:39:04.691Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779755944744_v716",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-26T00:39:04.744Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779756049702_samb",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T00:40:49.702Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779756070349_ic68",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T00:41:10.349Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779756101619_api8",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "通用合同模板结构（重点条款说明）",
+        "preview": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "question": "请给我一份通用合同模板结构，重点说明风险条款、违约责任和争议解决条款。",
+        "summary": "通用合同模板结构（重点条款说明）\n\n一、合同首部  \n甲方（全称）：  \n乙方（全称）：  \n签订日期：  \n签订地点：  \n\n二、鉴于条款（背景陈述）  \n简要说明双方订立合同的目的、合作基础及前提条件。\n\n三、定义与解释  \n对合同中关键术语（如“交付”“验收”“不可抗力”等）作出明确界定，避免歧义。\n\n四、标的条款  \n明确合同标的（货物、服务、知识产权、工程等）的名称、规格、数量、质量标准、技术要求等。\n\n五、价格与支付方式  \n包括合同总价、计价单位、付款节点（如预付款、进度款、验收款、质保金）、发票要求、货币种类及汇率约定（涉外情形）。\n\n六、履行期限与方式  \n约定起止时间、交付",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请给我一份通",
+          "用合同模板结",
+          "重点说明风险",
+          "条款",
+          "违约责任和争",
+          "议解决条款",
+          "通用合同模板",
+          "结构",
+          "重点条款说明",
+          "全称"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T00:41:41.619Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779756487128_lu69",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "劳动合同试用期",
+        "preview": "劳动合同试用期",
+        "query": "劳动合同试用期",
+        "analysis": "试用期是劳动合同的组成部分，受《劳动合同法》严格规制。其设立目的系双向考察，而非单方免责条款；法律通过期限限制、工资保障、解雇约束三重机制防止滥用。",
+        "source": "qwen_direct",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同试用",
+          "试用期是劳动",
+          "合同的组成部",
+          "劳动合同法",
+          "严格规制",
+          "其设立目的系",
+          "双向考察",
+          "而非单方免责",
+          "条款"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T00:48:07.129Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779756831998_lqa8",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "query": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "analysis": "夫妻共同财产认定以‘婚姻关系存续期间所得’为核心标准，兼顾意思自治与人身专属性；子女抚养权裁判遵循年龄分层+最有利于未成年人原则，兼具法定刚性与个案裁量空间；财产分割与抚养权判定虽属不同法律关系，但在司法实践中常同步审查，且抚养成本可能影响财产倾斜分割。",
+        "source": "qwen_direct",
+        "category": "marriage",
+        "keywords": [
+          "夫妻共同财产",
+          "离婚财产分割",
+          "认定",
+          "子女抚养权",
+          "认定以",
+          "婚姻关系存续",
+          "期间所得",
+          "为核心标准",
+          "兼顾意思自治",
+          "与人身专属性"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T00:53:52.000Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757045651_616s",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "民事起诉状",
+        "preview": "请按中国法院文书规范，生成一份结构完整的民事起诉状模板，并说明每一部分需要填写的要点。",
+        "question": "请按中国法院文书规范，生成一份结构完整的民事起诉状模板，并说明每一部分需要填写的要点。",
+        "summary": "民事起诉状\n\n原告：  \n姓名，性别，出生年月日，民族，职业，住址（具体到门牌号），联系电话。  \n（如为法人或其他组织，应写明名称、住所地、法定代表人或主要负责人姓名及职务、联系方式）\n\n被告：  \n姓名，性别，出生年月日，民族，职业，住址（具体到门牌号），联系电话。  \n（如为法人或其他组织，应写明名称、住所地、法定代表人或主要负责人姓名及职务、联系方式）\n\n诉讼请求：  \n一、判令被告向原告支付××款项人民币××元；  \n二、判令被告赔偿原告经济损失××元（或：判令被告承担违约金××元）；  \n三、本案诉讼费用由被告承担。  \n（诉讼请求应当明确、具体、可执行，每一项独立成项，不得使用“",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请按中国法院",
+          "文书规范",
+          "生成一份结构",
+          "完整的民事起",
+          "诉状模板",
+          "并说明每一部",
+          "分需要填写的",
+          "要点",
+          "民事起诉状",
+          "姓名"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T00:57:25.651Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757096386_rioc",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T00:58:16.386Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757503684_a1jx",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:05:03.684Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757505836_2ol4",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:05:05.836Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757569781_h37o",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:06:09.781Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757672235_ijcn",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:07:52.236Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757860324_19ye",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T01:11:00.357Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757861495_f91u",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "chat.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:11:01.495Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757930880_dz31",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:12:10.880Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757931009_i39c",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:12:11.009Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757933401_ixw8",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:12:13.402Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757957200_3bcy",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "wenshi.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:12:37.200Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757958927_34jt",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "fagui.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:12:38.927Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779757984094_e6sy",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "preview": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "query": "离婚财产分割，夫妻共同财产认定，子女抚养权",
+        "analysis": "夫妻共同财产认定是财产分割的前提，须严格区分婚前财产、个人特有财产与婚后共同财产；分割时不得机械均分，而应贯彻照顾子女、女方和无过错方的法定原则；子女抚养权归属以‘最有利于未成年人’为最高准则，兼顾年龄阶段特征与真实意愿表达。",
+        "source": "qwen_direct",
+        "category": "marriage",
+        "keywords": [
+          "夫妻共同财产",
+          "离婚财产分割",
+          "认定",
+          "子女抚养权",
+          "认定是财产分",
+          "割的前提",
+          "须严格区分婚",
+          "前财产",
+          "个人特有财产",
+          "与婚后共同财"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T01:13:04.095Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779767864803_yeav",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "chat.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T03:57:44.803Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779767864888_xnjx",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法律咨询」页面",
+        "keyword": "用户进入「法律咨询」页面",
+        "title": "用户进入「法律咨询」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法律咨询",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T03:57:44.888Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779767987849_fwd4",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "index.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T03:59:47.851Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779767987921_3f3c",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「首页」页面",
+        "keyword": "用户进入「首页」页面",
+        "title": "用户进入「首页」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "首页",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T03:59:47.921Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768005721_cm88",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:00:05.721Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768005843_87s6",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "keyword": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "title": "我遇到了民间借贷纠纷问题，请帮我分析：",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "民间借贷",
+          "我遇到了民间",
+          "借贷纠纷问题",
+          "请帮我分析"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:00:05.843Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768010995_obw9",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "knowledge.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:00:10.995Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768011010_gtli",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「资料库」页面",
+        "keyword": "用户进入「资料库」页面",
+        "title": "用户进入「资料库」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "资料库",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:00:11.010Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768022165_p7mv",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "证据材料已上传至咨询会话",
+        "keyword": "证据材料已上传至咨询会话",
+        "title": "证据材料已上传至咨询会话",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "证据材料已上",
+          "传至咨询会话"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:00:22.165Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768142346_w5wo",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:02:22.346Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768142509_errf",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "案例1.docx",
+        "keyword": "案例1.docx",
+        "title": "案例1.docx",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "案例"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:02:22.509Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768188329_vw3d",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:08.329Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768188353_wpfj",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "用户进入「普法宣传」页面",
+        "keyword": "用户进入「普法宣传」页面",
+        "title": "用户进入「普法宣传」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:08.353Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768188442_gyl2",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:08.442Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768188502_sdrs",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T04:03:08.502Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768188548_sfjm",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:08.548Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768194233_av0h",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:14.233Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768194267_018n",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "个人信息保护法实务指南：八类个人信息权利详解",
+        "category": "个人信息保护法实务指南：八类个人信息权利详解",
+        "kind": "article",
+        "keywords": [
+          "个人信息保护",
+          "法实务指南",
+          "八类个人信息",
+          "权利详解"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "个人信息保护法实务指南：八类个人信息权利详解"
+      }
+    },
+    "timestamp": "2026-05-26T04:03:14.267Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768194310_q3ij",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "阅读普法文章《个人信息保护法实务指南：八类个人信息权利详解》",
+        "keyword": "阅读普法文章《个人信息保护法实务指南：八类个人信息权利详解》",
+        "title": "阅读普法文章《个人信息保护法实务指南：八类个人信息权利详解》",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "阅读普法文章",
+          "个人信息保护",
+          "法实务指南",
+          "八类个人信息",
+          "权利详解"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:14.310Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768194362_72ys",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "浏览普法文章内容",
+        "keyword": "浏览普法文章内容",
+        "title": "浏览普法文章内容",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "浏览普法文章",
+          "内容"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:14.362Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768209994_4iyo",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "wenshi.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:29.994Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768210021_wf25",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「文书生成」页面",
+        "keyword": "用户进入「文书生成」页面",
+        "title": "用户进入「文书生成」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "文书生成",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:30.021Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768237304_m0zl",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "答辩状",
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "question": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "summary": "答辩状\n\n答辩人：×××，性别，××年××月××日出生，民族，职业，住址，身份证号码，联系电话。\n\n被答辩人：×××，性别，××年××月××日出生，民族，职业，住址，身份证号码，联系电话。\n\n案由：××××纠纷（如：民间借贷纠纷、房屋买卖合同纠纷、离婚纠纷等）\n\n答辩请求：  \n1．依法驳回被答辩人的全部诉讼请求；  \n2．本案诉讼费用由被答辩人承担。\n\n事实与理由：  \n一、关于案件基本事实的澄清  \n（简明陈述与起诉状所载事实存在实质性差异的关键情节，以时间、地点、人物、行为、结果为要素，突出己方无过错或对方违约/侵权在先等核心事实。避免主观评价，重客观陈述。）\n\n二、针对原告诉讼请求的逐",
+        "source": "qwen_direct",
+        "category": "marriage",
+        "keywords": [
+          "离婚纠纷",
+          "合同纠纷",
+          "民间借贷",
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项",
+          "答辩状",
+          "性别"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:57.304Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768237429_ii0l",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "keyword": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "title": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:03:57.429Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768245439_8x91",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "fagui.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:04:05.439Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768245491_2eib",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法规检索」页面",
+        "keyword": "用户进入「法规检索」页面",
+        "title": "用户进入「法规检索」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法规检索",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:04:05.491Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768421705_lv5u",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "劳动合同",
+        "preview": "劳动合同",
+        "query": "劳动合同",
+        "analysis": "劳动合同是确立劳动关系、明确双方权利义务的法定形式。《劳动合同法》以强制订立、逾期惩罚、视为无固定期限等制度设计，突出对劳动者缔约权的倾斜保护。核心在于‘书面性’‘及时性’和‘合法性’。",
+        "source": "qwen_direct",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "劳动合同是确",
+          "立劳动关系",
+          "明确双方权利",
+          "义务的法定形",
+          "劳动合同法",
+          "以强制订立",
+          "逾期惩罚",
+          "视为无固定期",
+          "限等制度设计"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:07:01.705Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768544018_sosf",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "preview": "网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "query": "网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "analysis": "虚假宣传在网络购物中具有隐蔽性强、传播快、取证难等特点。法律体系采取‘行为规制+责任追究’双轨路径：《广告法》《消保法》侧重规范宣传内容真实性，《网络交易管理办法》聚焦平台场景特殊性，而《消保法》第五十五条则赋予消费者可操作的民事救济权。司法实践中，是否构成‘欺诈’是适用‘退一赔三’的关键，需结合主观故意、客观误导性及消费者合理信赖程度综合判断。",
+        "source": "qwen_direct",
+        "category": "fraud",
+        "keywords": [
+          "网络购物消费",
+          "者权益保护",
+          "商家虚假宣传",
+          "相关法律条款",
+          "消保法",
+          "虚假宣传在网",
+          "络购物中具有",
+          "隐蔽性强",
+          "传播快",
+          "取证难等特点"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:09:04.018Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768544148_uc0m",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "preview": "关键词：网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "keyword": "关键词：网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "title": "关键词：网络购物消费者权益保护，商家虚假宣传，相关法律条款",
+        "riskLevel": "low",
+        "category": "fraud",
+        "keywords": [
+          "关键词",
+          "网络购物消费",
+          "者权益保护",
+          "商家虚假宣传",
+          "相关法律条款"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:09:04.148Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768557530_3yxa",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "contact.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:09:17.530Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768557563_0sw4",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「联系反馈」页面",
+        "keyword": "用户进入「联系反馈」页面",
+        "title": "用户进入「联系反馈」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "联系反馈",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:09:17.564Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768629923_s0ht",
+    "user_id": "guest",
+    "module": "system",
+    "action": "datav",
+    "detail": {
+      "type": "datav",
+      "payload": {
+        "preview": "正在查看智慧法务数据驾驶舱",
+        "keyword": "正在查看智慧法务数据驾驶舱",
+        "title": "正在查看智慧法务数据驾驶舱",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "正在查看智慧",
+          "法务数据驾驶"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:10:29.923Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768641936_3218",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "profile.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:10:41.936Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768641962_7dh3",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「个人中心」页面",
+        "keyword": "用户进入「个人中心」页面",
+        "title": "用户进入「个人中心」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "个人中心",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:10:41.962Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768678873_2e4f",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:11:18.873Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768834754_odmv",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:13:54.754Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768859253_wf6c",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T04:14:19.253Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768859915_eym7",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:14:19.915Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768860033_93cu",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:14:20.033Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768892814_yteh",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:14:52.814Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768893047_qpjr",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "keyword": "我遇到了合同纠纷问题，请帮我分析：",
+        "title": "我遇到了合同纠纷问题，请帮我分析：",
+        "riskLevel": "low",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:14:53.047Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768908967_9378",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "证据材料已上传至咨询会话",
+        "keyword": "证据材料已上传至咨询会话",
+        "title": "证据材料已上传至咨询会话",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "证据材料已上",
+          "传至咨询会话"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:15:08.967Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768999768_lfue",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:16:39.768Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779768999934_vy24",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "案例1.docx",
+        "keyword": "案例1.docx",
+        "title": "案例1.docx",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "案例"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:16:39.934Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769032933_tdgr",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "屏幕截图 2026-05-24 162845.png",
+        "keyword": "屏幕截图 2026-05-24 162845.png",
+        "title": "屏幕截图 2026-05-24 162845.png",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "屏幕截图"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:17:12.934Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769107443_j8xi",
+    "user_id": "1776096155583ciny",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "preview": "​一、纠纷类型判断\n根据用户提供的案情信息，本案属于典型的民间借贷纠纷。纠纷双方为出借人李某与借款人张某，争议核心是张某未按约定归还借款本金。\n二、主要法律风险\n点\n1. **借款合同的有效性及具体条款**：双方通过微信等方式达成的借款合意",
+        "question": "",
+        "category": "contract",
+        "keywords": [
+          "民间借贷",
+          "纠纷类型判断",
+          "根据用户提供",
+          "的案情信息",
+          "本案属于典型",
+          "的民间借贷纠",
+          "纠纷双方为出",
+          "借人李某与借",
+          "款人张某",
+          "争议核心是张"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T04:18:27.443Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769107541_7qbl",
+    "user_id": "1776096155583ciny",
+    "module": "ocr",
+    "action": "recognize",
+    "detail": {
+      "type": "ocr",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "fileName": "å±å¹æªå¾ 2026-05-24 162845.png",
+        "success": true,
+        "ocrText": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发送消息表示:\n”钱收到了，三个月后一定还你。\n双方虽未签订正式借条，但保留了完整的聊天记录、转账记录以及语音沟通内容。\n二、纠纷产生\n约定还款期限到达后，李某多次催要借款，但张某一直以\"暂时没钱”\"\"工资没发\"\"再等等\"等理由拖延。\n之后，张某甚至出现:\n不回复微信;\n●拒接电话;\n删除部分聊天记录;\n●更换联系方式等情况。\n李某认为自己的合法权益受到侵害，于是开始整理相关证据，准备通过法律途径维权。",
+        "source": "process_case",
+        "category": "labor",
+        "keywords": [
+          "民间借贷",
+          "民间借贷纠纷",
+          "案例",
+          "借钱不还",
+          "案件背景",
+          "张某因个人资",
+          "金周转困难",
+          "向朋友李某借",
+          "款人民币",
+          "并承诺三个月"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古",
+        "preview": "民间借贷纠纷案例(借钱不还)\n一、案件背景\n2025年3月，张某因个人资金周转困难，向朋友李某借款人民币50000元，并承诺三个月后归还。双方通过微\n信沟通确认借款事项，随后李某通过银行卡转账向张某支付了50000元。\n转账后，张某向李某发"
+      }
+    },
+    "timestamp": "2026-05-26T04:18:27.541Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769107675_r0tj",
+    "user_id": "guest",
+    "module": "case",
+    "action": "analyze",
+    "detail": {
+      "type": "ai_case",
+      "payload": {
+        "preview": "图片：屏幕截图 2026-05-24 162845.png",
+        "keyword": "图片：屏幕截图 2026-05-24 162845.png",
+        "title": "图片：屏幕截图 2026-05-24 162845.png",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "图片",
+          "屏幕截图"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:27.675Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769122486_w5hx",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "已添加到个人资料库",
+        "keyword": "已添加到个人资料库",
+        "title": "已添加到个人资料库",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "已添加到个人",
+          "资料库"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:42.486Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769125615_gp6f",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:45.615Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769125735_0flo",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T04:18:45.735Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769126033_i0gp",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:46.033Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769127217_u2ma",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:47.217Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769127260_nwx3",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "3 分钟看懂：消费者退换货的法定权利边界",
+        "category": "3 分钟看懂：消费者退换货的法定权利边界",
+        "kind": "video",
+        "keywords": [
+          "分钟看懂",
+          "消费者退换货",
+          "的法定权利边"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "3 分钟看懂：消费者退换货的法定权利边界"
+      }
+    },
+    "timestamp": "2026-05-26T04:18:47.260Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769127435_q3bz",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "观看普法视频《3 分钟看懂：消费者退换货的法定权利边界》",
+        "keyword": "观看普法视频《3 分钟看懂：消费者退换货的法定权利边界》",
+        "title": "观看普法视频《3 分钟看懂：消费者退换货的法定权利边界》",
+        "riskLevel": "low",
+        "category": "consumer",
+        "keywords": [
+          "观看普法视频",
+          "分钟看懂",
+          "消费者退换货",
+          "的法定权利边"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:47.435Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769127634_q65b",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "观看普法视频",
+        "keyword": "观看普法视频",
+        "title": "观看普法视频",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "观看普法视频"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:18:47.634Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769142526_rmmc",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:02.526Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769142641_kd9w",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "阅读普法文章《个人信息保护法实务指南：八类个人信息权利详解》",
+        "keyword": "阅读普法文章《个人信息保护法实务指南：八类个人信息权利详解》",
+        "title": "阅读普法文章《个人信息保护法实务指南：八类个人信息权利详解》",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "阅读普法文章",
+          "个人信息保护",
+          "法实务指南",
+          "八类个人信息",
+          "权利详解"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:02.641Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769142695_67y0",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "个人信息保护法实务指南：八类个人信息权利详解",
+        "category": "个人信息保护法实务指南：八类个人信息权利详解",
+        "kind": "article",
+        "keywords": [
+          "个人信息保护",
+          "法实务指南",
+          "八类个人信息",
+          "权利详解"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "个人信息保护法实务指南：八类个人信息权利详解"
+      }
+    },
+    "timestamp": "2026-05-26T04:19:02.695Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769142907_h7ox",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "浏览普法文章内容",
+        "keyword": "浏览普法文章内容",
+        "title": "浏览普法文章内容",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "浏览普法文章",
+          "内容"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:02.907Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769148604_posj",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:08.604Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769148633_7162",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "劳动合同必备条款清单：签前一定要看清",
+        "category": "劳动合同必备条款清单：签前一定要看清",
+        "kind": "article",
+        "keywords": [
+          "劳动合同",
+          "劳动合同必备",
+          "条款清单",
+          "签前一定要看"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "劳动合同必备条款清单：签前一定要看清"
+      }
+    },
+    "timestamp": "2026-05-26T04:19:08.633Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769148770_5eyc",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "阅读普法文章《劳动合同必备条款清单：签前一定要看清》",
+        "keyword": "阅读普法文章《劳动合同必备条款清单：签前一定要看清》",
+        "title": "阅读普法文章《劳动合同必备条款清单：签前一定要看清》",
+        "riskLevel": "low",
+        "category": "labor",
+        "keywords": [
+          "劳动合同",
+          "阅读普法文章",
+          "劳动合同必备",
+          "条款清单",
+          "签前一定要看"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:08.770Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769148870_m6di",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "浏览普法文章内容",
+        "keyword": "浏览普法文章内容",
+        "title": "浏览普法文章内容",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "浏览普法文章",
+          "内容"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:08.870Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769183047_30er",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "答辩状标准结构及要点说明如下：",
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "question": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "summary": "答辩状标准结构及要点说明如下：\n\n一、首部  \n（一）标题：民事答辩状（或行政答辩状、刑事附带民事答辩状，依案件性质确定）  \n（二）答辩人基本信息：姓名、性别、出生年月日、民族、身份证号码、住址、联系电话；如系法人或其他组织，列明名称、统一社会信用代码、住所地、法定代表人/负责人姓名及职务。  \n（三）被答辩人基本信息：同上，与起诉状所列一致。  \n（四）案由及案号：写明“贵院受理的（××××）××民初字第××号××纠纷一案”。\n\n二、正文  \n（一）答辩请求  \n明确、具体、可执行，例如：“依法驳回原告全部诉讼请求”或“驳回原告关于××项的诉讼请求，支持答辩人关于××的反诉请求”等。\n\n（",
+        "source": "qwen_direct",
+        "category": "other",
+        "keywords": [
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项",
+          "答辩状标准结",
+          "构及要点说明",
+          "如下",
+          "首部",
+          "标题"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:43.047Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769183391_p7rj",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "preview": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "keyword": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "title": "请给我一份答辩状标准结构，并标注常见抗辩思路与证据提交注意事项。",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "请给我一份答",
+          "辩状标准结构",
+          "并标注常见抗",
+          "辩思路与证据",
+          "提交注意事项"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:19:43.391Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769233231_s89n",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "preview": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "query": "房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "analysis": "房东无正当理由单方解除租赁合同，违反《民法典》合同编关于合同严守与法定解除条件的规定，构成根本违约；押金具有担保承租人履约的功能，合同未约定扣减情形或承租人无违约行为的，房东拒不退还押金缺乏法律依据，亦违反《商品房屋租赁管理办法》关于押金管理的强制性要求。",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规",
+          "房东无正当理",
+          "由单方解除租",
+          "赁合同",
+          "违反"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:20:33.231Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779769233352_hbtq",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "preview": "关键词：房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "keyword": "关键词：房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "title": "关键词：房屋租赁纠纷，房东无故解除合同，押金不退，相关法规",
+        "riskLevel": "low",
+        "category": "contract",
+        "keywords": [
+          "房屋租赁",
+          "关键词",
+          "房屋租赁纠纷",
+          "房东无故解除",
+          "合同",
+          "押金不退",
+          "相关法规"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T04:20:33.352Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809906816_p1gg",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "knowledge.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:26.816Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809906843_1p1b",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「资料库」页面",
+        "keyword": "用户进入「资料库」页面",
+        "title": "用户进入「资料库」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "资料库",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:26.843Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809907870_2ymb",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:27.870Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809907934_i973",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "用户进入「普法宣传」页面",
+        "keyword": "用户进入「普法宣传」页面",
+        "title": "用户进入「普法宣传」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:27.934Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809907979_crkp",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:27.979Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809908096_c78v",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:28.096Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809908150_uht8",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T15:38:28.150Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809912701_e8ot",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:32.701Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809912761_p0o9",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T15:38:32.761Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809912895_teyq",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:32.895Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809914085_hbi6",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "wenshi.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:34.085Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809914116_ca3s",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「文书生成」页面",
+        "keyword": "用户进入「文书生成」页面",
+        "title": "用户进入「文书生成」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "文书生成",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:34.116Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809915980_bcs9",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "fagui.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:35.980Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809916031_et4l",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法规检索」页面",
+        "keyword": "用户进入「法规检索」页面",
+        "title": "用户进入「法规检索」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法规检索",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:38:36.031Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809945303_bgv4",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "keyword": "交通事故责任认定和赔偿标准，相关法律法规",
+        "preview": "交通事故责任认定和赔偿标准，相关法律法规",
+        "query": "交通事故责任认定和赔偿标准，相关法律法规",
+        "analysis": "我国交通事故责任认定以《道路交通安全法》第七十六条为基石，实行‘交强险优先、过错比例分担、优者危险负担’三位一体规则；赔偿标准则由《民法典》第一千一百七十九条明确项目，结合司法解释细化保险赔付逻辑与例外情形。责任认定属行政确认行为，可复核但不可直接提起行政诉讼；赔偿争议属民事纠纷，依过错与因果关系确定最终责任比例。",
+        "source": "qwen_direct",
+        "category": "other",
+        "keywords": [
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规",
+          "我国交通事故",
+          "责任认定以",
+          "道路交通安全",
+          "第七十六条为",
+          "基石",
+          "实行",
+          "交强险优先"
+        ],
+        "riskLevel": "high",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:39:05.303Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809945377_xi1x",
+    "user_id": "guest",
+    "module": "regulation",
+    "action": "search",
+    "detail": {
+      "type": "ai_fagui",
+      "payload": {
+        "preview": "关键词：交通事故责任认定和赔偿标准，相关法律法规",
+        "keyword": "关键词：交通事故责任认定和赔偿标准，相关法律法规",
+        "title": "关键词：交通事故责任认定和赔偿标准，相关法律法规",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "关键词",
+          "交通事故责任",
+          "认定和赔偿标",
+          "相关法律法规"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:39:05.377Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809981580_hfyv",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "contact.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:39:41.580Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779809981626_5kdw",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「联系反馈」页面",
+        "keyword": "用户进入「联系反馈」页面",
+        "title": "用户进入「联系反馈」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "联系反馈",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:39:41.626Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779810100056_onih",
+    "user_id": "guest",
+    "module": "system",
+    "action": "datav",
+    "detail": {
+      "type": "datav",
+      "payload": {
+        "preview": "正在查看智慧法务数据驾驶舱",
+        "keyword": "正在查看智慧法务数据驾驶舱",
+        "title": "正在查看智慧法务数据驾驶舱",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "正在查看智慧",
+          "法务数据驾驶"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T15:41:40.056Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811254133_4d2n",
+    "user_id": "guest",
+    "module": "system",
+    "action": "datav",
+    "detail": {
+      "type": "datav",
+      "payload": {
+        "preview": "正在查看智慧法务数据驾驶舱",
+        "keyword": "正在查看智慧法务数据驾驶舱",
+        "title": "正在查看智慧法务数据驾驶舱",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "正在查看智慧",
+          "法务数据驾驶"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:00:54.133Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811260783_t6og",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "contact.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:00.783Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811260831_sras",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「联系反馈」页面",
+        "keyword": "用户进入「联系反馈」页面",
+        "title": "用户进入「联系反馈」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "联系反馈",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:00.831Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811302511_euwb",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "index.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:42.511Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811302589_dy4b",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「首页」页面",
+        "keyword": "用户进入「首页」页面",
+        "title": "用户进入「首页」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "首页",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:42.589Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811303825_4944",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "chat.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:43.826Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811303954_f8e0",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法律咨询」页面",
+        "keyword": "用户进入「法律咨询」页面",
+        "title": "用户进入「法律咨询」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法律咨询",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:43.955Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811315667_nobw",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "question": "我遇到了劳动纠纷问题，请帮我分析：",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:01:55.667Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811315768_fxl5",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "我遇到了劳动纠纷问题，请帮我分析：",
+        "keyword": "我遇到了劳动纠纷问题，请帮我分析：",
+        "title": "我遇到了劳动纠纷问题，请帮我分析：",
+        "riskLevel": "low",
+        "category": "labor",
+        "keywords": [
+          "我遇到了劳动",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:01:55.768Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811351769_9b2a",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "knowledge.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:31.769Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811351843_4qv9",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「资料库」页面",
+        "keyword": "用户进入「资料库」页面",
+        "title": "用户进入「资料库」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "资料库",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:31.843Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811353801_hyqg",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:33.801Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811353831_9f2x",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "用户进入「普法宣传」页面",
+        "keyword": "用户进入「普法宣传」页面",
+        "title": "用户进入「普法宣传」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:33.831Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811353920_0vzd",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:33.920Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811353950_e705",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:33.950Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811354015_2rxi",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T16:02:34.015Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811379040_0yna",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "对以上内容进行总结",
+        "question": "对以上内容进行总结",
+        "category": "other",
+        "keywords": [
+          "对以上内容进",
+          "行总结"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:02:59.040Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811379120_hgxc",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "对以上内容进行总结",
+        "keyword": "对以上内容进行总结",
+        "title": "对以上内容进行总结",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "对以上内容进",
+          "行总结"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:02:59.120Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811422677_m84n",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "对之前的回答进行总结",
+        "question": "对之前的回答进行总结",
+        "category": "other",
+        "keywords": [
+          "对之前的回答",
+          "进行总结"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:03:42.677Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811422741_38p5",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "对之前的回答进行总结",
+        "keyword": "对之前的回答进行总结",
+        "title": "对之前的回答进行总结",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "对之前的回答",
+          "进行总结"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:03:42.741Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811472643_m82h",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "对之前的内容进行总结",
+        "question": "对之前的内容进行总结",
+        "category": "other",
+        "keywords": [
+          "对之前的内容",
+          "进行总结"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:04:32.643Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779811472694_xm4r",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "对之前的内容进行总结",
+        "keyword": "对之前的内容进行总结",
+        "title": "对之前的内容进行总结",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "对之前的内容",
+          "进行总结"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:04:32.694Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812027773_lim9",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "category": "other",
+        "keywords": [
+          "房东退租后不",
+          "退押金",
+          "我想先看看这",
+          "件事有哪些法",
+          "律风险"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:13:47.774Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812027942_zsjr",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "keyword": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "title": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "房东退租后不",
+          "退押金",
+          "我想先看看这",
+          "件事有哪些法",
+          "律风险"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:13:47.942Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812132872_bgse",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+        "question": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+        "category": "contract",
+        "keywords": [
+          "我是租客",
+          "对方是房东",
+          "月签订租房合",
+          "月退租",
+          "合同里约定押",
+          "退租时如果房",
+          "屋和屋内物品",
+          "没有明显人为",
+          "损坏",
+          "应当退还押金"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:15:32.872Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812133017_iwsi",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东…",
+        "keyword": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东…",
+        "title": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东…",
+        "riskLevel": "low",
+        "category": "contract",
+        "keywords": [
+          "我是租客",
+          "对方是房东",
+          "月签订租房合",
+          "月退租",
+          "合同里约定押",
+          "退租时如果房",
+          "屋和屋内物品",
+          "没有明显人为",
+          "损坏",
+          "应当退还押金"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:15:33.017Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812719889_vw31",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "fagui.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:25:19.889Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812720005_6r1n",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法规检索」页面",
+        "keyword": "用户进入「法规检索」页面",
+        "title": "用户进入「法规检索」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法规检索",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:25:20.005Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812795540_ki6a",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "现在我想知道我的案子有什么争议焦点。",
+        "question": "现在我想知道我的案子有什么争议焦点。",
+        "category": "other",
+        "keywords": [
+          "现在我想知道",
+          "我的案子有什",
+          "么争议焦点"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:26:35.540Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812795688_xdyf",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "现在我想知道我的案子有什么争议焦点。",
+        "keyword": "现在我想知道我的案子有什么争议焦点。",
+        "title": "现在我想知道我的案子有什么争议焦点。",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "现在我想知道",
+          "我的案子有什",
+          "么争议焦点"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:26:35.688Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812889992_b2k9",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "已添加到个人资料库",
+        "keyword": "已添加到个人资料库",
+        "title": "已添加到个人资料库",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "已添加到个人",
+          "资料库"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:28:09.992Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812893172_xe95",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "证据材料已上传至咨询会话",
+        "keyword": "证据材料已上传至咨询会话",
+        "title": "证据材料已上传至咨询会话",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "证据材料已上",
+          "传至咨询会话"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:28:13.172Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779812913444_q7lf",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "证据材料已上传至咨询会话",
+        "keyword": "证据材料已上传至咨询会话",
+        "title": "证据材料已上传至咨询会话",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "证据材料已上",
+          "传至咨询会话"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:28:33.444Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813024203_cwj6",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "根据我刚上传的材料，开始证据体检。",
+        "question": "根据我刚上传的材料，开始证据体检。",
+        "category": "other",
+        "keywords": [
+          "根据我刚上传",
+          "的材料",
+          "开始证据体检"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:30:24.203Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813024350_fl5j",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "根据我刚上传的材料，开始证据体检。",
+        "keyword": "根据我刚上传的材料，开始证据体检。",
+        "title": "根据我刚上传的材料，开始证据体检。",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "根据我刚上传",
+          "的材料",
+          "开始证据体检"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:30:24.350Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813095342_uzz2",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "请结合前面的分析给我下一步该怎么做",
+        "question": "请结合前面的分析给我下一步该怎么做",
+        "category": "other",
+        "keywords": [
+          "请结合前面的",
+          "分析给我下一",
+          "步该怎么做"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:31:35.342Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813095435_dpl8",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "请结合前面的分析给我下一步该怎么做",
+        "keyword": "请结合前面的分析给我下一步该怎么做",
+        "title": "请结合前面的分析给我下一步该怎么做",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "请结合前面的",
+          "分析给我下一",
+          "步该怎么做"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:31:35.435Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813289398_mj4r",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "证据材料已上传至咨询会话",
+        "keyword": "证据材料已上传至咨询会话",
+        "title": "证据材料已上传至咨询会话",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "证据材料已上",
+          "传至咨询会话"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:34:49.398Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813401118_5ht7",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:36:41.118Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813403346_g1lz",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "案例1.docx",
+        "keyword": "案例1.docx",
+        "title": "案例1.docx",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "案例"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:36:43.346Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813454318_0zg0",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "证据材料已上传至咨询会话",
+        "keyword": "证据材料已上传至咨询会话",
+        "title": "证据材料已上传至咨询会话",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "证据材料已上",
+          "传至咨询会话"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:37:34.318Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813533964_13nc",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "",
+        "question": "",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T16:38:53.964Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813534060_9t4c",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "案例1.docx",
+        "keyword": "案例1.docx",
+        "title": "案例1.docx",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "案例"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:38:54.061Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813558203_27la",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:39:18.203Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813558246_wbj9",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-26T16:39:18.246Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813558307_8qa0",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:39:18.307Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813560566_89qx",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "wenshi.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:39:20.566Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813560594_scgr",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「文书生成」页面",
+        "keyword": "用户进入「文书生成」页面",
+        "title": "用户进入「文书生成」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "文书生成",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:39:20.594Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813891143_d66g",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "title": "律师函标准格式如下：",
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "question": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "summary": "律师函标准格式如下：\n\n致：×××（自然人姓名/法人全称）  \n身份证号/统一社会信用代码：×××  \n地址：×××  \n\n发函人：×××律师事务所  \n执业律师：××× 律师  \n地址：×××  \n联系电话：×××  \n电子邮箱：×××  \n\n发函日期：××××年××月××日  \n\n事由：关于贵方未履行《×××合同》项下义务之严正催告函  \n\n正文：  \n一、事实陈述  \n简明、客观、准确列明基础法律关系（如合同签订时间、主体、标的）、已履行情况及违约行为发生的时间、内容与具体表现（如逾期付款××元、未交付标的物、擅自终止合作等），注明证据线索（如合同条款编号、付款凭证编号、往来函件日期等）",
+        "source": "qwen_direct",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议",
+          "律师函标准格",
+          "式如下",
+          "地址",
+          "自然人姓名"
+        ],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:44:51.143Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779813891329_sqjv",
+    "user_id": "guest",
+    "module": "document",
+    "action": "generate",
+    "detail": {
+      "type": "ai_wenshi",
+      "payload": {
+        "preview": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "keyword": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "title": "请提供律师函的标准格式，并给出催告、违约责任、期限设置的写作建议。",
+        "riskLevel": "low",
+        "category": "contract",
+        "keywords": [
+          "请提供律师函",
+          "的标准格式",
+          "并给出催告",
+          "违约责任",
+          "期限设置的写",
+          "作建议"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T16:44:51.329Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779815260466_ffb7",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "profile.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T17:07:40.466Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779815260660_0hjy",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「个人中心」页面",
+        "keyword": "用户进入「个人中心」页面",
+        "title": "用户进入「个人中心」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "个人中心",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T17:07:40.665Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779816170329_fy13",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T17:22:50.330Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779817287768_dzpe",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-26T17:41:27.770Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779817743076_mqr9",
+    "user_id": "1779817743059izse",
+    "module": "auth",
+    "action": "register",
+    "detail": {
+      "type": "user_register",
+      "payload": {
+        "email": "3333@qq.com",
+        "userId": "1779817743059izse",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "湖南"
+      }
+    },
+    "timestamp": "2026-05-26T17:49:03.076Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779817743219_bh67",
+    "user_id": "1779817743059izse",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3333@qq.com",
+        "userId": "1779817743059izse",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "湖南"
+      }
+    },
+    "timestamp": "2026-05-26T17:49:03.219Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779817793218_1zd3",
+    "user_id": "1779817793198380j",
+    "module": "auth",
+    "action": "register",
+    "detail": {
+      "type": "user_register",
+      "payload": {
+        "email": "383749818@qq.com",
+        "userId": "1779817793198380j",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "四川"
+      }
+    },
+    "timestamp": "2026-05-26T17:49:53.218Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779817846918_m65f",
+    "user_id": "17798178468975yit",
+    "module": "auth",
+    "action": "register",
+    "detail": {
+      "type": "user_register",
+      "payload": {
+        "email": "1@qq.com",
+        "userId": "17798178468975yit",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "台湾"
+      }
+    },
+    "timestamp": "2026-05-26T17:50:46.918Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779818468522_iifa",
+    "user_id": "17798184684947vqi",
+    "module": "auth",
+    "action": "register",
+    "detail": {
+      "type": "user_register",
+      "payload": {
+        "email": "2@qq.com",
+        "userId": "17798184684947vqi",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "青海"
+      }
+    },
+    "timestamp": "2026-05-26T18:01:08.522Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779818510501_3qns",
+    "user_id": "17798184684947vqi",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "2@qq.com",
+        "userId": "17798184684947vqi",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "青海"
+      }
+    },
+    "timestamp": "2026-05-26T18:01:50.502Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779818927198_qvjv",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T18:08:47.198Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779818942303_122f",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T18:09:02.303Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779818967236_q2y7",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T18:09:27.236Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779819040976_xv7r",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-26T18:10:40.976Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779840884377_tvtd",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T00:14:44.377Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779842349390_x2qt",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "index.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T00:39:09.391Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779842349479_3lf5",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「首页」页面",
+        "keyword": "用户进入「首页」页面",
+        "title": "用户进入「首页」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "首页",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T00:39:09.479Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779842491005_ihdj",
+    "user_id": "1779842490968t738",
+    "module": "auth",
+    "action": "register",
+    "detail": {
+      "type": "user_register",
+      "payload": {
+        "email": "9@qq.com",
+        "userId": "1779842490968t738",
+        "userType": "user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "浙江"
+      }
+    },
+    "timestamp": "2026-05-27T00:41:31.005Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779842503146_6nuh",
+    "user_id": "1779842490968t738",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "9@qq.com",
+        "userId": "1779842490968t738",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "浙江"
+      }
+    },
+    "timestamp": "2026-05-27T00:41:43.146Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779860666767_9d7v",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "index.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T05:44:26.768Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779860666863_x0jg",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「首页」页面",
+        "keyword": "用户进入「首页」页面",
+        "title": "用户进入「首页」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "首页",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T05:44:26.863Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779860683083_wl8p",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T05:44:43.083Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871202006_88dt",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-27T08:40:02.007Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871202744_l40x",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "chat.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:40:02.744Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871202813_euxm",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法律咨询」页面",
+        "keyword": "用户进入「法律咨询」页面",
+        "title": "用户进入「法律咨询」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法律咨询",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:40:02.813Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871206041_5r8d",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "index.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:40:06.041Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871206063_suka",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「首页」页面",
+        "keyword": "用户进入「首页」页面",
+        "title": "用户进入「首页」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "首页",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:40:06.063Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871287115_hws4",
+    "user_id": "guest",
+    "module": "system",
+    "action": "datav",
+    "detail": {
+      "type": "datav",
+      "payload": {
+        "preview": "正在查看智慧法务数据驾驶舱",
+        "keyword": "正在查看智慧法务数据驾驶舱",
+        "title": "正在查看智慧法务数据驾驶舱",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "正在查看智慧",
+          "法务数据驾驶"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:41:27.115Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871296685_5nku",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "profile.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:41:36.685Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871296717_vydv",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「个人中心」页面",
+        "keyword": "用户进入「个人中心」页面",
+        "title": "用户进入「个人中心」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "个人中心",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:41:36.717Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871539793_9dfs",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-27T08:45:39.793Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871671696_26c7",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-27T08:47:51.696Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871674554_16tv",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "knowledge.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:47:54.554Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871674586_u1ul",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「资料库」页面",
+        "keyword": "用户进入「资料库」页面",
+        "title": "用户进入「资料库」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "资料库",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:47:54.586Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871683464_jd3g",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:03.464Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871683519_jmjb",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "pufa",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:03.519Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871683609_56of",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "title": "普法宣传",
+        "category": "other",
+        "kind": "page",
+        "keywords": [
+          "普法宣传"
+        ],
+        "riskLevel": "mid",
+        "region": null,
+        "preview": "普法宣传"
+      }
+    },
+    "timestamp": "2026-05-27T08:48:03.609Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871683655_7v60",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "访问普法宣传页面",
+        "keyword": "访问普法宣传页面",
+        "title": "访问普法宣传页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "访问普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:03.655Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871683675_kppz",
+    "user_id": "guest",
+    "module": "pufa",
+    "action": "visit",
+    "detail": {
+      "type": "law_edu_visit",
+      "payload": {
+        "preview": "用户进入「普法宣传」页面",
+        "keyword": "用户进入「普法宣传」页面",
+        "title": "用户进入「普法宣传」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "普法宣传",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:03.676Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871689435_zvul",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "contact.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:09.435Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871689465_wprr",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「联系反馈」页面",
+        "keyword": "用户进入「联系反馈」页面",
+        "title": "用户进入「联系反馈」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "联系反馈",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:09.465Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779871739047_rv7v",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-27T08:48:59.047Z",
+    "status": "success",
+    "duration": 0
   }
 ]

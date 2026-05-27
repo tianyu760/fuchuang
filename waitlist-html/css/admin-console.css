@@ -1,0 +1,219 @@
+/* 法绎 · 企业管理后台（浅色 SaaS） */
+
+:root {
+  --adm-bg: #f4f6f9;
+  --adm-sidebar: #ffffff;
+  --adm-surface: #ffffff;
+  --adm-border: #e5e9f0;
+  --adm-text: #1e293b;
+  --adm-muted: #64748b;
+  --adm-accent: #2563eb;
+  --adm-accent-soft: #eff6ff;
+  --adm-radius: 12px;
+}
+
+* { box-sizing: border-box; }
+
+body.adm-console {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--adm-bg);
+  color: var(--adm-text);
+}
+
+.adm-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.adm-side {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--adm-sidebar);
+  border-right: 1px solid var(--adm-border);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 14px;
+}
+
+.adm-brand {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 8px 12px 24px;
+  color: var(--adm-text);
+  letter-spacing: -0.02em;
+}
+
+.adm-brand span {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--adm-muted);
+  margin-top: 4px;
+}
+
+.adm-nav { flex: 1; }
+
+.adm-nav a {
+  display: block;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 10px;
+  color: var(--adm-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.adm-nav a:hover {
+  transform: translateY(-2px);
+  background: var(--adm-accent-soft);
+  color: var(--adm-accent);
+}
+
+.adm-nav a.is-active {
+  background: var(--adm-accent-soft);
+  color: var(--adm-accent);
+  font-weight: 600;
+}
+
+.adm-side-foot {
+  padding-top: 16px;
+  border-top: 1px solid var(--adm-border);
+  font-size: 12px;
+  color: var(--adm-muted);
+}
+
+.adm-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.adm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 28px;
+  background: var(--adm-surface);
+  border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-topbar h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.adm-topbar-meta {
+  font-size: 13px;
+  color: var(--adm-muted);
+  margin-top: 4px;
+}
+
+.adm-body {
+  flex: 1;
+  padding: 24px 28px 40px;
+  overflow: auto;
+}
+
+/* 覆盖嵌入深色样式为浅色控制台 */
+.adm-console .adm-embed-body,
+.adm-console #page-root {
+  color: var(--adm-text);
+}
+
+.adm-console .adm-stat {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.adm-console .adm-stat__label { color: var(--adm-muted); }
+.adm-console .adm-stat__value { color: var(--adm-text); font-size: 1.75rem; }
+.adm-console .adm-stat__sub { color: #059669; }
+
+.adm-console .adm-card {
+  background: var(--adm-surface);
+  border: 1px solid var(--adm-border);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.adm-console .adm-card h3 { color: var(--adm-text); }
+
+.adm-console .adm-table th {
+  color: var(--adm-muted);
+  background: #f8fafc;
+}
+
+.adm-console .adm-table td {
+  color: var(--adm-text);
+  border-bottom-color: var(--adm-border);
+}
+
+.adm-console .adm-input {
+  background: #fff;
+  border: 1px solid var(--adm-border);
+  color: var(--adm-text);
+}
+
+.adm-console .adm-btn--primary {
+  background: var(--adm-accent);
+  border-color: var(--adm-accent);
+}
+
+.adm-console .adm-btn--ghost {
+  border: 1px solid var(--adm-border);
+  color: var(--adm-text);
+  background: #fff;
+}
+
+.adm-console .adm-chart { background: #fafbfc; border-radius: 8px; }
+
+.adm-console .adm-skeleton {
+  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background-size: 200% 100%;
+  animation: adm-shimmer 1.2s infinite;
+  height: 48px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+@keyframes adm-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.adm-btn:hover { transform: translateY(-2px); }
+
+.adm-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--adm-border);
+  color: var(--adm-text);
+}
+
+.adm-btn--sm { height: 32px; padding: 0 12px; font-size: 12px; }
+
+@media (max-width: 900px) {
+  .adm-layout { flex-direction: column; }
+  .adm-side { width: 100%; border-right: none; border-bottom: 1px solid var(--adm-border); }
+  .adm-nav { display: flex; flex-wrap: wrap; gap: 4px; }
+  .adm-nav a { margin: 0; }
+}

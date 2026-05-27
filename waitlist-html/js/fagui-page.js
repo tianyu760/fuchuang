@@ -1,8 +1,20 @@
 (function () {
-  var MODULE = 'regulation_search';
-  var chatHistory = [];
+  var API_HEALTH = 'http://localhost:3002/health';
   var conversationId = sessionStorage.getItem('fayi_fagui_conversation_id') || ('fagui_' + Date.now());
   sessionStorage.setItem('fayi_fagui_conversation_id', conversationId);
+
+  function checkLegalService() {
+    return fetch(API_HEALTH, { method: 'GET' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { return !!(j && j.ok); })
+      .catch(function () { return false; });
+  }
+
+  function notifyServiceDown() {
+    if (window.FayiToast) {
+      FayiToast('法规检索服务未启动，请先运行 server/multimodal-server.js（端口 3002）', 'error');
+    }
+  }
 
   function doSearch(query) {
     if (!query || !window.FayiAiLegal) return;
@@ -18,24 +30,9 @@
     loadingDiv.classList.remove('hidden');
     if (submitBtn) submitBtn.disabled = true;
 
-    if (window.FayiIntentRouter && window.FayiContextManager) {
-      var histText = chatHistory.map(function (m) { return m.content || ''; }).join('\n');
-      if (FayiIntentRouter.isKeywordConflict(query, histText)) {
-        chatHistory = [];
-        FayiContextManager.clearContext(MODULE);
-        if (window.FayiToast) FayiToast('检测到历史上下文冲突，已自动清空检索会话', 'success');
-      }
-    }
-
-    FayiAiLegal.searchFagui(query, chatHistory, { conversationId: conversationId })
+    FayiAiLegal.searchFagui(query, [], { conversationId: conversationId })
       .then(function (res) {
         var data = res.data || {};
-        chatHistory.push({ role: 'user', content: query });
-        chatHistory.push({ role: 'assistant', content: JSON.stringify(data) });
-        if (chatHistory.length > 12) chatHistory = chatHistory.slice(chatHistory.length - 12);
-        if (window.FayiContextManager) {
-          FayiContextManager.setMessages(MODULE, chatHistory);
-        }
 
         loadingDiv.classList.add('hidden');
         answerDiv.innerHTML = FayiAiLegal.renderFaguiResult(data);
@@ -63,7 +60,12 @@
       })
       .catch(function (e) {
         loadingDiv.classList.add('hidden');
-        if (window.FayiToast) FayiToast('请求失败：' + e.message, 'error');
+        var msg = (e && e.message) || '未知错误';
+        if (/failed to fetch|network|未启动|不可用/i.test(msg)) {
+          notifyServiceDown();
+        } else if (window.FayiToast) {
+          FayiToast('请求失败：' + msg, 'error');
+        }
       })
       .finally(function () {
         if (submitBtn) submitBtn.disabled = false;
@@ -71,12 +73,12 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    if (window.FayiContextManager) {
-      FayiContextManager.switchModule(MODULE);
-      chatHistory = FayiContextManager.getMessages(MODULE);
-    }
-
     if (!window.FayiAuth || !FayiAuth.getCurrentUser()) return;
+
+    checkLegalService().then(function (ok) {
+      if (!ok) notifyServiceDown();
+    });
+
     var reg = sessionStorage.getItem('fayi_regenerate_law_search');
     if (reg) {
       var inp = document.getElementById('fagui-input');
@@ -95,8 +97,6 @@
       e.preventDefault();
       var q = document.getElementById('fagui-input').value.trim();
       if (!q) { if (window.FayiToast) FayiToast('请输入检索内容', 'error'); return; }
-      chatHistory = [];
-      if (window.FayiContextManager) FayiContextManager.clearContext(MODULE);
       doSearch(q);
     });
   });

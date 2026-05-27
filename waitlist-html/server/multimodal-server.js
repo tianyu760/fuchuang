@@ -18,23 +18,16 @@ const crypto   = require('crypto');          // 用于生成 token 和密码 has
 const axios    = require('axios');           // 腾讯元器流式请求
 const {
   apiSuccess,
-  apiError,
-  safeParseJson,
-  normalizeWenshiData,
-  normalizeFaguiData,
-  callYuanqiJson
+  apiError
 } = require('./lib/ai-utils');
+const { searchLegalByQwen } = require('./lib/qwen-legal-search');
+const { formatLegalSearchResult } = require('./lib/legal-search-formatter');
+const { generateLegalDocumentByQwen } = require('./lib/qwen-legal-document');
 const {
   detectIntent,
   isKeywordConflict,
   sanitizeHistoryByIntent
 } = require('./lib/intent-router');
-let qwenService = null;
-try {
-  qwenService = require('./dist/services/ai/qwenService');
-} catch (e) {
-  qwenService = null;
-}
 const {
   callTencentAgent,
   buildPassthroughUserContent,
@@ -702,51 +695,144 @@ function getTokenUser(req) {
   return usersLoad().find(u => u.id === userId) || null;
 }
 
-/** POST /api/auth/register — 注册 */
+function normEmail(email) {
+  return String(email || '').trim().toLowerCase();
+}
+
+const ADMIN_PERMISSION_CODE = 'manager';
+
+function isExactAdminCode(code) {
+  return String(code) === ADMIN_PERMISSION_CODE;
+}
+
+/** POST /api/auth/register — 注册（userType: user | admin） */
 app.post('/api/auth/register', (req, res) => {
-  const { name, email, password, avatar, persona } = req.body || {};
+  const { name, email, password, avatar, userType, adminPermissionCode } = req.body || {};
   if (!email || !password) return res.json({ ok: false, message: '邮箱和密码不能为空' });
 
+  const type = userType === 'admin' ? 'admin' : 'user';
+  const emailNorm = normEmail(email);
+
+  if (type === 'admin' && !isExactAdminCode(adminPermissionCode)) {
+    return res.json({
+      ok: false,
+      message: '管理员权限验证码错误，无法注册管理员账号',
+      code: 'ADMIN_CODE_INVALID'
+    });
+  }
+
   const users = usersLoad();
-  if (users.find(u => u.email === email))
+  if (users.find(u => normEmail(u.email) === emailNorm))
     return res.json({ ok: false, message: '该邮箱已被注册' });
 
+  const nickname = (name || email.split('@')[0]).trim();
   const user = {
-    id:        Date.now().toString() + Math.random().toString(36).slice(2, 6),
-    name:      (name || email.split('@')[0]).trim(),
-    email:     email.trim(),
-    password:  hashPwd(password),
-    avatar:    avatar  || './images/avatars/1.svg',
-    persona:   persona || 'life_consume',
-    createdAt: new Date().toISOString(),
+    id:           Date.now().toString() + Math.random().toString(36).slice(2, 6),
+    nickname:     nickname,
+    name:         nickname,
+    email:        emailNorm,
+    password:     hashPwd(password),
+    avatar:       avatar || './images/avatars/1.svg',
+    userType:     type,
+    role:         type === 'admin' ? 'admin' : 'user',
+    identityCode: type === 'admin' ? ADMIN_PERMISSION_CODE : null,
+    persona:      'life_consume',
+    status:       'active',
+    createdAt:    new Date().toISOString(),
   };
   users.push(user);
   usersSave(users);
-  adminAnalytics.logEvent('user_register', { email: user.email, userId: user.id });
-  console.log(`[auth] 注册: ${email}`);
-  res.json({ ok: true, message: '注册成功' });
+  adminAnalytics.logEvent(type === 'admin' ? 'admin_register' : 'user_register', {
+    email: user.email, userId: user.id, userType: type
+  });
+  console.log(`[auth] 注册(${type}): ${email}`);
+  res.json({ ok: true, message: '注册成功', data: { userType: type, email: user.email } });
 });
 
-/** POST /api/auth/login — 登录 */
+/** POST /api/auth/login — 登录（管理员需 adminPermissionCode === manager） */
 app.post('/api/auth/login', (req, res) => {
-  const { email, password } = req.body || {};
+  const { email, password, adminPermissionCode } = req.body || {};
   if (!email || !password) return res.json({ ok: false, message: '请填写邮箱和密码' });
 
+  const emailNorm = normEmail(email);
   const users = usersLoad();
-  const user  = users.find(u => u.email === email && u.password === hashPwd(password));
+  const user  = users.find(u => normEmail(u.email) === emailNorm && u.password === hashPwd(password));
   if (!user) return res.json({ ok: false, message: '邮箱或密码错误' });
+
+  const role = user.role || (user.userType === 'admin' ? 'admin' : 'user');
+  const isAdmin = role === 'admin' || user.userType === 'admin';
+
+  if (user.status === 'banned') {
+    return res.json({ ok: false, message: '账号已被封禁，请联系平台管理员' });
+  }
+
+  if (isAdmin) {
+    if (adminPermissionCode === undefined || adminPermissionCode === '') {
+      return res.json({
+        ok: false,
+        message: '请输入管理员权限验证码',
+        code: 'ADMIN_CODE_REQUIRED'
+      });
+    }
+    if (!isExactAdminCode(adminPermissionCode)) {
+      return res.json({
+        ok: false,
+        message: '管理员权限验证失败',
+        code: 'ADMIN_CODE_INVALID'
+      });
+    }
+
+    const token = genToken();
+    tokenStore.set(token, user.id);
+    tokenStoreSave(tokenStore);
+
+    let adminToken = token;
+    try {
+      const adminAuth = require('./modules/admin/admin-auth');
+      adminToken = adminAuth.loginPlatformUser(user);
+    } catch (e) {
+      console.warn('[auth] admin token issue:', e.message);
+    }
+
+    adminAnalytics.logEvent('admin_login', { email: user.email, userId: user.id, source: 'platform_login' });
+    console.log(`[auth] 管理员登录: ${email}`);
+    return res.json({
+      ok: true,
+      data: {
+        token,
+        adminToken,
+        adminVerified: true,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+          persona: user.persona,
+          userType: 'admin',
+          role: 'admin'
+        }
+      }
+    });
+  }
 
   const token = genToken();
   tokenStore.set(token, user.id);
-  tokenStoreSave(tokenStore); // 持久化到磁盘
+  tokenStoreSave(tokenStore);
   adminAnalytics.logEvent('user_login', { email: user.email, userId: user.id });
   console.log(`[auth] 登录: ${email}`);
   res.json({
     ok: true,
     data: {
       token,
-      user: { id: user.id, name: user.name, email: user.email,
-              avatar: user.avatar, persona: user.persona }
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        persona: user.persona,
+        userType: 'user',
+        role: 'user'
+      }
     }
   });
 });
@@ -769,8 +855,13 @@ app.put('/api/auth/profile', (req, res) => {
 
   const u = users[idx];
   console.log(`[auth] 更新资料: ${u.email}`);
-  res.json({ ok: true, data: { id: u.id, name: u.name, email: u.email,
-                               avatar: u.avatar, persona: u.persona } });
+  res.json({
+    ok: true,
+    data: {
+      id: u.id, name: u.name, email: u.email,
+      avatar: u.avatar, persona: u.persona, userType: u.userType || 'user'
+    }
+  });
 });
 
 /** POST /api/auth/change-password — 修改密码 */
@@ -1266,108 +1357,81 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
 });
 
 
-// ── POST /api/wenshi/generate  法律文书生成（Qwen 优先，元器降级）──────────────────
+// ── POST /api/wenshi/generate  法律文书生成（直连 Qwen，纯文本）──────────────────
 app.post('/api/wenshi/generate', async (req, res) => {
   try {
     const question = (req.body && req.body.question) ? String(req.body.question).trim() : '';
     if (!question) {
       return res.status(400).json(apiError('问题不能为空'));
     }
-    const rawHistory = Array.isArray(req.body.history) ? req.body.history : [];
-    const history = sanitizeHistoryByIntent(rawHistory, question);
-    const intentResult = detectIntent(question);
-    const wenshiUser = getTokenUser(req);
-    const conversationId = (req.body && req.body.conversationId) ? String(req.body.conversationId) : 'default';
-    const moduleScopedUserId = (wenshiUser && wenshiUser.id ? wenshiUser.id : 'guest') + ':legal_document:' + conversationId;
-    let normalized;
-    console.log(`[intent-router] module=legal_document intent=${intentResult.intent} prompt=wenshi historyRaw=${rawHistory.length} historySafe=${history.length}`);
 
-    if (qwenService && qwenService.isQwenConfigured()) {
-      const result = await qwenService.generateLegalDocument(question, { history });
-      normalized = normalizeWenshiData(result, question);
-    } else {
-      const { data } = await callYuanqiJson(question, {
-        history,
-        userId: moduleScopedUserId,
-        fallback: 'wenshi'
-      });
-      normalized = normalizeWenshiData(data, question);
-    }
+    // 文书生成简化：仅使用当前问题，禁止继承历史上下文
+    const content = await generateLegalDocumentByQwen(question);
+    const firstLine = String(content || '').split(/\n+/).find(Boolean) || '法律文书';
+    const title = firstLine.replace(/^《|》$/g, '').trim() || '法律文书';
+    const normalized = {
+      title: title,
+      summary: question.slice(0, 200),
+      document_content: content,
+      body_markdown: content
+    };
 
     adminAnalytics.logEvent('ai_wenshi', {
-      title: normalized.title,
+      title: title,
       preview: question.slice(0, 120),
       question: question.slice(0, 300),
-      risk_level: normalized.risk_level,
-      summary: (normalized.summary || '').slice(0, 300)
+      summary: content.slice(0, 300),
+      source: 'qwen_direct'
     });
     adminAnalytics.appendDocRecord({
-      title: normalized.title,
-      docType: normalized.doc_type || '法律文书',
-      content: normalized.body_markdown || normalized.document_content,
+      title: title,
+      docType: '法律文书',
+      content: content,
       preview: question.slice(0, 120)
     });
     return res.json(apiSuccess(normalized, '法律文书生成成功'));
   } catch (err) {
     console.error('[wenshi/generate]', err.message);
-    if (err.raw_content) {
-      const fallback = safeParseJson(err.raw_content);
-      if (fallback.ok) {
-        const normalized = normalizeWenshiData(fallback.data, req.body.question);
-        return res.json(apiSuccess(normalized, '法律文书生成成功（二次解析）'));
-      }
-    }
     return res.status(err.statusCode || 500).json(apiError(
-      err.message || '法律文书生成失败',
-      err.parseError || err.message,
-      err.raw_content ? { raw_content: err.raw_content } : {}
+      '当前法律文书生成服务暂时不可用，请稍后重试。',
+      err.message || 'wenshi unavailable'
     ));
   }
 });
 
-// ── POST /api/fagui/search  法律法规检索（元器透传 + JSON 解析）────────────────────
-app.post('/api/fagui/search', async (req, res) => {
+// ── POST /api/legal/search  法律法规检索（直连 Qwen，无历史上下文）───────────────
+async function handleLegalSearch(req, res) {
   try {
     const query = (req.body && req.body.query) ? String(req.body.query).trim() : '';
     if (!query) {
       return res.status(400).json(apiError('检索词不能为空'));
     }
-    const rawHistory = Array.isArray(req.body.history) ? req.body.history : [];
-    const history = sanitizeHistoryByIntent(rawHistory, query);
-    const intentResult = detectIntent(query);
-    const faguiUser = getTokenUser(req);
-    const conversationId = (req.body && req.body.conversationId) ? String(req.body.conversationId) : 'default';
-    const moduleScopedUserId = (faguiUser && faguiUser.id ? faguiUser.id : 'guest') + ':regulation_search:' + conversationId;
-    console.log(`[intent-router] module=regulation_search intent=${intentResult.intent} prompt=fagui historyRaw=${rawHistory.length} historySafe=${history.length}`);
-    const { data } = await callYuanqiJson(query, {
-      history,
-      userId: moduleScopedUserId,
-      fallback: 'fagui'
-    });
-    const normalized = normalizeFaguiData(data, query);
+
+    // 法规检索必须单轮独立请求：禁止历史串台、禁止上下文复用
+    const raw = await searchLegalByQwen(query);
+    const normalized = formatLegalSearchResult(query, raw);
+
     adminAnalytics.logEvent('ai_fagui', {
       keyword: normalized.keyword,
       preview: query.slice(0, 120),
       query: query.slice(0, 300),
-      analysis: (normalized.analysis || '').slice(0, 200)
+      analysis: (normalized.analysis || '').slice(0, 200),
+      source: 'qwen_direct'
     });
+
     return res.json(apiSuccess(normalized, '法规检索成功'));
   } catch (err) {
-    console.error('[fagui/search]', err.message);
-    if (err.raw_content) {
-      const fallback = safeParseJson(err.raw_content);
-      if (fallback.ok) {
-        const normalized = normalizeFaguiData(fallback.data, req.body.query);
-        return res.json(apiSuccess(normalized, '法规检索成功（二次解析）'));
-      }
-    }
+    console.error('[legal/search]', err.message);
     return res.status(err.statusCode || 500).json(apiError(
-      err.message || '法规检索失败',
-      err.parseError || err.message,
-      err.raw_content ? { raw_content: err.raw_content } : {}
+      '当前法规检索服务暂时不可用，请稍后重试。',
+      err.message || 'legal search unavailable'
     ));
   }
-});
+}
+
+app.post('/api/legal/search', handleLegalSearch);
+// 兼容旧前端路径：内部统一走直连 Qwen 链路
+app.post('/api/fagui/search', handleLegalSearch);
 
 // ── 普法宣传 API ────────────────────────────────────────────────────────────
 if (lawEducationRouter) {
@@ -1425,7 +1489,8 @@ app.listen(PORT, () => {
   console.log('    GET  /api/knowledge       — 获取资料库列表');
   console.log('    POST /api/knowledge       — 新建资料库条目');
   console.log('    POST /api/wenshi/generate — 法律文书生成（JSON）');
-  console.log('    POST /api/fagui/search    — 法律法规检索（JSON）');
+  console.log('    POST /api/legal/search    — 法律法规检索（Qwen直连）');
+  console.log('    POST /api/fagui/search    — 法律法规检索（兼容路径）');
   console.log('    GET  /api/admin/*         — 管理端 API');
   console.log('    GET  /api/admin/datav/realtime — 数字大屏实时数据');
   console.log('    GET  /api/admin/datav/stream   — 数字大屏 SSE 推送');

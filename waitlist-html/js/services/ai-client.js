@@ -41,6 +41,17 @@
     return json;
   }
 
+  function friendlyFetchError(path, err) {
+    var msg = (err && err.message) || '';
+    if (/failed to fetch|networkerror|network error|load failed/i.test(msg)) {
+      if (path.indexOf('/legal/search') >= 0 || path.indexOf('/fagui/search') >= 0) {
+        return new Error('法规检索服务未启动，请先运行 server/multimodal-server.js（端口 3002）');
+      }
+      return new Error('AI 服务未连接，请先启动 server/multimodal-server.js（端口 3002）');
+    }
+    return err;
+  }
+
   function postJson(path, body, extraHeaders) {
     return fetch(API_BASE + path, {
       method: 'POST',
@@ -57,6 +68,8 @@
         notifyRealtime(path);
         return normalizeReply(json);
       });
+    }).catch(function (err) {
+      throw friendlyFetchError(path, err);
     });
   }
 
@@ -146,28 +159,16 @@
 
     /** 法律文书生成 */
     generateWenshi: function (question, history, options) {
-      var intent = (global.FayiIntentRouter && FayiIntentRouter.detectIntent)
-        ? FayiIntentRouter.detectIntent(question || '')
-        : { intent: 'legal_document' };
       return postJson('/api/wenshi/generate', {
         question: question,
-        history: history || [],
-        module: 'legal_document',
-        intent: intent.intent,
         conversationId: options && options.conversationId
       });
     },
 
     /** 法规检索 */
     searchFagui: function (query, history, options) {
-      var intent = (global.FayiIntentRouter && FayiIntentRouter.detectIntent)
-        ? FayiIntentRouter.detectIntent(query || '')
-        : { intent: 'regulation_search' };
-      return postJson('/api/fagui/search', {
+      return postJson('/api/legal/search', {
         query: query,
-        history: history || [],
-        module: 'regulation_search',
-        intent: intent.intent,
         conversationId: options && options.conversationId
       });
     },

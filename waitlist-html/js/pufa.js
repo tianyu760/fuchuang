@@ -611,15 +611,35 @@
   /* ===== DOM Ready ===== */
   /** 管理端/大屏统计（附加，不影响页面展示与数据） */
   function trackPufaVisit(extra) {
+    extra = extra || {};
     try {
       fetch('http://localhost:3002/api/admin/track/visit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.assign({ page: 'pufa' }, extra || {}))
+        body: JSON.stringify(Object.assign({ page: 'pufa' }, extra))
       }).catch(function () {});
     } catch (e) { /* ignore */ }
 
-    if (!window.FayiActivity || !extra || !extra.action) return;
+    if (window.FayiPufaStats && FayiPufaStats.increaseReadCount) {
+      if (extra.action === 'article_click') {
+        FayiPufaStats.increaseReadCount({
+          kind: 'article',
+          title: extra.title || '',
+          category: extra.category || extra.title || '',
+          articleId: extra.articleId || ''
+        });
+      } else if (extra.action === 'video_click') {
+        FayiPufaStats.increaseReadCount({
+          kind: 'video',
+          title: extra.title || '',
+          category: extra.category || extra.title || ''
+        });
+      } else if (!extra.action) {
+        FayiPufaStats.increaseReadCount({ kind: 'page', title: '普法宣传' });
+      }
+    }
+
+    if (!window.FayiActivity || !extra.action) return;
     if (extra.action === 'article_click' && extra.title) {
       FayiActivity.addActivityLog({
         type: 'pufa',

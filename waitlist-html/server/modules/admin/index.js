@@ -7,14 +7,137 @@ let lawStore;
 try { lawStore = require('../law-education/law-store'); } catch (e) { lawStore = null; }
 
 const router = express.Router();
+const crypto = require('crypto');
+const USERS_FILE = path.join(__dirname, '..', '..', 'users.json');
+const FIXED_ADMIN_CODE = 'manager';
+
+function hashUserPwd(pwd) {
+  return crypto.createHash('sha256').update(pwd + 'fayi_salt_2024').digest('hex');
+}
+
+function normEmail(email) {
+  return String(email || '').trim().toLowerCase();
+}
+
+function loadUsersMutable() {
+  return store.loadPlatformUsers();
+}
+
+function saveUsers(users) {
+  fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2), 'utf-8');
+}
+
+function findPlatformAdmin(email, password) {
+  const emailNorm = normEmail(email);
+  const pwdHash = hashUserPwd(password);
+  const users = loadUsersMutable();
+  const idx = users.findIndex(function (u) {
+    return normEmail(u.email) === emailNorm && u.password === pwdHash;
+  });
+  if (idx === -1) return null;
+
+  const user = users[idx];
+  if (user.userType !== 'admin' && user.role !== 'admin') return null;
+
+  if (user.identityCode !== FIXED_ADMIN_CODE) {
+    user.identityCode = FIXED_ADMIN_CODE;
+    users[idx] = user;
+    saveUsers(users);
+  }
+  return user;
+}
+
+/** 仅凭验证码进入管理端 */
+router.post('/auth/code-login', function (req, res) {
+  const inputCode = (req.body && req.body.identityCode) != null ? String(req.body.identityCode) : '';
+  const result = auth.loginByCode(inputCode === FIXED_ADMIN_CODE ? inputCode : '');
+  if (!result) {
+    return res.status(403).json({
+      success: false,
+      message: '身份验证码错误，无权进入管理系统'
+    });
+  }
+  store.logEvent('admin_code_login', { email: result.admin.email });
+  res.json({
+    success: true,
+    data: result,
+    message: '验证成功'
+  });
+});
 
 router.post('/auth/login', function (req, res) {
-  const { email, password } = req.body || {};
-  if (!email || !password) return res.status(400).json({ success: false, message: '请输入账号和密码' });
-  const result = auth.login(String(email).trim(), password);
-  if (!result) return res.status(401).json({ success: false, message: '账号或密码错误' });
-  store.logEvent('admin_login', { email: result.admin.email });
-  res.json({ success: true, data: result, message: '登录成功' });
+  const { email, password, identityCode } = req.body || {};
+  const inputCode = identityCode != null ? String(identityCode) : '';
+
+  if (inputCode === FIXED_ADMIN_CODE && (!email || !password)) {
+    const codeResult = auth.loginByCode(inputCode);
+    if (codeResult) {
+      store.logEvent('admin_code_login', { email: codeResult.admin.email });
+      return res.json({ success: true, data: codeResult, message: '验证成功' });
+    }
+  }
+
+  if (!email || !password) {
+    return res.status(400).json({ success: false, message: '请输入身份验证码' });
+  }
+
+  if (inputCode !== FIXED_ADMIN_CODE) {
+    return res.status(403).json({
+      success: false,
+      message: '身份验证码错误或管理员权限无效'
+    });
+  }
+
+  const platformUser = findPlatformAdmin(email, password);
+  if (platformUser) {
+    if (platformUser.status === 'banned') {
+      return res.status(403).json({ success: false, message: '管理员账号已被禁用' });
+    }
+    const token = auth.loginPlatformUser(platformUser);
+    store.logEvent('admin_login', { email: platformUser.email, source: 'platform_user' });
+    return res.json({
+      success: true,
+      data: {
+        token: token,
+        admin: {
+          id: platformUser.id,
+          email: platformUser.email,
+          nickname: platformUser.nickname || platformUser.name,
+          name: platformUser.name || platformUser.nickname,
+          userType: 'admin',
+          identityCode: FIXED_ADMIN_CODE,
+          role: 'platform_admin'
+        }
+      },
+      message: '登录成功'
+    });
+  }
+
+  const emailNorm = normEmail(email);
+  const users = loadUsersMutable();
+  const anyUser = users.find(function (u) {
+    return normEmail(u.email) === emailNorm && u.password === hashUserPwd(password);
+  });
+  if (anyUser && anyUser.userType !== 'admin') {
+    return res.status(403).json({ success: false, message: '普通用户请使用前台登录页' });
+  }
+
+  const result = auth.login(emailNorm, password);
+  if (!result) {
+    return res.status(401).json({ success: false, message: '账号或密码错误' });
+  }
+  store.logEvent('admin_login', { email: result.admin.email, source: 'legacy_admin' });
+  res.json({
+    success: true,
+    data: {
+      token: result.token,
+      admin: Object.assign({}, result.admin, {
+        userType: 'admin',
+        identityCode: FIXED_ADMIN_CODE
+      })
+    },
+    message: '登录成功'
+  });
 });
 
 router.get('/auth/me', auth.requireAdmin, function (req, res) {
@@ -22,10 +145,13 @@ router.get('/auth/me', auth.requireAdmin, function (req, res) {
 });
 
 router.get('/auth/check-email', function (req, res) {
-  const email = (req.query.email || '').trim().toLowerCase();
+  const email = normEmail(req.query.email);
   const admins = store.readJson(store.FILES.admins, []);
+  const users = loadUsersMutable();
   const isAdmin = admins.some(function (a) {
-    return String(a.email || '').toLowerCase() === email;
+    return normEmail(a.email) === email;
+  }) || users.some(function (u) {
+    return normEmail(u.email) === email && u.userType === 'admin';
   });
   res.json({ success: true, data: { isAdmin: isAdmin } });
 });
@@ -46,11 +172,18 @@ router.get('/users', auth.requireAdmin, function (req, res) {
   const pageSize = Math.min(50, parseInt(req.query.pageSize, 10) || 10);
   const search = (req.query.search || '').trim().toLowerCase();
   const metaMap = store.getUserMetaMap();
-  let users = store.loadPlatformUsers().map(function (u) {
+  let users = store.loadPlatformUsers()
+    .filter(function (u) { return (u.userType || 'user') !== 'admin'; })
+    .map(function (u) {
     const meta = metaMap[u.id] || {};
     return {
-      id: u.id, name: u.name, email: u.email, status: meta.status || 'active',
-      consultCount: meta.consultCount || 0, createdAt: u.createdAt
+      id: u.id, name: u.name, email: u.email,
+      status: u.status === 'banned' || meta.status === 'banned' ? 'banned' : 'active',
+      userType: u.userType || 'user',
+      consultCount: meta.consultCount || 0,
+      riskLevel: meta.riskLevel || 'low',
+      lastActiveAt: meta.lastActiveAt || u.createdAt,
+      createdAt: u.createdAt
     };
   });
   if (search) {
@@ -74,6 +207,13 @@ router.put('/users/:id/status', auth.requireAdmin, function (req, res) {
   entry.updatedAt = new Date().toISOString();
   if (idx >= 0) list[idx] = entry; else list.push(entry);
   store.saveUserMetaList(list);
+  const users = store.loadPlatformUsers();
+  const uIdx = users.findIndex(function (u) { return u.id === userId; });
+  if (uIdx >= 0) {
+    users[uIdx].status = status;
+    saveUsers(users);
+  }
+  store.logEvent(status === 'banned' ? 'user_ban' : 'user_unban', { userId: userId });
   res.json({ success: true, message: status === 'banned' ? '已封禁' : '已解封' });
 });
 
@@ -82,8 +222,9 @@ router.delete('/users/:id', auth.requireAdmin, function (req, res) {
   const users = store.loadPlatformUsers();
   const filtered = users.filter(function (u) { return u.id !== userId; });
   if (filtered.length === users.length) return res.status(404).json({ success: false, message: '用户不存在' });
-  fs.writeFileSync(path.join(__dirname, '..', '..', 'users.json'), JSON.stringify(filtered, null, 2), 'utf-8');
+  saveUsers(filtered);
   store.saveUserMetaList(store.readJson(store.FILES.userMeta, []).filter(function (m) { return m.userId !== userId; }));
+  store.logEvent('user_delete', { userId: userId });
   res.json({ success: true, message: '已删除' });
 });
 
@@ -203,7 +344,6 @@ router.get('/logs', auth.requireAdmin, function (req, res) {
   });
 });
 
-/** 数字大屏专用：检测 3002 数据服务是否就绪 */
 router.get('/datav/health', function (req, res) {
   res.json({
     success: true,
@@ -220,7 +360,6 @@ router.get('/datav/realtime', function (req, res) {
   res.json({ success: true, data: store.buildRealtimePayload(lawStore) });
 });
 
-/** SSE：数字大屏实时推送（2s 心跳 + 数据快照） */
 router.get('/datav/stream', function (req, res) {
   res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
   res.setHeader('Cache-Control', 'no-cache, no-transform');
@@ -250,6 +389,18 @@ router.post('/datav/bump', function (req, res) {
 router.post('/track/visit', function (req, res) {
   store.bumpVisit((req.body && req.body.page) || '');
   res.json({ success: true });
+});
+
+router.post('/datav/operation-log', function (req, res) {
+  const body = req.body || {};
+  const row = store.logOperationFromClient(body);
+  res.json({ success: true, id: row && row.id });
+});
+
+router.post('/datav/pufa-read', function (req, res) {
+  const body = req.body || {};
+  const st = store.bumpPufaRead(body);
+  res.json({ success: true, data: st });
 });
 
 module.exports = router;

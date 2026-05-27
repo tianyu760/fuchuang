@@ -2,18 +2,19 @@
  * 法绎管理端 SPA（hash 路由）
  */
 (function () {
-  if (!FayiAdminApi.getToken()) {
-    location.href = 'login.html';
+  if (!window.FayiAdminAuth || !FayiAdminAuth.requireAuth()) {
     return;
   }
 
   var TITLES = {
     overview: '数据总览',
     users: '用户管理',
-    consultations: '法律咨询记录',
-    documents: '法律文书管理',
-    ocr: 'OCR 识别记录',
-    regulations: '法律法规库'
+    consultations: '法律咨询管理',
+    documents: '文书生成记录',
+    ocr: 'OCR 识别中心',
+    regulations: '法规库管理',
+    logs: '系统日志',
+    'law-education': '普法内容管理'
   };
 
   var CAT_LABELS = {
@@ -111,12 +112,12 @@
           '</div>' +
           '<div class="adm-card" style="margin-top:20px"><h3>系统状态</h3><p id="sys-status"></p></div>';
         var stats = [
-          ['总用户数', s.totalUsers],
-          ['今日访问量', s.todayVisits],
-          ['AI 调用次数', s.aiCalls],
-          ['OCR 识别次数', s.ocrCount],
-          ['法律咨询次数', s.consultCount],
-          ['文书生成次数', s.documentCount]
+          ['今日活跃用户', s.todayVisits || s.aiCallsToday || 0],
+          ['在线用户', s.onlineUsers || 1],
+          ['今日咨询量', s.consultToday || 0],
+          ['文书生成量', s.documentToday || s.wenshiToday || 0],
+          ['OCR 识别次数', s.ocrToday || s.ocrCount || 0],
+          ['风险案件数', (s.riskHigh || 0) + (s.riskMid || 0)]
         ];
         var row = $('stats-row');
         stats.forEach(function (item) {
@@ -157,7 +158,7 @@
       root.innerHTML =
         '<div class="adm-toolbar"><input class="adm-input" style="max-width:260px" id="user-search" placeholder="搜索邮箱/昵称">' +
         '<button class="adm-btn adm-btn--primary adm-btn--sm" id="user-search-btn">搜索</button></div>' +
-        '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>用户</th><th>邮箱</th><th>状态</th><th>咨询数</th><th>操作</th></tr></thead><tbody id="users-tb"></tbody></table></div><div id="users-pg"></div>';
+        '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>用户</th><th>邮箱</th><th>状态</th><th>注册时间</th><th>最近活跃</th><th>风险</th><th>咨询数</th><th>操作</th></tr></thead><tbody id="users-tb"></tbody></table></div><div id="users-pg"></div>';
       function load(page) {
         state.users.page = page;
         FayiAdminApi.users({ page: page, pageSize: 10, search: state.users.search }).then(function (res) {
@@ -166,7 +167,12 @@
           res.data.list.forEach(function (u) {
             var tr = document.createElement('tr');
             var st = u.status === 'banned' ? '<span class="adm-badge adm-badge--ban">封禁</span>' : '<span class="adm-badge adm-badge--ok">正常</span>';
-            tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '') + '</td><td>' + st + '</td><td>' + (u.consultCount || 0) + '</td><td class="user-actions"></td>';
+            var reg = (u.createdAt || '').slice(0, 10);
+            var active = (u.lastActiveAt || '').slice(0, 16).replace('T', ' ') || '—';
+            var risk = u.riskLevel === 'high' ? '<span class="adm-badge adm-badge--ban">高</span>' :
+              u.riskLevel === 'mid' ? '<span class="adm-badge" style="background:rgba(234,179,8,.2);color:#eab308">中</span>' :
+              '<span class="adm-badge adm-badge--ok">低</span>';
+            tr.innerHTML = '<td>' + (u.name || '—') + '</td><td>' + (u.email || '') + '</td><td>' + st + '</td><td>' + reg + '</td><td>' + active + '</td><td>' + risk + '</td><td>' + (u.consultCount || 0) + '</td><td class="user-actions"></td>';
             var td = tr.querySelector('.user-actions');
             var ban = el('button', 'adm-btn adm-btn--ghost adm-btn--sm', u.status === 'banned' ? '解封' : '封禁');
             ban.onclick = function () {
@@ -340,12 +346,63 @@
         });
       };
       load();
+    },
+
+    logs: function (root) {
+      root.innerHTML =
+        '<div class="adm-toolbar"><input class="adm-input" style="max-width:240px" id="log-type" placeholder="类型筛选">' +
+        '<button class="adm-btn adm-btn--primary adm-btn--sm" id="log-search-btn">筛选</button></div>' +
+        '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>类型</th><th>消息</th><th>时间</th></tr></thead><tbody id="logs-tb"></tbody></table></div><div id="logs-pg"></div>';
+      var q = { page: 1, type: '' };
+      function load(page) {
+        FayiAdminApi.logs({ page: page, pageSize: 20 }).then(function (res) {
+          var list = res.data.list || [];
+          if (q.type) list = list.filter(function (r) { return r.type.indexOf(q.type) >= 0; });
+          var tb = $('logs-tb');
+          tb.innerHTML = '';
+          list.forEach(function (r) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + r.type + '</td><td>' + (r.message || '').slice(0, 100) + '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
+            tb.appendChild(tr);
+          });
+          $('logs-pg').innerHTML = '';
+          $('logs-pg').appendChild(paginate(res.data.total, res.data.page, res.data.pageSize, load));
+        }).catch(function (e) { root.innerHTML = '<p style="color:#f87171">' + e.message + '</p>'; });
+      }
+      $('log-search-btn').onclick = function () { q.type = $('log-type').value.trim(); load(1); };
+      load(1);
+    },
+
+    'law-education': function (root) {
+      root.innerHTML =
+        '<div class="adm-toolbar"><button class="adm-btn adm-btn--primary adm-btn--sm" id="le-add">发布文章</button></div>' +
+        '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>标题</th><th>分类</th><th>阅读量</th><th>操作</th></tr></thead><tbody id="le-tb"></tbody></table></div>';
+      function load() {
+        FayiAdminApi.lawArticles().then(function (res) {
+          var tb = $('le-tb');
+          tb.innerHTML = '';
+          (res.data || []).forEach(function (a) {
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + a.title + '</td><td>' + (a.categoryId || '') + '</td><td>' + (a.reads || 0) + '</td><td class="le-act"></td>';
+            var del = el('button', 'adm-btn adm-btn--danger adm-btn--sm', '删除');
+            del.onclick = function () { if (confirm('确定删除？')) FayiAdminApi.deleteLawArticle(a.id).then(load); };
+            tr.querySelector('.le-act').appendChild(del);
+            tb.appendChild(tr);
+          });
+        });
+      }
+      $('le-add').onclick = function () {
+        var t = prompt('文章标题');
+        if (!t) return;
+        FayiAdminApi.saveLawArticle({ title: t, categoryId: 'consumer', summary: '', content: '', mediaType: 'article' }).then(load);
+      };
+      load();
     }
   };
 
   $('btn-logout').onclick = function () {
     FayiAdminApi.setToken('');
-    location.href = 'login.html';
+    location.href = '../admin-login.html';
   };
 
   FayiAdminApi.me().then(function (res) {

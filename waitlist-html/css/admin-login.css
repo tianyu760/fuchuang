@@ -1,0 +1,162 @@
+/* 法绎 · 管理端登录 */
+
+.al-root {
+  min-height: 100vh;
+  display: flex;
+  background: #f0f2f5;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+.al-brand {
+  flex: 1;
+  background: linear-gradient(145deg, #1e3a5f 0%, #2d4a6f 55%, #1a3352 100%);
+  color: #fff;
+  padding: 56px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.al-brand-logo {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  letter-spacing: -0.03em;
+}
+
+.al-brand h1 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0 0 16px;
+  max-width: 420px;
+}
+
+.al-brand p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 440px;
+  margin: 0 0 32px;
+}
+
+.al-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 400px;
+}
+
+.al-feature {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.al-form-panel {
+  width: min(480px, 100%);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+  background: #fff;
+}
+
+.al-form-box {
+  width: 100%;
+  max-width: 380px;
+}
+
+.al-form-box h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #1e293b;
+}
+
+.al-form-box .al-sub {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0 0 28px;
+}
+
+.al-field { margin-bottom: 18px; }
+
+.al-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.al-input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #dde3ec;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: 14px;
+  color: #1e293b;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.al-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.al-error {
+  display: none;
+  font-size: 13px;
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+}
+
+.al-error.is-show { display: block; }
+
+.al-submit {
+  width: 100%;
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  background: #1e3a5f;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.al-submit:hover {
+  transform: translateY(-2px);
+  background: #2d4a6f;
+}
+
+.al-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.al-foot {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #64748b;
+  text-align: center;
+}
+
+.al-foot a { color: #2563eb; text-decoration: none; font-weight: 500; }
+
+@media (max-width: 900px) {
+  .al-root { flex-direction: column; }
+  .al-brand { padding: 36px 28px; }
+  .al-form-panel { width: 100%; }
+}

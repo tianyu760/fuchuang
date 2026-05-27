@@ -354,64 +354,74 @@
         }
 
         .ai-message.ai-chat-plain {
-            padding: 2px 0 4px;
+            padding: 4px 2px 8px;
+            max-width: 100%;
         }
 
-        /* 一级标题 */
-        .ai-title-l1 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1f2937;
-            margin: 20px 0 10px;
-            line-height: 1.5;
-            letter-spacing: 0.01em;
+        .ai-message-content .ai-chat-plain {
+            padding-right: 4px;
         }
 
-        .ai-title-l1:first-child {
-            margin-top: 4px;
+        /* 法律咨询回答区 · 一级/二级标题（仅 .ai-message-content 内） */
+        .ai-message-content .ai-title-l1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 32px 0 18px;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            line-height: 1.6;
+            letter-spacing: 0.02em;
+            text-indent: 0;
+            border-bottom: 1px solid rgba(30, 41, 59, 0.1);
+            padding-bottom: 10px;
         }
 
-        .dark .ai-title-l1 {
-            color: #f3f4f6;
+        .ai-message-content .ai-title-l1:first-child {
+            margin-top: 8px;
         }
 
-        /* 二级标题 */
-        .ai-title-l2 {
-            font-size: 15px;
-            font-weight: 600;
-            color: #374151;
-            margin: 16px 0 8px;
-            line-height: 1.55;
+        .dark .ai-message-content .ai-title-l1 {
+            color: #f1f5f9;
+            border-bottom-color: rgba(148, 163, 184, 0.25);
         }
 
-        .dark .ai-title-l2 {
-            color: #e5e7eb;
+        .ai-message-content .ai-title-l2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin: 26px 0 14px;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            line-height: 1.6;
+            text-indent: 0;
         }
 
-        /* 正文段落 */
-        .ai-paragraph {
-            margin: 0 0 12px;
-            text-align: justify;
-            text-justify: inter-ideograph;
-            line-height: 1.8;
-            color: #4b5563;
-            text-indent: 2em;
+        .dark .ai-message-content .ai-title-l2 {
+            color: #f1f5f9;
+        }
+
+        /* 正文段落（法律咨询回答区） */
+        .ai-message-content .ai-paragraph {
+            margin: 14px 0;
+            text-align: left;
+            line-height: 1.9;
+            color: #334155;
+            text-indent: 0;
             word-break: break-word;
+            max-width: 100%;
         }
 
-        .dark .ai-paragraph {
-            color: #d1d5db;
+        .dark .ai-message-content .ai-paragraph {
+            color: #cbd5e1;
         }
 
-        .ai-paragraph:last-child {
+        .ai-message-content .ai-paragraph:last-child {
             margin-bottom: 0;
         }
 
-        /* 标题、提示行、列表项不做首行缩进，避免视觉错位 */
-        .ai-title-l1,
-        .ai-title-l2,
-        .ai-tip-line,
-        .ai-list-item {
+        .ai-message-content .ai-tip-line,
+        .ai-message-content .ai-list-item {
             text-indent: 0;
         }
 
@@ -419,26 +429,37 @@
             height: 8px;
         }
 
-        /* 列表 */
-        .ai-list {
-            margin: 6px 0 14px;
-            padding-left: 1.35rem;
+        /* 列表（法律咨询回答区） */
+        .ai-message-content .ai-list {
+            margin: 8px 0 16px;
+            padding-left: 1.25rem;
             list-style: disc;
         }
 
-        .ai-list-item {
+        .ai-message-content .ai-list:empty {
+            display: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ai-message-content .ai-list-item {
             margin-bottom: 8px;
-            line-height: 1.75;
-            color: #4b5563;
-            padding-left: 2px;
+            line-height: 1.85;
+            color: #334155;
+            padding-left: 0;
+            margin-left: 0;
         }
 
-        .dark .ai-list-item {
-            color: #d1d5db;
+        .dark .ai-message-content .ai-list-item {
+            color: #cbd5e1;
         }
 
-        .ai-list-item::marker {
-            color: #9ca3af;
+        .ai-message-content .ai-list-item:empty {
+            display: none;
+        }
+
+        .ai-message-content .ai-list-item::marker {
+            color: #94a3b8;
         }
 
         /* 法律关键词高亮 */
@@ -473,20 +494,56 @@
             color: #e5e7eb;
         }
 
-        /* 兜底：若残留 Markdown HTML 标签，强制 IM 样式 */
+        /* 兜底：若残留 Markdown HTML 标题标签 */
         .ai-message-content h1,
         .ai-message-content h2,
         .ai-message-content h3,
         .ai-message-content h4,
         .ai-message-content h5,
         .ai-message-content h6 {
-            font-size: 15px !important;
-            font-weight: 600 !important;
-            margin: 16px 0 8px !important;
-            padding: 0 !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            font-weight: 700 !important;
+            line-height: 1.6 !important;
+            color: #1e293b !important;
             border: none !important;
-            line-height: 1.55 !important;
-            color: #374151 !important;
+        }
+
+        .ai-message-content h1 {
+            font-size: 24px !important;
+            margin-top: 32px !important;
+            margin-bottom: 18px !important;
+            border-bottom: 1px solid rgba(30, 41, 59, 0.1) !important;
+            padding-bottom: 10px !important;
+        }
+
+        .ai-message-content h2 {
+            font-size: 20px !important;
+            margin-top: 26px !important;
+            margin-bottom: 14px !important;
+        }
+
+        .ai-message-content h3 {
+            font-size: 18px !important;
+            margin-top: 20px !important;
+            margin-bottom: 12px !important;
+        }
+
+        .dark .ai-message-content h1,
+        .dark .ai-message-content h2,
+        .dark .ai-message-content h3 {
+            color: #f1f5f9 !important;
+        }
+
+        /* 隐藏空列表与仅含标点的残留节点 */
+        .ai-message-content ul:empty,
+        .ai-message-content ol:empty,
+        .ai-message-content li:empty {
+            display: none !important;
+        }
+
+        .ai-message-content p:empty {
+            display: none !important;
         }
 
         .ai-message-content table,

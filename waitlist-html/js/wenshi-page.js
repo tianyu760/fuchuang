@@ -1,6 +1,4 @@
 (function () {
-  var MODULE = 'legal_document';
-  var chatHistory = [];
   var lastQuestion = '';
   var lastDocData = null;
   var conversationId = sessionStorage.getItem('fayi_wenshi_conversation_id') || ('wenshi_' + Date.now());
@@ -11,7 +9,6 @@
     var wordBtn = document.getElementById('legal-btn-word');
     var pdfBtn = document.getElementById('legal-btn-pdf');
     var copyBtn = document.getElementById('legal-btn-copy');
-    var regenBtn = document.getElementById('legal-btn-regen');
 
     if (wordBtn) {
       wordBtn.onclick = function () {
@@ -28,23 +25,6 @@
         if (window.FayiLegalExport) FayiLegalExport.copyLegalContent(lastDocData);
       };
     }
-    if (regenBtn) {
-      regenBtn.onclick = function () {
-        var inp = document.getElementById('wenshi-input');
-        if (inp && lastQuestion) {
-          inp.value = lastQuestion;
-          chatHistory = [];
-          doAsk(lastQuestion);
-        }
-      };
-    }
-  }
-
-  function autoExportPdf(data) {
-    if (!window.FayiLegalExport) return;
-    setTimeout(function () {
-      FayiLegalExport.exportLegalDefault(data, { silent: false }).catch(function () { /* toast inside */ });
-    }, 600);
   }
 
   function doAsk(question) {
@@ -61,24 +41,9 @@
     loadingDiv.classList.remove('hidden');
     if (submitBtn) submitBtn.disabled = true;
 
-    if (window.FayiIntentRouter && window.FayiContextManager) {
-      var histText = chatHistory.map(function (m) { return m.content || ''; }).join('\n');
-      if (FayiIntentRouter.isKeywordConflict(question, histText)) {
-        chatHistory = [];
-        FayiContextManager.clearContext(MODULE);
-        if (window.FayiToast) FayiToast('检测到历史上下文冲突，已自动清空会话上下文', 'success');
-      }
-    }
-
-    FayiAiLegal.generateWenshi(question, chatHistory, { conversationId: conversationId })
+    FayiAiLegal.generateWenshi(question, [], { conversationId: conversationId })
       .then(function (res) {
         var data = res.data || {};
-        chatHistory.push({ role: 'user', content: question });
-        chatHistory.push({ role: 'assistant', content: JSON.stringify(data) });
-        if (chatHistory.length > 12) chatHistory = chatHistory.slice(chatHistory.length - 12);
-        if (window.FayiContextManager) {
-          FayiContextManager.setMessages(MODULE, chatHistory);
-        }
 
         loadingDiv.classList.add('hidden');
         answerDiv.innerHTML = FayiAiLegal.renderWenshiResult(data);
@@ -86,7 +51,6 @@
         FayiAiLegal.renderFollowups(data.followups, followupDiv, 'ws-followup-pill ai-followup-pill', doAsk);
         resultDiv.classList.remove('hidden');
         resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        autoExportPdf(data);
 
         if (window.FayiActivity) {
           var docTitle = data.title || question;
@@ -113,11 +77,6 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    if (window.FayiContextManager) {
-      FayiContextManager.switchModule(MODULE);
-      chatHistory = FayiContextManager.getMessages(MODULE);
-    }
-
     if (!window.FayiAuth || !FayiAuth.getCurrentUser()) return;
     var reg = sessionStorage.getItem('fayi_regenerate_document');
     if (reg) {
@@ -137,8 +96,6 @@
       e.preventDefault();
       var q = document.getElementById('wenshi-input').value.trim();
       if (!q) { if (window.FayiToast) FayiToast('请输入您的问题', 'error'); return; }
-      chatHistory = [];
-      if (window.FayiContextManager) FayiContextManager.clearContext(MODULE);
       doAsk(q);
     });
   });

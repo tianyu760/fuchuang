@@ -269,3 +269,19 @@ if (lightSwitches.length > 0) {
     });
   });
 }
+
+// 数字大屏：全站操作日志与页面追踪
+(function loadDashboardLibs() {
+  if (window.FayiOperationLog) return;
+  var base = './js/lib/';
+  var queue = ['operation-log.js', 'pufa-read-stats.js', 'page-tracker.js'];
+  function next(i) {
+    if (i >= queue.length) return;
+    var s = document.createElement('script');
+    s.src = base + queue[i];
+    s.defer = true;
+    s.onload = function () { next(i + 1); };
+    document.head.appendChild(s);
+  }
+  next(0);
+})();

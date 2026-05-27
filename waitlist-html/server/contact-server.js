@@ -16,11 +16,9 @@ var path       = require('path');
 var app  = express();
 var PORT = process.env.CONTACT_PORT || 3001;
 var MAX_UPLOAD_SIZE = 10 * 1024 * 1024; // 10MB
-var MAX_UPLOAD_COUNT = 5;
 var ALLOWED_EXT = {
     pdf: true, doc: true, docx: true,
-    png: true, jpg: true, jpeg: true,
-    zip: true, txt: true
+    png: true, jpg: true, jpeg: true
 };
 var ALLOWED_MIME = {
     'application/pdf': true,
@@ -28,9 +26,7 @@ var ALLOWED_MIME = {
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document': true,
     'image/png': true,
     'image/jpeg': true,
-    'application/zip': true,
-    'application/x-zip-compressed': true,
-    'text/plain': true
+    'application/octet-stream': true
 };
 var CONTACT_UPLOAD_DIR = path.join(__dirname, 'uploads', 'contact');
 var FEEDBACK_LOG_FILE = path.join(__dirname, 'data', 'admin', 'feedback-upload-log.json');
@@ -83,6 +79,93 @@ function fileExt(name) {
     return idx >= 0 ? n.slice(idx + 1) : '';
 }
 
+/**
+ * Multer 常将 multipart 文件名按 latin1 解析，需智能还原 UTF-8。
+ * 若已是正常中文，禁止再次 latin1→utf8（否则会二次乱码）。
+ */
+function fixOriginalFilename(name) {
+    var raw = String(name || '').trim();
+    if (!raw) return '未命名附件';
+    if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(raw)) return raw;
+    var fromLatin = Buffer.from(raw, 'latin1').toString('utf8');
+    if (/[\u3400-\u9FFF\uF900-\uFAFF]/.test(fromLatin)) return fromLatin;
+    try {
+        var safe = decodeURIComponent(encodeURIComponent(raw));
+        if (safe && safe.indexOf('\uFFFD') === -1) return safe;
+    } catch (e) { /* ignore */ }
+    return raw;
+}
+
+function decodeUploadFilename(name) {
+    return fixOriginalFilename(name);
+}
+
+function guessMimeByName(filename, fallback) {
+    var ext = fileExt(filename);
+    var map = {
+        pdf: 'application/pdf',
+        doc: 'application/msword',
+        docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        png: 'image/png',
+        jpg: 'image/jpeg',
+        jpeg: 'image/jpeg'
+    };
+    return map[ext] || fallback || 'application/octet-stream';
+}
+
+function sanitizeFilename(name, fallback) {
+    var cleaned = fixOriginalFilename(name)
+        .replace(/[\\/:*?"<>|]/g, '_')
+        .replace(/\s+/g, ' ')
+        .replace(/[. ]+$/g, '')
+        .trim();
+    if (!cleaned) cleaned = fallback || '附件';
+    return cleaned.slice(0, 120);
+}
+
+/** RFC 2047：邮件主题 / 附件 filename 字段 */
+function encodeMimeWordUtf8(text) {
+    return '=?UTF-8?B?' + Buffer.from(String(text || ''), 'utf8').toString('base64') + '?=';
+}
+
+/** RFC 2231：Content-Disposition（ASCII 回退 + filename* UTF-8） */
+function asciiFallbackFilename(name) {
+    var ext = path.extname(name || '') || '';
+    var base = path.basename(name || 'attachment', ext)
+        .replace(/[^\x20-\x7E]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+    if (!base) base = 'attachment';
+    return (base + ext).slice(0, 80);
+}
+
+function buildContentDispositionHeader(filename) {
+    var utf8Name = sanitizeFilename(filename, '附件');
+    var asciiName = asciiFallbackFilename(utf8Name);
+    var encodedStar = encodeURIComponent(utf8Name)
+        .replace(/['()]/g, function (c) { return '%' + c.charCodeAt(0).toString(16).toUpperCase(); });
+    return 'attachment; filename="' + asciiName.replace(/"/g, '') + '"; filename*=UTF-8\'\'' + encodedStar;
+}
+
+function buildAttachment(file) {
+    if (!file) return null;
+    var safeFilename = sanitizeFilename(file.originalname, '附件');
+    var encodedFileName = encodeMimeWordUtf8(safeFilename);
+    console.log('[contact] 发送附件名称:', safeFilename);
+    console.log('[contact] RFC2047 附件名:', encodedFileName);
+    return {
+        filename: encodedFileName,
+        path: file.path,
+        contentType: guessMimeByName(safeFilename, file.mimetype)
+    };
+}
+
+function buildAttachmentsFromFiles(files) {
+    return (files || [])
+        .map(function (f) { return buildAttachment(f); })
+        .filter(Boolean);
+}
+
 function safeUnlink(filePath) {
     if (!filePath) return;
     fs.unlink(filePath, function () {});
@@ -113,23 +196,38 @@ var storage = multer.diskStorage({
         cb(null, CONTACT_UPLOAD_DIR);
     },
     filename: function (req, file, cb) {
-        var ext = path.extname(file.originalname || '');
-        var base = path.basename(file.originalname || 'file', ext).replace(/[^\w\u4e00-\u9fa5-]/g, '_');
+        var decoded = fixOriginalFilename(file.originalname);
+        file.originalname = decoded;
+        var original = sanitizeFilename(decoded, 'file');
+        var ext = path.extname(original || '');
+        var base = path.basename(original || 'file', ext).replace(/[^\w\u4e00-\u9fa5-]/g, '_');
         cb(null, Date.now() + '_' + Math.random().toString(36).slice(2, 8) + '_' + base + ext);
     }
 });
 
+function fixUploadedFile(req, res, next) {
+    if (req.file && req.file.originalname) {
+        req.file.originalname = sanitizeFilename(
+            fixOriginalFilename(req.file.originalname),
+            '附件'
+        );
+    }
+    next();
+}
+
 var upload = multer({
     storage: storage,
-    limits: { fileSize: MAX_UPLOAD_SIZE, files: MAX_UPLOAD_COUNT },
+    limits: { fileSize: MAX_UPLOAD_SIZE, files: 1 },
     fileFilter: function (req, file, cb) {
+        file.originalname = fixOriginalFilename(file.originalname);
         var ext = fileExt(file.originalname);
         var mime = String(file.mimetype || '').toLowerCase();
         if (!ALLOWED_EXT[ext]) {
-            return cb(new Error('附件类型不支持，仅支持 pdf/doc/docx/png/jpg/jpeg/zip/txt'));
+            return cb(new Error('附件类型不支持，仅支持 pdf/doc/docx/png/jpg/jpeg'));
         }
+        /* MIME 某些系统可能给 doc/docx 返回 octet-stream，这里放宽为警告而非拒绝 */
         if (mime && !ALLOWED_MIME[mime]) {
-            return cb(new Error('附件 MIME 类型不支持'));
+            console.warn('[contact] 附件 MIME 非标准，按扩展名放行:', mime, file.originalname);
         }
         cb(null, true);
     }
@@ -144,8 +242,8 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-/* ─── 接口：POST /api/contact（multipart + 附件）─── */
-app.post('/api/contact', rateLimit, upload.array('files', MAX_UPLOAD_COUNT), async function (req, res) {
+/* ─── 接口：POST /api/contact（multipart + 单附件）─── */
+app.post('/api/contact', rateLimit, upload.single('file'), fixUploadedFile, async function (req, res) {
     /* 取值并截断，防止超长输入 */
     var name     = (req.body.name     || '').toString().trim().slice(0, 50);
     var email    = (req.body.email    || '').toString().trim().slice(0, 100);
@@ -154,9 +252,15 @@ app.post('/api/contact', rateLimit, upload.array('files', MAX_UPLOAD_COUNT), asy
     var identity = (req.body.identity || '未填写').toString().trim().slice(0, 50);
     var message  = (req.body.message  || '').toString().trim().slice(0, 2000);
     var attachmentText = (req.body.attachmentText || '').toString().trim().slice(0, 600);
-    var files = Array.isArray(req.files) ? req.files : [];
-
-    console.log('[contact] 收到提交 name=%s email=%s identity=%s files=%d', name, email, identity, files.length);
+    var file = req.file || null;
+    var files = file ? [file] : [];
+    console.log('[contact] 收到提交 name=%s email=%s identity=%s', name, email, identity);
+    console.log('[contact] req.file =', file ? {
+        originalname: file.originalname,
+        mimetype: file.mimetype,
+        size: file.size,
+        path: file.path
+    } : null);
 
     /* 必填字段校验 */
     if (!name || !email || !message) {
@@ -182,20 +286,19 @@ app.post('/api/contact', rateLimit, upload.array('files', MAX_UPLOAD_COUNT), asy
     var attachmentRows = files.map(function (f) {
         return '<li>' + escHtml(f.originalname) + '（' + Math.round((f.size || 0) / 1024) + 'KB）</li>';
     }).join('');
-    var attachments = files.map(function (f) {
-        return {
-            filename: f.originalname,
-            path: f.path,
-            contentType: f.mimetype || undefined
-        };
-    });
+    var mailAttachments = buildAttachmentsFromFiles(files);
     var receiver = process.env.CONTACT_RECEIVER || process.env.EMAIL_USER;
+    var mailSubject = encodeMimeWordUtf8('【法绎用户反馈】');
     var mailOpts  = {
         from   : '"法绎系统通知" <' + process.env.EMAIL_USER + '>',
         to     : receiver,
-        subject: '【法绎系统】用户反馈通知',
-        attachments: attachments,
+        subject: mailSubject,
+        headers: {
+            'X-Fayi-Mail-Charset': 'utf-8'
+        },
+        attachments: mailAttachments,
         html   : [
+            '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>',
             '<div style="font-family:\'PingFang SC\',Arial,sans-serif;max-width:680px;',
             'margin:0 auto;background:#f8f9ff;border-radius:14px;overflow:hidden;',
             'border:1px solid #e0e3ff;">',
@@ -248,7 +351,7 @@ app.post('/api/contact', rateLimit, upload.array('files', MAX_UPLOAD_COUNT), asy
             '<p style="color:#9ca3af;font-size:12px;margin:20px 0 0;',
             'border-top:1px solid #e5e7eb;padding-top:16px;">',
             '此邮件由法绎系统自动发送，请在处理后回访用户。</p>',
-            '</div></div>'
+            '</div></div></body></html>'
         ].join('')
     };
 
@@ -268,6 +371,8 @@ app.post('/api/contact', rateLimit, upload.array('files', MAX_UPLOAD_COUNT), asy
         res.json({ success: true, message: '反馈已提交，附件已发送成功。' });
     } catch (err) {
         console.error('[contact] ❌ 邮件发送失败:', err.message);
+        console.error('[contact] SMTP error detail:', err);
+        if (file) console.error('[contact] 附件路径:', file.path);
         appendFeedbackLog({
             uploadTime: new Date().toISOString(),
             fileNames: files.map(function (f) { return f.originalname; }),
@@ -280,7 +385,7 @@ app.post('/api/contact', rateLimit, upload.array('files', MAX_UPLOAD_COUNT), asy
         });
         res.status(500).json({ success: false, message: '附件发送失败，请稍后重试。' });
     } finally {
-        files.forEach(function (f) { safeUnlink(f.path); });
+        if (file) safeUnlink(file.path);
     }
 });
 

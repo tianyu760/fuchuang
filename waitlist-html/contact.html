@@ -70,6 +70,17 @@
                 <form id="ct-form" class="ct-form" novalidate>
                     <div class="ct-row">
                         <div class="ct-field">
+                            <label for="ct-name">姓名</label>
+                            <input id="ct-name" name="name" type="text" placeholder="请输入您的姓名" required />
+                        </div>
+                        <div class="ct-field">
+                            <label for="ct-email">邮箱</label>
+                            <input id="ct-email" name="email" type="email" placeholder="请输入可接收回复的邮箱" required />
+                        </div>
+                    </div>
+
+                    <div class="ct-row">
+                        <div class="ct-field">
                             <label for="ct-type">反馈类型</label>
                             <select id="ct-type" name="type" required>
                                 <option value="">请选择反馈类型</option>
@@ -93,7 +104,7 @@
 
                     <div class="ct-field">
                         <label for="ct-files">附件上传（可选）</label>
-                        <input id="ct-files" name="files" type="file" multiple accept=".png,.jpg,.jpeg,.pdf,.doc,.docx,.zip,.txt" />
+                        <input id="ct-files" name="file" type="file" accept=".png,.jpg,.jpeg,.pdf,.doc,.docx" />
                         <p id="ct-file-hint" class="ct-file-hint">未选择附件</p>
                     </div>
 

@@ -88,29 +88,37 @@ npm run server:3002</pre>
           <div id="chart-module" class="datav-chart datav-chart--module"></div>
         </article>
         <article class="datav-panel datav-panel--feed" data-tier="2">
-          <header class="datav-panel__head"><h3>AI 实时分析流</h3><span class="datav-live-dot">LIVE</span></header>
-          <div class="datav-feed-wrap">
-            <ul class="datav-feed" id="datav-feed"></ul>
+          <header class="datav-panel__head"><h3>实时数据流</h3><span class="datav-live-dot">LIVE</span></header>
+          <div class="datav-feed-wrap" id="datav-feed-wrap">
+            <ul class="datav-feed datav-feed--timeline" id="datav-feed"></ul>
           </div>
         </article>
       </main>
 
-      <aside class="datav-col datav-col--right">
-        <article class="datav-panel" data-tier="1">
+      <aside class="datav-col datav-col--right" id="datav-col-right">
+        <article class="datav-panel datav-panel--right datav-panel--slot-word" data-tier="1">
           <header class="datav-panel__head"><h3>关键词热度</h3></header>
-          <div id="chart-word" class="datav-chart datav-chart--word"></div>
+          <div class="datav-panel__body">
+            <div id="chart-word" class="datav-chart datav-chart--word"></div>
+          </div>
         </article>
-        <article class="datav-panel" data-tier="2">
+        <article class="datav-panel datav-panel--right datav-panel--slot-heat" data-tier="2">
           <header class="datav-panel__head"><h3>分类热力</h3></header>
-          <div id="chart-heat" class="datav-chart datav-chart--heat"></div>
+          <div class="datav-panel__body">
+            <div id="chart-heat" class="datav-chart datav-chart--heat"></div>
+          </div>
         </article>
-        <article class="datav-panel" data-tier="2">
+        <article class="datav-panel datav-panel--right datav-panel--slot-topq" data-tier="2">
           <header class="datav-panel__head"><h3>高频法律问题</h3></header>
-          <ol class="datav-topq" id="datav-topq"></ol>
+          <div class="datav-panel__body datav-topq-scroll" id="datav-topq-wrap">
+            <ol class="datav-topq" id="datav-topq"></ol>
+          </div>
         </article>
-        <article class="datav-panel datav-panel--compact" data-tier="3">
+        <article class="datav-panel datav-panel--right datav-panel--slot-pub" data-tier="3">
           <header class="datav-panel__head"><h3>普法传播</h3></header>
-          <ul class="datav-kpi datav-kpi--compact" id="datav-publicity"></ul>
+          <div class="datav-panel__body">
+            <div class="datav-publicity" id="datav-publicity"></div>
+          </div>
         </article>
       </aside>
     </section>
@@ -121,6 +129,8 @@ npm run server:3002</pre>
   <script src="./js/datav-theme.js"></script>
   <script src="../js/auth.js"></script>
   <script src="../js/lib/activity-log.js"></script>
+  <script src="../js/lib/operation-log.js"></script>
+  <script src="../js/lib/pufa-read-stats.js"></script>
   <script src="./js/datav.js"></script>
 </body>
 </html>

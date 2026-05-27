@@ -566,7 +566,7 @@
       };
 
       xhr.open('POST', FILE_SERVER_URL + '/api/upload');
-      var authToken = localStorage.getItem('fayi_token') || localStorage.getItem('token');
+      var authToken = localStorage.getItem('fayi_user_token') || localStorage.getItem('fayi_token') || localStorage.getItem('token');
       if (authToken) xhr.setRequestHeader('Authorization', 'Bearer ' + authToken);
       xhr.send(formData);
     });
@@ -585,7 +585,7 @@
     
     // 请求头（带 token）
     var pollHeaders = {};
-    var authToken = localStorage.getItem('fayi_token') || localStorage.getItem('token');
+    var authToken = localStorage.getItem('fayi_user_token') || localStorage.getItem('fayi_token') || localStorage.getItem('token');
     if (authToken) {
       pollHeaders['Authorization'] = 'Bearer ' + authToken;
     }

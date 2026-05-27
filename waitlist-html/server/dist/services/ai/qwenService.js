@@ -15,6 +15,7 @@ exports.isQwenConfigured = isQwenConfigured;
 const openai_1 = __importDefault(require("openai"));
 const llm_1 = require("../../config/llm");
 const legalPrompts_1 = require("../../prompts/legalPrompts");
+const legal_document_formatter_1 = require("../../../lib/legal-document-formatter");
 let _client = null;
 function getClient() {
     if (!_client) {
@@ -114,20 +115,32 @@ async function createChatCompletion(messages, options) {
     }, 'createChatCompletion');
 }
 function normalizeWenshiResult(raw, question) {
-    const body = asStr(raw.body_markdown, asStr(raw.document_content, ''));
+    const formatted = (0, legal_document_formatter_1.formatLegalDocumentPayload)({
+        title: raw.title,
+        body_markdown: asStr(raw.body_markdown, asStr(raw.document_content, '')),
+        parties: raw.parties,
+        claims: raw.claims,
+        facts: raw.facts,
+        laws: raw.laws,
+        evidence: raw.evidence,
+        signature: raw.signature
+    });
+    const body = asStr(formatted.body_markdown, asStr(raw.body_markdown, asStr(raw.document_content, '')));
     const riskNotes = asStrArr(raw.risk_notes);
     const suggestions = asStrArr(raw.suggestions, riskNotes.length ? riskNotes : ['请结合证据材料完善文书细节']);
     const evidence = asStrArr(raw.evidence_list);
     return {
         doc_type: asStr(raw.doc_type, (0, legalPrompts_1.detectDocumentType)(question)),
-        title: asStr(raw.title, '法律文书'),
+        title: asStr(formatted.title || raw.title, '法律文书'),
         summary: asStr(raw.summary, question.slice(0, 200)),
         risk_level: asStr(raw.risk_level, '中'),
         legal_basis: asStrArr(raw.legal_basis, ['请结合案由进一步检索法律依据']),
         risk_notes: riskNotes.length ? riskNotes : suggestions.slice(0, 3),
         evidence_list: evidence,
-        body_markdown: body || '# 法律文书\n\n暂无正文，请补充案情后重新生成。',
-        signature: asStr(raw.signature, '此致\n\n具状人：________________\n二〇二六年X月X日'),
+        body_markdown: body || '一、当事人信息\n请补充当事人信息。\n\n二、事实与理由\n暂无正文，请补充案情后重新生成。',
+        signature: asStr(raw.signature || (formatted.sections.signature || []).join('\n'), '此致\n\n具状人：________________\n二〇二六年X月X日'),
+        document_sections: formatted.sections,
+        section_order: formatted.section_order,
         followups: asStrArr(raw.followups),
         document_content: body,
         suggestions,

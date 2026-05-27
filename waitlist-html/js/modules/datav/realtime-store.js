@@ -18,6 +18,15 @@
   }
 
   function notify(meta) {
+    meta = meta || {};
+    if (global.FayiOperationLog && FayiOperationLog.createOperationLog && meta.content) {
+      FayiOperationLog.createOperationLog(
+        meta.logType || meta.type || 'page',
+        meta.module || meta.type || 'system',
+        meta.content,
+        meta.level || 'mid'
+      );
+    }
     broadcast();
     fetch(API_BASE + '/api/admin/datav/bump', {
       method: 'POST',

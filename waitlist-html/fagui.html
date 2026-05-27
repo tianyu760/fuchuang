@@ -130,6 +130,20 @@
         .ai-followup-wrap { margin-top:16px; padding-top:14px; border-top:1px solid #f1f5f9; }
         .ai-followup-label { font-size:11px; color:#94a3b8; font-weight:500; margin-bottom:8px; }
         .ai-followup-pills { display:flex; flex-wrap:wrap; gap:8px; }
+        .ls-section { margin: 14px 0; }
+        .ls-section h3 { margin: 0 0 8px; font-size: 13px; font-weight: 700; color: #0f172a; }
+        .ls-section p { margin: 0; font-size: 13px; line-height: 1.75; color: #374151; }
+        .ls-law-grid { display: grid; gap: 10px; }
+        .ls-law-card { border: 1px solid #dbe5f5; border-radius: 10px; padding: 12px; background: #f8fbff; }
+        .ls-law-card__head { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 6px; }
+        .ls-law-index { width: 20px; height: 20px; border-radius: 50%; background: #1d4ed8; color: #fff; font-size: 11px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; }
+        .ls-law-meta h4 { margin: 0; font-size: 13px; color: #111827; }
+        .ls-law-meta p { margin: 2px 0 0; font-size: 12px; color: #475569; }
+        .ls-law-content, .ls-law-interpret, .ls-law-scenario { font-size: 13px; line-height: 1.7; color: #334155; margin-top: 6px; }
+        .ls-risk { margin-top: 16px; padding: 10px 12px; border-radius: 8px; border: 1px solid #efb5b5; background: #fff3f3; }
+        .ls-risk h3 { margin: 0 0 6px; font-size: 13px; color: #b42318; }
+        .ls-risk p { margin: 0; font-size: 13px; line-height: 1.7; color: #7a271a; }
+        .ls-empty { padding: 10px 12px; border: 1px dashed #c5d0e0; border-radius: 8px; font-size: 12px; color: #64748b; background: #fff; }
     </style>
 </head>
 
@@ -241,6 +255,7 @@
     <script src="./js/services/conversation-context-manager.js"></script>
     <script src="./js/services/ai-client.js"></script>
     <script src="./js/modules/datav/realtime-store.js"></script>
+    <script src="./js/lib/legal-search-formatter.js"></script>
     <script src="./js/ai-legal.js"></script>
     <script src="./js/lib/activity-log.js"></script>
     <script src="./js/fagui-page.js"></script>

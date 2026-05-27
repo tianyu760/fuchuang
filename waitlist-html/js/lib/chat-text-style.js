@@ -35,6 +35,30 @@
     });
   }
 
+  /** 孤立符号、空列表项、仅含标点的行 */
+  function isJunkText(text) {
+    var t = String(text || '').trim();
+    if (!t) return true;
+    if (/^[.．。、,，;；:：·•\-\*\+_~`'"“”‘’]+$/.test(t)) return true;
+    if (/^[\d]+[\.．、]?$/.test(t)) return true;
+    return false;
+  }
+
+  function sanitizeBlocks(blocks) {
+    var out = [];
+    (blocks || []).forEach(function (b) {
+      if (b.type === 'break') {
+        if (out.length && out[out.length - 1].type !== 'break') out.push(b);
+        return;
+      }
+      if (isJunkText(b.text)) return;
+      out.push(b);
+    });
+    while (out.length && out[0].type === 'break') out.shift();
+    while (out.length && out[out.length - 1].type === 'break') out.pop();
+    return out;
+  }
+
   /** 解析 Markdown 为结构化块（去 # 标题，保留层级） */
   function filterMarkdown(raw) {
     if (raw == null) return [];
@@ -47,7 +71,11 @@
       return block.replace(/^```\w*\n?/, '').replace(/\n?```$/, '').trim();
     });
 
-    var lines = text.split('\n');
+    var lines = text.split('\n').filter(function (line) {
+      var t = line.replace(/\t/g, ' ').replace(/\s+$/g, '').trim();
+      if (!t) return true;
+      return !isJunkText(t);
+    });
     var out = [];
     var tableBuf = [];
 
@@ -99,15 +127,19 @@
 
       var ordered = t.match(/^[\s]*(\d+)[\.、)\]]\s+(.+)$/);
       if (ordered) {
-        out.push({ type: 'list', text: ordered[2].trim() });
+        var orderedText = ordered[2].trim();
+        if (!isJunkText(orderedText)) out.push({ type: 'list', text: orderedText });
         return;
       }
 
       var list = t.match(/^[\s]*[-*+•]\s+(.+)$/);
       if (list) {
-        out.push({ type: 'list', text: list[1].trim() });
+        var listText = list[1].trim();
+        if (!isJunkText(listText)) out.push({ type: 'list', text: listText });
         return;
       }
+
+      if (/^[\s]*[-*+•]\s*$/.test(t) || /^[\s]*\d+[\.、．]\s*$/.test(t)) return;
 
       t = t.replace(/\*\*(.+?)\*\*/g, '⟦B:$1⟧');
       t = t.replace(/__(.+?)__/g, '⟦B:$1⟧');
@@ -122,12 +154,17 @@
       }
 
       var trimmed = t.trim().replace(/^\s*[#＃]{1,6}\s*/, '');
-      if (!trimmed) return;
+      if (!trimmed || isJunkText(trimmed)) return;
       if (/^【.+】$/.test(trimmed)) {
         out.push({ type: 'title-l1', text: trimmed.replace(/^【|】$/g, '') });
         return;
       }
-      if (/^([一二三四五六七八九十百千]+[、.．]|（[一二三四五六七八九十]+）|\d+[\.、．])/.test(trimmed)
+      if (/^([一二三四五六七八九十百千]+[、.．])/.test(trimmed)
+          && trimmed.length <= 48 && !/[。！？；，]$/.test(trimmed)) {
+        out.push({ type: 'title-l1', text: trimmed });
+        return;
+      }
+      if (/^（[一二三四五六七八九十]+）/.test(trimmed)
           && trimmed.length <= 48 && !/[。！？；，]$/.test(trimmed)) {
         out.push({ type: 'title-l2', text: trimmed });
         return;
@@ -141,7 +178,7 @@
     });
 
     if (tableBuf.length) flushTable();
-    return out;
+    return sanitizeBlocks(out);
   }
 
   function highlightKeywordsAndBold(text, esc) {
@@ -193,6 +230,7 @@
         return;
       }
       if (block.type === 'list') {
+        if (isJunkText(block.text)) return;
         if (!inList) {
           parts.push('<ul class="ai-list">');
           inList = true;

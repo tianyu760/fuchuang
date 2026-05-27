@@ -6,7 +6,9 @@
   var HEALTH_URL = API_BASE + '/api/admin/datav/health';
   var API = API_BASE + '/api/admin/datav/realtime';
   var SSE_URL = API_BASE + '/api/admin/datav/stream';
-  var POLL_MS = 2000;
+  var POLL_MS = 30000;
+  var WORD_MIN_FONT = 12;
+  var WORD_MAX_FONT = 28;
   var CHANNEL = 'fayi-dashboard-v1';
   var THEME = window.FayiDatavTheme || {};
   var grid = window.datavBaseGrid || function (o) { return o || {}; };
@@ -25,6 +27,34 @@
 
   function catLabel(c) {
     return (c && (c.label || c.name)) || '其他';
+  }
+
+  function ellipsize(str, max) {
+    str = String(str || '').trim();
+    max = max || 8;
+    if (str.length <= max) return str;
+    return str.slice(0, max) + '…';
+  }
+
+  function topqCardHtml(q, i) {
+    return '<li class="datav-topq__card">' +
+      '<span class="datav-topq__rank">' + (i + 1) + '</span>' +
+      '<span class="datav-topq__text" title="' + (q.question || '').replace(/"/g, '&quot;') + '">' +
+      (q.question || '') + '</span>' +
+      '<span class="datav-topq__cnt">' + (q.count || 0) + '</span></li>';
+  }
+
+  function syncRightColumnLayout() {
+    var col = $('datav-col-right');
+    if (!col) return;
+    var grid = col.closest('.datav-grid');
+    if (grid && grid.clientHeight > 0) {
+      col.style.height = grid.clientHeight + 'px';
+      col.style.maxHeight = grid.clientHeight + 'px';
+    }
+    charts.forEach(function (c) {
+      try { c.resize(); } catch (e) { /* ignore */ }
+    });
   }
 
   function dashboardDataValidator(data) {
@@ -76,6 +106,7 @@
     el.style.marginLeft = ((w - 1920 * s) / 2) + 'px';
     el.style.marginTop = ((h - 1080 * s) / 2) + 'px';
     charts.forEach(function (c) { try { c.resize(); } catch (e) {} });
+    syncRightColumnLayout();
   }
 
   function tickClock() {
@@ -182,57 +213,131 @@
     animateNum($('kpi-online'), stats.onlineUsers || 1);
   }
 
+  function mergeFeedSources(serverFeed) {
+    var list = (serverFeed || []).slice();
+    if (window.FayiOperationLog && FayiOperationLog.getDashboardLogs) {
+      var local = FayiOperationLog.getDashboardLogs({ limit: 20 });
+      local.forEach(function (l) {
+        list.push({
+          id: l.id,
+          time: l.time || l.createdAt,
+          moduleSource: l.moduleSource || l.module,
+          typeLabel: l.moduleSource || l.module,
+          message: l.content,
+          riskLevel: l.level,
+          riskLabel: l.riskLabel || RISK_LABEL[l.level] || '中风险'
+        });
+      });
+    }
+    list.sort(function (a, b) {
+      return String(b.time || '').localeCompare(String(a.time || ''));
+    });
+    var seen = {};
+    return list.filter(function (f) {
+      var key = (f.id || '') + (f.time || '') + (f.message || '');
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
+    }).slice(0, 24);
+  }
+
   function renderFeed(feed) {
     var ul = $('datav-feed');
+    var wrap = $('datav-feed-wrap');
     if (!ul) return;
-    var items = (feed || []).slice(0, 16);
+    var items = mergeFeedSources(feed);
     if (!items.length) {
-      ul.innerHTML = '<li><time>—</time><span class="datav-feed__type">系统</span><span class="datav-feed__msg">等待业务数据写入…</span></li>';
+      ul.innerHTML = '<li class="datav-feed-item is-latest">' +
+        '<div class="datav-feed-item__time">—</div>' +
+        '<div class="datav-feed-item__body">' +
+        '<span class="datav-feed-item__type">【系统】</span>' +
+        '<p class="datav-feed-item__desc">等待用户真实操作写入…</p>' +
+        '<span class="datav-feed-item__risk datav-feed-item__risk--low">风险等级：低风险</span>' +
+        '</div></li>';
       return;
     }
-    var html = items.map(function (f) {
-      var t = (f.time || '').slice(11, 19);
-      var riskCls = f.riskLevel ? ' datav-feed__risk--' + f.riskLevel : '';
-      var tags = [];
-      if (f.categoryLabel) tags.push(f.categoryLabel);
-      if (f.keywords && f.keywords.length) tags.push(f.keywords.join(' · '));
-      if (f.riskLevel) tags.push(RISK_LABEL[f.riskLevel] || f.riskLevel);
-      return '<li><time>' + t + '</time>' +
-        '<span class="datav-feed__type">' + (f.typeLabel || f.type) + '</span>' +
-        '<span class="datav-feed__msg' + riskCls + '">' + (f.message || '') +
-        (tags.length ? '<div class="datav-feed__tags">' + tags.join(' · ') + '</div>' : '') +
-        '</span></li>';
-    }).join('');
+    function itemHtml(f, i) {
+      var t = (f.time || '').slice(11, 19) || '—';
+      var mod = f.moduleSource || f.typeLabel || f.type || '系统';
+      var risk = f.riskLabel || RISK_LABEL[f.riskLevel] || '中风险';
+      var riskCls = ' datav-feed-item__risk--' + (f.riskLevel || 'mid');
+      var latest = i === 0 ? ' is-latest' : '';
+      return '<li class="datav-feed-item' + latest + '" style="animation-delay:' + (i * 0.04) + 's">' +
+        '<div class="datav-feed-item__time">' + t + '</div>' +
+        '<div class="datav-feed-item__body">' +
+        '<span class="datav-feed-item__type">【' + mod + '】</span>' +
+        '<p class="datav-feed-item__desc">' + (f.message || '') + '</p>' +
+        '<span class="datav-feed-item__risk' + riskCls + '">风险等级：' + risk + '</span>' +
+        '</div></li>';
+    }
+    var html = items.map(itemHtml).join('');
     ul.innerHTML = html + html;
+    if (wrap) {
+      wrap.onmouseenter = function () { wrap.classList.add('is-paused'); };
+      wrap.onmouseleave = function () { wrap.classList.remove('is-paused'); };
+    }
   }
 
   function renderTopQuestions(list) {
     var el = $('datav-topq');
+    var wrap = $('datav-topq-wrap');
     if (!el) return;
-    var items = list || [];
+    var items = (list || []).slice(0, 12);
+    wrap && wrap.classList.remove('is-auto-scroll');
     if (!items.length) {
-      el.innerHTML = '<li><span class="datav-topq__text">暂无足够问答样本</span></li>';
+      el.innerHTML = '<li class="datav-topq__empty">暂无足够问答样本</li>';
       return;
     }
-    el.innerHTML = items.map(function (q, i) {
-      return '<li><span class="datav-topq__rank">' + (i + 1) + '</span>' +
-        '<span class="datav-topq__text">' + q.question + '</span>' +
-        '<span class="datav-topq__cnt">' + q.count + '</span></li>';
-    }).join('');
+    var html = items.map(topqCardHtml).join('');
+    if (items.length > 4) {
+      el.innerHTML = html + html;
+      if (wrap) wrap.classList.add('is-auto-scroll');
+    } else {
+      el.innerHTML = html;
+    }
   }
 
   function renderPublicity(pub) {
     pub = pub || {};
     var el = $('datav-publicity');
     if (!el) return;
-    var topics = (pub.hotTopics || []).slice(0, 2).join('、') || '—';
-    el.innerHTML = [
-      ['今日阅读', pub.todayReads || 0],
-      ['累计阅读', pub.totalReads || 0],
-      ['热门', topics]
-    ].map(function (x) {
-      return '<li><span>' + x[0] + '</span><span>' + x[1] + '</span></li>';
-    }).join('');
+    var local = window.FayiPufaStats && FayiPufaStats.getSnapshot ? FayiPufaStats.getSnapshot() : {};
+    var today = Math.max(pub.todayReads || 0, local.todayReadCount || 0);
+    var total = Math.max(pub.totalReads || 0, local.totalReadCount || 0);
+    var hotList = (pub.hotTopics && pub.hotTopics.length)
+      ? pub.hotTopics.slice(0, 3)
+      : (window.FayiPufaStats && FayiPufaStats.getHotTopics ? FayiPufaStats.getHotTopics(3) : []);
+    var tags = hotList.length
+      ? hotList.map(function (t) {
+          var label = t.indexOf('《') === 0 ? t : '《' + t + '》';
+          return '<span class="datav-publicity__tag" title="' + label.replace(/"/g, '&quot;') + '">' + label + '</span>';
+        }).join('')
+      : '<span class="datav-publicity__tag">暂无热词</span>';
+
+    el.innerHTML =
+      '<div class="datav-publicity__col">' +
+        '<div class="datav-publicity__metric">' +
+          '<span class="datav-publicity__label">今日阅读</span>' +
+          '<strong class="datav-publicity__num" data-count="' + today + '">0</strong>' +
+        '</div>' +
+        '<div class="datav-publicity__metric">' +
+          '<span class="datav-publicity__label">累计阅读</span>' +
+          '<strong class="datav-publicity__num" data-count="' + total + '">0</strong>' +
+        '</div>' +
+      '</div>' +
+      '<div class="datav-publicity__col">' +
+        '<div class="datav-publicity__hot-title">热门内容</div>' +
+        '<div class="datav-publicity__tags">' + tags + '</div>' +
+        '<div class="datav-publicity__hot-title" style="margin-top:4px">热词标签</div>' +
+      '</div>' +
+      '<div class="datav-publicity__hot-row">' +
+        '<div class="datav-publicity__tags">' + tags + '</div>' +
+      '</div>';
+
+    el.querySelectorAll('.datav-publicity__num[data-count]').forEach(function (node) {
+      var v = node.getAttribute('data-count');
+      if (/^\d+$/.test(String(v))) animateNum(node, v);
+    });
   }
 
   function applyData(data, isUpdate) {
@@ -255,7 +360,12 @@
 
     chartSet($('chart-trend'), {
       color: THEME.color,
-      tooltip: { trigger: 'axis' },
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: 'rgba(12,21,40,0.92)',
+        borderColor: 'rgba(79,156,249,0.35)',
+        textStyle: { color: '#e2e8f0' }
+      },
       legend: { data: ['咨询', 'OCR', '文书'], top: 0, right: 8 },
       grid: grid({ top: 42 }),
       xAxis: { type: 'category', data: ch.labels, boundaryGap: false },
@@ -264,8 +374,13 @@
         {
           id: 's-consult', name: '咨询', type: 'line', smooth: true, data: ch.consult,
           symbol: 'circle', symbolSize: 6,
-          lineStyle: { width: 2, color: '#4f9cf9' },
-          areaStyle: { color: 'rgba(79,156,249,0.12)' }
+          lineStyle: { width: 2, color: '#4f9cf9', shadowColor: 'rgba(79,156,249,0.4)', shadowBlur: 8 },
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(79,156,249,0.35)' },
+              { offset: 1, color: 'rgba(79,156,249,0.02)' }
+            ])
+          }
         },
         {
           id: 's-ocr', name: 'OCR', type: 'line', smooth: true, data: ch.ocr,
@@ -319,20 +434,39 @@
     }, !isUpdate);
 
     var heatCats = (data.consultHotspots || []).slice().sort(function (a, b) { return b.value - a.value; });
+    var heatLabels = heatCats.map(function (c) { return ellipsize(catLabel(c), 6); });
+    var heatBarW = heatCats.length <= 4 ? 10 : 8;
     chartSet($('chart-heat'), {
-      tooltip: { trigger: 'axis' },
-      grid: grid({ left: 88, right: 16, top: 8, bottom: 8 }),
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: 'rgba(12,21,40,0.92)',
+        borderColor: 'rgba(79,156,249,0.35)',
+        formatter: function (p) {
+          var idx = p[0] && p[0].dataIndex;
+          var full = heatCats[idx] ? catLabel(heatCats[idx]) : '';
+          return full + '：' + ((p[0] && p[0].value) || 0);
+        }
+      },
+      grid: { top: 10, bottom: 10, left: 40, right: 10, containLabel: false },
       xAxis: { type: 'value', show: false },
       yAxis: {
         type: 'category',
-        data: heatCats.map(function (c) { return catLabel(c); }),
-        axisLabel: { color: '#94a3b8', fontSize: 10 }
+        data: heatLabels,
+        axisLabel: {
+          color: '#94a3b8',
+          fontSize: 9,
+          width: 36,
+          overflow: 'truncate'
+        },
+        axisTick: { show: false },
+        axisLine: { show: false }
       },
       series: [{
         id: 'heat-bar', type: 'bar', data: heatCats.map(function (c) { return c.value; }),
-        barWidth: 12,
+        barWidth: heatBarW,
+        barCategoryGap: '28%',
         itemStyle: {
-          borderRadius: [0, 8, 8, 0],
+          borderRadius: [0, 6, 6, 0],
           color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
             { offset: 0, color: 'rgba(79,156,249,0.25)' },
             { offset: 1, color: '#4f9cf9' }
@@ -368,23 +502,46 @@
     var words = (data.keywords || []).map(function (w) {
       return { name: w.name, value: Math.max(1, w.value) };
     });
-    if ($('chart-word') && words.length) {
-      chartSet($('chart-word'), {
+    if ($('chart-word')) {
+      var dom = $('chart-word');
+      var w = dom.clientWidth || 280;
+      var h = dom.clientHeight || 200;
+      var scale = Math.min(1, Math.min(w, h) / 220);
+      var maxFont = Math.max(WORD_MIN_FONT, Math.min(WORD_MAX_FONT, Math.round(WORD_MAX_FONT * scale)));
+      var minFont = WORD_MIN_FONT;
+      var palette = THEME.color || ['#4f9cf9', '#38bdf8', '#818cf8', '#22d3ee'];
+      chartSet(dom, {
+        tooltip: {
+          show: true,
+          backgroundColor: 'rgba(12,21,40,0.9)',
+          borderColor: 'rgba(79,156,249,0.3)',
+          formatter: function (p) { return p.name + '：' + p.value; }
+        },
         series: [{
           id: 'word-cloud', type: 'wordCloud', shape: 'circle',
-          sizeRange: [11, 38],
-          rotationRange: [-20, 20],
-          gridSize: 6,
+          left: 'center', top: 'center', width: '88%', height: '86%',
+          sizeRange: [minFont, maxFont],
+          rotationRange: [-15, 15],
+          gridSize: Math.max(6, Math.round(10 * (1.1 - scale * 0.3))),
+          drawOutOfBound: false,
+          shrinkToFit: true,
+          layoutAnimation: true,
           textStyle: {
-            color: function () {
-              var palette = THEME.color || ['#4f9cf9'];
-              return palette[Math.floor(Math.random() * palette.length)];
+            fontFamily: 'PingFang SC, Microsoft YaHei, sans-serif',
+            fontWeight: 600,
+            color: function (p) {
+              return palette[(p.dataIndex || 0) % palette.length];
             }
           },
-          data: words
+          emphasis: {
+            textStyle: { shadowBlur: 10, shadowColor: 'rgba(56,189,248,0.5)' }
+          },
+          data: words.length ? words : [{ name: '暂无关键词', value: 1 }]
         }]
       }, !isUpdate);
     }
+
+    syncRightColumnLayout();
 
     var rev = data.revision && data.revision.seq;
     if (rev != null) lastRevisionSeq = rev;
@@ -527,11 +684,12 @@
       ch.onmessage = function () { poll(); };
     } catch (e) {}
     window.addEventListener('storage', function (ev) {
-      if (ev.key === 'fayi-dashboard-bump') poll();
+      if (ev.key === 'fayi-dashboard-bump' || ev.key === 'fayi_dashboard_logs') poll();
     });
     document.addEventListener('visibilitychange', function () {
       if (!document.hidden) poll();
     });
+    document.addEventListener('fayi-dashboard-log', function () { poll(); });
   }
 
   function logDatavVisit() {
@@ -561,6 +719,8 @@
     initParticles();
     scaleLayout();
     window.addEventListener('resize', scaleLayout);
+    setTimeout(syncRightColumnLayout, 100);
+    setTimeout(syncRightColumnLayout, 600);
 
     var cached = window.FayiDatavStore && FayiDatavStore.loadSnapshot();
     if (cached) applyData(cached, false);
