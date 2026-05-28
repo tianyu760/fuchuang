@@ -84,7 +84,7 @@ async function callTencentAgent(apiMessages, userId) {
 
   const reqHeaders = {
     Authorization: 'Bearer ' + YUANQI_API_KEY,
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json; charset=utf-8',
     'X-Source': 'openapi'
   };
 

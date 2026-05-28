@@ -5,8 +5,29 @@
 (function (global) {
   var API_BASE = 'http://localhost:3002';
 
+  var JSON_UTF8 = 'application/json; charset=utf-8';
+
+  function apiFetch(url, options) {
+    if (global.FayiHttp) {
+      return FayiHttp.request(url, Object.assign({ silent: false }, options || {}));
+    }
+    options = options || {};
+    return fetch(url, options).then(function (r) {
+      var ct = (r.headers.get('content-type') || '').toLowerCase();
+      if (ct.indexOf('application/json') < 0) {
+        return r.text().then(function () {
+          throw new Error('接口返回了非 JSON 数据，请确认后端服务已启动（端口 3002）');
+        });
+      }
+      return r.json().then(function (json) {
+        if (!r.ok) throw new Error((json && json.message) || '请求失败');
+        return json;
+      });
+    });
+  }
+
   function getAuthHeaders(extra) {
-    var h = Object.assign({ 'Content-Type': 'application/json' }, extra || {});
+    var h = Object.assign({ 'Content-Type': JSON_UTF8, Accept: JSON_UTF8 }, extra || {});
     if (global.FayiAuth && FayiAuth.getToken) {
       var t = FayiAuth.getToken();
       if (t) h.Authorization = 'Bearer ' + t;
@@ -53,21 +74,13 @@
   }
 
   function postJson(path, body, extraHeaders) {
-    return fetch(API_BASE + path, {
+    return apiFetch(API_BASE + path, {
       method: 'POST',
       headers: getAuthHeaders(extraHeaders),
       body: JSON.stringify(body || {})
-    }).then(function (r) {
-      return r.json().then(function (json) {
-        if (!r.ok || (json && json.success === false && json.ok === false)) {
-          var msg = (json && (json.message || json.error)) || ('HTTP ' + r.status);
-          var err = new Error(msg);
-          err.detail = json;
-          throw err;
-        }
-        notifyRealtime(path);
-        return normalizeReply(json);
-      });
+    }).then(function (json) {
+      notifyRealtime(path);
+      return normalizeReply(json);
     }).catch(function (err) {
       throw friendlyFetchError(path, err);
     });
@@ -77,19 +90,13 @@
     var opts = {
       method: 'POST',
       headers: getFormAuthHeaders(),
-      body: formData
+      body: formData,
+      silent: false
     };
     if (signal) opts.signal = signal;
-    return fetch(API_BASE + path, opts).then(function (r) {
-      return r.json().then(function (json) {
-        if (!r.ok && json && json.success !== false) {
-          var err = new Error((json && (json.message || json.error)) || ('HTTP ' + r.status));
-          err.detail = json;
-          throw err;
-        }
-        notifyRealtime(path);
-        return normalizeReply(json);
-      });
+    return apiFetch(API_BASE + path, opts).then(function (json) {
+      notifyRealtime(path);
+      return normalizeReply(json);
     });
   }
 

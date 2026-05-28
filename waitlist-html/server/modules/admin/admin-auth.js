@@ -60,7 +60,12 @@ function requireAdmin(req, res, next) {
   const token = auth.replace(/^Bearer\s+/i, '').trim();
   const session = adminTokens.get(token);
   if (!session) {
-    return res.status(401).json({ success: false, message: '管理员未登录或会话已过期' });
+    return res.status(401).json({
+      code: 401,
+      message: '管理员未登录或会话已过期',
+      data: null,
+      success: false
+    });
   }
   req.admin = session;
   next();

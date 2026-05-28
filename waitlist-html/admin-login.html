@@ -1,43 +1,123 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <title>管理端登录 · 法绎</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="./css/admin-login.css" rel="stylesheet">
+    <link href="./css/auth-dual-panel.css" rel="stylesheet">
 </head>
-<body>
-    <div class="al-root">
-        <aside class="al-brand">
-            <div class="al-brand-logo">法绎 · 管理控制台</div>
-            <h1>企业级法律服务<br>运营管理平台</h1>
-            <p>输入管理端身份验证码即可进入后台。与普通用户系统完全隔离。</p>
-            <div class="al-features">
-                <div class="al-feature">数据总览与业务趋势分析</div>
-                <div class="al-feature">用户与风险案件统一管理</div>
-                <div class="al-feature">咨询、文书、OCR 全链路记录</div>
+<body class="auth-dual auth-dual--admin">
+
+<div class="auth-dual-bg" aria-hidden="true"><div class="auth-dual-bg-photo"></div></div>
+
+<div class="auth-dual-shell">
+    <div class="auth-dual-cluster">
+        <aside class="auth-intro-card" aria-label="管理端介绍">
+            <p class="auth-intro-watermark" aria-hidden="true">Legal</p>
+            <div class="auth-intro-top">
+                <div class="auth-intro-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+                        <path fill="#7A8CA3" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z"/>
+                        <path fill="#556B86" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z"/>
+                    </svg>
+                    <span>法绎</span>
+                </div>
+                <span class="auth-intro-tag">管理控制台</span>
             </div>
+            <div class="auth-intro-body">
+                <div class="auth-intro-panel">
+                    <h2 class="auth-intro-title">后台管理<br>与运营</h2>
+                    <p class="auth-intro-lead">管理员专用入口，与用户前台隔离。</p>
+                </div>
+                <ul class="auth-intro-points" aria-label="管理端能力">
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></span>
+                        运营数据总览
+                    </li>
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
+                        用户权限管理
+                    </li>
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        后台独立会话
+                    </li>
+                </ul>
+            </div>
+            <a href="welcome.html" class="auth-intro-back">← 返回欢迎页</a>
         </aside>
-        <section class="al-form-panel">
-            <div class="al-form-box">
-                <h2>管理端验证</h2>
-                <p class="al-sub">请输入身份验证码以进入管理后台</p>
-                <div id="al-error" class="al-error" role="alert"></div>
-                <form id="al-login-form" autocomplete="off">
-                    <div class="al-field">
-                        <label class="al-label" for="al-identity">身份验证码</label>
-                        <input id="al-identity" class="al-input" type="text" name="identityCode" placeholder="请输入管理员权限验证码" required autocomplete="off" autofocus />
+
+        <section class="auth-form-card">
+            <div class="auth-form-card-head">
+                <h1>后台管理验证</h1>
+                <p>请输入邮箱、密码及身份验证码</p>
+            </div>
+            <div class="auth-form-card-body">
+                <div class="auth-info-strip" aria-label="管理端能力">
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>数据总览</strong>访问与业务指标</span>
                     </div>
-                    <button type="submit" class="al-submit" id="al-submit">进入管理后台</button>
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>用户权限</strong>账号与角色管理</span>
+                    </div>
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>安全隔离</strong>独立会话接口</span>
+                    </div>
+                </div>
+
+                <div class="auth-alert auth-alert--error" id="al-error" role="alert"></div>
+
+                <form id="al-login-form" autocomplete="off" novalidate>
+                    <div class="auth-field">
+                        <label class="auth-label" for="al-email">管理员邮箱</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </span>
+                            <input id="al-email" class="auth-input" type="email" name="email" placeholder="注册时使用的邮箱" required autocomplete="username" autofocus/>
+                        </div>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="al-password">密码</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            </span>
+                            <input id="al-password" class="auth-input" type="password" name="password" placeholder="注册时设置的密码" required autocomplete="current-password"/>
+                            <span class="auth-input-eye" id="al-eye-pw" title="显示/隐藏密码" role="button" tabindex="0">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="auth-hint-block auth-hint-block--accent">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                        <span>请使用注册为「系统管理员」的邮箱与密码，并输入身份验证码完成三重校验。</span>
+                    </div>
+                    <div class="auth-field">
+                        <label class="auth-label" for="al-identity">身份验证码</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            </span>
+                            <input id="al-identity" class="auth-input" type="text" name="identityCode" placeholder="请输入身份验证码" required autocomplete="off" spellcheck="false"/>
+                        </div>
+                    </div>
+                    <button type="submit" class="auth-btn" id="al-submit">进入管理后台</button>
                 </form>
-                <p class="al-foot">
-                    普通用户请 <a href="login.html">前往用户登录</a>
-                </p>
+            </div>
+            <div class="auth-form-card-foot">
+                <p class="auth-foot">普通用户请 <a href="login.html">前往用户登录</a></p>
             </div>
         </section>
-    </div>
-    <script src="./js/admin-permission.js"></script>
-    <script src="./js/modules/admin/admin-api.js"></script>
-    <script src="./js/admin-login.js"></script>
+    </div><!-- .auth-dual-cluster -->
+</div>
+
+<script src="./js/admin-permission.js"></script>
+<script src="./js/lib/http-client.js"></script>
+<script src="./js/modules/admin/admin-api.js"></script>
+<script src="./js/admin-login.js"></script>
 </body>
 </html>

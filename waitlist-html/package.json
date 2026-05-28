@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "npx tailwindcss -i ./css/style.css -o ./style.css --watch",
     "build": "npx tailwindcss -i ./css/style.css -o ./style.css",
-    "serve": "npx http-server . -p 8080 -c-1 --cors -o /chat.html",
+    "serve": "npx http-server . -p 8080 -c-1 --cors -o /welcome.html",
     "server:3002": "npm --prefix server start",
     "server:3002:dev": "npm --prefix server run dev",
     "datav": "npm run server:3002"

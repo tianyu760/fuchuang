@@ -62,7 +62,7 @@ async function generateLegalDocumentByQwen(question) {
     timeout: cfg.timeout,
     headers: {
       Authorization: 'Bearer ' + cfg.apiKey,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json; charset=utf-8'
     }
   });
 

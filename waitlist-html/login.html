@@ -1,165 +1,151 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <title>登录 · 法绎</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="./style.css" rel="stylesheet">
-    <link href="./css/login-page.css" rel="stylesheet">
+    <link href="./css/auth-dual-panel.css" rel="stylesheet">
     <script src="./js/admin-permission.js"></script>
     <script src="./js/auth.js"></script>
-    <script>
-        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
-            document.querySelector('html').classList.remove('dark');
-        } else {
-            document.querySelector('html').classList.add('dark');
-        }
-    </script>
 </head>
-<body class="login-page">
+<body class="auth-dual auth-dual--login">
 
-<!-- 背景层：参考图 + 法律元素 + 渐变遮罩 + 流光 + 暗角 -->
-<div class="login-background" aria-hidden="true">
-    <div class="background-flow" role="presentation"></div>
-    <div class="background-legal-motifs">
-        <svg class="lg-motif lg-motif--scales" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1"><path d="M60 18v72M30 90h60M24 90l6-18h60l6 18"/><ellipse cx="42" cy="72" rx="14" ry="4"/><ellipse cx="78" cy="72" rx="14" ry="4"/></svg>
-        <svg class="lg-motif lg-motif--gavel" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1"><rect x="58" y="22" width="28" height="14" rx="2" transform="rotate(35 72 29)"/><path d="M52 36L28 72"/><path d="M22 78h20l-4 12H18l4-12z"/></svg>
-        <svg class="lg-motif lg-motif--doc" viewBox="0 0 200 150" fill="none" stroke="currentColor" stroke-width="0.8"><rect x="40" y="20" width="120" height="110" rx="4"/><line x1="58" y1="48" x2="142" y2="48"/><line x1="58" y1="68" x2="130" y2="68"/><line x1="58" y1="88" x2="138" y2="88"/></svg>
-        <svg class="lg-motif lg-motif--city" viewBox="0 0 240 80" fill="none" stroke="currentColor" stroke-width="0.9"><path d="M20 70V40h24v30M56 70V25h20v45M92 70V35h28v35M136 70V20h22v50M174 70V45h26v25M212 70V30h18v40"/></svg>
-    </div>
-</div>
-<div class="background-overlay" aria-hidden="true"></div>
-<div class="background-light-flow" aria-hidden="true"></div>
-<div class="background-vignette" aria-hidden="true"></div>
+<div class="auth-dual-bg" aria-hidden="true"><div class="auth-dual-bg-photo"></div></div>
 
-<div class="lg-shell">
-
-    <header class="lg-header">
-        <a href="index.html" class="lg-header-logo" aria-label="返回首页">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" aria-hidden="true">
-                <path fill="#7A8CA3" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z"/>
-                <path fill="#556B86" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z"/>
-            </svg>
-            <span>法绎</span>
-        </a>
-        <div>
-            <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only"/>
-            <label class="cursor-pointer" for="light-switch" style="padding:6px;display:flex;">
-                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z"/><path class="fill-gray-700" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"/></svg>
-            </label>
-        </div>
-    </header>
-
-    <main class="lg-main">
-        <div class="lg-card">
-
-            <div class="lg-brand-mini">
-                <div class="lg-brand-mini-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" aria-hidden="true">
+<div class="auth-dual-shell">
+    <div class="auth-dual-cluster">
+        <aside class="auth-intro-card" aria-label="平台介绍">
+            <p class="auth-intro-watermark" aria-hidden="true">Legal</p>
+            <div class="auth-intro-top">
+                <div class="auth-intro-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
                         <path fill="#7A8CA3" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z"/>
                         <path fill="#556B86" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z"/>
                     </svg>
-                    法绎
+                    <span>法绎</span>
                 </div>
-                <p class="lg-brand-mini-tagline">让法律服务更加清晰、高效、可信</p>
+                <span class="auth-intro-tag">用户登录</span>
             </div>
+            <div class="auth-intro-body">
+                <div class="auth-intro-panel">
+                    <h2 class="auth-intro-title">智能法律<br>服务平台</h2>
+                    <p class="auth-intro-lead">登录后继续您的咨询与检索。</p>
+                </div>
+                <ul class="auth-intro-points" aria-label="平台能力">
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                        多轮案情梳理
+                    </li>
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+                        法条快速检索
+                    </li>
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        账号安全隔离
+                    </li>
+                </ul>
+            </div>
+            <a href="welcome.html" class="auth-intro-back">← 返回欢迎页</a>
+        </aside>
 
-            <div class="lg-form-inner">
+        <section class="auth-form-card">
+            <div class="auth-form-card-head">
+                <h1>欢迎回来</h1>
+                <p>登录您的法绎账号，继续使用平台服务</p>
+            </div>
+            <div class="auth-form-card-body">
+                <div class="auth-info-strip" aria-label="平台能力">
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>智能咨询</strong>多轮案情梳理</span>
+                    </div>
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>法规文书</strong>检索与起草辅助</span>
+                    </div>
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>安全合规</strong>权限与数据隔离</span>
+                    </div>
+                </div>
 
-                <h1 class="lg-title">欢迎回来</h1>
-                <p class="lg-subtitle">登录您的法绎账号，继续使用平台服务</p>
-
-                <div class="lg-success-bar" id="login-success">
+                <div class="auth-alert auth-alert--success hidden" id="login-success">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                     注册成功，请使用刚才的邮箱与密码登录。
                 </div>
-
-                <div class="lg-error-bar" id="login-error"></div>
+                <div class="auth-alert auth-alert--error" id="login-error" role="alert"></div>
 
                 <form id="login-form" novalidate>
-
-                    <div class="lg-field">
-                        <label class="lg-label" for="login-email">邮箱</label>
-                        <div class="lg-input-wrap">
-                            <span class="lg-input-icon">
+                    <div class="auth-field">
+                        <label class="auth-label" for="login-email">邮箱</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                             </span>
-                            <input id="login-email" class="lg-input" type="email" autocomplete="username" placeholder="请输入您的邮箱"/>
+                            <input id="login-email" class="auth-input" type="email" autocomplete="username" placeholder="请输入您的邮箱"/>
                         </div>
                     </div>
-
-                    <div class="lg-field">
-                        <label class="lg-label" for="login-password">密码</label>
-                        <div class="lg-input-wrap">
-                            <span class="lg-input-icon">
+                    <div class="auth-field">
+                        <label class="auth-label" for="login-password">密码</label>
+                        <div class="auth-input-wrap">
+                            <span class="auth-input-icon">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                             </span>
-                            <input id="login-password" class="lg-input" type="password" autocomplete="current-password" placeholder="请输入密码"/>
-                            <span class="lg-eye" id="eye-pw" title="显示/隐藏密码" role="button" tabindex="0">
+                            <input id="login-password" class="auth-input" type="password" autocomplete="current-password" placeholder="请输入密码"/>
+                            <span class="auth-input-eye" id="eye-pw" title="显示/隐藏密码" role="button" tabindex="0">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                             </span>
                         </div>
                     </div>
-
                     <div class="auth-admin-code-wrap" id="lg-admin-code-wrap" aria-hidden="true">
-                        <div class="lg-field">
-                            <label class="lg-label" for="login-admin-permission-code">管理员权限验证码</label>
-                            <div class="lg-input-wrap">
-                                <span class="lg-input-icon">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <div class="auth-field">
+                            <label class="auth-label" for="login-admin-permission-code">管理员权限验证码</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                                 </span>
-                                <input id="login-admin-permission-code" class="lg-input" type="text" placeholder="请输入管理员权限验证码" autocomplete="off" spellcheck="false"/>
+                                <input id="login-admin-permission-code" class="auth-input" type="text" placeholder="请输入管理员权限验证码" autocomplete="off" spellcheck="false"/>
                             </div>
                         </div>
                     </div>
-
-                    <div class="lg-remember-row">
-                        <label class="lg-remember">
-                            <input type="checkbox" id="remember-me"/>
-                            记住我
-                        </label>
-                        <a class="lg-forgot" href="#" id="forgot-link">忘记密码？</a>
+                    <div class="auth-remember">
+                        <label><input type="checkbox" id="remember-me"/> 记住我</label>
+                        <a href="#" id="forgot-link">忘记密码？</a>
                     </div>
-
-                    <button type="submit" class="lg-submit-btn" id="lg-submit-btn">
+                    <button type="submit" class="auth-btn" id="lg-submit-btn">
                         <span id="lg-btn-text">登录</span>
                     </button>
                 </form>
-
-                <div class="lg-divider"><span>其他登录方式</span></div>
-
-                <div class="lg-social-row">
-                    <button class="lg-social-btn" type="button" id="btn-qq-login">
-                        <div class="lg-social-icon" style="background:#12b7f5;">
-                            <svg width="10" height="10" viewBox="0 0 40 40" fill="#fff"><path d="M20 2C10.1 2 2 10.1 2 20s8.1 18 18 18 18-8.1 18-18S29.9 2 20 2zm6.6 26.3c-.4.8-1.4 1.1-2.3.7l-4.3-2.1-4.3 2.1c-.9.4-1.9.1-2.3-.7-.4-.8-.1-1.8.7-2.3l1.4-.7v-8.6l-1.4-.7c-.8-.4-1.1-1.4-.7-2.3.4-.9 1.4-1.1 2.3-.7L20 15.2l4.3-2.1c.9-.4 1.9-.1 2.3.7.4.8.1 1.8-.7 2.3l-1.4.7v8.6l1.4.7c.8.5 1.1 1.5.7 2.2z"/></svg>
-                        </div>
-                        QQ 登录
-                    </button>
-                    <button class="lg-social-btn" type="button" id="btn-wechat-login">
-                        <div class="lg-social-icon" style="background:#07c160;">
-                            <svg width="11" height="11" viewBox="0 0 40 40" fill="#fff"><path d="M16 8C9.4 8 4 12.7 4 18.5c0 3.3 1.7 6.3 4.4 8.3l-1.1 3.3 3.8-1.9c1.3.4 2.8.6 4.3.6.4 0 .8 0 1.2-.1-.3-.8-.4-1.7-.4-2.6 0-5.3 4.8-9.6 10.8-9.6.4 0 .8 0 1.2.1C27.4 12.1 22.2 8 16 8zm-3.5 5.5c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5zm7 0c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5-1.5-.7-1.5-1.5.7-1.5 1.5-1.5z"/><path d="M27 20c-5 0-9 3.6-9 8s4 8 9 8c1.2 0 2.4-.2 3.4-.6l3 1.5-.9-2.7c2.2-1.6 3.5-4 3.5-6.2 0-4.4-4-8-9-8zm-2.5 5c-.7 0-1.2-.6-1.2-1.2s.5-1.2 1.2-1.2 1.2.6 1.2 1.2-.5 1.2-1.2 1.2zm5 0c-.7 0-1.2-.6-1.2-1.2s.5-1.2 1.2-1.2 1.2.6 1.2 1.2-.5 1.2-1.2 1.2z"/></svg>
-                        </div>
-                        微信登录
-                    </button>
+                <div class="auth-social-compact">
+                    <button type="button" id="btn-qq-login">QQ 登录</button>
+                    <button type="button" id="btn-wechat-login">微信登录</button>
                 </div>
-
-                <p class="lg-register-link">
+                <p class="auth-form-note">平台内容仅供参考，不构成正式法律意见；重大事项请咨询执业律师。</p>
+            </div>
+            <div class="auth-form-card-foot">
+                <p class="auth-foot">
                     还没有账号？<a href="register.html">立即注册</a>
-                    <span style="margin:0 6px;color:#cbd5e1">|</span>
-                    <a href="admin-login.html">管理端登录</a>
+                    <span style="margin:0 8px;color:#cbd5e1">|</span>
+                    <a href="admin-login.html">管理端登录</a> · <a href="welcome.html">欢迎页</a>
                 </p>
             </div>
-        </div>
-    </main>
+        </section>
+    </div><!-- .auth-dual-cluster -->
+</div>
 
-    <!-- 忘记密码弹窗 -->
-    <div class="lg-modal-overlay" id="forgot-modal" role="dialog" aria-modal="true" aria-hidden="true">
-        <div class="lg-modal">
-            <button type="button" class="lg-modal-close" id="forgot-close" aria-label="关闭">✕</button>
-            <div class="lg-modal-title">找回密码</div>
-            <p class="lg-modal-sub">请输入注册邮箱，我们将发送重置说明（功能建设中）</p>
-            <input type="email" class="lg-modal-input" placeholder="请输入您的邮箱"/>
-            <button type="button" class="lg-modal-submit" id="forgot-submit">发送重置邮件</button>
+<div class="auth-modal-overlay" id="forgot-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="auth-modal">
+        <div class="auth-modal-head">
+            <h2>找回密码</h2>
+            <button type="button" class="auth-modal-close" id="forgot-close" aria-label="关闭">&times;</button>
+        </div>
+        <div class="auth-modal-body">
+            <p>请输入注册邮箱，我们将发送重置说明（功能建设中）</p>
+            <input type="email" class="auth-input" style="margin-top:12px;padding-left:16px;" placeholder="请输入您的邮箱"/>
+        </div>
+        <div class="auth-modal-foot">
+            <button type="button" class="auth-modal-btn auth-modal-btn--primary" id="forgot-submit">发送重置邮件</button>
         </div>
     </div>
 </div>
@@ -169,89 +155,53 @@
 <script>
 (function () {
     var successBar = document.getElementById('login-success');
-    successBar.style.display = new URLSearchParams(location.search).get('registered') === '1' ? 'flex' : 'none';
-
+    if (successBar && new URLSearchParams(location.search).get('registered') === '1') {
+        successBar.classList.remove('hidden');
+        successBar.classList.add('is-show');
+    }
     var eyeBtn = document.getElementById('eye-pw');
     var pwInp = document.getElementById('login-password');
-    eyeBtn.addEventListener('click', function () {
-        pwInp.type = pwInp.type === 'password' ? 'text' : 'password';
-    });
-
+    if (eyeBtn && pwInp) eyeBtn.addEventListener('click', function () { pwInp.type = pwInp.type === 'password' ? 'text' : 'password'; });
     var errBar = document.getElementById('login-error');
-    function showErr(msg) { errBar.textContent = msg; errBar.style.display = 'block'; }
-    function hideErr() { errBar.style.display = 'none'; }
-
+    function showErr(msg) { if (errBar) { errBar.textContent = msg; errBar.classList.add('is-show'); } }
+    function hideErr() { if (errBar) { errBar.classList.remove('is-show'); errBar.textContent = ''; } }
     var modal = document.getElementById('forgot-modal');
-    document.getElementById('forgot-link').addEventListener('click', function (e) {
-        e.preventDefault();
-        modal.classList.add('open');
-        modal.setAttribute('aria-hidden', 'false');
-    });
-    function closeModal() {
-        modal.classList.remove('open');
-        modal.setAttribute('aria-hidden', 'true');
+    var forgotLink = document.getElementById('forgot-link');
+    if (forgotLink && modal) {
+        forgotLink.addEventListener('click', function (e) { e.preventDefault(); modal.classList.add('is-open'); });
+        function closeModal() { modal.classList.remove('is-open'); }
+        document.getElementById('forgot-close').addEventListener('click', closeModal);
+        document.getElementById('forgot-submit').addEventListener('click', function () { closeModal(); if (window.FayiToast) FayiToast('功能建设中', 'success'); });
+        modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
     }
-    document.getElementById('forgot-close').addEventListener('click', closeModal);
-    document.getElementById('forgot-submit').addEventListener('click', function () {
-        closeModal();
-        if (window.FayiToast) FayiToast('功能建设中，请联系客服找回', 'success');
-    });
-    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
-
-    var btnWechat = document.getElementById('btn-wechat-login');
-    if (btnWechat) {
-        btnWechat.addEventListener('click', function () {
-            if (window.FayiToast) FayiToast('微信登录功能建设中', 'success');
-        });
-    }
-
+    document.getElementById('btn-wechat-login')?.addEventListener('click', function () { if (window.FayiToast) FayiToast('微信登录功能建设中', 'success'); });
     (function handleQqCallback() {
         var p = new URLSearchParams(location.search);
-        var qqToken = p.get('qq_token');
-        if (!qqToken) return;
-        localStorage.setItem('fayi_user_token', qqToken);
-        localStorage.setItem('fayi_current_user', JSON.stringify({
-            email: p.get('qq_email') || '',
-            name: p.get('qq_name') || 'QQ用户',
-            avatar: p.get('qq_avatar') || './images/avatars/1.svg',
-            persona: 'life_consume'
-        }));
-        if (window.FayiToast) FayiToast('QQ 登录成功！', 'success');
+        if (!p.get('qq_token')) return;
+        localStorage.setItem('fayi_user_token', p.get('qq_token'));
+        localStorage.setItem('fayi_current_user', JSON.stringify({ email: p.get('qq_email') || '', name: p.get('qq_name') || 'QQ用户', avatar: p.get('qq_avatar') || './images/avatars/1.svg', persona: 'life_consume' }));
         setTimeout(function () { window.location.replace('chat.html'); }, 800);
     })();
-
-    var btnQq = document.getElementById('btn-qq-login');
-    if (btnQq) {
-        btnQq.addEventListener('click', function () {
-            window.location.href = 'http://localhost:8081/api/auth/qq/login';
-        });
-    }
-
+    document.getElementById('btn-qq-login')?.addEventListener('click', function () { window.location.href = 'http://localhost:8081/api/auth/qq/login'; });
     var form = document.getElementById('login-form');
     var submitBtn = document.getElementById('lg-submit-btn');
     var btnText = document.getElementById('lg-btn-text');
-
+    if (!form) return;
     form.addEventListener('submit', function (e) {
         var email = document.getElementById('login-email').value.trim();
         var pw = document.getElementById('login-password').value;
-        if (!email || !pw) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            showErr('请填写邮箱和密码');
-            return;
-        }
+        if (!email || !pw) { e.preventDefault(); e.stopImmediatePropagation(); showErr('请填写邮箱和密码'); return; }
         hideErr();
-        submitBtn.disabled = true;
-        btnText.textContent = '登录中...';
+        if (submitBtn) submitBtn.disabled = true;
+        if (btnText) btnText.textContent = '登录中...';
         var spinner = document.createElement('div');
-        spinner.className = 'lg-spinner';
+        spinner.className = 'auth-spinner';
         submitBtn.appendChild(spinner);
         setTimeout(function () {
-            if (submitBtn.disabled) {
+            if (submitBtn && submitBtn.disabled) {
                 submitBtn.disabled = false;
-                btnText.textContent = '登录';
-                var s = submitBtn.querySelector('.lg-spinner');
+                if (btnText) btnText.textContent = '登录';
+                var s = submitBtn.querySelector('.auth-spinner');
                 if (s) s.remove();
             }
         }, 5000);

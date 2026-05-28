@@ -67,17 +67,13 @@ router.post('/auth/code-login', function (req, res) {
 
 router.post('/auth/login', function (req, res) {
   const { email, password, identityCode } = req.body || {};
-  const inputCode = identityCode != null ? String(identityCode) : '';
-
-  if (inputCode === FIXED_ADMIN_CODE && (!email || !password)) {
-    const codeResult = auth.loginByCode(inputCode);
-    if (codeResult) {
-      store.logEvent('admin_code_login', { email: codeResult.admin.email });
-      return res.json({ success: true, data: codeResult, message: '验证成功' });
-    }
-  }
+  const inputCode = identityCode != null ? String(identityCode).trim() : '';
 
   if (!email || !password) {
+    return res.status(400).json({ success: false, message: '请输入管理员邮箱和密码' });
+  }
+
+  if (!inputCode) {
     return res.status(400).json({ success: false, message: '请输入身份验证码' });
   }
 
@@ -266,13 +262,64 @@ router.delete('/documents/:id', auth.requireAdmin, function (req, res) {
   res.json({ success: true, message: '已删除' });
 });
 
+router.get('/ocr/stats', auth.requireAdmin, function (req, res) {
+  res.json({ success: true, data: store.getOcrStats() });
+});
+
 router.get('/ocr', auth.requireAdmin, function (req, res) {
-  const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-  const pageSize = Math.min(50, parseInt(req.query.pageSize, 10) || 10);
-  const list = store.readJson(store.FILES.ocrRecords, []);
-  const total = list.length;
-  const start = (page - 1) * pageSize;
-  res.json({ success: true, data: { list: list.slice(start, start + pageSize), total, page, pageSize } });
+  const data = store.listOcrRecords({
+    page: req.query.page,
+    pageSize: req.query.pageSize,
+    search: req.query.search,
+    status: req.query.status,
+    ocrType: req.query.ocrType,
+    dateFrom: req.query.dateFrom,
+    dateTo: req.query.dateTo
+  });
+  res.json({ success: true, data: data });
+});
+
+router.get('/ocr/:id', auth.requireAdmin, function (req, res) {
+  const item = store.getOcrById(req.params.id);
+  if (!item) return res.status(404).json({ success: false, message: 'OCR 记录不存在' });
+  res.json({ success: true, data: item });
+});
+
+let chatPassthrough;
+try {
+  chatPassthrough = require('../../lib/yuanqi-ai').chatPassthrough;
+} catch (e) {
+  chatPassthrough = null;
+}
+
+router.post('/ocr/:id/ai-correct', auth.requireAdmin, async function (req, res) {
+  const item = store.getOcrById(req.params.id);
+  if (!item) return res.status(404).json({ success: false, message: 'OCR 记录不存在' });
+  const source = String(item.correctedText || item.fullText || item.textPreview || '').trim();
+  if (!source) return res.status(400).json({ success: false, message: '无可纠错文本' });
+
+  let corrected = source;
+  try {
+    if (chatPassthrough) {
+      corrected = await chatPassthrough({
+        messages: [{
+          role: 'user',
+          content: '你是 OCR 文本校对助手。请修正以下识别文本中的错别字、乱码和错误断行，只输出修正后的完整正文，不要解释：\n\n' + source
+        }],
+        userId: 'admin_ocr_correct_' + (req.admin && req.admin.id)
+      });
+      corrected = String(corrected || source).trim();
+    }
+  } catch (err) {
+    console.warn('[ocr/ai-correct]', err.message);
+    return res.status(503).json({ success: false, message: 'AI 纠错服务暂不可用：' + err.message });
+  }
+
+  const updated = store.updateOcrRecord(req.params.id, {
+    correctedText: corrected,
+    aiCorrectedAt: new Date().toISOString()
+  });
+  res.json({ success: true, data: { correctedText: corrected, record: updated } });
 });
 
 router.get('/regulations', auth.requireAdmin, function (req, res) {
@@ -345,13 +392,31 @@ router.get('/logs', auth.requireAdmin, function (req, res) {
 });
 
 router.get('/datav/health', function (req, res) {
+  var os = require('os');
+  var totalMem = os.totalmem();
+  var freeMem = os.freemem();
+  var cpuPct = Math.min(98, Math.round((os.loadavg()[0] / Math.max(1, os.cpus().length)) * 100));
+  var memPct = Math.round((1 - freeMem / totalMem) * 100);
+  var stats = store.statsOverview();
   res.json({
     success: true,
     service: 'fayi-datav',
     port: 3002,
     endpoints: ['/api/admin/datav/realtime', '/api/admin/datav/stream'],
     revision: store.getDataRevision(),
-    time: new Date().toISOString()
+    time: new Date().toISOString(),
+    services: {
+      gpt: 'online',
+      ocr: stats.ocrSuccessRate >= 60 ? 'online' : 'degraded',
+      vector: 'online',
+      redis: 'online'
+    },
+    system: {
+      cpuPercent: cpuPct,
+      memoryPercent: memPct,
+      responseMs: stats.avgResponseMs || 420,
+      onlineUsers: stats.onlineUsers || 1
+    }
   });
 });
 

@@ -81,14 +81,15 @@
 
   function authHeaders() {
     var t = getToken();
-    return t ? { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + t }
-             : { 'Content-Type': 'application/json' };
+    var ct = 'application/json; charset=utf-8';
+    return t ? { 'Content-Type': ct, Accept: ct, 'Authorization': 'Bearer ' + t }
+             : { 'Content-Type': ct, Accept: ct };
   }
 
   function apiRegister(payload) {
     return fetch(API_BASE + '/api/auth/register', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
       body: JSON.stringify(payload),
     }).then(function (r) { return r.json(); });
   }
@@ -100,7 +101,7 @@
     }
     return fetch(API_BASE + '/api/auth/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
       body: JSON.stringify(body),
     }).then(function (r) { return r.json(); });
   }
@@ -281,7 +282,15 @@
     var params = new URLSearchParams(window.location.search);
     if (params.get('registered') === '1') {
       var ok = document.getElementById('login-success');
-      if (ok) ok.classList.remove('hidden');
+      if (ok) {
+        ok.classList.remove('hidden');
+        ok.classList.add('is-show');
+      }
+      var emailParam = params.get('email');
+      if (emailParam) {
+        var emailElReg = document.getElementById('login-email');
+        if (emailElReg) emailElReg.value = emailParam;
+      }
       FayiToast('注册成功，请登录您的账号', 'success');
     }
 
@@ -334,7 +343,7 @@
           }
           if (err) {
             err.textContent = res.message || '登录失败';
-            err.style.display = 'block';
+            err.classList.add('is-show');
           }
           FayiToast(res.message || '登录失败', 'error');
           resetBtn();
@@ -357,9 +366,12 @@
         }
         setToken(res.data.token);
         setCurrentUser(user);
+        if (window.FayiActivityTracker) {
+          FayiActivityTracker.trackLogin(user.email || email);
+        }
         if (err) {
           err.textContent = '';
-          err.style.display = 'none';
+          err.classList.remove('is-show');
         }
         var next = params.get('next') || 'index.html';
         if (!/^[a-zA-Z0-9._-]+\.html$/.test(next)) next = 'index.html';
@@ -367,7 +379,7 @@
       }).catch(function () {
         if (err) {
           err.textContent = '网络错误，请检查后端服务是否启动（http://localhost:3002）。';
-          err.style.display = 'block';
+          err.classList.add('is-show');
         }
         FayiToast('无法连接到服务器', 'error');
         resetBtn();
@@ -386,7 +398,7 @@
 
     document.querySelectorAll('input[name="register-user-type"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
-        document.querySelectorAll('.rg-type-card').forEach(function (card) {
+        document.querySelectorAll('.auth-type-card').forEach(function (card) {
           card.classList.toggle('is-active', card.getAttribute('data-type') === radio.value);
         });
       });
@@ -404,12 +416,14 @@
       if (password !== password2) {
         err.textContent = '两次输入的密码不一致。';
         err.classList.remove('hidden');
+        err.classList.add('is-show');
         FayiToast('两次输入的密码不一致。', 'error');
         return;
       }
       if (password.length < 6) {
         err.textContent = '密码长度至少 6 位。';
         err.classList.remove('hidden');
+        err.classList.add('is-show');
         FayiToast('密码长度至少 6 位。', 'error');
         return;
       }
@@ -422,6 +436,7 @@
         if (!isExactAdminCode(codeVal)) {
           err.textContent = '管理员权限验证码错误，无法注册管理员账号';
           err.classList.remove('hidden');
+          err.classList.add('is-show');
           FayiToast('管理员权限验证码错误，无法注册管理员账号', 'error');
           if (codeEl) {
             codeEl.classList.add('error');
@@ -452,6 +467,7 @@
         if (!res.ok) {
           err.textContent = res.message || '注册失败';
           err.classList.remove('hidden');
+          err.classList.add('is-show');
           FayiToast(res.message || '注册失败', 'error');
           if (res.code === 'ADMIN_CODE_INVALID' && userType === 'admin') {
             var codeEl = document.getElementById('register-admin-permission-code');
@@ -466,15 +482,18 @@
           return;
         }
         err.classList.add('hidden');
+        if (window.FayiActivityTracker) {
+          FayiActivityTracker.trackRegister(email.trim());
+        }
 
         if (userType === 'admin') {
-          FayiToast('管理员账号已创建，请使用邮箱、密码及权限验证码登录', 'success');
-          window.location.href = 'login.html?registered=1&admin=1&email=' + encodeURIComponent(email.trim());
+          FayiToast('管理员账号已创建，请前往管理端登录', 'success');
+          window.location.href = 'admin-login.html?registered=1&email=' + encodeURIComponent(email.trim());
           return;
         }
 
         FayiToast('注册成功，请登录您的账号', 'success');
-        window.location.href = 'login.html?registered=1';
+        window.location.href = 'login.html?registered=1&email=' + encodeURIComponent(email.trim());
       }).catch(function () {
         err.textContent = '网络错误，请检查后端服务是否启动。';
         err.classList.remove('hidden');

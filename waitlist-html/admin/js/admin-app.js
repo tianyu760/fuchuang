@@ -7,7 +7,7 @@
   }
 
   var TITLES = {
-    overview: '数据总览',
+    overview: '运营总览',
     users: '用户管理',
     consultations: '法律咨询管理',
     documents: '文书生成记录',
@@ -36,6 +36,7 @@
   function disposeCharts() {
     charts.forEach(function (c) { try { c.dispose(); } catch (e) {} });
     charts = [];
+    if (window.AdminOverviewV3) AdminOverviewV3.dispose();
   }
 
   function skeleton(n) {
@@ -80,11 +81,18 @@
       a.classList.toggle('is-active', a.getAttribute('data-route') === hash);
     });
     $('page-title').textContent = TITLES[hash];
+    var kpiStrip = $('adm-kpi-strip');
+    if (kpiStrip) kpiStrip.style.display = hash === 'overview' ? '' : 'none';
     disposeCharts();
     var root = $('page-root');
     root.innerHTML = skeleton(6);
     var fn = routes[hash];
     if (fn) fn(root);
+    if (window.AdminShell && AdminShell.pageEnter) {
+      AdminShell.pageEnter();
+    } else {
+      window.setTimeout(function () { animateNum(document.querySelector('.adm-kpi__value')); }, 100);
+    }
   }
 
   function mountChart(dom, option) {
@@ -101,57 +109,11 @@
 
   var routes = {
     overview: function (root) {
-      FayiAdminApi.overview().then(function (res) {
-        var s = res.data.stats;
-        var ch = res.data.charts;
-        root.innerHTML =
-          '<div class="adm-stats" id="stats-row"></div>' +
-          '<div class="adm-grid-2">' +
-          '<div class="adm-card"><h3>近7日业务趋势</h3><div id="chart-trend" class="adm-chart"></div></div>' +
-          '<div class="adm-card"><h3>咨询分类占比</h3><div id="chart-pie" class="adm-chart"></div></div>' +
-          '</div>' +
-          '<div class="adm-card" style="margin-top:20px"><h3>系统状态</h3><p id="sys-status"></p></div>';
-        var stats = [
-          ['今日活跃用户', s.todayVisits || s.aiCallsToday || 0],
-          ['在线用户', s.onlineUsers || 1],
-          ['今日咨询量', s.consultToday || 0],
-          ['文书生成量', s.documentToday || s.wenshiToday || 0],
-          ['OCR 识别次数', s.ocrToday || s.ocrCount || 0],
-          ['风险案件数', (s.riskHigh || 0) + (s.riskMid || 0)]
-        ];
-        var row = $('stats-row');
-        stats.forEach(function (item) {
-          var card = el('div', 'adm-stat');
-          card.innerHTML = '<div class="adm-stat__label">' + item[0] + '</div><div class="adm-stat__value" data-v="' + item[1] + '">0</div><div class="adm-stat__sub">运行正常</div>';
-          row.appendChild(card);
-          animateNum(card.querySelector('.adm-stat__value'), item[1]);
-        });
-        $('sys-status').innerHTML = '<span class="adm-badge adm-badge--ok">● ' + (s.systemStatus === 'healthy' ? '系统健康' : s.systemStatus) + '</span> · OCR 成功率 ' + s.ocrSuccessRate + '% · 更新 ' + (s.updatedAt || '').slice(11, 19);
-        mountChart($('chart-trend'), {
-          tooltip: { trigger: 'axis' },
-          grid: { left: 48, right: 24, top: 32, bottom: 32 },
-          legend: { data: ['咨询', 'OCR', '文书'], textStyle: { color: '#94a3b8' } },
-          xAxis: { type: 'category', data: ch.labels, axisLine: { lineStyle: { color: '#334155' } } },
-          yAxis: { type: 'value', splitLine: { lineStyle: { color: 'rgba(51,65,85,.4)' } } },
-          series: [
-            { name: '咨询', type: 'line', smooth: true, data: ch.consult, areaStyle: { opacity: 0.15 }, itemStyle: { color: '#3b82f6' } },
-            { name: 'OCR', type: 'line', smooth: true, data: ch.ocr, itemStyle: { color: '#22c55e' } },
-            { name: '文书', type: 'bar', data: ch.documents, itemStyle: { color: '#6366f1' } }
-          ]
-        });
-        var cats = (res.data.categories || []).map(function (c) {
-          return { name: CAT_LABELS[c.name] || c.name, value: c.value };
-        });
-        mountChart($('chart-pie'), {
-          tooltip: { trigger: 'item' },
-          series: [{
-            type: 'pie', radius: ['42%', '68%'],
-            data: cats.length ? cats : [{ name: '暂无', value: 1 }],
-            label: { color: '#cbd5e1' },
-            itemStyle: { borderRadius: 6 }
-          }]
-        });
-      }).catch(function (e) { root.innerHTML = '<p style="color:#f87171">' + e.message + '</p>'; });
+      if (window.AdminOverviewV3 && window.FayiActivityCenter) {
+        AdminOverviewV3.mount(root, { kpiStrip: $('adm-kpi-strip') });
+        return;
+      }
+      root.innerHTML = '<p class="adm-error">运营总览模块未加载，请刷新页面。</p>';
     },
 
     users: function (root) {
@@ -272,24 +234,11 @@
     },
 
     ocr: function (root) {
-      root.innerHTML = '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>文件</th><th>结果摘要</th><th>状态</th><th>时间</th></tr></thead><tbody id="ocr-tb"></tbody></table></div><div id="ocr-pg"></div>';
-      function load(page) {
-        FayiAdminApi.ocr({ page: page, pageSize: 10 }).then(function (res) {
-          var tb = $('ocr-tb');
-          tb.innerHTML = '';
-          res.data.list.forEach(function (r) {
-            var tr = document.createElement('tr');
-            var ok = r.success !== false;
-            tr.innerHTML = '<td>' + (r.fileName || '—') + '</td><td>' + ((r.textPreview || r.result || '—') + '').slice(0, 80) + '</td><td>' +
-              (ok ? '<span class="adm-badge adm-badge--ok">成功</span>' : '<span class="adm-badge adm-badge--ban">失败</span>') +
-              '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
-            tb.appendChild(tr);
-          });
-          $('ocr-pg').innerHTML = '';
-          $('ocr-pg').appendChild(paginate(res.data.total, res.data.page, res.data.pageSize, load));
-        });
+      if (global.AdminOcrCenter && AdminOcrCenter.mount) {
+        AdminOcrCenter.mount(root);
+        return;
       }
-      load(1);
+      root.innerHTML = '<p class="adm-error">OCR 模块未加载，请刷新页面。</p>';
     },
 
     regulations: function (root) {
@@ -356,18 +305,32 @@
       var q = { page: 1, type: '' };
       function load(page) {
         FayiAdminApi.logs({ page: page, pageSize: 20 }).then(function (res) {
-          var list = res.data.list || [];
-          if (q.type) list = list.filter(function (r) { return r.type.indexOf(q.type) >= 0; });
+          var data = (res && res.data) || {};
+          var list = data.list || [];
+          if (q.type) list = list.filter(function (r) { return (r.type || '').indexOf(q.type) >= 0; });
           var tb = $('logs-tb');
+          if (!tb) return;
           tb.innerHTML = '';
-          list.forEach(function (r) {
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + r.type + '</td><td>' + (r.message || '').slice(0, 100) + '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
-            tb.appendChild(tr);
-          });
-          $('logs-pg').innerHTML = '';
-          $('logs-pg').appendChild(paginate(res.data.total, res.data.page, res.data.pageSize, load));
-        }).catch(function (e) { root.innerHTML = '<p style="color:#f87171">' + e.message + '</p>'; });
+          if (!list.length) {
+            tb.innerHTML = '<tr><td colspan="3" style="color:#94a3b8;text-align:center;padding:24px">暂无日志记录</td></tr>';
+          } else {
+            list.forEach(function (r) {
+              var tr = document.createElement('tr');
+              tr.innerHTML = '<td>' + (r.type || '—') + '</td><td>' + (r.message || '').slice(0, 100) + '</td><td>' + ((r.createdAt || '').slice(0, 16).replace('T', ' ') || '—') + '</td>';
+              tb.appendChild(tr);
+            });
+          }
+          var pg = $('logs-pg');
+          if (pg) {
+            pg.innerHTML = '';
+            pg.appendChild(paginate(data.total || list.length, data.page || page, data.pageSize || 20, load));
+          }
+        }).catch(function (e) {
+          var tb = $('logs-tb');
+          if (tb) {
+            tb.innerHTML = '<tr><td colspan="3" style="color:#f87171;text-align:center;padding:24px">' + (e.message || '加载失败') + '</td></tr>';
+          }
+        });
       }
       $('log-search-btn').onclick = function () { q.type = $('log-type').value.trim(); load(1); };
       load(1);
@@ -406,9 +369,15 @@
   };
 
   FayiAdminApi.me().then(function (res) {
-    $('admin-name').textContent = res.data.name || res.data.email;
+    if (window.AdmSidebar) AdmSidebar.renderAdmin(res.data);
+    else {
+      var nameEl = document.getElementById('adm-admin-name');
+      if (nameEl) nameEl.textContent = res.data.name || res.data.email;
+    }
     $('adm-shell').style.opacity = '1';
-  }).catch(function () {});
+  }).catch(function () {
+    $('adm-shell').style.opacity = '1';
+  });
 
   window.addEventListener('hashchange', route);
   if (document.readyState === 'loading') {

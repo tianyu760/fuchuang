@@ -1,6 +1,8 @@
 package com.fayi.backend.config;
 
 import com.fayi.backend.security.JwtAuthFilter;
+import com.fayi.backend.security.JsonAccessDeniedHandler;
+import com.fayi.backend.security.JsonAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,9 +26,15 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthFilter jwtAuthFilter;
+    private final JsonAuthenticationEntryPoint jsonAuthenticationEntryPoint;
+    private final JsonAccessDeniedHandler jsonAccessDeniedHandler;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+    public SecurityConfig(JwtAuthFilter jwtAuthFilter,
+                          JsonAuthenticationEntryPoint jsonAuthenticationEntryPoint,
+                          JsonAccessDeniedHandler jsonAccessDeniedHandler) {
         this.jwtAuthFilter = jwtAuthFilter;
+        this.jsonAuthenticationEntryPoint = jsonAuthenticationEntryPoint;
+        this.jsonAccessDeniedHandler = jsonAccessDeniedHandler;
     }
 
     @Bean
@@ -49,6 +57,10 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .headers(headers -> headers.frameOptions(fo -> fo.sameOrigin()))
+            .exceptionHandling(ex -> ex
+                .authenticationEntryPoint(jsonAuthenticationEntryPoint)
+                .accessDeniedHandler(jsonAccessDeniedHandler)
+            )
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

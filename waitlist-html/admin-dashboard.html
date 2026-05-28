@@ -1,51 +1,237 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="adm-console-root">
 <head>
-    <meta charset="utf-8">
-    <title>管理后台 · 法绎</title>
+    <meta charset="UTF-8" />
+    <title>运营中心 · 法绎管理后台</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link href="./css/modules/admin.css" rel="stylesheet">
     <link href="./css/admin-console.css" rel="stylesheet">
+    <link href="./css/admin-shell-v4.css" rel="stylesheet">
+    <link href="./css/admin-ocr-center.css" rel="stylesheet">
+    <link href="./css/additional-styles/fayi.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js" defer></script>
+    <script src="./js/lib/http-client.js"></script>
     <script src="./js/admin-permission.js"></script>
     <script src="./js/modules/admin/admin-api.js"></script>
     <script src="./js/admin-guard.js"></script>
 </head>
-<body class="adm-console">
-    <div class="adm-layout" id="adm-shell" style="opacity:0;transition:opacity .3s ease">
+<body class="adm-console adm-v3 adm-v4">
+    <div class="adm-bg-layers" aria-hidden="true">
+        <div class="adm-bg-grid"></div>
+        <div class="adm-bg-glow adm-bg-glow--a"></div>
+        <div class="adm-bg-glow adm-bg-glow--b"></div>
+        <div class="adm-bg-noise"></div>
+        <div class="adm-scanline"></div>
+    </div>
+    <div id="adm-notify-stack" class="adm-notify-stack" aria-live="polite"></div>
+    <div class="adm-drawer-overlay" id="adm-drawer-overlay"></div>
+    <aside class="adm-drawer" id="adm-msg-drawer" aria-label="消息中心">
+        <div class="adm-drawer__head">
+            <h2>全局消息中心</h2>
+            <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="adm-drawer-close">关闭</button>
+        </div>
+        <div class="adm-drawer__body" id="adm-msg-list"></div>
+    </aside>
+    <div class="adm-layout" id="adm-shell" style="opacity:0;transition:opacity .35s ease">
         <aside class="adm-side">
-            <div class="adm-brand">
-                法绎管理后台
-                <span>Legal Service Console</span>
-            </div>
-            <nav class="adm-nav" id="adm-nav">
-                <a href="#overview" data-route="overview" class="is-active">数据总览</a>
-                <a href="#users" data-route="users">用户管理</a>
-                <a href="#consultations" data-route="consultations">法律咨询</a>
-                <a href="#documents" data-route="documents">文书生成</a>
-                <a href="#ocr" data-route="ocr">OCR 识别</a>
-                <a href="#law-education" data-route="law-education">普法内容</a>
-                <a href="#regulations" data-route="regulations">法规库</a>
-                <a href="#logs" data-route="logs">系统日志</a>
-            </nav>
-            <div class="adm-side-foot">
-                <div id="admin-name">管理员</div>
-                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btn-logout" style="margin-top:10px;width:100%">退出登录</button>
+            <div class="adm-side-inner">
+                <!-- 管理员信息卡 -->
+                <div class="adm-side-card adm-side-card--glow adm-admin-card">
+                    <div class="adm-admin-card__avatar" id="adm-avatar">管</div>
+                    <div class="adm-admin-card__info">
+                        <div class="adm-admin-card__name-row">
+                            <span class="adm-admin-card__name" id="adm-admin-name">管理员</span>
+                            <span class="adm-admin-card__online"><span class="adm-breathe"></span>在线</span>
+                        </div>
+                        <div class="adm-admin-card__meta">
+                            <span class="adm-admin-card__role" id="adm-admin-role">系统管理员</span>
+                        </div>
+                        <div class="adm-admin-card__login" id="adm-last-login">最近登录：—</div>
+                    </div>
+                </div>
+
+                <!-- AI 状态监控 -->
+                <div class="adm-side-card adm-side-card--glow adm-ai-status">
+                    <div class="adm-side-card__title">
+                        <iconify-icon icon="lucide:cpu"></iconify-icon>
+                        <span>AI 状态监控</span>
+                    </div>
+                    <ul class="adm-ai-status__list" id="adm-ai-status-list">
+                        <li data-svc="gpt"><span class="adm-breathe"></span><span>GPT 服务</span><em id="adm-svc-gpt">检测中</em></li>
+                        <li data-svc="ocr"><span class="adm-breathe"></span><span>OCR 引擎</span><em id="adm-svc-ocr">检测中</em></li>
+                        <li data-svc="vector"><span class="adm-breathe"></span><span>向量数据库</span><em id="adm-svc-vector">检测中</em></li>
+                        <li data-svc="redis"><span class="adm-breathe"></span><span>Redis 缓存</span><em id="adm-svc-redis">检测中</em></li>
+                    </ul>
+                </div>
+
+                <!-- 系统运行指标 -->
+                <div class="adm-side-card adm-side-card--glow adm-sys-metrics">
+                    <div class="adm-side-card__title">
+                        <iconify-icon icon="lucide:activity"></iconify-icon>
+                        <span>系统运行指标</span>
+                    </div>
+                    <div class="adm-metric-bar">
+                        <div class="adm-metric-bar__head"><span>CPU</span><span id="adm-cpu-val">—</span></div>
+                        <div class="adm-metric-bar__track"><div class="adm-metric-bar__fill" id="adm-cpu-bar" style="width:0%"></div></div>
+                    </div>
+                    <div class="adm-metric-bar">
+                        <div class="adm-metric-bar__head"><span>内存</span><span id="adm-mem-val">—</span></div>
+                        <div class="adm-metric-bar__track"><div class="adm-metric-bar__fill" id="adm-mem-bar" style="width:0%"></div></div>
+                    </div>
+                    <div class="adm-metric-bar">
+                        <div class="adm-metric-bar__head"><span>接口响应</span><span id="adm-api-val">—</span></div>
+                        <div class="adm-metric-bar__track"><div class="adm-metric-bar__fill adm-metric-bar__fill--cyan" id="adm-api-bar" style="width:0%"></div></div>
+                    </div>
+                    <div class="adm-metric-bar">
+                        <div class="adm-metric-bar__head"><span>在线用户</span><span id="adm-online-val">—</span></div>
+                        <div class="adm-metric-bar__track"><div class="adm-metric-bar__fill adm-metric-bar__fill--green" id="adm-online-bar" style="width:0%"></div></div>
+                    </div>
+                </div>
+
+                <!-- 消息通知 -->
+                <a href="#logs" class="adm-side-card adm-side-card--glow adm-notify-card" data-route-jump="logs">
+                    <iconify-icon icon="lucide:bell" class="adm-notify-card__icon"></iconify-icon>
+                    <div class="adm-notify-card__text">
+                        <strong>消息通知中心</strong>
+                        <span>系统与风险提醒</span>
+                    </div>
+                    <span class="adm-notify-card__badge" id="adm-notify-count">0</span>
+                </a>
+
+                <!-- 快捷入口 -->
+                <div class="adm-side-card adm-side-card--glow adm-quick">
+                    <div class="adm-side-card__title">
+                        <iconify-icon icon="lucide:zap"></iconify-icon>
+                        <span>快捷入口</span>
+                    </div>
+                    <div class="adm-quick__grid">
+                        <a href="../wenshi.html" class="adm-quick__btn" target="_blank" rel="noopener">
+                            <iconify-icon icon="lucide:file-plus"></iconify-icon>
+                            <span>快速生成文书</span>
+                        </a>
+                        <a href="../knowledge.html" class="adm-quick__btn" target="_blank" rel="noopener">
+                            <iconify-icon icon="lucide:folder-up"></iconify-icon>
+                            <span>上传案件</span>
+                        </a>
+                        <a href="#ocr" class="adm-quick__btn" data-route-jump="ocr">
+                            <iconify-icon icon="lucide:scan-text"></iconify-icon>
+                            <span>OCR 识别</span>
+                        </a>
+                        <a href="#overview" class="adm-quick__btn" data-route-jump="overview">
+                            <iconify-icon icon="lucide:shield-alert"></iconify-icon>
+                            <span>风险预警</span>
+                        </a>
+                        <a href="../chat.html" class="adm-quick__btn adm-quick__btn--wide" target="_blank" rel="noopener">
+                            <iconify-icon icon="lucide:sparkles"></iconify-icon>
+                            <span>AI 分析</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 主导航 -->
+                <nav class="adm-nav" id="adm-nav" aria-label="管理菜单">
+                    <a href="#overview" data-route="overview" class="is-active">
+                        <iconify-icon icon="lucide:layout-dashboard"></iconify-icon>
+                        <span>运营总览</span>
+                    </a>
+                    <a href="#users" data-route="users">
+                        <iconify-icon icon="lucide:users"></iconify-icon>
+                        <span>用户管理</span>
+                    </a>
+                    <a href="#consultations" data-route="consultations">
+                        <iconify-icon icon="lucide:message-square-text"></iconify-icon>
+                        <span>法律咨询</span>
+                    </a>
+                    <a href="#documents" data-route="documents">
+                        <iconify-icon icon="lucide:file-text"></iconify-icon>
+                        <span>文书生成</span>
+                    </a>
+                    <a href="#ocr" data-route="ocr">
+                        <iconify-icon icon="lucide:scan-text"></iconify-icon>
+                        <span>OCR 识别</span>
+                    </a>
+                    <a href="#law-education" data-route="law-education">
+                        <iconify-icon icon="lucide:book-open"></iconify-icon>
+                        <span>普法内容</span>
+                    </a>
+                    <a href="#regulations" data-route="regulations">
+                        <iconify-icon icon="lucide:scale"></iconify-icon>
+                        <span>法规库</span>
+                    </a>
+                    <a href="#logs" data-route="logs">
+                        <iconify-icon icon="lucide:scroll-text"></iconify-icon>
+                        <span>系统日志</span>
+                    </a>
+                </nav>
+
+                <div class="adm-side-foot">
+                    <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm adm-side-logout" id="btn-logout">
+                        <iconify-icon icon="lucide:log-out"></iconify-icon>
+                        退出登录
+                    </button>
+                    <div class="adm-side-meta">
+                        <div>系统版本 <strong id="adm-version">v3.0.0</strong></div>
+                        <div>最后同步 <span id="adm-sync-time">—</span></div>
+                        <div class="adm-side-copy">© 法绎 Legal Tech</div>
+                    </div>
+                </div>
             </div>
         </aside>
-        <div class="adm-main">
+
+        <div class="adm-main adm-main-content">
+            <div class="adm-dynamic-status" id="adm-dynamic-status" aria-label="系统实时状态">
+                <div class="adm-dynamic-status__track" id="adm-status-track"></div>
+            </div>
             <header class="adm-topbar">
                 <div>
-                    <h1 id="page-title">数据总览</h1>
-                    <div class="adm-topbar-meta">法绎法律服务运营与管理</div>
+                    <h1 id="page-title">运营总览</h1>
+                    <div class="adm-topbar-meta">法律智能服务平台 · 实时数据运营控制台</div>
                 </div>
-                <a href="index.html" class="adm-btn adm-btn--ghost adm-btn--sm">返回前台</a>
+                <div class="adm-topbar-actions">
+                    <span class="adm-live-tag"><span class="adm-pulse"></span> 实时同步</span>
+                    <button type="button" class="adm-topbar-btn" id="adm-msg-btn" title="消息中心">
+                        <iconify-icon icon="lucide:inbox"></iconify-icon>
+                        <span class="adm-topbar-btn__badge is-hidden" id="adm-msg-badge">0</span>
+                    </button>
+                    <button type="button" class="adm-topbar-btn" id="adm-notify-btn" title="系统通知" onclick="document.getElementById('adm-msg-btn').click()">
+                        <iconify-icon icon="lucide:bell-ring"></iconify-icon>
+                        <span class="adm-topbar-btn__badge is-hidden" id="adm-notify-badge">0</span>
+                    </button>
+                    <div class="adm-user-menu" id="adm-user-menu">
+                        <button type="button" class="adm-user-trigger" id="adm-user-trigger">
+                            <span class="adm-user-trigger__avatar" id="adm-user-avatar-mini">管</span>
+                            <span class="adm-user-trigger__meta">
+                                <strong id="adm-user-name">管理员</strong>
+                                <span id="adm-user-role">系统管理员</span>
+                            </span>
+                            <iconify-icon icon="lucide:chevron-down"></iconify-icon>
+                        </button>
+                        <div class="adm-user-dropdown">
+                            <a href="#overview" data-route-jump="overview"><iconify-icon icon="lucide:layout-dashboard"></iconify-icon> 运营总览</a>
+                            <a href="#logs" data-route-jump="logs"><iconify-icon icon="lucide:scroll-text"></iconify-icon> 系统日志</a>
+                            <a href="index.html" target="_blank" rel="noopener"><iconify-icon icon="lucide:external-link"></iconify-icon> 返回前台</a>
+                            <button type="button" class="is-danger" id="adm-user-logout-drop"><iconify-icon icon="lucide:log-out"></iconify-icon> 退出登录</button>
+                        </div>
+                    </div>
+                </div>
             </header>
+            <div id="adm-kpi-strip" class="adm-kpi-strip" aria-label="运营指标"></div>
             <div class="adm-body adm-embed-body">
                 <div id="page-root"></div>
             </div>
         </div>
     </div>
+
+    <script src="./js/utils/activityTracker.js"></script>
+    <script src="./js/utils/fayiActivityCenter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+    <script src="./admin/js/admin-shell.js"></script>
+    <script src="./admin/js/admin-charts-theme.js"></script>
+    <script src="./admin/js/admin-overview-v3.js"></script>
+    <script src="./admin/js/admin-ocr-center.js"></script>
+    <script src="./admin/js/admin-sidebar.js"></script>
     <script src="./admin/js/admin-app.js"></script>
 </body>
 </html>

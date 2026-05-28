@@ -2,8 +2,10 @@
 
 root = true
 
+# 全项目文本文件：UTF-8 无 BOM（运行 node scripts/ensure-utf8-no-bom.js 批量校验）
 [*]
 charset = utf-8
+end_of_line = lf
 indent_size = 2
 indent_style = space
 insert_final_newline = true

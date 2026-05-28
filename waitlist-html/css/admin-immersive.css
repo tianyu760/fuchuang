@@ -1,0 +1,256 @@
+/* 管理端登录 · 全屏参考图背景（模糊）+ 右侧毛玻璃表单区 */
+
+.auth-page--admin.admin-immersive {
+  overflow: hidden;
+  background: #0a1228;
+}
+
+.admin-bg {
+  position: fixed;
+  inset: -12px;
+  z-index: 0;
+  background-image: url("../assets/images/admin-cover.png");
+  background-size: cover;
+  background-position: 42% center;
+  background-repeat: no-repeat;
+  filter: blur(7px);
+  transform: scale(1.06);
+}
+
+.admin-bg-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 10, 26, 0.72) 0%,
+      rgba(4, 10, 26, 0.45) 42%,
+      rgba(4, 10, 26, 0.18) 62%,
+      rgba(4, 10, 26, 0.06) 78%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 12, 28, 0.2) 0%,
+      transparent 18%,
+      transparent 82%,
+      rgba(6, 12, 28, 0.25) 100%
+    );
+}
+
+.admin-stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5vh 8.5vw 5vh 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.admin-glass-zone {
+  pointer-events: auto;
+  width: clamp(288px, 27.5vw, 360px);
+  height: min(74vh, 700px);
+  max-height: calc(100vh - 8vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: panelIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.auth-page--admin .admin-panel {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(32px) saturate(1.25);
+  -webkit-backdrop-filter: blur(32px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  overflow: hidden;
+  animation: none;
+}
+
+.admin-panel-inner {
+  height: 100%;
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+}
+
+.auth-page--admin .auth-panel-head {
+  margin-bottom: 0;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.auth-page--admin .auth-panel-head h1 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+.auth-page--admin .auth-panel-head p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.admin-panel-alerts {
+  flex-shrink: 0;
+  margin: 14px 0 0;
+}
+
+.admin-panel-alerts .auth-alert {
+  margin-bottom: 0;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.auth-page--admin .admin-form {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0 14px;
+}
+
+.auth-page--admin .admin-form .auth-field {
+  margin-bottom: 0;
+}
+
+.auth-page--admin .auth-label {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.auth-page--admin .auth-input {
+  height: 44px;
+  font-size: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(255, 255, 255, 0.4);
+  padding-left: 44px;
+  padding-right: 40px;
+}
+
+.auth-page--admin .auth-input-icon {
+  left: 16px;
+}
+
+.auth-page--admin .auth-btn {
+  height: 48px;
+  margin-top: 4px;
+  font-size: 15px;
+  border-radius: 14px;
+}
+
+.auth-page--admin .admin-foot {
+  color: rgba(255, 255, 255, 0.62);
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.auth-page--admin .admin-foot a {
+  color: #c5d8ff;
+}
+
+.auth-page--admin .auth-alert--error {
+  background: rgba(254, 242, 242, 0.94);
+}
+
+@media (min-width: 1600px) {
+  .admin-stage {
+    padding-right: 9.2vw;
+  }
+
+  .admin-glass-zone {
+    width: 352px;
+    height: min(66vh, 620px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .admin-stage {
+    padding-right: 6vw;
+  }
+
+  .admin-glass-zone {
+    width: clamp(280px, 32vw, 340px);
+    height: min(70vh, 600px);
+  }
+}
+
+@media (max-width: 900px) {
+  .admin-bg {
+    background-position: 35% center;
+    filter: blur(8px);
+  }
+
+  .admin-stage {
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .admin-glass-zone {
+    width: min(90vw, 380px);
+    height: auto;
+    min-height: 420px;
+    max-height: calc(100vh - 32px);
+  }
+
+  .admin-panel-inner {
+    padding: 32px 24px 28px;
+    height: auto;
+  }
+}
+
+@media (max-height: 800px) {
+  .admin-stage {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+  }
+
+  .admin-glass-zone {
+    height: min(74vh, 580px);
+  }
+
+  .admin-panel-inner {
+    padding: 22px 22px 20px;
+  }
+
+  .auth-page--admin .admin-form {
+    margin: 18px 0 14px;
+    gap: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-glass-zone {
+    animation: none;
+  }
+}

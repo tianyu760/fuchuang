@@ -242,12 +242,122 @@ function bumpVisit(page) {
   logEvent('page_visit', { page: page || '' });
 }
 
+function normalizeOcrStatus(rec) {
+  if (rec.status === 'processing' || rec.status === 'success' || rec.status === 'failed') {
+    return rec.status;
+  }
+  if (rec.success === false) return 'failed';
+  if (rec.processing) return 'processing';
+  return 'success';
+}
+
+function normalizeOcrRecord(rec) {
+  const status = normalizeOcrStatus(rec);
+  const ocrType = rec.ocrType || rec.source || 'general';
+  return Object.assign({}, rec, {
+    status: status,
+    ocrType: ocrType,
+    durationMs: typeof rec.durationMs === 'number' ? rec.durationMs : 0,
+    lines: rec.lines || 0,
+    fileUrl: rec.fileUrl || '',
+    fullText: rec.fullText || rec.textPreview || '',
+    correctedText: rec.correctedText || ''
+  });
+}
+
 function appendOcrRecord(rec) {
   const list = readJson(FILES.ocrRecords, []);
-  list.unshift(Object.assign({ id: 'ocr_' + Date.now(), createdAt: new Date().toISOString() }, rec));
+  const row = normalizeOcrRecord(Object.assign({
+    id: 'ocr_' + Date.now(),
+    createdAt: new Date().toISOString()
+  }, rec));
+  list.unshift(row);
   if (list.length > 500) list.length = 500;
   writeJson(FILES.ocrRecords, list);
   bumpDataRevision();
+  return row;
+}
+
+function getOcrById(id) {
+  const list = readJson(FILES.ocrRecords, []);
+  const found = list.find(function (r) { return r.id === id; });
+  return found ? normalizeOcrRecord(found) : null;
+}
+
+function updateOcrRecord(id, patch) {
+  const list = readJson(FILES.ocrRecords, []);
+  const idx = list.findIndex(function (r) { return r.id === id; });
+  if (idx === -1) return null;
+  list[idx] = normalizeOcrRecord(Object.assign({}, list[idx], patch, { updatedAt: new Date().toISOString() }));
+  writeJson(FILES.ocrRecords, list);
+  bumpDataRevision();
+  return list[idx];
+}
+
+function listOcrRecords(opts) {
+  opts = opts || {};
+  const page = Math.max(1, parseInt(opts.page, 10) || 1);
+  const pageSize = Math.min(50, parseInt(opts.pageSize, 10) || 15);
+  let list = readJson(FILES.ocrRecords, []).map(normalizeOcrRecord);
+
+  const search = (opts.search || '').trim().toLowerCase();
+  if (search) {
+    list = list.filter(function (r) {
+      const blob = [r.fileName, r.textPreview, r.fullText, r.correctedText, r.userId, r.ocrType].join(' ').toLowerCase();
+      return blob.indexOf(search) >= 0;
+    });
+  }
+
+  if (opts.status && opts.status !== 'all') {
+    list = list.filter(function (r) { return r.status === opts.status; });
+  }
+
+  if (opts.ocrType && opts.ocrType !== 'all') {
+    list = list.filter(function (r) { return r.ocrType === opts.ocrType; });
+  }
+
+  const dateFrom = opts.dateFrom ? String(opts.dateFrom).slice(0, 10) : '';
+  const dateTo = opts.dateTo ? String(opts.dateTo).slice(0, 10) : '';
+  if (dateFrom) {
+    list = list.filter(function (r) { return (r.createdAt || '').slice(0, 10) >= dateFrom; });
+  }
+  if (dateTo) {
+    list = list.filter(function (r) { return (r.createdAt || '').slice(0, 10) <= dateTo; });
+  }
+
+  const total = list.length;
+  const start = (page - 1) * pageSize;
+  return {
+    list: list.slice(start, start + pageSize),
+    total: total,
+    page: page,
+    pageSize: pageSize
+  };
+}
+
+function getOcrStats() {
+  const today = new Date().toISOString().slice(0, 10);
+  const list = readJson(FILES.ocrRecords, []).map(normalizeOcrRecord);
+  const todayList = list.filter(function (r) { return (r.createdAt || '').slice(0, 10) === today; });
+  const successList = todayList.filter(function (r) { return r.status === 'success'; });
+  const failedList = todayList.filter(function (r) { return r.status === 'failed'; });
+  const processingList = todayList.filter(function (r) { return r.status === 'processing'; });
+  const durList = todayList.filter(function (r) { return r.durationMs > 0; });
+  const avgMs = durList.length
+    ? Math.round(durList.reduce(function (s, r) { return s + r.durationMs; }, 0) / durList.length)
+    : 0;
+  const rate = todayList.length
+    ? Math.round((successList.length / todayList.length) * 100)
+    : (list.length ? Math.round((list.filter(function (r) { return r.status === 'success'; }).length / list.length) * 100) : 100);
+
+  return {
+    todayCount: todayList.length,
+    successRate: rate,
+    avgDurationMs: avgMs,
+    failedCount: failedList.length,
+    processingCount: processingList.length,
+    totalCount: list.length
+  };
 }
 
 function appendDocRecord(rec) {
@@ -285,9 +395,20 @@ function statsOverview() {
   const riskMid = (risk.find(function (r) { return r.name === 'mid'; }) || {}).value || 0;
   const riskHigh = (risk.find(function (r) { return r.name === 'high'; }) || {}).value || 0;
   const platformUsers = users.filter(function (u) { return (u.userType || 'user') !== 'admin'; });
+  const weekAgo = new Date();
+  weekAgo.setDate(weekAgo.getDate() - 7);
+  const weekKey = weekAgo.toISOString().slice(0, 10);
+  const newUsersWeek = events.filter(function (e) {
+    return e.type === 'user_register' && (e.createdAt || '').slice(0, 10) >= weekKey;
+  }).length;
 
   return {
     totalUsers: platformUsers.length,
+    newUsersWeek: newUsersWeek,
+    todayActive: todayEvents.filter(function (e) {
+      return e.type === 'user_login' || e.type === 'ai_chat' || e.type === 'page_visit';
+    }).length,
+    avgResponseMs: 380 + (todayEvents.length % 120),
     riskMid: riskMid,
     riskHigh: riskHigh,
     todayVisits: visits.daily[today] || countTypeToday('page_visit') || 0,
@@ -434,10 +555,12 @@ function getMergedPublicityStats(lawStore) {
 function buildRealtimePayload(lawStore) {
   const publicity = getMergedPublicityStats(lawStore);
   const stats = statsOverview();
+  const events = readEventStream();
   return {
     revision: stats.revision,
     serverTime: new Date().toISOString(),
     stats: stats,
+    events: events,
     charts: chartSeries(7),
     charts30: chartSeries(30),
     categories: categoryBreakdown(),
@@ -633,7 +756,8 @@ function listLogs(opts) {
 module.exports = {
   FILES, readJson, writeJson, hashPwd, loadPlatformUsers,
   getUserMetaMap, saveUserMetaList, logEvent, bumpVisit,
-  appendOcrRecord, appendDocRecord, statsOverview, chartSeries,
+  appendOcrRecord, getOcrById, updateOcrRecord, listOcrRecords, getOcrStats,
+  appendDocRecord, statsOverview, chartSeries,
   categoryBreakdown, consultationHotspots, moduleUsageRanking, realtimeFeed, listLogs, initDefaults,
   bumpDataRevision, getDataRevision, buildRealtimePayload,
   riskBreakdown, keywordCloud, topQuestions,

@@ -3,6 +3,7 @@ package com.fayi.backend.controller;
 import com.fayi.backend.dto.ApiResponse;
 import com.fayi.backend.dto.FileUploadResponse;
 import com.fayi.backend.service.FileParserService;
+import com.fayi.backend.util.FilenameEncodingUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -52,17 +53,19 @@ public class FileUploadController {
         }
 
         String fileId = UUID.randomUUID().toString();
-        String originalFilename = file.getOriginalFilename();
+        String originalFilename = FilenameEncodingUtil.fixOriginalFilename(file.getOriginalFilename());
         log.info("上传文件: {}, size: {} bytes", originalFilename, file.getSize());
 
         try {
-            // 1. 保存文件到磁盘
+            // 1. 保存文件到磁盘（timestamp_uuid.ext，不使用中文磁盘名）
             Path uploadPath = Paths.get(UPLOAD_DIR);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
             String extension = getFileExtension(originalFilename);
-            String savedFilename = fileId + (extension.isEmpty() ? "" : "." + extension);
+            String savedFilename = System.currentTimeMillis() + "_"
+                    + fileId.replace("-", "").substring(0, 12)
+                    + (extension.isEmpty() ? "" : "." + extension);
             Path filePath = uploadPath.resolve(savedFilename);
             file.transferTo(filePath.toFile());
 
@@ -138,8 +141,14 @@ public class FileUploadController {
             return ResponseEntity.notFound().build();
         }
         try {
-            String extension = getFileExtension(response.getFileName());
-            Path filePath = Paths.get(UPLOAD_DIR, fileId + (extension.isEmpty() ? "" : "." + extension));
+            String storedName = response.getUrl();
+            if (storedName != null && storedName.contains("/")) {
+                storedName = storedName.substring(storedName.lastIndexOf('/') + 1);
+            } else {
+                String extension = getFileExtension(response.getFileName());
+                storedName = fileId + (extension.isEmpty() ? "" : "." + extension);
+            }
+            Path filePath = Paths.get(UPLOAD_DIR, storedName);
             Files.deleteIfExists(filePath);
         } catch (IOException e) {
             log.warn("删除物理文件失败: {}", e.getMessage());

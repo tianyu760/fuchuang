@@ -36,7 +36,7 @@ const content = `/**
   function postJson(path, body) {
     return fetch(API_BASE + path, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
       body: JSON.stringify(body || {})
     }).then(function (r) {
       return r.json().then(function (json) {

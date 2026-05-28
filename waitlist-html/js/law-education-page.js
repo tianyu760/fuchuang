@@ -23,7 +23,7 @@
     opts = opts || {};
     return fetch(API + path, {
       method: opts.method || 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
       body: opts.body ? JSON.stringify(opts.body) : undefined
     }).then(function (r) { return r.json(); });
   }
@@ -31,7 +31,7 @@
   function trackVisit() {
     fetch('http://localhost:3002/api/admin/track/visit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
       body: JSON.stringify({ page: 'law-education' })
     }).catch(function () {});
   }

@@ -66,17 +66,25 @@
 
   function syncServer(entry) {
     var eventType = TYPE_TO_EVENT[entry.type] || entry.type || 'system_event';
-    fetch(API_BASE + '/api/admin/datav/operation-log', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        type: eventType,
-        module: entry.module,
-        content: entry.content,
-        level: entry.level,
-        meta: entry.meta || {}
-      })
-    }).catch(function () {});
+    var body = {
+      type: eventType,
+      module: entry.module,
+      content: entry.content,
+      level: entry.level,
+      meta: entry.meta || {}
+    };
+    if (global.FayiHttp) {
+      FayiHttp.post(API_BASE + '/api/admin/datav/operation-log', body, { silent: true }).catch(function () {});
+    } else {
+      fetch(API_BASE + '/api/admin/datav/operation-log', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
+        body: JSON.stringify(body)
+      }).then(function (r) {
+        var ct = (r.headers.get('content-type') || '').toLowerCase();
+        if (ct.indexOf('application/json') >= 0) return r.json();
+      }).catch(function () {});
+    }
     if (global.FayiRealtime && FayiRealtime.notify) {
       FayiRealtime.notify({ type: eventType, module: entry.module });
     }

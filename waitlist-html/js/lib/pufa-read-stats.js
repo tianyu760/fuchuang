@@ -70,7 +70,7 @@
 
     fetch(API_BASE + '/api/admin/datav/pufa-read', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
       body: JSON.stringify({
         kind: kind,
         title: opts.title || '',

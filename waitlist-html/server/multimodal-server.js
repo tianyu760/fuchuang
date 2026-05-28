@@ -12,7 +12,15 @@ const multer   = require('multer');
 const cors     = require('cors');
 const fs       = require('fs');
 const path     = require('path');
+const {
+  applyNodeUtf8Locale,
+  installExpressUtf8Json,
+  fixFileName,
+  safeStorageFileName,
+  ensureUtf8String
+} = require('./lib/encoding-utils');
 
+applyNodeUtf8Locale();
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 const crypto   = require('crypto');          // 用于生成 token 和密码 hash
 const axios    = require('axios');           // 腾讯元器流式请求
@@ -78,18 +86,13 @@ try { mammoth  = require('mammoth');   } catch (e) { console.warn('[warn] mammot
 // ─── 常量 ─────────────────────────────────────────────────────────────────
 const PORT = 3002;
 
-/**
- * 修复 multer 文件名乱码：multer 默认用 Latin-1 解析 HTTP 头中的文件名，导致中文字符串展示为乱码
- * 修复方式：将 Latin-1 字节串重新按 UTF-8 解码
- */
-function fixFileName(name) {
-  if (!name) return name;
-  try {
-    const fixed = Buffer.from(name, 'latin1').toString('utf8');
-    return /[\u0080-\uffff]/.test(fixed) ? fixed : name;
-  } catch (e) {
-    return name;
-  }
+function buildOcrRecord(file, extra) {
+  const base = {
+    fileName: fixFileName(file && file.originalname),
+    fileUrl: file && file.filename ? '/uploads/' + file.filename : '',
+    storedFile: file && file.filename ? file.filename : ''
+  };
+  return Object.assign(base, extra || {});
 }
 
 /**
@@ -162,7 +165,9 @@ async function parseWithTencentOCR(filePath) {
 
   // GeneralAccurateOCR —— 通用精确识别（支持印刺、手写、混排文本）
   const result = await tencentOcrClient.GeneralBasicOCR({ ImageBase64: base64 });
-  const lines  = (result.TextDetections || []).map(t => t.DetectedText).join('\n');
+  const lines  = ensureUtf8String(
+    (result.TextDetections || []).map(t => t.DetectedText).join('\n')
+  );
 
   console.log(`[ocr] 识别完成，共 ${result.TextDetections?.length || 0} 行文字`);
   return lines;
@@ -337,12 +342,7 @@ const app = express();
 
 // JSON 请求体大小限制 50MB（支持 base64 图片传输）
 app.use(express.json({ limit: '50mb' }));
-
-// 强制 UTF-8 响应头，避免中文乱码
-app.use((req, res, next) => {
-  res.setHeader('Content-Type', 'application/json; charset=utf-8');
-  next();
-});
+installExpressUtf8Json(app);
 
 // CORS：允许本地前端调用
 app.use(cors({
@@ -353,7 +353,7 @@ app.use(cors({
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'charset']
 }));
 app.options('*', cors());  // 响应所有 OPTIONS 预检请求
 
@@ -369,8 +369,8 @@ if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
   filename: (req, file, cb) => {
-    const suffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, suffix + path.extname(fixFileName(file.originalname)));
+    file.originalname = fixFileName(file.originalname);
+    cb(null, safeStorageFileName(file.originalname));
   }
 });
 const upload = multer({ storage, limits: { fileSize: 20 * 1024 * 1024 } });
@@ -586,9 +586,11 @@ app.post('/api/chat', async (req, res) => {
                 : null;
               if (!base64) continue;
               const ocrRes = await tencentOcrClient.GeneralBasicOCR({ ImageBase64: base64 });
-              const text   = (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim();
+              const text   = ensureUtf8String(
+                (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim()
+              );
               if (text) {
-                ocrResults += (ocrResults ? '\n' : '') + '《' + imgFile.name + '》\n' + text;
+                ocrResults += (ocrResults ? '\n' : '') + '《' + fixFileName(imgFile.name) + '》\n' + text;
               }
             } catch (ocrErr) {
               console.error(`[ocr-inline] ${imgFile.name} OCR 失败:`, ocrErr.message);
@@ -1155,36 +1157,52 @@ app.post('/api/ocr', upload.single('file'), async (req, res) => {
       return res.status(503).json({ success: false, message: 'OCR 客户端未初始化，请检查密钥配置' });
     }
 
+    const ocrStarted = Date.now();
     const base64 = fs.readFileSync(req.file.path).toString('base64');
     console.log(`[/api/ocr] 识别: ${req.file.originalname}, base64长度: ${base64.length}`);
 
     const ocrRes = await tencentOcrClient.GeneralBasicOCR({ ImageBase64: base64 });
-    const text   = (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim();
+    const text   = ensureUtf8String(
+      (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim()
+    );
     const lines  = ocrRes.TextDetections?.length || 0;
+    const ocrFileName = fixFileName(req.file.originalname);
     console.log(`[/api/ocr] 完成，共识别 ${lines} 行文字`);
 
     const ocrUser = getTokenUser(req);
-    adminAnalytics.appendOcrRecord({
-      fileName: req.file.originalname,
+    adminAnalytics.appendOcrRecord(buildOcrRecord(req.file, {
       success: true,
+      status: 'success',
+      ocrType: 'basic',
       lines: lines,
+      durationMs: Date.now() - ocrStarted,
       userId: ocrUser && ocrUser.id,
-      textPreview: text.slice(0, 300)
-    });
+      textPreview: text.slice(0, 300),
+      fullText: text.slice(0, 8000)
+    }));
     adminAnalytics.logEvent('ocr', {
       userId: ocrUser && ocrUser.id,
-      fileName: req.file.originalname,
+      fileName: ocrFileName,
       success: true,
       lines: lines,
-      ocrText: text.slice(0, 500),
+      ocrText: ensureUtf8String(text.slice(0, 500)),
       source: 'api_ocr'
     });
 
     res.json({ success: true, text, lines });
   } catch (err) {
     console.error('[/api/ocr] 错误:', err.message, '错误码:', err.code || err.statusCode);
+    if (req.file) {
+      adminAnalytics.appendOcrRecord(buildOcrRecord(req.file, {
+        success: false,
+        status: 'failed',
+        ocrType: 'basic',
+        error: err.message,
+        userId: (getTokenUser(req) && getTokenUser(req).id) || ''
+      }));
+    }
     adminAnalytics.logEvent('ocr', {
-      fileName: (req.file && req.file.originalname) || 'unknown',
+      fileName: (req.file && fixFileName(req.file.originalname)) || 'unknown',
       success: false,
       source: 'api_ocr'
     });
@@ -1211,12 +1229,16 @@ app.post('/api/process-image', upload.single('file'), async (req, res) => {
     }
 
     // ──── 1. OCR 识别 ──────────────────────────────────────────────────
+    const imgOcrStarted = Date.now();
     const base64 = fs.readFileSync(req.file.path).toString('base64');
     console.log(`[/api/process-image] 上传文件： ${req.file.originalname}, base64长度: ${base64.length}`);
 
     const ocrRes  = await tencentOcrClient.GeneralBasicOCR({ ImageBase64: base64 });
-    const ocr_text = (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim();
+    const ocr_text = ensureUtf8String(
+      (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim()
+    );
     const lines   = ocrRes.TextDetections?.length || 0;
+    const imgFileName = fixFileName(req.file.originalname);
     console.log(`[/api/process-image] OCR完成，共 ${lines} 行文字`);
     console.log(`[/api/process-image] OCR文字内容：${ocr_text.substring(0, 300)}`);
 
@@ -1225,30 +1247,33 @@ app.post('/api/process-image', upload.single('file'), async (req, res) => {
     const userId = (imageUser && imageUser.id) ? imageUser.id : 'fayi_image_user';
 
     const analysis = await chatPassthrough({
-      messages: [{ role: 'user', content: buildPassthroughUserContent('', [{ label: 'OCR/' + req.file.originalname, text: ocr_text || PLACEHOLDER.image }]) }],
+      messages: [{ role: 'user', content: buildPassthroughUserContent('', [{ label: 'OCR/' + imgFileName, text: ocr_text || PLACEHOLDER.image }]) }],
       userId: userId
     });
     console.log(`[/api/process-image] 接口返回：{ success: true, ocr_text长度: ${ocr_text.length}, analysis长度: ${analysis.length} }`);
 
-    adminAnalytics.appendOcrRecord({
-      fileName: req.file.originalname,
+    adminAnalytics.appendOcrRecord(buildOcrRecord(req.file, {
       success: true,
+      status: 'success',
+      ocrType: 'process_image',
       lines: lines,
+      durationMs: Date.now() - imgOcrStarted,
       userId: userId,
-      textPreview: ocr_text.slice(0, 300)
-    });
+      textPreview: ensureUtf8String(ocr_text.slice(0, 300)),
+      fullText: ensureUtf8String(ocr_text.slice(0, 8000))
+    }));
     adminAnalytics.logEvent('ocr', {
       userId: userId,
-      fileName: req.file.originalname,
+      fileName: imgFileName,
       success: true,
       lines: lines,
-      ocrText: ocr_text.slice(0, 500),
+      ocrText: ensureUtf8String(ocr_text.slice(0, 500)),
       source: 'process_image'
     });
     adminAnalytics.logEvent('ai_case', {
       userId: userId,
       risk: '中',
-      preview: (ocr_text || '图片法律分析').slice(0, 80),
+      preview: ensureUtf8String((ocr_text || '图片法律分析').slice(0, 80)),
       analysis: (analysis || '').slice(0, 400),
       source: 'process_image'
     });
@@ -1275,15 +1300,20 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
       const isDoc = ['.pdf', '.docx', '.doc', '.txt'].includes(ext);
 
       if (isImg && tencentOcrClient) {
+        const caseOcrStarted = Date.now();
         const base64 = fs.readFileSync(req.file.path).toString('base64');
         let ocrText = '';
+        let usedMethod = 'GeneralBasicOCR';
         // 先试 GeneralBasicOCR，失败则尝试 GeneralFastOCR
         const ocrMethods = ['GeneralBasicOCR', 'GeneralFastOCR', 'GeneralAccurateOCR'];
         for (const method of ocrMethods) {
           try {
             const ocrRes = await tencentOcrClient[method]({ ImageBase64: base64 });
-            ocrText = (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim();
+            ocrText = ensureUtf8String(
+              (ocrRes.TextDetections || []).map(t => t.DetectedText).join('\n').trim()
+            );
             if (ocrText) {
+              usedMethod = method;
               console.log(`[process-case] ${method} 识别成功，${ocrRes.TextDetections?.length || 0}行`);
               break;
             }
@@ -1294,7 +1324,19 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
         if (ocrText) {
           extractedText = ocrText;
           if (userText) extractedText = userText + '\n\n' + ocrText;
+          req._caseOcrMeta = {
+            durationMs: Date.now() - caseOcrStarted,
+            ocrType: usedMethod === 'GeneralAccurateOCR' ? 'accurate' : 'process_case',
+            lines: (ocrText.match(/\n/g) || []).length + 1
+          };
         } else {
+          adminAnalytics.appendOcrRecord(buildOcrRecord(req.file, {
+            success: false,
+            status: 'failed',
+            ocrType: 'process_case',
+            error: 'OCR识别失败',
+            userId: (getTokenUser(req) && getTokenUser(req).id) || ''
+          }));
           // OCR 全部失败：兑廞汇报告用户并引导手动输入
           console.warn('[process-case] 所有OCR方式均失败，返回引导提示');
           return res.status(200).json({
@@ -1334,17 +1376,24 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
       question: userText.slice(0, 200)
     });
     if (req.file) {
-      adminAnalytics.appendOcrRecord({
-        fileName: req.file.originalname,
-        textPreview: extractedText.slice(0, 300),
+      const caseFileName = fixFileName(req.file.originalname);
+      const caseText = ensureUtf8String(extractedText);
+      const meta = req._caseOcrMeta || {};
+      adminAnalytics.appendOcrRecord(buildOcrRecord(req.file, {
+        textPreview: caseText.slice(0, 300),
+        fullText: caseText.slice(0, 8000),
         success: true,
+        status: 'success',
+        ocrType: meta.ocrType || 'process_case',
+        durationMs: meta.durationMs || 0,
+        lines: meta.lines || 0,
         userId: caseUser && caseUser.id
-      });
+      }));
       adminAnalytics.logEvent('ocr', {
         userId: caseUser && caseUser.id,
-        fileName: req.file.originalname,
+        fileName: caseFileName,
         success: true,
-        ocrText: extractedText.slice(0, 500),
+        ocrText: caseText.slice(0, 500),
         source: 'process_case'
       });
     }
@@ -1439,6 +1488,8 @@ if (lawEducationRouter) {
 }
 
 // ── 管理端 & 数字大屏 API（/api/admin/*）────────────────────────────────────
+const { installAdminJsonEnvelope, installApiErrorHandlers } = require('./lib/api-response');
+installAdminJsonEnvelope(adminRouter);
 app.use('/api/admin', adminRouter);
 
 // ── 公共数字看板 API（/api/dashboard/*）──────────────────────────────────────
@@ -1471,9 +1522,10 @@ app.get('/api/dashboard/stream', (req, res) => {
 
 // ── 健康检查 ────────────────────────────────────────────────────────────────
 app.get('/health', (req, res) => {
-  res.json({ ok: true, port: PORT, model: 'deepseek-chat' });
+  res.json({ code: 0, message: 'ok', data: { port: PORT, model: 'deepseek-chat' }, ok: true });
 });
 
+installApiErrorHandlers(app);
 
 // ── 启动服务器 ──────────────────────────────────────────────────────────────
 app.listen(PORT, () => {

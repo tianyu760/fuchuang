@@ -1,219 +1,189 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8" />
     <title>创建账号 · 法绎</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link href="./style.css" rel="stylesheet">
-    <link href="./css/register-page.css" rel="stylesheet">
+    <link href="./css/auth-dual-panel.css" rel="stylesheet">
     <script src="./js/admin-permission.js"></script>
     <script src="./js/auth.js"></script>
-    <script>
-        if (localStorage.getItem('dark-mode') === 'false' || !('dark-mode' in localStorage)) {
-            document.querySelector('html').classList.remove('dark');
-        } else {
-            document.querySelector('html').classList.add('dark');
-        }
-    </script>
 </head>
-<body class="rg-page">
+<body class="auth-dual auth-dual--register">
 
-<!-- 背景参考图-注册：images/register-bg-reference.png -->
-<div class="register-background" aria-hidden="true">
-    <div class="background-flow" role="presentation"></div>
-</div>
-<div class="background-overlay" aria-hidden="true"></div>
+<div class="auth-dual-bg" aria-hidden="true"><div class="auth-dual-bg-photo"></div></div>
 
-<div class="rg-shell">
-
-    <header class="rg-header">
-        <a href="index.html" class="rg-header-logo" aria-label="返回首页">
-            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" aria-hidden="true">
-                <path fill="#7D8EA3" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z"/>
-                <path fill="#556B86" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z"/>
-            </svg>
-            <span>法绎</span>
-        </a>
-        <div>
-            <input type="checkbox" name="light-switch" id="light-switch" class="light-switch sr-only"/>
-            <label class="cursor-pointer" for="light-switch" style="padding:6px;display:flex;">
-                <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path class="fill-gray-400" d="M9 0H7v2h2V0ZM14.294 3.052 12.88 1.637 11.466 3.05l1.413 1.414 1.415-1.413ZM16 7h-2v2h2V7ZM11.535 13.02l1.415 1.413 1.414-1.415-1.415-1.413-1.414 1.414ZM9 14H7v2h2v-2ZM1.566 12.948l1.414 1.415 1.415-1.413-1.414-1.415-1.415 1.413ZM2 7H0v2h2V7ZM4.465 3.12 3.05 1.707 1.636 3.12l1.415 1.414L4.465 3.12Z"/><path class="fill-gray-700" d="M8 4C5.8 4 4 5.8 4 8s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4Z"/></svg>
-            </label>
-        </div>
-    </header>
-
-    <main class="rg-main">
-        <div class="rg-card">
-
-            <aside class="rg-brand">
-                <div class="rg-brand-logo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" aria-hidden="true">
-                        <path fill="#7D8EA3" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z"/>
+<div class="auth-dual-shell">
+    <div class="auth-dual-cluster">
+        <aside class="auth-intro-card" aria-label="平台介绍">
+            <p class="auth-intro-watermark" aria-hidden="true">Legal</p>
+            <div class="auth-intro-top">
+                <div class="auth-intro-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+                        <path fill="#7A8CA3" d="M16.975 3.036c6.402.475 11.514 5.586 11.99 11.989H24.32a7.345 7.345 0 0 1-7.345-7.345V3.036Zm-1.95 21.284v4.644c-6.402-.475-11.514-5.587-11.989-11.99H7.68a7.345 7.345 0 0 1 7.345 7.346Z"/>
                         <path fill="#556B86" d="M3.036 15.025c.475-6.403 5.587-11.514 11.99-11.99V7.68a7.345 7.345 0 0 1-7.346 7.345H3.036Zm21.284 1.95h4.644c-.475 6.402-5.586 11.514-11.989 11.989V24.32a7.345 7.345 0 0 1 7.345-7.345Z"/>
                     </svg>
-                    法绎
+                    <span>法绎</span>
                 </div>
-
-                <p class="rg-brand-tagline">让法律服务更加清晰、高效、可信</p>
-                <p class="rg-brand-sub">面向个人与组织的智能法律事务辅助平台</p>
-
-                <div class="rg-features">
-                    <div class="rg-feature-item">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                        法律文书辅助
-                    </div>
-                    <div class="rg-feature-item">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                <span class="auth-intro-tag">注册开通</span>
+            </div>
+            <div class="auth-intro-body">
+                <div class="auth-intro-panel">
+                    <h2 class="auth-intro-title">加入法绎<br>开启法律服务之旅</h2>
+                    <p class="auth-intro-lead">一次注册，畅享智能法律服务。</p>
+                </div>
+                <ul class="auth-intro-points" aria-label="平台服务">
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
                         智能法律咨询
+                    </li>
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+                        法规条文检索
+                    </li>
+                    <li>
+                        <span class="auth-intro-point-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                        文书起草辅助
+                    </li>
+                </ul>
+            </div>
+            <a href="welcome.html" class="auth-intro-back">← 返回欢迎页</a>
+        </aside>
+
+        <section class="auth-form-card">
+            <div class="auth-form-card-head">
+                <h1>创建账号</h1>
+                <p>填写以下信息完成注册</p>
+            </div>
+            <div class="auth-form-card-body">
+                <div class="auth-info-strip" aria-label="注册说明">
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>双角色</strong>用户与管理员</span>
                     </div>
-                    <div class="rg-feature-item">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        风险分析支持
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>安全注册</strong>密码强度校验</span>
+                    </div>
+                    <div class="auth-info-chip">
+                        <span class="auth-info-chip-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                        <span class="auth-info-chip-text"><strong>隐私保护</strong>协议合规</span>
                     </div>
                 </div>
 
-                <p class="rg-brand-note">本平台提供的信息仅供参考，不构成正式法律意见。重大事项请咨询执业律师。</p>
-            </aside>
+                <div class="auth-alert auth-alert--error hidden" id="register-error" role="alert"></div>
 
-            <div class="rg-form-area">
-                <div class="rg-form-inner">
-
-                    <h1 class="rg-form-title">创建账号</h1>
-                    <p class="rg-form-subtitle">欢迎使用法绎智能法律服务平台</p>
-
-                    <div class="rg-global-error hidden" id="register-error" role="alert"></div>
-
-                    <form id="register-form" novalidate>
-
-                        <div class="rg-field">
-                            <label class="rg-label" for="register-name">昵称</label>
-                            <div class="rg-input-wrap">
-                                <span class="rg-input-icon">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                </span>
-                                <input id="register-name" class="rg-input" type="text" placeholder="如何称呼您" autocomplete="nickname" maxlength="20"/>
+                <form id="register-form" novalidate>
+                    <div class="auth-row-2">
+                        <div class="auth-field">
+                            <label class="auth-label" for="register-name">昵称</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                                <input id="register-name" class="auth-input" type="text" placeholder="如何称呼您" autocomplete="nickname" maxlength="20"/>
                             </div>
-                            <div class="rg-field-msg" id="msg-name"></div>
+                            <div class="auth-field-msg" id="msg-name"></div>
                         </div>
-
-                        <div class="rg-field">
-                            <label class="rg-label" for="register-email">邮箱</label>
-                            <div class="rg-input-wrap">
-                                <span class="rg-input-icon">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                </span>
-                                <input id="register-email" class="rg-input" type="email" placeholder="example@email.com" autocomplete="email"/>
+                        <div class="auth-field">
+                            <label class="auth-label" for="register-email">邮箱</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                                <input id="register-email" class="auth-input" type="email" placeholder="example@email.com" autocomplete="email"/>
                             </div>
-                            <div class="rg-field-msg" id="msg-email"></div>
+                            <div class="auth-field-msg" id="msg-email"></div>
                         </div>
-
-                        <div class="rg-field">
-                            <label class="rg-label" for="register-password">密码</label>
-                            <div class="rg-input-wrap">
-                                <span class="rg-input-icon">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                </span>
-                                <input id="register-password" class="rg-input rg-input--eye" type="password" placeholder="至少 6 位，建议含字母与数字" autocomplete="new-password"/>
-                                <span class="rg-input-eye" id="eye-pw1" title="显示/隐藏密码" role="button" tabindex="0">
+                    </div>
+                    <div class="auth-row-2">
+                        <div class="auth-field">
+                            <label class="auth-label" for="register-password">密码</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                                <input id="register-password" class="auth-input" type="password" placeholder="至少 6 位" autocomplete="new-password"/>
+                                <span class="auth-input-eye" id="eye-pw1" role="button" tabindex="0" title="显示/隐藏">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </span>
                             </div>
                             <div class="pw-strength-bar" id="pw-strength-bar"><span></span><span></span><span></span></div>
-                            <div class="pw-strength-text" id="pw-strength-text"></div>
                         </div>
-
-                        <div class="rg-field">
-                            <label class="rg-label" for="register-password2">确认密码</label>
-                            <div class="rg-input-wrap">
-                                <span class="rg-input-icon">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                </span>
-                                <input id="register-password2" class="rg-input rg-input--eye" type="password" placeholder="再次输入密码" autocomplete="new-password"/>
-                                <span class="rg-input-eye" id="eye-pw2" title="显示/隐藏密码" role="button" tabindex="0">
+                        <div class="auth-field">
+                            <label class="auth-label" for="register-password2">确认密码</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+                                <input id="register-password2" class="auth-input" type="password" placeholder="再次输入" autocomplete="new-password"/>
+                                <span class="auth-input-eye" id="eye-pw2" role="button" tabindex="0" title="显示/隐藏">
                                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </span>
                             </div>
-                            <div class="rg-field-msg" id="msg-pw2"></div>
+                            <div class="auth-field-msg" id="msg-pw2"></div>
                         </div>
-
-                        <div class="rg-field">
-                            <div class="rg-label">选择头像</div>
-                            <div class="rg-avatar-grid" id="avatar-presets">
-                                <label><input type="radio" name="register-avatar" value="./images/avatars/1.svg" class="sr-only" checked/><img src="./images/avatars/1.svg" width="38" height="38" alt="头像 1"/></label>
-                                <label><input type="radio" name="register-avatar" value="./images/avatars/2.svg" class="sr-only"/><img src="./images/avatars/2.svg" width="38" height="38" alt="头像 2"/></label>
-                                <label><input type="radio" name="register-avatar" value="./images/avatars/3.svg" class="sr-only"/><img src="./images/avatars/3.svg" width="38" height="38" alt="头像 3"/></label>
-                                <label><input type="radio" name="register-avatar" value="./images/avatars/4.svg" class="sr-only"/><img src="./images/avatars/4.svg" width="38" height="38" alt="头像 4"/></label>
-                                <label><input type="radio" name="register-avatar" value="./images/avatars/5.svg" class="sr-only"/><img src="./images/avatars/5.svg" width="38" height="38" alt="头像 5"/></label>
-                                <label><input type="radio" name="register-avatar" value="./images/avatars/6.svg" class="sr-only"/><img src="./images/avatars/6.svg" width="38" height="38" alt="头像 6"/></label>
-                            </div>
-                            <label class="rg-upload-avatar" for="register-avatar-file">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                                上传自定义头像
+                    </div>
+                    <div class="auth-field">
+                        <div class="auth-label">选择头像</div>
+                        <div class="auth-avatar-grid" id="avatar-presets">
+                            <label><input type="radio" name="register-avatar" value="./images/avatars/1.svg" class="sr-only" checked/><img src="./images/avatars/1.svg" width="36" height="36" alt="1"/></label>
+                            <label><input type="radio" name="register-avatar" value="./images/avatars/2.svg" class="sr-only"/><img src="./images/avatars/2.svg" width="36" height="36" alt="2"/></label>
+                            <label><input type="radio" name="register-avatar" value="./images/avatars/3.svg" class="sr-only"/><img src="./images/avatars/3.svg" width="36" height="36" alt="3"/></label>
+                            <label><input type="radio" name="register-avatar" value="./images/avatars/4.svg" class="sr-only"/><img src="./images/avatars/4.svg" width="36" height="36" alt="4"/></label>
+                            <label><input type="radio" name="register-avatar" value="./images/avatars/5.svg" class="sr-only"/><img src="./images/avatars/5.svg" width="36" height="36" alt="5"/></label>
+                            <label><input type="radio" name="register-avatar" value="./images/avatars/6.svg" class="sr-only"/><img src="./images/avatars/6.svg" width="36" height="36" alt="6"/></label>
+                        </div>
+                        <label class="auth-upload-link" for="register-avatar-file">上传自定义头像</label>
+                        <input type="file" id="register-avatar-file" accept="image/jpeg,image/png" class="sr-only"/>
+                    </div>
+                    <div class="auth-field">
+                        <div class="auth-label">人员类型</div>
+                        <div class="auth-hint-block auth-hint-block--accent" id="rg-type-hint">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                            <span>默认注册为系统用户；选择管理员需填写权限验证码，通过后可登录管理端。</span>
+                        </div>
+                        <div class="auth-type-grid">
+                            <label class="auth-type-card is-active" data-type="user">
+                                <input type="radio" name="register-user-type" value="user" class="sr-only" checked/>
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                <span class="auth-type-title">系统用户</span>
                             </label>
-                            <input type="file" id="register-avatar-file" accept="image/jpeg,image/png" class="sr-only"/>
+                            <label class="auth-type-card" data-type="admin">
+                                <input type="radio" name="register-user-type" value="admin" class="sr-only"/>
+                                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                <span class="auth-type-title">系统管理员</span>
+                            </label>
                         </div>
-
-                        <div class="rg-field">
-                            <div class="rg-label">人员类型</div>
-                            <div class="rg-type-grid">
-                                <label class="rg-type-card is-active" data-type="user">
-                                    <input type="radio" name="register-user-type" value="user" class="sr-only" checked/>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                    <span class="rg-type-title">系统用户</span>
-                                </label>
-                                <label class="rg-type-card" data-type="admin">
-                                    <input type="radio" name="register-user-type" value="admin" class="sr-only"/>
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                    <span class="rg-type-title">系统管理员</span>
-                                </label>
+                    </div>
+                    <div class="auth-admin-code-wrap" id="rg-admin-code-wrap" aria-hidden="true">
+                        <div class="auth-field">
+                            <label class="auth-label" for="register-admin-permission-code">管理员权限验证码</label>
+                            <div class="auth-input-wrap">
+                                <span class="auth-input-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                                <input id="register-admin-permission-code" class="auth-input" type="text" placeholder="请输入验证码" autocomplete="off" spellcheck="false"/>
                             </div>
+                            <div class="auth-field-msg" id="msg-admin-code"></div>
                         </div>
-
-                        <div class="auth-admin-code-wrap" id="rg-admin-code-wrap" aria-hidden="true">
-                            <div class="rg-field">
-                                <label class="rg-label" for="register-admin-permission-code">管理员权限验证码</label>
-                                <div class="rg-input-wrap">
-                                    <span class="rg-input-icon">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                    </span>
-                                    <input id="register-admin-permission-code" class="rg-input" type="text" placeholder="请输入管理员权限验证码" autocomplete="off" spellcheck="false"/>
-                                </div>
-                                <div class="rg-field-msg" id="msg-admin-code"></div>
-                            </div>
+                    </div>
+                    <div class="auth-agree">
+                        <input type="checkbox" id="rg-agree-cb"/>
+                        <div>我已阅读并同意
+                            <button type="button" class="auth-link-btn" id="rg-open-terms">《用户协议》</button>与
+                            <button type="button" class="auth-link-btn" id="rg-open-privacy">《隐私政策》</button>
                         </div>
-
-                        <div class="rg-agree">
-                            <input type="checkbox" id="rg-agree-cb"/>
-                            <div class="rg-agree-text">
-                                我已阅读并同意
-                                <button type="button" class="rg-link-btn" id="rg-open-terms">《用户协议》</button>与
-                                <button type="button" class="rg-link-btn" id="rg-open-privacy">《隐私政策》</button>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="rg-submit-btn" id="rg-submit-btn">
-                            <span id="rg-btn-text">创建账号</span>
-                        </button>
-                    </form>
-
-                    <p class="rg-login-link">已有账号？<a href="login.html">立即登录</a></p>
-                </div>
+                    </div>
+                    <button type="submit" class="auth-btn" id="rg-submit-btn"><span id="rg-btn-text">创建账号</span></button>
+                </form>
             </div>
-        </div>
-    </main>
+            <div class="auth-form-card-foot">
+                <p class="auth-foot">已有账号？<a href="login.html">立即登录</a> · <a href="welcome.html">返回欢迎页</a></p>
+            </div>
+        </section>
+    </div><!-- .auth-dual-cluster -->
 </div>
 
-<!-- 协议 / 隐私 Modal -->
-<div class="rg-modal-overlay" id="rg-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rg-modal-title">
-    <div class="rg-modal" role="document">
-        <div class="rg-modal-head">
+<div class="auth-modal-overlay" id="rg-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="rg-modal-title">
+    <div class="auth-modal" role="document">
+        <div class="auth-modal-head">
             <h2 id="rg-modal-title">法绎平台用户协议</h2>
-            <button type="button" class="rg-modal-close" id="rg-modal-close" aria-label="关闭">&times;</button>
+            <button type="button" class="auth-modal-close" id="rg-modal-close" aria-label="关闭">&times;</button>
         </div>
-        <div class="rg-modal-body" id="rg-modal-body"></div>
-        <div class="rg-modal-foot">
-            <button type="button" class="rg-modal-btn rg-modal-btn--ghost" id="rg-modal-dismiss">关闭</button>
-            <button type="button" class="rg-modal-btn rg-modal-btn--primary" id="rg-modal-confirm">我已阅读并同意</button>
+        <div class="auth-modal-body" id="rg-modal-body"></div>
+        <div class="auth-modal-foot">
+            <button type="button" class="auth-modal-btn auth-modal-btn--ghost" id="rg-modal-dismiss">关闭</button>
+            <button type="button" class="auth-modal-btn auth-modal-btn--primary" id="rg-modal-confirm">我已阅读并同意</button>
         </div>
     </div>
 </div>

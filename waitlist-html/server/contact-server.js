@@ -5,6 +5,15 @@
  */
 require('dotenv').config({ path: __dirname + '/.env' });
 
+var {
+    applyNodeUtf8Locale,
+    installExpressUtf8Json,
+    fixFileName,
+    safeStorageFileName,
+    JSON_UTF8
+} = require('./lib/encoding-utils');
+applyNodeUtf8Locale();
+
 var express    = require('express');
 var nodemailer = require('nodemailer');
 var cors       = require('cors');
@@ -14,6 +23,7 @@ var fs         = require('fs');
 var path       = require('path');
 
 var app  = express();
+installExpressUtf8Json(app);
 var PORT = process.env.CONTACT_PORT || 3001;
 var MAX_UPLOAD_SIZE = 10 * 1024 * 1024; // 10MB
 var ALLOWED_EXT = {
@@ -114,7 +124,7 @@ function guessMimeByName(filename, fallback) {
 }
 
 function sanitizeFilename(name, fallback) {
-    var cleaned = fixOriginalFilename(name)
+    var cleaned = fixFileName(name)
         .replace(/[\\/:*?"<>|]/g, '_')
         .replace(/\s+/g, ' ')
         .replace(/[. ]+$/g, '')
@@ -196,19 +206,15 @@ var storage = multer.diskStorage({
         cb(null, CONTACT_UPLOAD_DIR);
     },
     filename: function (req, file, cb) {
-        var decoded = fixOriginalFilename(file.originalname);
-        file.originalname = decoded;
-        var original = sanitizeFilename(decoded, 'file');
-        var ext = path.extname(original || '');
-        var base = path.basename(original || 'file', ext).replace(/[^\w\u4e00-\u9fa5-]/g, '_');
-        cb(null, Date.now() + '_' + Math.random().toString(36).slice(2, 8) + '_' + base + ext);
+        file.originalname = sanitizeFilename(fixFileName(file.originalname), '附件');
+        cb(null, safeStorageFileName(file.originalname));
     }
 });
 
 function fixUploadedFile(req, res, next) {
     if (req.file && req.file.originalname) {
         req.file.originalname = sanitizeFilename(
-            fixOriginalFilename(req.file.originalname),
+            fixFileName(req.file.originalname),
             '附件'
         );
     }
@@ -219,7 +225,7 @@ var upload = multer({
     storage: storage,
     limits: { fileSize: MAX_UPLOAD_SIZE, files: 1 },
     fileFilter: function (req, file, cb) {
-        file.originalname = fixOriginalFilename(file.originalname);
+        file.originalname = fixFileName(file.originalname);
         var ext = fileExt(file.originalname);
         var mime = String(file.mimetype || '').toLowerCase();
         if (!ALLOWED_EXT[ext]) {

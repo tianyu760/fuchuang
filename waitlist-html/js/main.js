@@ -274,7 +274,7 @@ if (lightSwitches.length > 0) {
 (function loadDashboardLibs() {
   if (window.FayiOperationLog) return;
   var base = './js/lib/';
-  var queue = ['operation-log.js', 'pufa-read-stats.js', 'page-tracker.js'];
+  var queue = ['operation-log.js', 'pufa-read-stats.js', 'page-tracker.js', '../utils/activityTracker.js'];
   function next(i) {
     if (i >= queue.length) return;
     var s = document.createElement('script');

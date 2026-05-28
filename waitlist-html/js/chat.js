@@ -887,7 +887,7 @@
       : fetch(AI_SERVER_URL + '/api/chat', {
           method: 'POST',
           headers: (function() {
-            var h = { 'Content-Type': 'application/json' };
+            var h = { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' };
             if (window.FayiAuth && FayiAuth.getToken) {
               var t = FayiAuth.getToken();
               if (t) h.Authorization = 'Bearer ' + t;

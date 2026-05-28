@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>欢迎 · 法绎</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="法绎智能法律服务平台">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="./css/welcome-page.css" rel="stylesheet">
+</head>
+<body class="welcome-page">
+
+<div class="welcome-bg" aria-hidden="true">
+    <img
+        class="welcome-bg-img"
+        src="./assets/images/welcome-bg-justice.png"
+        alt=""
+        decoding="async"
+        onerror="this.onerror=null;this.src='./assets/images/auth-bg-photo.png';"
+    >
+</div>
+<div class="welcome-overlay" aria-hidden="true"></div>
+
+<!-- 轻量白蓝动态氛围（不改变主体布局） -->
+<div class="welcome-fx" aria-hidden="true">
+    <div class="welcome-fx__glow welcome-fx__glow--a"></div>
+    <div class="welcome-fx__glow welcome-fx__glow--b"></div>
+    <div class="welcome-fx__edge welcome-fx__edge--left"></div>
+    <div class="welcome-fx__edge welcome-fx__edge--right"></div>
+    <div class="welcome-fx__scan"></div>
+    <div class="welcome-fx__particles">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="welcome-fx__scales"></div>
+</div>
+
+<main class="welcome-hero">
+    <div class="welcome-hero-inner">
+        <p class="welcome-deco welcome-reveal" aria-hidden="true">Legal</p>
+
+        <h1 class="welcome-title welcome-reveal welcome-logo-glow">法绎</h1>
+
+        <div class="welcome-taglines">
+            <p class="welcome-tagline-main welcome-reveal">让法律知识走进每个人的生活</p>
+            <p class="welcome-tagline-sub welcome-reveal">科技赋能，法律可见</p>
+        </div>
+
+        <div class="welcome-actions welcome-reveal-block">
+            <a href="register.html" class="welcome-cta" id="welcome-register-btn">进入注册界面 →</a>
+        </div>
+    </div>
+</main>
+
+<script src="./js/welcome-page.js"></script>
+</body>
+</html>

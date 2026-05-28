@@ -53,6 +53,7 @@
 
     activeModal = type;
     overlay.classList.add('is-open');
+    /* legacy id kept for compatibility */
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
   }
@@ -126,7 +127,7 @@
 
     document.querySelectorAll('input[name="register-user-type"]').forEach(function (radio) {
       radio.addEventListener('change', function () {
-        document.querySelectorAll('.rg-type-card').forEach(function (card) {
+        document.querySelectorAll('.auth-type-card').forEach(function (card) {
           card.classList.toggle('is-active', card.getAttribute('data-type') === radio.value);
         });
         syncAdminField();
@@ -153,7 +154,7 @@
       var el = document.getElementById(id);
       if (!el) return;
       el.textContent = text;
-      el.className = 'rg-field-msg ' + (type || '');
+      el.className = 'auth-field-msg ' + (type || '');
     }
     function setInputState(id, state) {
       var el = document.getElementById(id);
@@ -237,6 +238,7 @@
     function showFormErr(msg) {
       errBox.textContent = msg;
       errBox.classList.remove('hidden');
+      errBox.classList.add('is-show');
     }
 
     form.addEventListener('submit', function (e) {
@@ -297,6 +299,7 @@
       }
 
       errBox.classList.add('hidden');
+      errBox.classList.remove('is-show');
       errBox.textContent = '';
     }, true);
   }

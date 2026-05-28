@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node multimodal-server.js",
     "dev": "nodemon multimodal-server.js",
-    "contact": "node contact-server.js"
+    "contact": "node contact-server.js",
+    "utf8": "node ../scripts/ensure-utf8-no-bom.js"
   },
   "dependencies": {
     "axios": "^1.15.0",

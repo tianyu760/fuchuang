@@ -1,0 +1,418 @@
+/* 注册页 · 全屏参考图背景（模糊）+ 右侧毛玻璃表单区（均匀排布） */
+
+.auth-page--register.register-immersive {
+  overflow: hidden;
+  background: #0a1228;
+}
+
+.register-bg {
+  position: fixed;
+  inset: -12px;
+  z-index: 0;
+  background-image: url("../assets/images/register-cover.png");
+  background-size: cover;
+  background-position: 42% center;
+  background-repeat: no-repeat;
+  filter: blur(7px);
+  transform: scale(1.06);
+}
+
+.register-bg-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 10, 26, 0.72) 0%,
+      rgba(4, 10, 26, 0.45) 42%,
+      rgba(4, 10, 26, 0.18) 62%,
+      rgba(4, 10, 26, 0.06) 78%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 12, 28, 0.2) 0%,
+      transparent 16%,
+      transparent 84%,
+      rgba(6, 12, 28, 0.25) 100%
+    );
+}
+
+.register-stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5vh 8.5vw 5vh 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 与登录页玻璃区对齐 */
+.register-glass-zone {
+  pointer-events: auto;
+  width: clamp(288px, 27.5vw, 360px);
+  height: min(72vh, 680px);
+  max-height: calc(100vh - 10vh);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: panelIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.auth-page--register .register-panel {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(32px) saturate(1.25);
+  -webkit-backdrop-filter: blur(32px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  overflow: hidden;
+  animation: none;
+}
+
+.register-panel-inner {
+  height: 100%;
+  padding: 18px 22px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.register-panel-top {
+  flex-shrink: 0;
+}
+
+.auth-page--register .auth-panel-head {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.auth-page--register .auth-panel-head h1 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 4px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+.auth-page--register .auth-panel-head p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.register-panel-alerts {
+  margin-top: 6px;
+}
+
+.register-panel-alerts .auth-alert {
+  margin-bottom: 0;
+  padding: 6px 10px;
+  font-size: 11px;
+}
+
+/* 表单占满中间区域并均匀分布 */
+.auth-page--register .register-form {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.register-form-fields {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 0;
+}
+
+.register-form-group {
+  flex-shrink: 0;
+}
+
+.auth-page--register .register-form .auth-field {
+  margin-bottom: 0;
+}
+
+.auth-page--register .auth-row-2 {
+  gap: 10px;
+  align-items: start;
+}
+
+.auth-page--register .auth-label {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.auth-page--register .auth-input {
+  height: 42px;
+  font-size: 13px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(255, 255, 255, 0.4);
+  padding-left: 40px;
+  padding-right: 36px;
+}
+
+.auth-page--register .auth-input-icon {
+  left: 12px;
+}
+
+.auth-page--register .auth-input-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.auth-page--register .auth-input-eye {
+  right: 10px;
+}
+
+.auth-page--register .auth-field-msg {
+  font-size: 10px;
+  margin-top: 2px;
+  min-height: 0;
+  line-height: 1.3;
+}
+
+.auth-page--register .auth-field-msg:empty {
+  display: none;
+}
+
+.auth-page--register .pw-strength-bar {
+  margin-top: 4px;
+  gap: 3px;
+}
+
+.auth-page--register .pw-strength-bar span {
+  height: 2px;
+}
+
+.auth-page--register .pw-strength-text {
+  display: none;
+}
+
+.auth-page--register .auth-field--avatar .auth-label {
+  margin-bottom: 6px;
+}
+
+.auth-page--register .auth-avatar-grid {
+  gap: 6px;
+  margin-bottom: 4px;
+  justify-content: flex-start;
+}
+
+.auth-page--register .auth-avatar-grid img {
+  width: 30px;
+  height: 30px;
+}
+
+.auth-page--register .auth-upload-link {
+  font-size: 11px;
+  color: #c5d8ff;
+}
+
+.auth-page--register .auth-type-grid {
+  gap: 8px;
+}
+
+.auth-page--register .auth-type-card {
+  height: 42px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.auth-page--register .auth-type-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.auth-page--register .auth-type-card.is-active {
+  background: rgba(91, 124, 255, 0.22);
+  border-color: rgba(140, 170, 255, 0.65);
+}
+
+.auth-page--register .auth-type-title {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.auth-page--register .auth-type-card svg {
+  width: 17px;
+  height: 17px;
+  stroke: rgba(255, 255, 255, 0.75);
+}
+
+.auth-page--register .auth-type-card.is-active svg {
+  stroke: #b8d0ff;
+}
+
+.auth-page--register .auth-admin-code-wrap {
+  margin-top: 0;
+}
+
+.auth-page--register .auth-admin-code-wrap.is-visible {
+  max-height: 72px;
+  margin-top: -2px;
+}
+
+.auth-page--register .register-form-group--agree {
+  padding-top: 2px;
+}
+
+.auth-page--register .auth-agree {
+  margin: 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.45;
+}
+
+.auth-page--register .auth-link-btn {
+  color: #c5d8ff;
+}
+
+.auth-page--register .register-submit {
+  height: 44px;
+  margin-top: 0;
+  font-size: 14px;
+  border-radius: 13px;
+  flex-shrink: 0;
+}
+
+.auth-page--register .register-foot {
+  color: rgba(255, 255, 255, 0.62);
+  margin: 0;
+  padding-top: 2px;
+  font-size: 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.auth-page--register .register-foot a {
+  color: #c5d8ff;
+}
+
+.auth-page--register .auth-alert--error {
+  background: rgba(254, 242, 242, 0.94);
+}
+
+@media (min-width: 1600px) {
+  .register-stage {
+    padding-right: 9.2vw;
+  }
+
+  .register-glass-zone {
+    width: 352px;
+    height: min(70vh, 660px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .register-stage {
+    padding-right: 6vw;
+  }
+
+  .register-glass-zone {
+    width: clamp(280px, 32vw, 340px);
+  }
+}
+
+@media (max-width: 900px) {
+  .register-bg {
+    background-position: 35% center;
+    filter: blur(8px);
+  }
+
+  .register-stage {
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .register-glass-zone {
+    width: min(90vw, 380px);
+    height: auto;
+    min-height: min(72vh, 640px);
+    max-height: calc(100vh - 32px);
+  }
+
+  .register-panel-inner {
+    padding: 22px 20px 16px;
+    max-height: calc(100vh - 48px);
+  }
+
+  .auth-page--register .auth-row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .register-form-fields {
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .register-form-fields::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-height: 760px) {
+  .register-glass-zone {
+    height: min(78vh, 620px);
+  }
+
+  .register-panel-inner {
+    padding: 14px 18px 12px;
+  }
+
+  .auth-page--register .auth-panel-head h1 {
+    font-size: 18px;
+  }
+
+  .auth-page--register .auth-input {
+    height: 38px;
+  }
+
+  .auth-page--register .auth-type-card {
+    height: 38px;
+  }
+
+  .auth-page--register .register-submit {
+    height: 40px;
+  }
+
+  .auth-page--register .auth-avatar-grid img {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .register-glass-zone {
+    animation: none;
+  }
+}

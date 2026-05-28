@@ -1,0 +1,319 @@
+/* 登录页 · 全屏参考图背景（模糊）+ 右侧毛玻璃表单区 */
+
+.auth-page--login.login-immersive {
+  overflow: hidden;
+  background: #0a1228;
+}
+
+/* 模糊背景层 */
+.login-bg {
+  position: fixed;
+  inset: -12px;
+  z-index: 0;
+  background-image: url("../assets/images/login-cover.png");
+  background-size: cover;
+  background-position: 42% center;
+  background-repeat: no-repeat;
+  filter: blur(7px);
+  transform: scale(1.06);
+  will-change: transform;
+}
+
+/* 左侧压暗、右侧留白突出登录 */
+.login-bg-vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4, 10, 26, 0.72) 0%,
+      rgba(4, 10, 26, 0.45) 42%,
+      rgba(4, 10, 26, 0.18) 62%,
+      rgba(4, 10, 26, 0.06) 78%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 12, 28, 0.2) 0%,
+      transparent 18%,
+      transparent 82%,
+      rgba(6, 12, 28, 0.25) 100%
+    );
+}
+
+.login-stage {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 5vh 8.5vw 5vh 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 对齐参考图右侧玻璃竖条 */
+.login-glass-zone {
+  pointer-events: auto;
+  width: clamp(288px, 27.5vw, 360px);
+  height: min(68vh, 640px);
+  max-height: calc(100vh - 10vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: panelIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+.auth-page--login .login-panel {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(32px) saturate(1.25);
+  -webkit-backdrop-filter: blur(32px) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+  overflow: hidden;
+  animation: none;
+}
+
+.login-panel-inner {
+  height: 100%;
+  padding: 22px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0;
+  overflow: hidden;
+}
+
+.auth-page--login .auth-panel-head {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.auth-page--login .auth-panel-head h1 {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+.auth-page--login .auth-panel-head p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.login-panel-alerts {
+  flex-shrink: 0;
+  margin: 8px 0 0;
+}
+
+.login-panel-alerts .auth-alert {
+  margin-bottom: 0;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.login-panel-alerts .auth-alert + .auth-alert {
+  margin-top: 6px;
+}
+
+.auth-page--login .login-form {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.auth-page--login .login-form .auth-field {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.auth-page--login .auth-label {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.auth-page--login .auth-input {
+  height: 44px;
+  font-size: 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(255, 255, 255, 0.4);
+  padding-left: 44px;
+}
+
+.auth-page--login .auth-input-icon {
+  left: 14px;
+}
+
+.auth-page--login .auth-remember {
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.auth-page--login .auth-remember a {
+  color: #b8d4ff;
+}
+
+.auth-page--login .auth-btn {
+  height: 46px;
+  margin-top: 2px;
+  font-size: 15px;
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+
+.auth-page--login .auth-social-compact {
+  margin-top: 0;
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.auth-page--login .auth-social-compact button {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11.5px;
+  padding: 2px 6px;
+}
+
+.auth-page--login .auth-social-compact button:hover {
+  color: #fff;
+}
+
+.auth-page--login .login-foot {
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.auth-page--login .login-foot a {
+  color: #c5d8ff;
+}
+
+.auth-page--login .login-foot-sep {
+  margin: 0 6px;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.auth-page--login .auth-admin-code-wrap.is-visible {
+  max-height: 72px;
+}
+
+.auth-page--login .auth-alert--error {
+  background: rgba(254, 242, 242, 0.94);
+}
+
+.auth-page--login .auth-alert--success {
+  background: rgba(240, 249, 244, 0.94);
+}
+
+/* 1920×1080 精细对齐 */
+@media (min-width: 1600px) {
+  .login-stage {
+    padding-right: 9.2vw;
+  }
+
+  .login-glass-zone {
+    width: 352px;
+    height: min(66vh, 620px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .login-stage {
+    padding-right: 6vw;
+  }
+
+  .login-glass-zone {
+    width: clamp(280px, 32vw, 340px);
+    height: min(70vh, 600px);
+  }
+}
+
+@media (max-width: 900px) {
+  .login-bg {
+    background-position: 35% center;
+    filter: blur(8px);
+  }
+
+  .login-stage {
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .login-glass-zone {
+    width: min(90vw, 380px);
+    height: auto;
+    max-height: calc(100vh - 32px);
+  }
+
+  .login-panel-inner {
+    padding: 28px 22px 22px;
+    height: auto;
+    max-height: calc(100vh - 48px);
+  }
+}
+
+@media (max-height: 800px) {
+  .login-stage {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+  }
+
+  .login-glass-zone {
+    height: min(74vh, 580px);
+  }
+
+  .login-panel-inner {
+    padding: 18px 20px 16px;
+  }
+
+  .auth-page--login .auth-panel-head h1 {
+    font-size: 20px;
+  }
+
+  .auth-page--login .login-form {
+    gap: 8px;
+    margin: 6px 0;
+  }
+
+  .auth-page--login .auth-input {
+    height: 42px;
+  }
+
+  .auth-page--login .auth-btn {
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .login-glass-zone {
+    animation: none;
+  }
+}
