@@ -69,7 +69,7 @@ window.AdminChartsTheme = (function () {
   function lineGrowth(labels, values, registry) {
     return {
       tooltip: tooltip(),
-      grid: { left: 44, right: 20, top: 28, bottom: 28 },
+      grid: { left: 48, right: 24, top: 32, bottom: 36 },
       xAxis: Object.assign({ type: 'category', data: labels, boundaryGap: false }, axis()),
       yAxis: Object.assign({ type: 'value' }, axis()),
       series: [{
@@ -98,16 +98,37 @@ window.AdminChartsTheme = (function () {
       tooltip: {
         trigger: 'item',
         backgroundColor: 'rgba(8, 16, 40, 0.94)',
-        borderColor: 'rgba(0, 210, 255, 0.2)',
-        textStyle: { color: C.textBright }
+        borderColor: 'rgba(0, 210, 255, 0.25)',
+        textStyle: { color: C.textBright, fontSize: 12 },
+        extraCssText: 'box-shadow: 0 8px 32px rgba(0,0,0,.5); border-radius: 12px;'
+      },
+      legend: {
+        orient: 'horizontal',
+        bottom: 4,
+        left: 'center',
+        itemWidth: 10,
+        itemHeight: 10,
+        itemGap: 14,
+        textStyle: { color: C.text, fontSize: 11 }
       },
       series: [{
         type: 'pie',
-        radius: ['46%', '72%'],
-        center: ['50%', '52%'],
+        radius: '65%',
+        center: ['50%', '44%'],
         padAngle: 2,
-        itemStyle: { borderRadius: 6, borderColor: 'rgba(8, 16, 40, 0.85)', borderWidth: 2 },
-        label: { color: C.textBright, fontSize: 11 },
+        itemStyle: {
+          borderRadius: 6,
+          borderColor: 'rgba(10, 25, 60, 0.92)',
+          borderWidth: 2,
+          shadowBlur: 8,
+          shadowColor: 'rgba(0, 210, 255, 0.12)'
+        },
+        label: { show: false },
+        emphasis: {
+          scale: true,
+          scaleSize: 6,
+          itemStyle: { shadowBlur: 16, shadowColor: 'rgba(0, 210, 255, 0.35)' }
+        },
         data: data
       }]
     };
@@ -221,51 +242,6 @@ window.AdminChartsTheme = (function () {
     };
   }
 
-  function regionBar(items) {
-    var labels = (items || []).map(function (x) { return x.label; });
-    var values = (items || []).map(function (x) { return x.value; });
-    return {
-      tooltip: tooltip(),
-      grid: { left: 48, right: 16, top: 16, bottom: 48 },
-      xAxis: Object.assign({ type: 'category', data: labels, axisLabel: { rotate: 30 } }, axis()),
-      yAxis: Object.assign({ type: 'value' }, axis()),
-      series: [{
-        type: 'bar',
-        data: values,
-        barWidth: 18,
-        itemStyle: {
-          borderRadius: [6, 6, 0, 0],
-          color: {
-            type: 'linear', x: 0, y: 1, x2: 0, y2: 0,
-            colorStops: [
-              { offset: 0, color: '#0b1739' },
-              { offset: 1, color: C.blue }
-            ]
-          }
-        }
-      }]
-    };
-  }
-
-  function funnel(stages) {
-    return {
-      tooltip: { trigger: 'item' },
-      series: [{
-        type: 'funnel',
-        left: '12%',
-        width: '76%',
-        label: { color: C.textBright },
-        data: (stages || []).map(function (s, i) {
-          return {
-            name: s.label,
-            value: s.value,
-            itemStyle: { color: PALETTE[i % PALETTE.length] }
-          };
-        })
-      }]
-    };
-  }
-
   function adminTimeline(events) {
     var counts = {};
     (events || []).slice(0, 80).forEach(function (ev) {
@@ -330,8 +306,6 @@ window.AdminChartsTheme = (function () {
     radar: radar,
     heatmap24: heatmap24,
     areaDwell: areaDwell,
-    regionBar: regionBar,
-    funnel: funnel,
     wordCloud: wordCloud,
     adminTimeline: adminTimeline
   };

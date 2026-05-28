@@ -56,29 +56,43 @@
     return { code: 0, message: 'ok', data: json, success: true };
   }
 
+  function tryParseJsonText(text, status) {
+    if (!text) return normalizeBody({}, status);
+    var trimmed = String(text).trim();
+    if (trimmed.charAt(0) === '{' || trimmed.charAt(0) === '[') {
+      try {
+        return normalizeBody(JSON.parse(trimmed), status);
+      } catch (e) { /* fall through */ }
+    }
+    return null;
+  }
+
   function parseResponse(res) {
     var ct = res.headers.get('content-type') || '';
-    if (!isJsonContentType(ct)) {
-      return res.text().then(function (text) {
-        var preview = (text || '').replace(/\s+/g, ' ').trim().slice(0, 80);
-        var hint = preview.indexOf('<') >= 0
-          ? '接口返回了 HTML 页面而非 JSON（常见于后端未启动或路径错误）'
-          : '接口返回了非 JSON 数据';
-        var err = new Error(hint + (preview ? '：' + preview : ''));
-        err.status = res.status;
-        err.isHtml = preview.indexOf('<') >= 0;
-        throw err;
-      });
-    }
     return res.text().then(function (text) {
-      if (!text) return normalizeBody({}, res.status);
-      try {
-        return normalizeBody(JSON.parse(text), res.status);
-      } catch (e) {
-        var err = new Error('JSON 解析失败：' + e.message);
-        err.status = res.status;
-        throw err;
+      if (isJsonContentType(ct)) {
+        try {
+          return normalizeBody(text ? JSON.parse(text) : {}, res.status);
+        } catch (e) {
+          var parsed = tryParseJsonText(text, res.status);
+          if (parsed) return parsed;
+          var parseErr = new Error('JSON 解析失败：' + e.message);
+          parseErr.status = res.status;
+          throw parseErr;
+        }
       }
+      var sniffed = tryParseJsonText(text, res.status);
+      if (sniffed) return sniffed;
+      var preview = (text || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+      var isHtml = preview.indexOf('<') >= 0;
+      var hint = isHtml
+        ? '接口返回了 HTML 页面而非 JSON（请确认 Node 服务已启动：waitlist-html/server，端口 3002）'
+        : '接口返回了非 JSON 数据';
+      var err = new Error(hint + (preview ? '：' + preview : ''));
+      err.status = res.status;
+      err.isHtml = isHtml;
+      err.code = isHtml ? 'NON_JSON_HTML' : 'NON_JSON';
+      throw err;
     });
   }
 
@@ -131,10 +145,21 @@
         return body;
       });
     }).catch(function (err) {
-      if (err && err.status) throw err;
+      if (err && err.status) {
+        if (options.serviceUnavailable && (err.isHtml || err.code === 'NON_JSON_HTML')) {
+          err.userMessage = '日志服务暂时不可用';
+          err.code = 'SERVICE_UNAVAILABLE';
+          if (!options.silent) notifyError(err.userMessage, options);
+        }
+        throw err;
+      }
       var netErr = new Error((err && err.message) || '网络请求失败');
       netErr.cause = err;
-      if (!options.silent) notifyError(netErr.message, options);
+      if (options.serviceUnavailable) {
+        netErr.userMessage = '日志服务暂时不可用';
+        netErr.code = 'SERVICE_UNAVAILABLE';
+      }
+      if (!options.silent) notifyError(netErr.userMessage || netErr.message, options);
       throw netErr;
     });
   }

@@ -11,7 +11,6 @@ window.FayiAdminPanel = (function () {
     users: '用户管理',
     consultations: '法律咨询记录',
     documents: '法律文书管理',
-    ocr: 'OCR 识别记录',
     regulations: '法律法规库'
   };
 
@@ -72,6 +71,7 @@ window.FayiAdminPanel = (function () {
 
   function route() {
     var hash = (location.hash || '#overview').slice(1);
+    if (hash === 'ocr' || hash === 'logs') hash = 'overview';
     if (!TITLES[hash]) hash = 'overview';
     state.route = hash;
     document.querySelectorAll('#adm-nav a').forEach(function (a) {
@@ -113,7 +113,6 @@ window.FayiAdminPanel = (function () {
           ['总用户数', s.totalUsers],
           ['今日访问量', s.todayVisits],
           ['AI 调用次数', s.aiCalls],
-          ['OCR 识别次数', s.ocrCount],
           ['法律咨询次数', s.consultCount],
           ['文书生成次数', s.documentCount]
         ];
@@ -124,16 +123,15 @@ window.FayiAdminPanel = (function () {
           row.appendChild(card);
           animateNum(card.querySelector('.adm-stat__value'), item[1]);
         });
-        $('sys-status').innerHTML = '<span class="adm-badge adm-badge--ok">● ' + (s.systemStatus === 'healthy' ? '系统健康' : s.systemStatus) + '</span> · OCR 成功率 ' + s.ocrSuccessRate + '% · 更新 ' + (s.updatedAt || '').slice(11, 19);
+        $('sys-status').innerHTML = '<span class="adm-badge adm-badge--ok">● ' + (s.systemStatus === 'healthy' ? '系统健康' : s.systemStatus) + '</span> · 更新 ' + (s.updatedAt || '').slice(11, 19);
         mountChart($('chart-trend'), {
           tooltip: { trigger: 'axis' },
           grid: { left: 48, right: 24, top: 32, bottom: 32 },
-          legend: { data: ['咨询', 'OCR', '文书'], textStyle: { color: '#94a3b8' } },
+          legend: { data: ['咨询', '文书'], textStyle: { color: '#94a3b8' } },
           xAxis: { type: 'category', data: ch.labels, axisLine: { lineStyle: { color: '#334155' } } },
           yAxis: { type: 'value', splitLine: { lineStyle: { color: 'rgba(51,65,85,.4)' } } },
           series: [
             { name: '咨询', type: 'line', smooth: true, data: ch.consult, areaStyle: { opacity: 0.15 }, itemStyle: { color: '#3b82f6' } },
-            { name: 'OCR', type: 'line', smooth: true, data: ch.ocr, itemStyle: { color: '#22c55e' } },
             { name: '文书', type: 'bar', data: ch.documents, itemStyle: { color: '#6366f1' } }
           ]
         });
@@ -264,27 +262,6 @@ window.FayiAdminPanel = (function () {
       load(1);
     },
 
-    ocr: function (root) {
-      root.innerHTML = '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>文件</th><th>结果摘要</th><th>状态</th><th>时间</th></tr></thead><tbody id="ocr-tb"></tbody></table></div><div id="ocr-pg"></div>';
-      function load(page) {
-        FayiAdminApi.ocr({ page: page, pageSize: 10 }).then(function (res) {
-          var tb = $('ocr-tb');
-          tb.innerHTML = '';
-          res.data.list.forEach(function (r) {
-            var tr = document.createElement('tr');
-            var ok = r.success !== false;
-            tr.innerHTML = '<td>' + (r.fileName || '—') + '</td><td>' + ((r.textPreview || r.result || '—') + '').slice(0, 80) + '</td><td>' +
-              (ok ? '<span class="adm-badge adm-badge--ok">成功</span>' : '<span class="adm-badge adm-badge--ban">失败</span>') +
-              '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
-            tb.appendChild(tr);
-          });
-          $('ocr-pg').innerHTML = '';
-          $('ocr-pg').appendChild(paginate(res.data.total, res.data.page, res.data.pageSize, load));
-        });
-      }
-      load(1);
-    },
-
     regulations: function (root) {
       root.innerHTML =
         '<div class="adm-toolbar"><button class="adm-btn adm-btn--primary adm-btn--sm" id="reg-add">新增法规</button></div>' +
@@ -354,22 +331,7 @@ window.FayiAdminPanel = (function () {
   }
 
 
-  TITLES.logs = '系统日志';
   TITLES['law-education'] = '普法宣传管理';
-
-  routes.logs = function (root) {
-    root.innerHTML = '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>类型</th><th>消息</th><th>时间</th></tr></thead><tbody id="logs-tb"></tbody></table></div>';
-    FayiAdminApi.logs({ page: 1, pageSize: 30 }).then(function (res) {
-      var tb = document.getElementById('logs-tb');
-      if (!tb) return;
-      tb.innerHTML = '';
-      (res.data.list || []).forEach(function (r) {
-        var tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + r.type + '</td><td>' + (r.message || '').slice(0, 120) + '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
-        tb.appendChild(tr);
-      });
-    }).catch(function (e) { root.innerHTML = '<p style="color:#f87171">' + e.message + '</p>'; });
-  };
 
   var _overviewFn = routes.overview;
   routes.overview = function (root) {

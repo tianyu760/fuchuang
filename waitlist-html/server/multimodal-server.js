@@ -8,6 +8,7 @@
  */
 
 const express  = require('express');
+const http     = require('http');
 const multer   = require('multer');
 const cors     = require('cors');
 const fs       = require('fs');
@@ -46,6 +47,7 @@ const {
   YUANQI_ASSISTANT_ID
 } = require('./lib/yuanqi-ai');
 const adminRouter = require('./modules/admin');
+const logsRouter = require('./modules/logs-router');
 const adminAnalytics = adminRouter.store;
 const SYSTEM_CONFIG = require('./lib/system-config');
 let lawEducationRouter;
@@ -356,6 +358,32 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'charset']
 }));
 app.options('*', cors());  // 响应所有 OPTIONS 预检请求
+
+app.use(function (req, res, next) {
+  if (!req.path || req.path.indexOf('/api/') !== 0) return next();
+  const started = Date.now();
+  res.on('finish', function () {
+    const durationMs = Date.now() - started;
+    try {
+      adminAnalytics.recordApiMonitor({
+        path: req.path,
+        method: req.method,
+        statusCode: res.statusCode,
+        durationMs: durationMs
+      });
+      if (res.statusCode >= 500) {
+        adminAnalytics.recordSystemError('api_error', req.method + ' ' + req.path, {
+          path: req.path,
+          method: req.method,
+          statusCode: res.statusCode,
+          durationMs: durationMs,
+          ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress
+        });
+      }
+    } catch (e) { /* ignore */ }
+  });
+  next();
+});
 
 /** GET /api/system/config — 全局系统配置（客服电话、版权年份） */
 app.get('/api/system/config', (req, res) => {
@@ -759,7 +787,15 @@ app.post('/api/auth/login', (req, res) => {
   const emailNorm = normEmail(email);
   const users = usersLoad();
   const user  = users.find(u => normEmail(u.email) === emailNorm && u.password === hashPwd(password));
-  if (!user) return res.json({ ok: false, message: '邮箱或密码错误' });
+  if (!user) {
+    adminAnalytics.recordSystemError('login_failed', '邮箱或密码错误', {
+      path: '/api/auth/login',
+      method: 'POST',
+      statusCode: 401,
+      ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress
+    });
+    return res.json({ ok: false, message: '邮箱或密码错误' });
+  }
 
   const role = user.role || (user.userType === 'admin' ? 'admin' : 'user');
   const isAdmin = role === 'admin' || user.userType === 'admin';
@@ -796,7 +832,19 @@ app.post('/api/auth/login', (req, res) => {
       console.warn('[auth] admin token issue:', e.message);
     }
 
-    adminAnalytics.logEvent('admin_login', { email: user.email, userId: user.id, source: 'platform_login' });
+    user.lastLoginAt = new Date().toISOString();
+    const uList = usersLoad();
+    const uIdx = uList.findIndex(u => u.id === user.id);
+    if (uIdx >= 0) { uList[uIdx].lastLoginAt = user.lastLoginAt; usersSave(uList); }
+    adminAnalytics.logEvent('admin_login', { email: user.email, userId: user.id, source: 'platform_login' }, {
+      ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress
+    });
+    adminAnalytics.touchHeartbeat({
+      userId: user.id,
+      userName: user.email,
+      ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress,
+      sourcePage: 'admin'
+    });
     console.log(`[auth] 管理员登录: ${email}`);
     return res.json({
       ok: true,
@@ -820,7 +868,19 @@ app.post('/api/auth/login', (req, res) => {
   const token = genToken();
   tokenStore.set(token, user.id);
   tokenStoreSave(tokenStore);
-  adminAnalytics.logEvent('user_login', { email: user.email, userId: user.id });
+  user.lastLoginAt = new Date().toISOString();
+  const allUsers = usersLoad();
+  const idx = allUsers.findIndex(u => u.id === user.id);
+  if (idx >= 0) { allUsers[idx].lastLoginAt = user.lastLoginAt; usersSave(allUsers); }
+  adminAnalytics.logEvent('user_login', { email: user.email, userId: user.id }, {
+    ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress
+  });
+  adminAnalytics.touchHeartbeat({
+    userId: user.id,
+    userName: user.email,
+    ip: (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || req.socket.remoteAddress,
+    sourcePage: 'app'
+  });
   console.log(`[auth] 登录: ${email}`);
   res.json({
     ok: true,
@@ -1492,6 +1552,9 @@ const { installAdminJsonEnvelope, installApiErrorHandlers } = require('./lib/api
 installAdminJsonEnvelope(adminRouter);
 app.use('/api/admin', adminRouter);
 
+installAdminJsonEnvelope(logsRouter);
+app.use('/api/logs', logsRouter);
+
 // ── 公共数字看板 API（/api/dashboard/*）──────────────────────────────────────
 app.get('/api/dashboard/realtime', (req, res) => {
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
@@ -1527,8 +1590,15 @@ app.get('/health', (req, res) => {
 
 installApiErrorHandlers(app);
 
-// ── 启动服务器 ──────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
+// ── 启动服务器（HTTP + WebSocket）────────────────────────────────────────────
+const server = http.createServer(app);
+if (adminRouter.realtimeHub) {
+  adminRouter.realtimeHub.attach(server, function () {
+    return adminAnalytics.buildRealtimePayload();
+  });
+}
+
+server.listen(PORT, () => {
   console.log('');
   console.log('  ╔══════════════════════════════════════╗');
   console.log(`  ║  DeepSeek AI 服务已启动                ║`);
@@ -1546,6 +1616,7 @@ app.listen(PORT, () => {
   console.log('    GET  /api/admin/*         — 管理端 API');
   console.log('    GET  /api/admin/datav/realtime — 数字大屏实时数据');
   console.log('    GET  /api/admin/datav/stream   — 数字大屏 SSE 推送');
+  console.log('    WS   /api/admin/ws            — 管理端实时数据 WebSocket');
   console.log('    GET  /api/dashboard/realtime   — 公共实时看板数据');
   console.log('    GET  /api/dashboard/stream     — 公共实时看板 SSE');
   console.log('    GET  /api/law-education/* — 普法宣传 API');

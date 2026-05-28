@@ -1,0 +1,423 @@
+/**
+ * 运营总览 · 企业级数据中心布局
+ */
+
+/* KPI 顶栏 */
+.adm-kpi-strip {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  padding: 14px 24px;
+  background: rgba(8, 18, 37, 0.55);
+  border-bottom: 1px solid var(--adm-border);
+}
+
+.adm-kpi {
+  height: 110px;
+  min-width: 0;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(10, 25, 60, 0.92);
+  border: 1px solid rgba(120, 160, 255, 0.14);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(120, 160, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.adm-kpi:hover {
+  transform: translateY(-3px);
+  border-color: rgba(120, 160, 255, 0.32);
+  box-shadow: 0 12px 32px rgba(59, 130, 246, 0.12);
+}
+
+.adm-body {
+  flex: 1;
+  padding: 16px 20px 24px;
+  overflow: visible;
+  min-height: 0;
+}
+
+/* 总览根布局 */
+.adm-v3-overview--dc {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  min-height: min(100%, calc(100vh - 220px));
+}
+
+/* 顶部指标 */
+.adm-v3-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.adm-v3-metric-card {
+  height: 110px;
+  padding: 16px 18px;
+  border-radius: 22px;
+  background: rgba(10, 25, 60, 0.92);
+  border: 1px solid rgba(120, 160, 255, 0.14);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.adm-v3-metric-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(120, 160, 255, 0.28);
+}
+
+.adm-v3-metric-card__top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.adm-v3-metric-card__titles h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(220, 235, 255, 0.88);
+}
+
+.adm-v3-metric-card__titles p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: rgba(220, 235, 255, 0.5);
+}
+
+.adm-v3-metric-card .adm-v3-mod__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.adm-v3-metric-card__val {
+  font-size: 28px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.adm-v3-metric-card__unit {
+  font-size: 12px;
+  color: rgba(220, 235, 255, 0.55);
+}
+
+/* 主图区 70% / 30% */
+.adm-v3-hero-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+.adm-v3-biz-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* 统一模块卡片 */
+.adm-v3-overview--dc .adm-v3-mod {
+  border-radius: 22px;
+  padding: 20px 22px;
+  background: rgba(10, 25, 60, 0.92);
+  border: 1px solid rgba(120, 160, 255, 0.14);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(120, 160, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.adm-v3-overview--dc .adm-v3-mod:hover {
+  transform: translateY(-3px);
+  border-color: rgba(120, 160, 255, 0.26);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.35), 0 0 24px rgba(59, 130, 246, 0.08);
+}
+
+.adm-v3-mod--enter {
+  animation: adm-v3-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes adm-v3-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.adm-v3-overview--dc .adm-v3-mod__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+.adm-v3-overview--dc .adm-v3-mod__titles h3 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #f1f5f9;
+  letter-spacing: 0.01em;
+}
+
+.adm-v3-overview--dc .adm-v3-mod__titles p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(220, 235, 255, 0.65);
+  line-height: 1.45;
+}
+
+.adm-v3-overview--dc .adm-v3-mod__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 图表高度 */
+.adm-v3-chart-wrap {
+  flex: 1;
+  width: 100%;
+  border-radius: 14px;
+  background: rgba(6, 14, 32, 0.55);
+  border: 1px solid rgba(120, 160, 255, 0.08);
+  padding: 8px 10px 10px;
+  box-sizing: border-box;
+}
+
+.adm-v3-chart-wrap--hero {
+  height: 380px;
+  min-height: 380px;
+  max-height: 380px;
+}
+
+.adm-v3-chart-wrap--hero .adm-v3-chart {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+}
+
+.adm-v3-mod--hero,
+.adm-v3-mod--pie {
+  min-height: 460px;
+}
+
+/* 业务双栏 300px */
+.adm-v3-mod--biz.adm-v3-mod--panel {
+  min-height: 300px;
+  max-height: 300px;
+  background: linear-gradient(180deg, rgba(12, 28, 62, 0.96), rgba(8, 18, 42, 0.98)) !important;
+}
+
+.adm-v3-scroll--biz {
+  flex: 1;
+  min-height: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+
+.adm-v3-mod--biz .adm-v3-feed-meta {
+  flex-shrink: 0;
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(200, 220, 255, 0.65);
+  text-align: right;
+}
+
+/* 风险预警流 */
+.adm-v3-risk-section {
+  flex-shrink: 0;
+}
+
+.adm-v3-mod--risk {
+  min-height: 0;
+  max-height: none;
+}
+
+.adm-v3-risk-stream {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+
+.adm-v3-risk-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.adm-v3-risk-row {
+  display: grid;
+  grid-template-columns: 10px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(8, 18, 40, 0.65);
+  border: 1px solid rgba(120, 160, 255, 0.1);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.adm-v3-risk-row:hover {
+  background: rgba(30, 58, 120, 0.35);
+  border-color: rgba(120, 160, 255, 0.22);
+}
+
+.adm-v3-risk-row__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+  align-self: center;
+}
+
+.adm-v3-risk-row--high .adm-v3-risk-row__dot {
+  background: #f87171;
+  box-shadow: 0 0 10px rgba(248, 113, 113, 0.55);
+}
+
+.adm-v3-risk-row--low .adm-v3-risk-row__dot {
+  background: #4ade80;
+  box-shadow: 0 0 10px rgba(74, 222, 128, 0.45);
+}
+
+.adm-v3-risk-row__main {
+  min-width: 0;
+}
+
+.adm-v3-risk-row__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.adm-v3-risk-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  letter-spacing: 0.04em;
+}
+
+.adm-v3-risk-tag--high {
+  color: #fecaca;
+  background: rgba(185, 28, 28, 0.35);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.adm-v3-risk-tag--mid {
+  color: #fde68a;
+  background: rgba(180, 120, 0, 0.3);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.adm-v3-risk-tag--low {
+  color: #bbf7d0;
+  background: rgba(22, 101, 52, 0.35);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+}
+
+.adm-v3-risk-tag--type {
+  color: rgba(200, 220, 255, 0.85);
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(120, 160, 255, 0.2);
+  font-weight: 600;
+}
+
+.adm-v3-risk-row__text {
+  margin: 0 0 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(235, 245, 255, 0.92);
+  line-height: 1.45;
+}
+
+.adm-v3-risk-row__source {
+  font-size: 11px;
+  color: rgba(200, 220, 255, 0.55);
+}
+
+.adm-v3-risk-row__time {
+  font-size: 12px;
+  font-weight: 600;
+  color: #7fdbff;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.adm-v3-risk-row--empty .adm-v3-risk-row__text {
+  color: rgba(200, 220, 255, 0.55);
+}
+
+/* 智能分析 / 动态 · 继承 biz 样式并收紧 */
+.adm-v3-overview--dc .adm-v3-mod--biz .adm-ai-list__text {
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.adm-v3-overview--dc .adm-v3-mod--biz .adm-feed__msg {
+  font-size: 13px;
+}
+
+@media (max-width: 1280px) {
+  .adm-v3-hero-row {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-v3-mod--hero,
+  .adm-v3-mod--pie {
+    min-height: 0;
+  }
+
+  .adm-v3-biz-row {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-v3-mod--biz.adm-v3-mod--panel {
+    max-height: none;
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 720px) {
+  .adm-kpi-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adm-v3-metrics-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .adm-v3-chart-wrap--hero {
+    height: 300px;
+    min-height: 300px;
+    max-height: 300px;
+  }
+}

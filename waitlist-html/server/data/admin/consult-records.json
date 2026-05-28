@@ -1,0 +1,1380 @@
+[
+  {
+    "id": "evt_1779268680411_e70n",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-20T09:18:00.411Z"
+  },
+  {
+    "id": "evt_1779377522682_4ko5",
+    "userId": "1776096155583ciny",
+    "question": "早上吃饭了吗",
+    "keywords": [
+      "早上吃饭了吗"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-21T15:32:02.682Z"
+  },
+  {
+    "id": "evt_1779378974679_a55d",
+    "userId": "1776096155583ciny",
+    "question": "你好呀",
+    "keywords": [
+      "你好呀"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-21T15:56:14.679Z"
+  },
+  {
+    "id": "evt_1779379139008_blte",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-21T15:58:59.008Z"
+  },
+  {
+    "id": "evt_1779517411797_j9ri",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T06:23:31.797Z"
+  },
+  {
+    "id": "evt_1779518182948_d0o2",
+    "userId": "1776096155583ciny",
+    "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+    "keywords": [
+      "房东退租后不",
+      "退押金",
+      "我想先看看这",
+      "件事有哪些法",
+      "律风险"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T06:36:22.949Z"
+  },
+  {
+    "id": "evt_1779518971083_8up0",
+    "userId": "1776096155583ciny",
+    "question": "回答",
+    "keywords": [
+      "回答"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T06:49:31.083Z"
+  },
+  {
+    "id": "evt_1779521327580_mdl0",
+    "userId": "1776096155583ciny",
+    "question": "我是租客，对方是房东。2024年9月签订租房合同，2026年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+    "keywords": [
+      "我是租客",
+      "对方是房东",
+      "月签订租房合",
+      "月退租",
+      "合同里约定押",
+      "退租时如果房",
+      "屋和屋内物品",
+      "没有明显人为",
+      "损坏",
+      "应当退还押金"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T07:28:47.582Z"
+  },
+  {
+    "id": "evt_1779521423437_1iz9",
+    "userId": "1776096155583ciny",
+    "question": "我是租客，对方是房东。2024年9月签订租房合同，2026年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+    "keywords": [
+      "我是租客",
+      "对方是房东",
+      "月签订租房合",
+      "月退租",
+      "合同里约定押",
+      "退租时如果房",
+      "屋和屋内物品",
+      "没有明显人为",
+      "损坏",
+      "应当退还押金"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T07:30:23.437Z"
+  },
+  {
+    "id": "evt_1779521950440_h6to",
+    "userId": "1776096155583ciny",
+    "question": "中",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T07:39:10.440Z"
+  },
+  {
+    "id": "evt_1779523624265_7h94",
+    "userId": "1776096155583ciny",
+    "question": "根据我刚上传的材料，开始证据体检",
+    "keywords": [
+      "根据我刚上传",
+      "的材料",
+      "开始证据体检"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T08:07:04.267Z"
+  },
+  {
+    "id": "evt_1779524372377_xma4",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T08:19:32.378Z"
+  },
+  {
+    "id": "evt_1779524462740_4bns",
+    "userId": "1776096155583ciny",
+    "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+    "keywords": [
+      "房东退租后不",
+      "退押金",
+      "我想先看看这",
+      "件事有哪些法",
+      "律风险"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T08:21:02.740Z"
+  },
+  {
+    "id": "evt_1779525390519_2nmj",
+    "userId": "1776096155583ciny",
+    "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+    "keywords": [
+      "房东退租后不",
+      "退押金",
+      "我想先看看这",
+      "件事有哪些法",
+      "律风险"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T08:36:30.521Z"
+  },
+  {
+    "id": "evt_1779526217105_sniw",
+    "userId": "1776096155583ciny",
+    "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+    "keywords": [
+      "房东退租后不",
+      "退押金",
+      "我想先看看这",
+      "件事有哪些法",
+      "律风险"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T08:50:17.105Z"
+  },
+  {
+    "id": "evt_1779526968174_3cxu",
+    "userId": "1776096155583ciny",
+    "question": "根据我刚上传的材料，开始证据体检。",
+    "keywords": [
+      "根据我刚上传",
+      "的材料",
+      "开始证据体检"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T09:02:48.175Z"
+  },
+  {
+    "id": "evt_1779527352930_cj5o",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-23T09:09:12.937Z"
+  },
+  {
+    "id": "evt_1779608613802_qpyl",
+    "userId": "guest",
+    "question": "??,??????????",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T07:43:33.802Z"
+  },
+  {
+    "id": "evt_1779608807398_bsjt",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T07:46:47.398Z"
+  },
+  {
+    "id": "evt_1779608968630_xkml",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T07:49:28.630Z"
+  },
+  {
+    "id": "evt_1779611278502_nmnk",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T08:27:58.502Z"
+  },
+  {
+    "id": "evt_1779611419388_rnr1",
+    "userId": "1776096155583ciny",
+    "question": "为了更准确地分析你的案件，我还需要补充几个关键信息。我目前初步理解为：用户遇到了劳动纠纷问题。当前还缺少的信息主要有：关键时间线、涉及金额或争议对象、是否存在合同、借条、聊天约定等、当前已有证据材料、用户当前希望达到的目标。请你按事实补充回",
+    "keywords": [
+      "为了更准确地",
+      "分析你的案件",
+      "我还需要补充",
+      "几个关键信息",
+      "我目前初步理",
+      "解为",
+      "用户遇到了劳",
+      "动纠纷问题",
+      "当前还缺少的",
+      "信息主要有"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T08:30:19.388Z"
+  },
+  {
+    "id": "evt_1779611618648_0bws",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。李某作为出借人，张某作为借款人，双方之间存在明确的借贷合意（通过聊天记录等体现）、资金交付事实（转账记录）以及还款期限约定（三个月后归还），符合民间借贷纠纷的基本特征。",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案纠纷类型",
+      "为民间借贷纠",
+      "李某作为出借",
+      "张某作为借款",
+      "双方之间存在",
+      "明确的借贷合"
+    ],
+    "category": "fraud",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T08:33:38.648Z"
+  },
+  {
+    "id": "evt_1779611737332_b01i",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T08:35:37.332Z"
+  },
+  {
+    "id": "evt_1779611803804_mv86",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。李某作为出借人，张某作为借款人，双方形成了借贷合意，张某未按约定期限归还借款，构成违约，符合民间借贷纠纷的基本特征。\n二、主要法律风险\n点\n1. **借款合同有效性风险",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案纠纷类型",
+      "为民间借贷纠",
+      "李某作为出借",
+      "张某作为借款",
+      "双方形成了借",
+      "贷合意"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T08:36:43.804Z"
+  },
+  {
+    "id": "evt_1779611838190_z4it",
+    "userId": "1776096155583ciny",
+    "question": "分析文件内容",
+    "keywords": [
+      "分析文件内容"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T08:37:18.190Z"
+  },
+  {
+    "id": "evt_1779613751719_lcov",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了租房纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了租房",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T09:09:11.719Z"
+  },
+  {
+    "id": "evt_1779616497979_crnb",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了租房纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了租房",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T09:54:57.979Z"
+  },
+  {
+    "id": "evt_1779617199805_xcpu",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案初步判断为民间借贷纠纷。出借人张某与借款人李某之间存在明确的借款合意（通过微信聊天记录等体现），借款金额为50000元，并约定了还款期限（三个月）。借款人李某未按约定归还借款，符合民间借贷纠纷",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案初步判断",
+      "为民间借贷纠",
+      "出借人张某与",
+      "借款人李某之",
+      "间存在明确的",
+      "借款合意"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T10:06:39.805Z"
+  },
+  {
+    "id": "evt_1779617223789_bqxx",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T10:07:03.789Z"
+  },
+  {
+    "id": "evt_1779630713013_75lq",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T13:51:53.013Z"
+  },
+  {
+    "id": "evt_1779630806888_ymj4",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。出借人李某与借款人张某之间存在明确的借贷合意（通过微信聊天记录等体现）和资金交付事实（转账记录），张某未按约定时间归还借款，符合民间借贷纠纷的核心特征。\n二、主要法律风",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案纠纷类型",
+      "为民间借贷纠",
+      "出借人李某与",
+      "借款人张某之",
+      "间存在明确的",
+      "借贷合意"
+    ],
+    "category": "fraud",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T13:53:26.888Z"
+  },
+  {
+    "id": "evt_1779630911215_qttp",
+    "userId": "1776096155583ciny",
+    "question": "1",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T13:55:11.215Z"
+  },
+  {
+    "id": "evt_1779631004844_9jzr",
+    "userId": "1776096155583ciny",
+    "question": "2",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T13:56:44.844Z"
+  },
+  {
+    "id": "evt_1779631039023_cnou",
+    "userId": "1776096155583ciny",
+    "question": "123",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T13:57:19.023Z"
+  },
+  {
+    "id": "evt_1779633698328_67xl",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T14:41:38.345Z"
+  },
+  {
+    "id": "evt_1779633729941_mwzp",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T14:42:09.942Z"
+  },
+  {
+    "id": "evt_1779634068530_oh85",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T14:47:48.530Z"
+  },
+  {
+    "id": "evt_1779634128999_caan",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案属于典型的民间借贷纠纷。出借人李某与借款人张某之间形成了借贷合意，并实际发生了资金交付，借款人未按约定期限归还借款，符合民间借贷纠纷的核心特征。\n二、主要法律风险\n点\n1. **借款合同的有效",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案属于典型",
+      "的民间借贷纠",
+      "出借人李某与",
+      "借款人张某之",
+      "间形成了借贷",
+      "合意"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T14:48:48.999Z"
+  },
+  {
+    "id": "evt_1779634564605_5yjp",
+    "userId": "1776096155583ciny",
+    "question": "我遭遇了抢劫 我该如何维护自己的权利",
+    "keywords": [
+      "我遭遇了抢劫",
+      "我该如何维护",
+      "自己的权利"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T14:56:04.605Z"
+  },
+  {
+    "id": "evt_1779636118537_7rdq",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:21:58.537Z"
+  },
+  {
+    "id": "evt_1779636828881_mypk",
+    "userId": "1776096155583ciny",
+    "question": "我遭遇抢劫该如何维权",
+    "keywords": [
+      "我遭遇抢劫该",
+      "如何维权"
+    ],
+    "category": "consumer",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:33:48.883Z"
+  },
+  {
+    "id": "evt_1779637143493_9k1t",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。出借人李某与借款人张某之间因借款本金50000元的偿还问题产生争议，符合民间借贷纠纷的法律特征。\n二、主要法律风险\n点\n1. 借款合同的有效性和具体条款：需审查双方是否",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案纠纷类型",
+      "为民间借贷纠",
+      "出借人李某与",
+      "借款人张某之",
+      "间因借款本金",
+      "元的偿还问题"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:39:03.493Z"
+  },
+  {
+    "id": "evt_1779637220971_onpq",
+    "userId": "1776096155583ciny",
+    "question": "​一、案件与诉求概况\n本案为一起房屋租赁合同纠纷。承租人张某与出租人杨某因租赁期满后押金退还问题产生争议。租赁期限为2024年9月5日至2025年2月28日。承租人张某的诉求是要求出租人杨某返还押金2000元。\n二、当前已提交证据清单\n根据",
+    "keywords": [
+      "合同纠纷",
+      "房屋租赁",
+      "案件与诉求概",
+      "本案为一起房",
+      "屋租赁合同纠",
+      "承租人张某与",
+      "出租人杨某因",
+      "租赁期满后押",
+      "金退还问题产",
+      "生争议"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:40:20.971Z"
+  },
+  {
+    "id": "evt_1779637521644_seuf",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:45:21.645Z"
+  },
+  {
+    "id": "evt_1779638271458_wu9h",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:57:51.458Z"
+  },
+  {
+    "id": "evt_1779638375335_xhso",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T15:59:35.335Z"
+  },
+  {
+    "id": "evt_1779639010964_zfw9",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:10:10.966Z"
+  },
+  {
+    "id": "evt_1779639052300_trnw",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:10:52.300Z"
+  },
+  {
+    "id": "evt_1779639138174_96vb",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:12:18.174Z"
+  },
+  {
+    "id": "evt_1779639234269_sg89",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:13:54.270Z"
+  },
+  {
+    "id": "evt_1779640727905_dz27",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:38:47.905Z"
+  },
+  {
+    "id": "evt_1779640748693_q1p4",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:39:08.693Z"
+  },
+  {
+    "id": "evt_1779640873984_8iou",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:41:13.984Z"
+  },
+  {
+    "id": "evt_1779641084471_bktw",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:44:44.471Z"
+  },
+  {
+    "id": "evt_1779641967920_tzx4",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案纠纷类型为民间借贷纠纷。出借人张某与借款人李某之间存在明确的借款合意及资金交付事实，因借款人未按约定归还借款而产生争议。\n二、主要法律风险\n点\n1. 借款合同的有效性及条款的明确性：本案借款合",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案纠纷类型",
+      "为民间借贷纠",
+      "出借人张某与",
+      "借款人李某之",
+      "间存在明确的",
+      "借款合意及资"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T16:59:27.920Z"
+  },
+  {
+    "id": "evt_1779642058145_8mwo",
+    "userId": "1776096155583ciny",
+    "question": "针对上述我的问题进行总结",
+    "keywords": [
+      "针对上述我的",
+      "问题进行总结"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T17:00:58.146Z"
+  },
+  {
+    "id": "evt_1779642194257_ht90",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T17:03:14.257Z"
+  },
+  {
+    "id": "evt_1779642340909_dlh8",
+    "userId": "1776096155583ciny",
+    "question": "综合以上两个案例来进行分析",
+    "keywords": [
+      "综合以上两个",
+      "案例来进行分"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T17:05:40.909Z"
+  },
+  {
+    "id": "evt_1779642478669_mqh4",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T17:07:58.669Z"
+  },
+  {
+    "id": "evt_1779642540750_tthn",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-24T17:09:00.750Z"
+  },
+  {
+    "id": "sel_1779679182161_zfv2",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-25T03:19:42.161Z"
+  },
+  {
+    "id": "sel_1779679216749_6r4i",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-25T03:20:16.749Z"
+  },
+  {
+    "id": "sel_1779679237990_10p5",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了租房纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了租房",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-25T03:20:37.990Z"
+  },
+  {
+    "id": "sel_1779717612919_p2at",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-25T14:00:12.919Z"
+  },
+  {
+    "id": "sel_1779722228511_so7p",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-25T15:17:08.511Z"
+  },
+  {
+    "id": "sel_1779722324660_rva6",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-25T15:18:44.663Z"
+  },
+  {
+    "id": "sel_1779755849801_2p2w",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T00:37:29.801Z"
+  },
+  {
+    "id": "sel_1779755869866_0pim",
+    "userId": "1776096155583ciny",
+    "question": "为了更准确地分析你的案件，我还需要补充几个关键信息。\n我目前初步理解为：\n用户遇到了劳动纠纷问题\n当前还缺少的信息主要有：\n[\"关键时间线\",\"涉及金额或争议对象\",\"是否存在合同、借条、聊天约定等\",\"当前已有证据材料\",\"用户当前希望达",
+    "keywords": [
+      "为了更准确地",
+      "分析你的案件",
+      "我还需要补充",
+      "几个关键信息",
+      "我目前初步理",
+      "解为",
+      "用户遇到了劳",
+      "动纠纷问题",
+      "当前还缺少的",
+      "信息主要有"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T00:37:49.866Z"
+  },
+  {
+    "id": "sel_1779755944691_z57h",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案为典型的民间借贷纠纷。出借人李某与借款人张某之间存在借款合同关系，张某未按约定归还借款，符合民间借贷纠纷的核心特征。\n二、主要法律风险\n点\n1. **诉讼时效风险**：借款约定于2025年6月",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案为典型的",
+      "民间借贷纠纷",
+      "出借人李某与",
+      "借款人张某之",
+      "间存在借款合",
+      "同关系"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T00:39:04.691Z"
+  },
+  {
+    "id": "sel_1779756049702_samb",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T00:40:49.702Z"
+  },
+  {
+    "id": "sel_1779768005721_cm88",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T04:00:05.721Z"
+  },
+  {
+    "id": "sel_1779768005843_87s6",
+    "userId": "guest",
+    "question": "我遇到了民间借贷纠纷问题，请帮我分析：",
+    "keywords": [
+      "民间借贷",
+      "我遇到了民间",
+      "借贷纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T04:00:05.843Z"
+  },
+  {
+    "id": "sel_1779768142346_w5wo",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T04:02:22.346Z"
+  },
+  {
+    "id": "sel_1779768142509_errf",
+    "userId": "guest",
+    "question": "案例1.docx",
+    "keywords": [
+      "案例"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T04:02:22.509Z"
+  },
+  {
+    "id": "sel_1779768892814_yteh",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T04:14:52.814Z"
+  },
+  {
+    "id": "sel_1779768893047_qpjr",
+    "userId": "guest",
+    "question": "我遇到了合同纠纷问题，请帮我分析：",
+    "keywords": [
+      "合同纠纷",
+      "我遇到了合同",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "contract",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T04:14:53.047Z"
+  },
+  {
+    "id": "sel_1779768999768_lfue",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T04:16:39.768Z"
+  },
+  {
+    "id": "sel_1779768999934_vy24",
+    "userId": "guest",
+    "question": "案例1.docx",
+    "keywords": [
+      "案例"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T04:16:39.934Z"
+  },
+  {
+    "id": "sel_1779769107443_j8xi",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案属于典型的民间借贷纠纷。纠纷双方为出借人李某与借款人张某，争议核心是张某未按约定归还借款本金。\n二、主要法律风险\n点\n1. **借款合同的有效性及具体条款**：双方通过微信等方式达成的借款合意",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案属于典型",
+      "的民间借贷纠",
+      "纠纷双方为出",
+      "借人李某与借",
+      "款人张某",
+      "争议核心是张"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T04:18:27.443Z"
+  },
+  {
+    "id": "sel_1779769107675_r0tj",
+    "userId": "guest",
+    "question": "图片：屏幕截图 2026-05-24 162845.png",
+    "keywords": [
+      "图片",
+      "屏幕截图"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T04:18:27.675Z"
+  },
+  {
+    "id": "sel_1779811315667_nobw",
+    "userId": "1776096155583ciny",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:01:55.667Z"
+  },
+  {
+    "id": "sel_1779811315768_fxl5",
+    "userId": "guest",
+    "question": "我遇到了劳动纠纷问题，请帮我分析：",
+    "keywords": [
+      "我遇到了劳动",
+      "纠纷问题",
+      "请帮我分析"
+    ],
+    "category": "labor",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:01:55.768Z"
+  },
+  {
+    "id": "sel_1779811379040_0yna",
+    "userId": "1776096155583ciny",
+    "question": "对以上内容进行总结",
+    "keywords": [
+      "对以上内容进",
+      "行总结"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:02:59.040Z"
+  },
+  {
+    "id": "sel_1779811379120_hgxc",
+    "userId": "guest",
+    "question": "对以上内容进行总结",
+    "keywords": [
+      "对以上内容进",
+      "行总结"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:02:59.120Z"
+  },
+  {
+    "id": "sel_1779811422677_m84n",
+    "userId": "1776096155583ciny",
+    "question": "对之前的回答进行总结",
+    "keywords": [
+      "对之前的回答",
+      "进行总结"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:03:42.677Z"
+  },
+  {
+    "id": "sel_1779811422741_38p5",
+    "userId": "guest",
+    "question": "对之前的回答进行总结",
+    "keywords": [
+      "对之前的回答",
+      "进行总结"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:03:42.741Z"
+  },
+  {
+    "id": "sel_1779811472643_m82h",
+    "userId": "1776096155583ciny",
+    "question": "对之前的内容进行总结",
+    "keywords": [
+      "对之前的内容",
+      "进行总结"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:04:32.643Z"
+  },
+  {
+    "id": "sel_1779811472694_xm4r",
+    "userId": "guest",
+    "question": "对之前的内容进行总结",
+    "keywords": [
+      "对之前的内容",
+      "进行总结"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:04:32.694Z"
+  },
+  {
+    "id": "sel_1779812027773_lim9",
+    "userId": "1776096155583ciny",
+    "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+    "keywords": [
+      "房东退租后不",
+      "退押金",
+      "我想先看看这",
+      "件事有哪些法",
+      "律风险"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:13:47.774Z"
+  },
+  {
+    "id": "sel_1779812027942_zsjr",
+    "userId": "guest",
+    "question": "房东退租后不退押金，我想先看看这件事有哪些法律风险。",
+    "keywords": [
+      "房东退租后不",
+      "退押金",
+      "我想先看看这",
+      "件事有哪些法",
+      "律风险"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:13:47.942Z"
+  },
+  {
+    "id": "sel_1779812132872_bgse",
+    "userId": "1776096155583ciny",
+    "question": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东拒绝退还押金，理由是说墙面有污损、家具也有损坏，但我认为这些要么是正常使用痕迹，",
+    "keywords": [
+      "我是租客",
+      "对方是房东",
+      "月签订租房合",
+      "月退租",
+      "合同里约定押",
+      "退租时如果房",
+      "屋和屋内物品",
+      "没有明显人为",
+      "损坏",
+      "应当退还押金"
+    ],
+    "category": "contract",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:15:32.872Z"
+  },
+  {
+    "id": "sel_1779812133017_iwsi",
+    "userId": "guest",
+    "question": "我是租客，对方是房东。2024年9月签订租房合同，2025年2月退租。合同里约定押金2000元，退租时如果房屋和屋内物品没有明显人为损坏，应当退还押金。现在房东…",
+    "keywords": [
+      "我是租客",
+      "对方是房东",
+      "月签订租房合",
+      "月退租",
+      "合同里约定押",
+      "退租时如果房",
+      "屋和屋内物品",
+      "没有明显人为",
+      "损坏",
+      "应当退还押金"
+    ],
+    "category": "contract",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:15:33.017Z"
+  },
+  {
+    "id": "sel_1779812795540_ki6a",
+    "userId": "1776096155583ciny",
+    "question": "现在我想知道我的案子有什么争议焦点。",
+    "keywords": [
+      "现在我想知道",
+      "我的案子有什",
+      "么争议焦点"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:26:35.540Z"
+  },
+  {
+    "id": "sel_1779812795688_xdyf",
+    "userId": "guest",
+    "question": "现在我想知道我的案子有什么争议焦点。",
+    "keywords": [
+      "现在我想知道",
+      "我的案子有什",
+      "么争议焦点"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:26:35.688Z"
+  },
+  {
+    "id": "sel_1779813024203_cwj6",
+    "userId": "1776096155583ciny",
+    "question": "根据我刚上传的材料，开始证据体检。",
+    "keywords": [
+      "根据我刚上传",
+      "的材料",
+      "开始证据体检"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:30:24.203Z"
+  },
+  {
+    "id": "sel_1779813024350_fl5j",
+    "userId": "guest",
+    "question": "根据我刚上传的材料，开始证据体检。",
+    "keywords": [
+      "根据我刚上传",
+      "的材料",
+      "开始证据体检"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:30:24.350Z"
+  },
+  {
+    "id": "sel_1779813095342_uzz2",
+    "userId": "1776096155583ciny",
+    "question": "请结合前面的分析给我下一步该怎么做",
+    "keywords": [
+      "请结合前面的",
+      "分析给我下一",
+      "步该怎么做"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:31:35.342Z"
+  },
+  {
+    "id": "sel_1779813095435_dpl8",
+    "userId": "guest",
+    "question": "请结合前面的分析给我下一步该怎么做",
+    "keywords": [
+      "请结合前面的",
+      "分析给我下一",
+      "步该怎么做"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:31:35.435Z"
+  },
+  {
+    "id": "sel_1779813401118_5ht7",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:36:41.118Z"
+  },
+  {
+    "id": "sel_1779813403346_g1lz",
+    "userId": "guest",
+    "question": "案例1.docx",
+    "keywords": [
+      "案例"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:36:43.346Z"
+  },
+  {
+    "id": "sel_1779813533964_13nc",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-26T16:38:53.964Z"
+  },
+  {
+    "id": "sel_1779813534060_9t4c",
+    "userId": "guest",
+    "question": "案例1.docx",
+    "keywords": [
+      "案例"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-26T16:38:54.061Z"
+  }
+]

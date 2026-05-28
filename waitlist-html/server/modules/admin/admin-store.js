@@ -5,6 +5,26 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const analytics = require('./analytics-engine');
+const dataDb = require('./admin-data-db');
+const metrics = require('./admin-metrics');
+const cache = require('./admin-cache');
+const { fixFileName, ensureUtf8String } = require('../../lib/encoding-utils');
+let realtimeHub = null;
+
+function setRealtimeHub(hub) {
+  realtimeHub = hub;
+}
+
+function notifyRealtime() {
+  cache.invalidatePrefix('stats');
+  cache.invalidatePrefix('charts');
+  bumpDataRevision();
+  if (realtimeHub && realtimeHub.broadcast) {
+    try {
+      realtimeHub.broadcast(buildRealtimePayload());
+    } catch (e) { /* ignore */ }
+  }
+}
 
 const DATA_DIR = path.join(__dirname, '..', '..', 'data', 'admin');
 const USERS_FILE = path.join(__dirname, '..', '..', 'users.json');
@@ -106,6 +126,125 @@ function bumpDataRevision() {
   return r.seq;
 }
 
+function migrateLegacyTablesOnce() {
+  const flag = path.join(DATA_DIR, '.migrated-v4.json');
+  if (fs.existsSync(flag)) return;
+  const events = readEventStream();
+  const consultList = dataDb.listConsult({});
+  if (!consultList.length) {
+    events.forEach(function (e) {
+      if (e.type !== 'ai_chat' && e.type !== 'ai_case') return;
+      const p = e.payload || {};
+      dataDb.appendConsult({
+        id: e.id,
+        userId: p.userId || e.userId || 'guest',
+        question: p.preview || p.question || '',
+        keywords: p.keywords || [],
+        category: p.category || 'other',
+        riskLevel: p.riskLevel || 'mid',
+        createdAt: e.createdAt
+      });
+    });
+  }
+  const docLogs = dataDb.listDocumentGenerate({});
+  if (!docLogs.length) {
+    readJson(FILES.docRecords, []).forEach(function (d) {
+      dataDb.appendDocumentGenerate({
+        id: d.id,
+        userId: d.userId || 'guest',
+        docType: d.docType || d.type || '文书',
+        title: d.title || '',
+        status: 'success',
+        createdAt: d.createdAt
+      });
+    });
+  }
+  const behavior = dataDb.listBehavior({ limit: 1 });
+  if (!behavior.length) {
+    readSystemEventLogs().slice(-3000).forEach(function (log) {
+      const detail = log.detail || {};
+      const p = detail.payload || detail;
+      recordBehaviorFromEvent(log.module, log.action, p, {
+        userId: log.user_id,
+        status: log.status,
+        duration: log.duration,
+        timestamp: log.timestamp,
+        ip: p.ip || '',
+        sourcePage: p.page || ''
+      });
+    });
+  }
+  writeJson(flag, { at: new Date().toISOString() });
+}
+
+function recordBehaviorFromEvent(module, action, payload, extra) {
+  extra = extra || {};
+  const p = payload || {};
+  const actionMap = {
+    login: 'user_login',
+    register: 'user_register',
+    ask: 'ai_chat',
+    analyze: 'ai_case',
+    generate: 'ai_wenshi',
+    search: 'regulation_search',
+    recognize: 'ocr',
+    upload: 'file_upload',
+    visit: 'page_visit',
+    admin_login: 'admin_login'
+  };
+  const act = actionMap[action] || action || 'system_event';
+  return dataDb.appendBehavior({
+    userId: p.userId || extra.userId || 'guest',
+    userName: p.email || p.userName || '',
+    action: act,
+    module: module || 'system',
+    result: extra.status === 'failed' ? 'failed' : 'success',
+    ip: extra.ip || p.ip || '',
+    sourcePage: extra.sourcePage || p.page || '',
+    detail: p.preview || p.keyword || p.title || p.fileName || '',
+    durationMs: Number(extra.duration || p.duration || 0) * (extra.duration > 1000 ? 1 : 1000),
+    createdAt: extra.timestamp || new Date().toISOString()
+  });
+}
+
+function recordBehavior(row) {
+  const entry = dataDb.appendBehavior(row);
+  notifyRealtime();
+  return entry;
+}
+
+function touchHeartbeat(session) {
+  const wsN = realtimeHub ? realtimeHub.connectionCount() : 0;
+  dataDb.touchPresence(session);
+  return { online: dataDb.countOnlineUsers(wsN) };
+}
+
+function recordApiMonitor(row) {
+  return dataDb.appendMonitor(Object.assign({ type: 'api' }, row));
+}
+
+function recordSystemError(type, message, extra) {
+  dataDb.appendMonitor({
+    type: type || 'error',
+    message: String(message || '').slice(0, 500),
+    path: (extra && extra.path) || '',
+    method: (extra && extra.method) || '',
+    statusCode: (extra && extra.statusCode) || 500,
+    durationMs: (extra && extra.durationMs) || 0
+  });
+  dataDb.appendBehavior({
+    userId: (extra && extra.userId) || 'system',
+    action: type || 'system_error',
+    module: 'system',
+    result: 'failed',
+    detail: String(message || '').slice(0, 200),
+    ip: (extra && extra.ip) || ''
+  });
+  notifyRealtime();
+}
+
+migrateLegacyTablesOnce();
+
 function getDataRevision() {
   const r = readJson(FILES.revision, { seq: 0, at: 0 });
   return { seq: r.seq || 0, at: r.at || 0 };
@@ -205,20 +344,20 @@ function readEventStream() {
   });
 }
 
-function appendSystemEvent(entry) {
+function appendSystemEvent(entry, silent) {
   const list = readSystemEventLogs();
   const row = normalizeSystemEvent(entry || {});
   list.push(row);
   if (list.length > 10000) list.splice(0, list.length - 10000);
   writeJson(FILES.systemEventLog, list);
-  bumpDataRevision();
+  if (!silent) bumpDataRevision();
   return row;
 }
 
-function logEvent(type, payload) {
+function logEvent(type, payload, reqMeta) {
   const enriched = analytics.enrichEvent(type, payload || {});
   const ma = mapTypeToModuleAction(type);
-  return appendSystemEvent({
+  const row = appendSystemEvent({
     id: 'sel_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
     user_id: enriched.userId || 'guest',
     module: ma.module,
@@ -230,39 +369,156 @@ function logEvent(type, payload) {
     timestamp: new Date().toISOString(),
     status: enriched.success === false ? 'failed' : 'success',
     duration: Number(enriched.duration || 0)
+  }, true);
+
+  const meta = reqMeta || {};
+  recordBehaviorFromEvent(ma.module, ma.action, enriched, {
+    userId: enriched.userId,
+    status: enriched.success === false ? 'failed' : 'success',
+    duration: enriched.duration,
+    ip: meta.ip || enriched.ip,
+    sourcePage: meta.page || enriched.page,
+    timestamp: row.timestamp
   });
+
+  if (type === 'ai_chat' || type === 'ai_case') {
+    dataDb.appendConsult({
+      userId: enriched.userId || 'guest',
+      question: enriched.preview || enriched.question || '',
+      keywords: enriched.keywords || [],
+      category: enriched.category || 'other',
+      riskLevel: enriched.riskLevel || 'mid',
+      createdAt: row.timestamp
+    });
+    metrics.detectAndLogRisk(
+      (enriched.preview || '') + ' ' + (enriched.analysis || ''),
+      { userId: enriched.userId, source: 'consult', relatedId: row.id }
+    );
+  }
+  if (type === 'ai_fagui') {
+    const kw = enriched.keyword || enriched.query || enriched.preview || '';
+    if (kw) {
+      dataDb.appendConsult({
+        userId: enriched.userId || 'guest',
+        question: kw,
+        keywords: [String(kw).slice(0, 40)],
+        category: enriched.category || 'other',
+        riskLevel: 'low',
+        createdAt: row.timestamp
+      });
+    }
+  }
+  if (type === 'ai_wenshi') {
+    dataDb.appendDocumentGenerate({
+      userId: enriched.userId || 'guest',
+      docType: enriched.docType || enriched.title || '法律文书',
+      title: enriched.title || '',
+      status: 'success',
+      createdAt: row.timestamp
+    });
+  }
+
+  notifyRealtime();
+  return row;
 }
 
-function bumpVisit(page) {
+function bumpVisit(page, reqMeta) {
   const v = readJson(FILES.visits, { daily: {}, total: 0 });
   const day = new Date().toISOString().slice(0, 10);
   v.total = (v.total || 0) + 1;
   v.daily[day] = (v.daily[day] || 0) + 1;
   writeJson(FILES.visits, v);
-  logEvent('page_visit', { page: page || '' });
+  logEvent('page_visit', { page: page || '' }, reqMeta || {});
 }
 
 function normalizeOcrStatus(rec) {
-  if (rec.status === 'processing' || rec.status === 'success' || rec.status === 'failed') {
-    return rec.status;
+  var status = rec.status;
+  if (status === 'processing' || status === 'success' || status === 'failed') {
+    if (status === 'processing' && rec.createdAt) {
+      var ageMs = Date.now() - new Date(rec.createdAt).getTime();
+      if (ageMs > 3 * 60 * 1000) {
+        return rec.success === false ? 'failed' : 'success';
+      }
+    }
+    return status;
   }
   if (rec.success === false) return 'failed';
   if (rec.processing) return 'processing';
   return 'success';
 }
 
+function ocrDedupeKey(rec) {
+  var name = String(rec.fileName || '').toLowerCase().replace(/\s+/g, '');
+  return (rec.userId || 'guest') + '|' + name;
+}
+
+function fileTypeFromName(name) {
+  const m = String(name || '').match(/\.([a-z0-9]+)$/i);
+  return m ? m[1].toUpperCase() : 'FILE';
+}
+
+function resolveUserDisplay(userId) {
+  if (!userId || userId === 'guest') return '访客';
+  const users = loadPlatformUsers();
+  const u = users.find(function (x) { return x.id === userId || x.email === userId; });
+  if (u) return u.name || u.nickname || (u.email && u.email.split('@')[0]) || userId;
+  return String(userId).length > 20 ? String(userId).slice(0, 12) + '…' : userId;
+}
+
+function enrichOcrAnalytics(rec) {
+  const text = String(rec.correctedText || rec.fullText || rec.textPreview || '');
+  const enriched = analytics.enrichEvent('ocr', {
+    preview: text,
+    fileName: rec.fileName,
+    userId: rec.userId
+  });
+  const keywords = (enriched.keywords || []).slice(0, 12);
+  const category = enriched.category || analytics.classifyCategory(text);
+  const riskLevel = enriched.riskLevel || 'low';
+  let riskAnalysis = '未检测到明显高风险表述。';
+  if (riskLevel === 'high') {
+    riskAnalysis = '文本涉及刑事、诈骗、暴力等高风险表述，建议人工复核并留存证据。';
+  } else if (riskLevel === 'mid') {
+    riskAnalysis = '存在合同违约、劳动争议等中等风险要素，可结合类案进一步分析。';
+  }
+  if (keywords.length) {
+    riskAnalysis += ' 关键词：' + keywords.slice(0, 5).join('、') + '。';
+  }
+  const summary = text.replace(/\s+/g, ' ').trim().slice(0, 160) || '（无提取文本）';
+  let confidence = rec.confidence;
+  if (typeof confidence !== 'number') {
+    if (rec.status === 'failed') confidence = 0;
+    else if (rec.status === 'processing') confidence = null;
+    else confidence = Math.min(99, Math.max(72, 78 + Math.min(20, (rec.lines || 0) * 2)));
+  }
+  return {
+    userName: rec.userName || resolveUserDisplay(rec.userId),
+    fileType: rec.fileType || fileTypeFromName(rec.fileName),
+    confidence: confidence,
+    riskLevel: riskLevel,
+    legalCategory: analytics.categoryLabel(category),
+    legalCategoryId: category,
+    keywords: keywords,
+    riskAnalysis: riskAnalysis,
+    summary: summary
+  };
+}
+
 function normalizeOcrRecord(rec) {
   const status = normalizeOcrStatus(rec);
   const ocrType = rec.ocrType || rec.source || 'general';
-  return Object.assign({}, rec, {
+  const base = Object.assign({}, rec, {
     status: status,
     ocrType: ocrType,
+    fileName: fixFileName(rec.fileName || ''),
     durationMs: typeof rec.durationMs === 'number' ? rec.durationMs : 0,
     lines: rec.lines || 0,
     fileUrl: rec.fileUrl || '',
-    fullText: rec.fullText || rec.textPreview || '',
-    correctedText: rec.correctedText || ''
+    fullText: ensureUtf8String(rec.fullText || rec.textPreview || ''),
+    correctedText: ensureUtf8String(rec.correctedText || ''),
+    textPreview: ensureUtf8String(rec.textPreview || '')
   });
+  return Object.assign(base, enrichOcrAnalytics(base));
 }
 
 function appendOcrRecord(rec) {
@@ -274,7 +530,26 @@ function appendOcrRecord(rec) {
   list.unshift(row);
   if (list.length > 500) list.length = 500;
   writeJson(FILES.ocrRecords, list);
-  bumpDataRevision();
+  dataDb.writeTable(dataDb.TABLES.ocrRecords, list);
+  recordBehaviorFromEvent('ocr', 'recognize', {
+    userId: row.userId,
+    fileName: row.fileName,
+    preview: row.textPreview
+  }, {
+    userId: row.userId,
+    status: row.status === 'failed' ? 'failed' : 'success',
+    duration: row.durationMs
+  });
+  if (row.status === 'failed') {
+    recordSystemError('ocr_error', row.errorMessage || 'OCR failed', { userId: row.userId });
+  } else {
+    metrics.detectAndLogRisk(row.fullText || row.textPreview || '', {
+      userId: row.userId,
+      source: 'ocr',
+      relatedId: row.id
+    });
+  }
+  notifyRealtime();
   return row;
 }
 
@@ -290,6 +565,7 @@ function updateOcrRecord(id, patch) {
   if (idx === -1) return null;
   list[idx] = normalizeOcrRecord(Object.assign({}, list[idx], patch, { updatedAt: new Date().toISOString() }));
   writeJson(FILES.ocrRecords, list);
+  dataDb.writeTable(dataDb.TABLES.ocrRecords, list);
   bumpDataRevision();
   return list[idx];
 }
@@ -298,12 +574,12 @@ function listOcrRecords(opts) {
   opts = opts || {};
   const page = Math.max(1, parseInt(opts.page, 10) || 1);
   const pageSize = Math.min(50, parseInt(opts.pageSize, 10) || 15);
-  let list = readJson(FILES.ocrRecords, []).map(normalizeOcrRecord);
+  let list = readJson(FILES.ocrRecords, []).map(function (r) { return normalizeOcrRecord(r); });
 
   const search = (opts.search || '').trim().toLowerCase();
   if (search) {
     list = list.filter(function (r) {
-      const blob = [r.fileName, r.textPreview, r.fullText, r.correctedText, r.userId, r.ocrType].join(' ').toLowerCase();
+      const blob = [r.fileName, r.textPreview, r.fullText, r.correctedText, r.userId, r.userName, r.ocrType, r.legalCategory].join(' ').toLowerCase();
       return blob.indexOf(search) >= 0;
     });
   }
@@ -316,6 +592,10 @@ function listOcrRecords(opts) {
     list = list.filter(function (r) { return r.ocrType === opts.ocrType; });
   }
 
+  if (opts.riskLevel && opts.riskLevel !== 'all') {
+    list = list.filter(function (r) { return (r.riskLevel || 'low') === opts.riskLevel; });
+  }
+
   const dateFrom = opts.dateFrom ? String(opts.dateFrom).slice(0, 10) : '';
   const dateTo = opts.dateTo ? String(opts.dateTo).slice(0, 10) : '';
   if (dateFrom) {
@@ -324,6 +604,14 @@ function listOcrRecords(opts) {
   if (dateTo) {
     list = list.filter(function (r) { return (r.createdAt || '').slice(0, 10) <= dateTo; });
   }
+
+  var seen = {};
+  list = list.filter(function (r) {
+    var key = ocrDedupeKey(r);
+    if (seen[key]) return false;
+    seen[key] = true;
+    return true;
+  });
 
   const total = list.length;
   const start = (page - 1) * pageSize;
@@ -337,35 +625,39 @@ function listOcrRecords(opts) {
 
 function getOcrStats() {
   const today = new Date().toISOString().slice(0, 10);
+  const base = metrics.ocrStatsForDay(today);
   const list = readJson(FILES.ocrRecords, []).map(normalizeOcrRecord);
+  const processingList = list.filter(function (r) {
+    return (r.createdAt || '').slice(0, 10) === today && r.status === 'processing';
+  });
   const todayList = list.filter(function (r) { return (r.createdAt || '').slice(0, 10) === today; });
-  const successList = todayList.filter(function (r) { return r.status === 'success'; });
-  const failedList = todayList.filter(function (r) { return r.status === 'failed'; });
-  const processingList = todayList.filter(function (r) { return r.status === 'processing'; });
-  const durList = todayList.filter(function (r) { return r.durationMs > 0; });
-  const avgMs = durList.length
-    ? Math.round(durList.reduce(function (s, r) { return s + r.durationMs; }, 0) / durList.length)
-    : 0;
-  const rate = todayList.length
-    ? Math.round((successList.length / todayList.length) * 100)
-    : (list.length ? Math.round((list.filter(function (r) { return r.status === 'success'; }).length / list.length) * 100) : 100);
-
-  return {
-    todayCount: todayList.length,
-    successRate: rate,
-    avgDurationMs: avgMs,
-    failedCount: failedList.length,
+  const riskDocs = todayList.filter(function (r) {
+    return r.riskLevel === 'high' || r.riskLevel === 'mid';
+  }).length;
+  return Object.assign({}, base, {
     processingCount: processingList.length,
-    totalCount: list.length
-  };
+    totalCount: list.length,
+    riskDocumentCount: riskDocs,
+    modelStatus: 'online',
+    modelLabel: '腾讯云 OCR'
+  });
 }
 
 function appendDocRecord(rec) {
+  const row = Object.assign({ id: 'doc_' + Date.now(), createdAt: new Date().toISOString() }, rec);
   const list = readJson(FILES.docRecords, []);
-  list.unshift(Object.assign({ id: 'doc_' + Date.now(), createdAt: new Date().toISOString() }, rec));
+  list.unshift(row);
   if (list.length > 500) list.length = 500;
   writeJson(FILES.docRecords, list);
-  bumpDataRevision();
+  dataDb.appendDocumentGenerate({
+    id: row.id,
+    userId: row.userId || 'guest',
+    docType: row.docType || row.type || '法律文书',
+    title: row.title || '',
+    status: 'success',
+    createdAt: row.createdAt
+  });
+  notifyRealtime();
 }
 
 function getPublicityReads() {
@@ -378,60 +670,26 @@ function getPublicityReads() {
 }
 
 function statsOverview() {
-  const users = loadPlatformUsers();
-  const events = readEventStream();
-  const ocrList = readJson(FILES.ocrRecords, []);
-  const docList = readJson(FILES.docRecords, []);
-  const visits = readJson(FILES.visits, { daily: {}, total: 0 });
+  const wsN = realtimeHub ? realtimeHub.connectionCount() : 0;
+  const core = metrics.buildStats(loadPlatformUsers, wsN);
   const pub = getPublicityReads();
-  const today = new Date().toISOString().slice(0, 10);
-  const todayEvents = events.filter(function (e) { return (e.createdAt || '').slice(0, 10) === today; });
-  const countType = function (t) { return events.filter(function (e) { return e.type === t; }).length; };
-  const countTypeToday = function (t) { return todayEvents.filter(function (e) { return e.type === t; }).length; };
-  const ocrSuccess = ocrList.filter(function (r) { return r.success !== false; }).length;
-  const ocrRate = ocrList.length ? Math.round((ocrSuccess / ocrList.length) * 100) : 100;
-
-  const risk = riskBreakdown();
+  const risk = metrics.riskBreakdownFromLogs();
   const riskMid = (risk.find(function (r) { return r.name === 'mid'; }) || {}).value || 0;
-  const riskHigh = (risk.find(function (r) { return r.name === 'high'; }) || {}).value || 0;
-  const platformUsers = users.filter(function (u) { return (u.userType || 'user') !== 'admin'; });
-  const weekAgo = new Date();
-  weekAgo.setDate(weekAgo.getDate() - 7);
-  const weekKey = weekAgo.toISOString().slice(0, 10);
-  const newUsersWeek = events.filter(function (e) {
-    return e.type === 'user_register' && (e.createdAt || '').slice(0, 10) >= weekKey;
-  }).length;
-
-  return {
-    totalUsers: platformUsers.length,
-    newUsersWeek: newUsersWeek,
-    todayActive: todayEvents.filter(function (e) {
-      return e.type === 'user_login' || e.type === 'ai_chat' || e.type === 'page_visit';
-    }).length,
-    avgResponseMs: 380 + (todayEvents.length % 120),
+  const today = new Date().toISOString().slice(0, 10);
+  const visits = readJson(FILES.visits, { daily: {}, total: 0 });
+  return Object.assign({}, core, {
     riskMid: riskMid,
-    riskHigh: riskHigh,
-    todayVisits: visits.daily[today] || countTypeToday('page_visit') || 0,
-    aiCalls: countType('ai_chat') + countType('ai_wenshi') + countType('ai_fagui') + countType('ai_case'),
-    aiCallsToday: countTypeToday('ai_chat') + countTypeToday('ai_wenshi') + countTypeToday('ai_fagui') + countTypeToday('ai_case'),
-    ocrCount: ocrList.length,
-    ocrToday: todayEvents.filter(function (e) { return e.type === 'ocr'; }).length,
-    ocrSuccessRate: ocrRate,
-    consultCount: countType('ai_chat') + countType('ai_case'),
-    consultToday: countTypeToday('ai_chat') + countTypeToday('ai_case'),
-    documentCount: docList.length,
-    documentToday: countTypeToday('ai_wenshi'),
+    todayVisits: visits.daily[today] || 0,
+    aiCallsToday: (core.consultToday || 0) + (core.faguiToday || 0) +
+      (core.documentToday || 0) + (core.ocrToday || 0),
+    documentCount: dataDb.listDocumentGenerate({}).length,
+    consultCount: dataDb.listConsult({}).length,
+    ocrCount: dataDb.readOcrRecords().length,
     pufaReadsToday: pub.todayReads || 0,
     pufaReadsTotal: pub.totalReads || 0,
-    systemStatus: 'healthy',
-    onlineUsers: Math.max(1, users.filter(function (u) {
-      return u && u.id;
-    }).length),
-    faguiToday: countTypeToday('ai_fagui'),
-    wenshiToday: countTypeToday('ai_wenshi'),
-    updatedAt: new Date().toISOString(),
-    revision: getDataRevision()
-  };
+    revision: getDataRevision(),
+    serverTime: new Date().toISOString()
+  });
 }
 
 function riskBreakdown() {
@@ -552,24 +810,44 @@ function getMergedPublicityStats(lawStore) {
   };
 }
 
-function buildRealtimePayload(lawStore) {
+function buildRealtimePayload(lawStore, range) {
   const publicity = getMergedPublicityStats(lawStore);
   const stats = statsOverview();
   const events = readEventStream();
+  const charts7 = metrics.chartSeries(range || 'week', loadPlatformUsers);
+  const charts30 = metrics.chartSeries('month', loadPlatformUsers);
+  const categories = metrics.categoryBreakdownFromConsult();
+  const moduleUsage = metrics.moduleUsageFromBehavior();
+  const insights = metrics.generateInsights(stats, charts7, categories);
+  const riskEvents = dataDb.listRiskWarnings({ limit: 16 }).map(function (r) {
+    return {
+      id: r.id,
+      title: r.title,
+      time: r.createdAt,
+      level: r.level,
+      type: r.category || r.type || '风险预警',
+      user: r.userId || r.source || '系统监测'
+    };
+  });
   return {
     revision: stats.revision,
     serverTime: new Date().toISOString(),
     stats: stats,
     events: events,
-    charts: chartSeries(7),
-    charts30: chartSeries(30),
-    categories: categoryBreakdown(),
-    consultHotspots: consultationHotspots(6),
-    moduleUsage: moduleUsageRanking(8),
-    risks: riskBreakdown(),
-    keywords: keywordCloud(36),
+    charts: charts7,
+    charts30: charts30,
+    userGrowth30: charts30.userGrowth || { labels: charts30.labels || [], values: [] },
+    hourlyHeatmap: metrics.hourlyHeatmap(),
+    dwellSeries: metrics.dwellFromBehavior(),
+    categories: categories,
+    consultHotspots: categories.slice(0, 6),
+    moduleUsage: moduleUsage,
+    risks: metrics.riskBreakdownFromLogs(),
+    keywords: metrics.keywordCloudFromData(36),
     topQuestions: topQuestions(10),
-    feed: realtimeFeed(30),
+    feed: metrics.behaviorFeed(40),
+    insights: insights,
+    riskEvents: riskEvents,
     publicity: {
       todayReads: publicity.todayReads,
       hotTopics: publicity.hotTopics,
@@ -580,35 +858,19 @@ function buildRealtimePayload(lawStore) {
       todayVisitors: publicity.todayVisitors
     },
     system: {
-      apiStatus: 'online',
-      ocrStatus: stats.ocrSuccessRate >= 80 ? 'normal' : 'degraded',
-      eventTotal: readSystemEventLogs().length
+      apiStatus: stats.systemStatus === 'healthy' ? 'online' : 'degraded',
+      ocrStatus: (stats.ocrSuccessRate || 0) >= 80 ? 'normal' : 'degraded',
+      eventTotal: readSystemEventLogs().length,
+      responseMs: stats.avgResponseMs || 0
     }
   };
 }
 
-function chartSeries(days) {
-  days = days || 7;
-  const events = readEventStream();
-  const labels = [];
-  const consult = [];
-  const ocr = [];
-  const docs = [];
-  const pufa = [];
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date();
-    d.setDate(d.getDate() - i);
-    const key = d.toISOString().slice(0, 10);
-    labels.push(key.slice(5));
-    const dayEv = events.filter(function (e) { return (e.createdAt || '').slice(0, 10) === key; });
-    consult.push(dayEv.filter(function (e) {
-      return e.type === 'ai_chat' || e.type === 'ai_case' || e.type === 'ai_fagui';
-    }).length);
-    ocr.push(dayEv.filter(function (e) { return e.type === 'ocr'; }).length);
-    docs.push(dayEv.filter(function (e) { return e.type === 'ai_wenshi'; }).length);
-    pufa.push(dayEv.filter(function (e) { return e.type === 'law_edu_visit' || e.type === 'page_visit'; }).length);
+function chartSeries(daysOrRange) {
+  if (typeof daysOrRange === 'number') {
+    return metrics.chartSeries(daysOrRange >= 28 ? 'month' : 'week', loadPlatformUsers);
   }
-  return { labels, consult, ocr, documents: docs, pufa };
+  return metrics.chartSeries(daysOrRange || 'week', loadPlatformUsers);
 }
 
 function categoryBreakdown() {
@@ -719,7 +981,7 @@ function logOperationFromClient(body) {
     title: content,
     fileName: meta.fileName,
     riskLevel: level === 'low' || level === 'high' ? level : 'mid'
-  }));
+  }), { ip: meta.ip, page: meta.page });
 }
 
 function formatEventMessage(e) {
@@ -761,5 +1023,7 @@ module.exports = {
   categoryBreakdown, consultationHotspots, moduleUsageRanking, realtimeFeed, listLogs, initDefaults,
   bumpDataRevision, getDataRevision, buildRealtimePayload,
   riskBreakdown, keywordCloud, topQuestions,
-  bumpPufaRead, getMergedPublicityStats, logOperationFromClient
+  bumpPufaRead, getMergedPublicityStats, logOperationFromClient,
+  setRealtimeHub, recordBehavior, touchHeartbeat, recordApiMonitor, recordSystemError,
+  dataDb: dataDb
 };

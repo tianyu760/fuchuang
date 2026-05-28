@@ -14988,5 +14988,4367 @@
     "timestamp": "2026-05-28T09:17:25.357Z",
     "status": "success",
     "duration": 189
+  },
+  {
+    "id": "sel_1779960065927_4hsm",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "admin_login",
+    "detail": {
+      "type": "admin_login",
+      "payload": {
+        "email": "18363623082@qq.com",
+        "source": "platform_user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:21:05.927Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960066210_9hii",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:21:06.210Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960066467_upwz",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:21:06.468Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960074431_7o3h",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 8,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:21:14.431Z",
+    "status": "success",
+    "duration": 8
+  },
+  {
+    "id": "sel_1779960134641_sex4",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 68,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:22:14.641Z",
+    "status": "success",
+    "duration": 68
+  },
+  {
+    "id": "sel_1779960198677_2p2s",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 132,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:23:18.677Z",
+    "status": "success",
+    "duration": 132
+  },
+  {
+    "id": "sel_1779960211280_ywx3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 145,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:23:31.280Z",
+    "status": "success",
+    "duration": 145
+  },
+  {
+    "id": "sel_1779960324067_dvk0",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 258,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:25:24.067Z",
+    "status": "success",
+    "duration": 258
+  },
+  {
+    "id": "sel_1779960351285_wkme",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 285,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:25:51.285Z",
+    "status": "success",
+    "duration": 285
+  },
+  {
+    "id": "sel_1779960544787_40j5",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 479,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:29:04.787Z",
+    "status": "success",
+    "duration": 479
+  },
+  {
+    "id": "sel_1779960585642_qszd",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 519,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:29:45.642Z",
+    "status": "success",
+    "duration": 519
+  },
+  {
+    "id": "sel_1779960593863_uno7",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 528,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:29:53.863Z",
+    "status": "success",
+    "duration": 528
+  },
+  {
+    "id": "sel_1779960701897_cxo3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 636,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:31:41.897Z",
+    "status": "success",
+    "duration": 636
+  },
+  {
+    "id": "sel_1779960828218_ifw9",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 762,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:33:48.219Z",
+    "status": "success",
+    "duration": 762
+  },
+  {
+    "id": "sel_1779960828784_d839",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 763,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:33:48.784Z",
+    "status": "success",
+    "duration": 763
+  },
+  {
+    "id": "sel_1779960837580_dv28",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-28T09:33:57.580Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960837702_ymu0",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "preview": "用户登录：3837498182@qq.com",
+        "keyword": "用户登录：3837498182@qq.com",
+        "title": "用户登录：3837498182@qq.com",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户登录"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:33:57.702Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960904889_1mht",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "admin_login",
+    "detail": {
+      "type": "admin_login",
+      "payload": {
+        "email": "18363623082@qq.com",
+        "source": "platform_user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:35:04.889Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960905184_jamm",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:35:05.184Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960905431_xi5n",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:35:05.431Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960910559_hcmk",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 5,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:35:10.559Z",
+    "status": "success",
+    "duration": 5
+  },
+  {
+    "id": "sel_1779960910631_ykdx",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 5,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:35:10.631Z",
+    "status": "success",
+    "duration": 5
+  },
+  {
+    "id": "sel_1779960920550_6epg",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-28T09:35:20.550Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779960920639_80g1",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "preview": "用户登录：3837498182@qq.com",
+        "keyword": "用户登录：3837498182@qq.com",
+        "title": "用户登录：3837498182@qq.com",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户登录"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:35:20.639Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961005729_jeyc",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "admin_login",
+    "detail": {
+      "type": "admin_login",
+      "payload": {
+        "email": "18363623082@qq.com",
+        "source": "platform_user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:36:45.729Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961006121_6mqh",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:36:46.122Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961006540_sauk",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:36:46.540Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961015989_0ee1",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 10,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:36:55.989Z",
+    "status": "success",
+    "duration": 10
+  },
+  {
+    "id": "sel_1779961016061_n1kt",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 10,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:36:56.061Z",
+    "status": "success",
+    "duration": 10
+  },
+  {
+    "id": "sel_1779961022611_llxw",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-28T09:37:02.611Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961022793_dhog",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "preview": "用户登录：3837498182@qq.com",
+        "keyword": "用户登录：3837498182@qq.com",
+        "title": "用户登录：3837498182@qq.com",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户登录"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:37:02.793Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961045073_y4f8",
+    "user_id": "1776096155583ciny",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "userId": "1776096155583ciny",
+        "email": "3837498182@qq.com",
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "question": "我遇到了合同纠纷问题，请帮我分析：",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-28T09:37:25.073Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961045186_vmbp",
+    "user_id": "guest",
+    "module": "consult",
+    "action": "ask",
+    "detail": {
+      "type": "ai_chat",
+      "payload": {
+        "preview": "我遇到了合同纠纷问题，请帮我分析：",
+        "keyword": "我遇到了合同纠纷问题，请帮我分析：",
+        "title": "我遇到了合同纠纷问题，请帮我分析：",
+        "riskLevel": "low",
+        "category": "contract",
+        "keywords": [
+          "合同纠纷",
+          "我遇到了合同",
+          "纠纷问题",
+          "请帮我分析"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:37:25.186Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961066414_qwlr",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "admin_login",
+    "detail": {
+      "type": "admin_login",
+      "payload": {
+        "email": "18363623082@qq.com",
+        "source": "platform_user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:37:46.414Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961066872_mk5l",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:37:46.872Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961066917_2hdv",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:37:46.917Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961093842_ltp3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 27,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:38:13.842Z",
+    "status": "success",
+    "duration": 27
+  },
+  {
+    "id": "sel_1779961104523_n40i",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 38,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:38:24.523Z",
+    "status": "success",
+    "duration": 38
+  },
+  {
+    "id": "sel_1779961104612_ahbp",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 38,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:38:24.612Z",
+    "status": "success",
+    "duration": 38
+  },
+  {
+    "id": "sel_1779961104808_eefc",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:38:24.808Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961105103_75gc",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:38:25.104Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961133051_gaoj",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 28,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:38:53.051Z",
+    "status": "success",
+    "duration": 28
+  },
+  {
+    "id": "sel_1779961323287_1u7f",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 218,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:42:03.287Z",
+    "status": "success",
+    "duration": 218
+  },
+  {
+    "id": "sel_1779961404731_2dsp",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 300,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:43:24.731Z",
+    "status": "success",
+    "duration": 300
+  },
+  {
+    "id": "sel_1779961472473_dg5j",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 368,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:44:32.473Z",
+    "status": "success",
+    "duration": 368
+  },
+  {
+    "id": "sel_1779961562332_h7tf",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 458,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:46:02.332Z",
+    "status": "success",
+    "duration": 458
+  },
+  {
+    "id": "sel_1779961562543_8n62",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 458,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:46:02.543Z",
+    "status": "success",
+    "duration": 458
+  },
+  {
+    "id": "sel_1779961562869_euww",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:46:02.869Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961563177_e2df",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:46:03.177Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961620656_dsq5",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 58,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:47:00.656Z",
+    "status": "success",
+    "duration": 58
+  },
+  {
+    "id": "sel_1779961694058_8dkx",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 131,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:48:14.058Z",
+    "status": "success",
+    "duration": 131
+  },
+  {
+    "id": "sel_1779961801827_59l2",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 239,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:50:01.828Z",
+    "status": "success",
+    "duration": 239
+  },
+  {
+    "id": "sel_1779961801914_cfz3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 239,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:50:01.914Z",
+    "status": "success",
+    "duration": 239
+  },
+  {
+    "id": "sel_1779961802209_l9j1",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:50:02.209Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961802513_yxgo",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:50:02.513Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779961808345_lhe5",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 6,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:50:08.345Z",
+    "status": "success",
+    "duration": 6
+  },
+  {
+    "id": "sel_1779962020915_1s5k",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 219,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:53:40.915Z",
+    "status": "success",
+    "duration": 219
+  },
+  {
+    "id": "sel_1779962054203_b3dw",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 252,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:54:14.203Z",
+    "status": "success",
+    "duration": 252
+  },
+  {
+    "id": "sel_1779962054615_x9eo",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 252,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:54:14.615Z",
+    "status": "success",
+    "duration": 252
+  },
+  {
+    "id": "sel_1779962054643_aikb",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:54:14.643Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779962054874_4shm",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:54:14.874Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779962126785_zjq3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 72,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:55:26.785Z",
+    "status": "success",
+    "duration": 72
+  },
+  {
+    "id": "sel_1779962236936_vtg5",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 182,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:57:16.936Z",
+    "status": "success",
+    "duration": 182
+  },
+  {
+    "id": "sel_1779962283160_xp6n",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 229,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:58:03.160Z",
+    "status": "success",
+    "duration": 229
+  },
+  {
+    "id": "sel_1779962394054_w2r3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 340,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:59:54.054Z",
+    "status": "success",
+    "duration": 340
+  },
+  {
+    "id": "sel_1779962394114_3wzo",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 340,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:59:54.114Z",
+    "status": "success",
+    "duration": 340
+  },
+  {
+    "id": "sel_1779962394331_qwmi",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T09:59:54.331Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779962394630_30mm",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T09:59:54.630Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779962452503_o0x8",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 58,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:00:52.504Z",
+    "status": "success",
+    "duration": 58
+  },
+  {
+    "id": "sel_1779962522718_f15x",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 128,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:02:02.718Z",
+    "status": "success",
+    "duration": 128
+  },
+  {
+    "id": "sel_1779963201431_45y2",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 807,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:13:21.431Z",
+    "status": "success",
+    "duration": 807
+  },
+  {
+    "id": "sel_1779963201646_vt01",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 807,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:13:21.646Z",
+    "status": "success",
+    "duration": 807
+  },
+  {
+    "id": "sel_1779963202380_378q",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:13:22.380Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963202532_ljqd",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:13:22.533Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963212714_433k",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 11,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:13:32.714Z",
+    "status": "success",
+    "duration": 11
+  },
+  {
+    "id": "sel_1779963282692_5byv",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 81,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:14:42.692Z",
+    "status": "success",
+    "duration": 81
+  },
+  {
+    "id": "sel_1779963333156_d5bq",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 131,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:15:33.156Z",
+    "status": "success",
+    "duration": 131
+  },
+  {
+    "id": "sel_1779963333220_lpaf",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 131,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:15:33.220Z",
+    "status": "success",
+    "duration": 131
+  },
+  {
+    "id": "sel_1779963341683_lbe7",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-28T10:15:41.683Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963341801_15aq",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "preview": "用户登录：3837498182@qq.com",
+        "keyword": "用户登录：3837498182@qq.com",
+        "title": "用户登录：3837498182@qq.com",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户登录"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:15:41.801Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963433892_kln1",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "admin_login",
+    "detail": {
+      "type": "admin_login",
+      "payload": {
+        "email": "18363623082@qq.com",
+        "source": "platform_user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:17:13.892Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963434786_8m6l",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:17:14.786Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963434821_q97n",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:17:14.821Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963451059_c9lz",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 17,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:17:31.059Z",
+    "status": "success",
+    "duration": 17
+  },
+  {
+    "id": "sel_1779963486221_j99n",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 52,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:18:06.221Z",
+    "status": "success",
+    "duration": 52
+  },
+  {
+    "id": "sel_1779963506057_of6o",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 72,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:18:26.057Z",
+    "status": "success",
+    "duration": 72
+  },
+  {
+    "id": "sel_1779963506119_i615",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 72,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:18:26.119Z",
+    "status": "success",
+    "duration": 72
+  },
+  {
+    "id": "sel_1779963506649_dg4v",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:18:26.649Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963506989_fp0y",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:18:26.989Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963544814_2tqq",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 38,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:19:04.814Z",
+    "status": "success",
+    "duration": 38
+  },
+  {
+    "id": "sel_1779963564031_dkm7",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 58,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:19:24.031Z",
+    "status": "success",
+    "duration": 58
+  },
+  {
+    "id": "sel_1779963576916_t7zw",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 70,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:19:36.916Z",
+    "status": "success",
+    "duration": 70
+  },
+  {
+    "id": "sel_1779963645721_fqu8",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 139,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:20:45.721Z",
+    "status": "success",
+    "duration": 139
+  },
+  {
+    "id": "sel_1779963675951_k454",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 170,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:21:15.951Z",
+    "status": "success",
+    "duration": 170
+  },
+  {
+    "id": "sel_1779963757108_8z5i",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 251,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:22:37.108Z",
+    "status": "success",
+    "duration": 251
+  },
+  {
+    "id": "sel_1779963922317_nq5t",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 416,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:25:22.317Z",
+    "status": "success",
+    "duration": 416
+  },
+  {
+    "id": "sel_1779963988149_ww03",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:26:28.149Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779963988208_dntu",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:26:28.208Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964009301_93zd",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 21,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:26:49.301Z",
+    "status": "success",
+    "duration": 21
+  },
+  {
+    "id": "sel_1779964305748_rmzr",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 318,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:31:45.748Z",
+    "status": "success",
+    "duration": 318
+  },
+  {
+    "id": "sel_1779964344834_k4lx",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 357,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:32:24.834Z",
+    "status": "success",
+    "duration": 357
+  },
+  {
+    "id": "sel_1779964344938_i80h",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 357,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:32:24.938Z",
+    "status": "success",
+    "duration": 357
+  },
+  {
+    "id": "sel_1779964345549_1vog",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:32:25.549Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964345598_3i75",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:32:25.598Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964358861_itxx",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 14,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:32:38.861Z",
+    "status": "success",
+    "duration": 14
+  },
+  {
+    "id": "sel_1779964358928_fs2z",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 14,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:32:38.928Z",
+    "status": "success",
+    "duration": 14
+  },
+  {
+    "id": "sel_1779964359487_ffrj",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:32:39.487Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964359589_uwe3",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:32:39.589Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964386650_ojlb",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 27,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:33:06.650Z",
+    "status": "success",
+    "duration": 27
+  },
+  {
+    "id": "sel_1779964597130_nx6o",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 238,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:36:37.130Z",
+    "status": "success",
+    "duration": 238
+  },
+  {
+    "id": "sel_1779964597273_s0ue",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 238,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:36:37.274Z",
+    "status": "success",
+    "duration": 238
+  },
+  {
+    "id": "sel_1779964598034_q7jx",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:36:38.034Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964598088_hjs3",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:36:38.088Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964605386_jnau",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 8,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:36:45.386Z",
+    "status": "success",
+    "duration": 8
+  },
+  {
+    "id": "sel_1779964755604_3nhj",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 158,
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:39:15.604Z",
+    "status": "success",
+    "duration": 158
+  },
+  {
+    "id": "sel_1779964761361_gzq1",
+    "user_id": "1776096155583ciny",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "email": "3837498182@qq.com",
+        "userId": "1776096155583ciny",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": "内蒙古"
+      }
+    },
+    "timestamp": "2026-05-28T10:39:21.361Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964761505_sm6g",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "login",
+    "detail": {
+      "type": "user_login",
+      "payload": {
+        "preview": "用户登录：3837498182@qq.com",
+        "keyword": "用户登录：3837498182@qq.com",
+        "title": "用户登录：3837498182@qq.com",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户登录"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:39:21.505Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964761902_8rpx",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "knowledge.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:39:21.902Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964761930_m19r",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「资料库」页面",
+        "keyword": "用户进入「资料库」页面",
+        "title": "用户进入「资料库」页面",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "资料库",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:39:21.930Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964770615_isog",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "chat.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:39:30.615Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964770667_s2lf",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "preview": "用户进入「法律咨询」页面",
+        "keyword": "用户进入「法律咨询」页面",
+        "title": "用户进入「法律咨询」页面",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "用户进入",
+          "法律咨询",
+          "页面"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:39:30.667Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779964771017_rv65",
+    "user_id": "guest",
+    "module": "system",
+    "action": "file_upload",
+    "detail": {
+      "type": "file_upload",
+      "payload": {
+        "preview": "屏幕截图 2026-05-24 162845.png",
+        "keyword": "屏幕截图 2026-05-24 162845.png",
+        "title": "屏幕截图 2026-05-24 162845.png",
+        "riskLevel": "low",
+        "category": "other",
+        "keywords": [
+          "屏幕截图"
+        ],
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:39:31.017Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965284781_vkdi",
+    "user_id": "guest",
+    "module": "auth",
+    "action": "admin_login",
+    "detail": {
+      "type": "admin_login",
+      "payload": {
+        "email": "18363623082@qq.com",
+        "source": "platform_user",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:48:04.781Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965286340_nxf2",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "ip": "::1",
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:48:06.340Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965286919_xcf6",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:48:06.919Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965295140_zqoz",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 10,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:48:15.140Z",
+    "status": "success",
+    "duration": 10
+  },
+  {
+    "id": "sel_1779965307129_cowh",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 22,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:48:27.129Z",
+    "status": "success",
+    "duration": 22
+  },
+  {
+    "id": "sel_1779965391525_nmn3",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 106,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:49:51.525Z",
+    "status": "success",
+    "duration": 106
+  },
+  {
+    "id": "sel_1779965662206_i00v",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 377,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:54:22.206Z",
+    "status": "success",
+    "duration": 377
+  },
+  {
+    "id": "sel_1779965662990_8mil",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 377,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:54:22.990Z",
+    "status": "success",
+    "duration": 377
+  },
+  {
+    "id": "sel_1779965663591_lfj5",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "ip": "::1",
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:54:23.591Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965664002_2xpi",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:54:24.002Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965671806_9iws",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 9,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:54:31.806Z",
+    "status": "success",
+    "duration": 9
+  },
+  {
+    "id": "sel_1779965702657_hxh1",
+    "user_id": "guest",
+    "module": "system",
+    "action": "admin_code_login",
+    "detail": {
+      "type": "admin_code_login",
+      "payload": {
+        "email": "admin@fayi.local",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T10:55:02.657Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779965760299_apmv",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 98,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:56:00.299Z",
+    "status": "success",
+    "duration": 98
+  },
+  {
+    "id": "sel_1779965792128_9sxm",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 129,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:56:32.128Z",
+    "status": "success",
+    "duration": 129
+  },
+  {
+    "id": "sel_1779965815007_9rbq",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1217,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:56:55.007Z",
+    "status": "success",
+    "duration": 1217
+  },
+  {
+    "id": "sel_1779965818096_h81o",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1220,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:56:58.096Z",
+    "status": "success",
+    "duration": 1220
+  },
+  {
+    "id": "sel_1779965835037_o44b",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1237,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T10:57:15.038Z",
+    "status": "success",
+    "duration": 1237
+  },
+  {
+    "id": "sel_1779966805563_a7uf",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 2208,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:13:25.572Z",
+    "status": "success",
+    "duration": 2208
+  },
+  {
+    "id": "sel_1779966806840_w485",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 2208,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:13:26.840Z",
+    "status": "success",
+    "duration": 2208
+  },
+  {
+    "id": "sel_1779966807585_ilzm",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "ip": "::1",
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:13:27.585Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779966807931_74p5",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T11:13:27.931Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779966887239_5268",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 80,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:14:47.239Z",
+    "status": "success",
+    "duration": 80
+  },
+  {
+    "id": "sel_1779966920927_be8e",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 114,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:15:20.927Z",
+    "status": "success",
+    "duration": 114
+  },
+  {
+    "id": "sel_1779967027811_b66u",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 221,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:17:07.811Z",
+    "status": "success",
+    "duration": 221
+  },
+  {
+    "id": "sel_1779967079788_4ym4",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 273,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:17:59.788Z",
+    "status": "success",
+    "duration": 273
+  },
+  {
+    "id": "sel_1779967084627_vrrt",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 278,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:18:04.627Z",
+    "status": "success",
+    "duration": 278
+  },
+  {
+    "id": "sel_1779967274856_laaw",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1612,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:21:14.856Z",
+    "status": "success",
+    "duration": 1612
+  },
+  {
+    "id": "sel_1779967411945_cmpy",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 605,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:23:31.945Z",
+    "status": "success",
+    "duration": 605
+  },
+  {
+    "id": "sel_1779967418436_fnm6",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 612,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:23:38.436Z",
+    "status": "success",
+    "duration": 612
+  },
+  {
+    "id": "sel_1779967452842_rsxh",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 646,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:24:12.842Z",
+    "status": "success",
+    "duration": 646
+  },
+  {
+    "id": "sel_1779967469734_gsb0",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1806,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:24:29.734Z",
+    "status": "success",
+    "duration": 1806
+  },
+  {
+    "id": "sel_1779967479187_ukpf",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 672,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:24:39.187Z",
+    "status": "success",
+    "duration": 672
+  },
+  {
+    "id": "sel_1779967562471_m4so",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 756,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:26:02.471Z",
+    "status": "success",
+    "duration": 756
+  },
+  {
+    "id": "sel_1779967601219_375w",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 794,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:26:41.219Z",
+    "status": "success",
+    "duration": 794
+  },
+  {
+    "id": "sel_1779967629009_s7bk",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 822,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:27:09.009Z",
+    "status": "success",
+    "duration": 822
+  },
+  {
+    "id": "sel_1779967733120_36gv",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 926,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:28:53.120Z",
+    "status": "success",
+    "duration": 926
+  },
+  {
+    "id": "sel_1779967785882_tafs",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 979,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:29:45.882Z",
+    "status": "success",
+    "duration": 979
+  },
+  {
+    "id": "sel_1779967786634_gk2n",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 979,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:29:46.634Z",
+    "status": "success",
+    "duration": 979
+  },
+  {
+    "id": "sel_1779967787218_ep4t",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "ip": "::1",
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:29:47.218Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779967787670_7ac5",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T11:29:47.670Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779967799949_o46t",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 13,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:29:59.949Z",
+    "status": "success",
+    "duration": 13
+  },
+  {
+    "id": "sel_1779968876979_t6ve",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1091,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:47:56.979Z",
+    "status": "success",
+    "duration": 1091
+  },
+  {
+    "id": "sel_1779968955042_s4qu",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1168,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:49:15.042Z",
+    "status": "success",
+    "duration": 1168
+  },
+  {
+    "id": "sel_1779968957327_qwen",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 1169,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:49:17.327Z",
+    "status": "success",
+    "duration": 1169
+  },
+  {
+    "id": "sel_1779968959259_2i3k",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "ip": "::1",
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:49:19.259Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779968960103_fmd8",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T11:49:20.103Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779968963972_l35c",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 7,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:49:23.972Z",
+    "status": "success",
+    "duration": 7
+  },
+  {
+    "id": "sel_1779968998629_cfmu",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 42,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:49:58.629Z",
+    "status": "success",
+    "duration": 42
+  },
+  {
+    "id": "sel_1779969129768_bkwz",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 173,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:52:09.768Z",
+    "status": "success",
+    "duration": 173
+  },
+  {
+    "id": "sel_1779969130629_sx6w",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 173,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:52:10.629Z",
+    "status": "success",
+    "duration": 173
+  },
+  {
+    "id": "sel_1779969131350_eeh4",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "访问页面：admin-dashboard.html",
+        "duration": 0,
+        "ip": "::1",
+        "keyword": "访问页面：admin-dashboard.html",
+        "title": "访问页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "访问页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:52:11.350Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779969131978_7q2g",
+    "user_id": "guest",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "category": "other",
+        "keywords": [],
+        "riskLevel": "mid",
+        "region": null
+      }
+    },
+    "timestamp": "2026-05-28T11:52:11.978Z",
+    "status": "success",
+    "duration": 0
+  },
+  {
+    "id": "sel_1779969139995_pjsm",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 10,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:52:19.995Z",
+    "status": "success",
+    "duration": 10
+  },
+  {
+    "id": "sel_1779969250401_rlrk",
+    "user_id": "manager1",
+    "module": "page",
+    "action": "visit",
+    "detail": {
+      "type": "page_visit",
+      "payload": {
+        "page": "admin-dashboard.html",
+        "userId": "manager1",
+        "preview": "离开页面：admin-dashboard.html",
+        "duration": 120,
+        "ip": "::1",
+        "keyword": "离开页面：admin-dashboard.html",
+        "title": "离开页面：admin-dashboard.html",
+        "riskLevel": "mid",
+        "category": "other",
+        "keywords": [
+          "离开页面"
+        ],
+        "region": "河北"
+      }
+    },
+    "timestamp": "2026-05-28T11:54:10.401Z",
+    "status": "success",
+    "duration": 120
   }
 ]

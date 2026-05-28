@@ -1,0 +1,12 @@
+{
+  "sessions": [
+    {
+      "userId": "guest",
+      "userName": "manager1",
+      "ip": "::1",
+      "sourcePage": "admin-dashboard.html",
+      "at": 1779969280537,
+      "connectionId": "web_guest"
+    }
+  ]
+}

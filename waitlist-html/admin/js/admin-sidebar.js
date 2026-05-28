@@ -2,7 +2,9 @@
  * 管理端左侧栏 · 数据绑定与交互
  */
 (function () {
-  var HEALTH_URL = 'http://localhost:3002/api/admin/datav/health';
+  var HEALTH_URL = (window.FayiAdminApi && FayiAdminApi.getApiBase
+    ? FayiAdminApi.getApiBase()
+    : 'http://127.0.0.1:3002/api/admin') + '/datav/health';
   var REFRESH_MS = 12000;
 
   function $(id) { return document.getElementById(id); }
@@ -62,16 +64,20 @@
     if (!data) return;
     var svc = data.services || {};
     setServiceStatus('gpt', svc.gpt || 'online');
-    setServiceStatus('ocr', svc.ocr || 'online');
     setServiceStatus('vector', svc.vector || 'online');
-    setServiceStatus('redis', svc.redis || 'online');
+    var cacheState = svc.cache || svc.redis || 'online';
+    setServiceStatus('redis', cacheState === 'memory' ? 'online' : cacheState);
     var sys = data.system || {};
     setBar('adm-cpu-bar', 'adm-cpu-val', sys.cpuPercent || 0);
     setBar('adm-mem-bar', 'adm-mem-val', sys.memoryPercent || 0);
-    var apiMs = sys.responseMs || 420;
+    var apiMs = sys.responseMs || 0;
     setBar('adm-api-bar', 'adm-api-val', Math.min(100, apiMs / 10), apiMs + 'ms');
-    var online = sys.onlineUsers || 1;
-    setBar('adm-online-bar', 'adm-online-val', Math.min(100, online * 12), String(online));
+    var onlineEl = $('adm-online-val');
+    if (onlineEl) onlineEl.textContent = String(sys.onlineUsers != null ? sys.onlineUsers : 0);
+    var sysState = $('adm-sys-state');
+    if (sysState) {
+      sysState.textContent = (svc.gpt === 'offline' || svc.vector === 'offline') ? '观察中' : '运行中';
+    }
     var syncEl = $('adm-sync-time');
     if (syncEl && data.time) syncEl.textContent = fmtLogin(data.time);
   }
@@ -106,7 +112,6 @@
       })
       .catch(function () {
         setServiceStatus('gpt', 'offline');
-        setServiceStatus('ocr', 'offline');
         setServiceStatus('vector', 'offline');
         setServiceStatus('redis', 'offline');
       });
@@ -118,8 +123,9 @@
       renderNotify(data);
       if (data.stats) {
         var s = data.stats;
-        setBar('adm-online-bar', 'adm-online-val', Math.min(100, (s.onlineUsers || 1) * 12), String(s.onlineUsers || 1));
-        var apiMs = s.avgResponseMs || 420;
+        var onlineEl = $('adm-online-val');
+        if (onlineEl) onlineEl.textContent = String(s.onlineUsers != null ? s.onlineUsers : 0);
+        var apiMs = s.avgResponseMs || 0;
         setBar('adm-api-bar', 'adm-api-val', Math.min(100, apiMs / 10), apiMs + 'ms');
       }
       if (window.AdminShell && AdminShell.ingestActivity) {

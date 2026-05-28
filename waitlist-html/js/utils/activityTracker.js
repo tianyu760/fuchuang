@@ -6,6 +6,7 @@
   var MAX_LOGS = 8000;
   var SYNC_API = 'http://localhost:3002/api/admin/datav/operation-log';
   var VISIT_API = 'http://localhost:3002/api/admin/track/visit';
+  var HEARTBEAT_API = 'http://localhost:3002/api/admin/track/heartbeat';
 
   var TYPE_TO_SERVER = {
     login: 'user_login',
@@ -153,12 +154,32 @@
     });
   }
 
+  function sendHeartbeat() {
+    var u = getUser();
+    var body = {
+      userId: (u && u.id) || (u && u.email) || 'guest',
+      userName: username(),
+      page: currentPage || (location.pathname.split('/').pop() || 'index.html'),
+      connectionId: 'web_' + (u && u.id ? u.id : 'guest')
+    };
+    try {
+      fetch(HEARTBEAT_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+        body: JSON.stringify(body)
+      }).catch(function () {});
+    } catch (e) { /* ignore */ }
+  }
+
   function initAutoPage() {
     if (global.FayiPageTracker) return;
     trackPageView();
+    sendHeartbeat();
+    window.setInterval(sendHeartbeat, 30000);
     global.addEventListener('beforeunload', trackPageLeave);
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'hidden') trackPageLeave();
+      else sendHeartbeat();
     });
   }
 

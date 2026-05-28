@@ -20,7 +20,8 @@
     "nodemailer": "^6.10.1",
     "openai": "^4.28.0",
     "pdf-parse": "^1.1.1",
-    "tencentcloud-sdk-nodejs": "^4.1.216"
+    "tencentcloud-sdk-nodejs": "^4.1.216",
+    "ws": "^8.21.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"

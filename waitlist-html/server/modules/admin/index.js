@@ -153,14 +153,26 @@ router.get('/auth/check-email', function (req, res) {
 });
 
 router.get('/dashboard/overview', auth.requireAdmin, function (req, res) {
+  const range = req.query.range || 'week';
   res.json({
     success: true,
-    data: {
-      stats: store.statsOverview(),
-      charts: store.chartSeries(7),
-      categories: store.categoryBreakdown()
-    }
+    data: store.buildRealtimePayload(lawStore, range)
   });
+});
+
+router.get('/dashboard/stats', auth.requireAdmin, function (req, res) {
+  res.json({ success: true, data: store.statsOverview() });
+});
+
+router.get('/dashboard/charts', auth.requireAdmin, function (req, res) {
+  const range = req.query.range || req.query.period || 'week';
+  res.json({ success: true, data: store.chartSeries(range) });
+});
+
+router.get('/dashboard/feed', auth.requireAdmin, function (req, res) {
+  const limit = Math.min(100, parseInt(req.query.limit, 10) || 40);
+  const metrics = require('./admin-metrics');
+  res.json({ success: true, data: metrics.behaviorFeed(limit) });
 });
 
 router.get('/users', auth.requireAdmin, function (req, res) {
@@ -273,6 +285,7 @@ router.get('/ocr', auth.requireAdmin, function (req, res) {
     search: req.query.search,
     status: req.query.status,
     ocrType: req.query.ocrType,
+    riskLevel: req.query.riskLevel,
     dateFrom: req.query.dateFrom,
     dateTo: req.query.dateTo
   });
@@ -322,36 +335,6 @@ router.post('/ocr/:id/ai-correct', auth.requireAdmin, async function (req, res) 
   res.json({ success: true, data: { correctedText: corrected, record: updated } });
 });
 
-router.get('/regulations', auth.requireAdmin, function (req, res) {
-  res.json({ success: true, data: store.readJson(store.FILES.regulations, []) });
-});
-
-router.post('/regulations', auth.requireAdmin, function (req, res) {
-  const { title, category, content } = req.body || {};
-  if (!title) return res.status(400).json({ success: false, message: '标题不能为空' });
-  const list = store.readJson(store.FILES.regulations, []);
-  const item = { id: 'law_' + Date.now(), title: String(title).trim(), category: category || '其他', content: content || '', updatedAt: new Date().toISOString() };
-  list.unshift(item);
-  store.writeJson(store.FILES.regulations, list);
-  res.json({ success: true, data: item });
-});
-
-router.put('/regulations/:id', auth.requireAdmin, function (req, res) {
-  const list = store.readJson(store.FILES.regulations, []);
-  const idx = list.findIndex(function (r) { return r.id === req.params.id; });
-  if (idx < 0) return res.status(404).json({ success: false, message: '不存在' });
-  Object.assign(list[idx], req.body || {}, { updatedAt: new Date().toISOString() });
-  store.writeJson(store.FILES.regulations, list);
-  res.json({ success: true, data: list[idx] });
-});
-
-router.delete('/regulations/:id', auth.requireAdmin, function (req, res) {
-  let list = store.readJson(store.FILES.regulations, []);
-  list = list.filter(function (r) { return r.id !== req.params.id; });
-  store.writeJson(store.FILES.regulations, list);
-  res.json({ success: true });
-});
-
 if (lawStore) {
   router.get('/law-education/articles', auth.requireAdmin, function (req, res) {
     res.json({ success: true, data: lawStore.listArticles({ search: req.query.search }) });
@@ -374,22 +357,41 @@ if (lawStore) {
   });
 }
 
-router.get('/logs', auth.requireAdmin, function (req, res) {
-  const page = Math.max(1, parseInt(req.query.page, 10) || 1);
-  const pageSize = Math.min(100, parseInt(req.query.pageSize, 10) || 20);
-  const rows = store.listLogs({ type: req.query.type, search: req.query.search });
-  const total = rows.length;
-  const start = (page - 1) * pageSize;
-  res.json({
-    success: true,
-    data: {
-      list: rows.slice(start, start + pageSize).map(function (e) {
-        return { id: e.id, type: e.type, payload: e.payload, createdAt: e.createdAt, message: store.formatEventMessage(e) };
-      }),
-      total, page, pageSize
-    }
-  });
-});
+function handleSystemLogs(req, res) {
+  try {
+    const page = Math.max(1, parseInt(req.query.page, 10) || 1);
+    const pageSize = Math.min(100, parseInt(req.query.pageSize, 10) || 20);
+    const rows = store.listLogs({ type: req.query.type, search: req.query.search });
+    const total = rows.length;
+    const start = (page - 1) * pageSize;
+    res.json({
+      success: true,
+      data: {
+        list: rows.slice(start, start + pageSize).map(function (e) {
+          return {
+            id: e.id,
+            type: e.type,
+            module: e.module || 'system',
+            action: e.action || '',
+            status: e.status || 'success',
+            payload: e.payload,
+            createdAt: e.createdAt,
+            message: store.formatEventMessage(e)
+          };
+        }),
+        total,
+        page,
+        pageSize
+      }
+    });
+  } catch (err) {
+    console.error('[admin/system-logs]', err.message);
+    res.status(500).json({ success: false, message: err.message || '读取系统日志失败' });
+  }
+}
+
+router.get('/system-logs', auth.requireAdmin, handleSystemLogs);
+router.get('/logs', auth.requireAdmin, handleSystemLogs);
 
 router.get('/datav/health', function (req, res) {
   var os = require('os');
@@ -402,20 +404,24 @@ router.get('/datav/health', function (req, res) {
     success: true,
     service: 'fayi-datav',
     port: 3002,
-    endpoints: ['/api/admin/datav/realtime', '/api/admin/datav/stream'],
+    endpoints: [
+      '/api/admin/datav/realtime',
+      '/api/admin/datav/stream',
+      '/api/admin/ws'
+    ],
     revision: store.getDataRevision(),
     time: new Date().toISOString(),
     services: {
       gpt: 'online',
-      ocr: stats.ocrSuccessRate >= 60 ? 'online' : 'degraded',
+      ocr: (stats.ocrSuccessRate || 0) >= 60 ? 'online' : 'degraded',
       vector: 'online',
-      redis: 'online'
+      cache: 'memory'
     },
     system: {
       cpuPercent: cpuPct,
       memoryPercent: memPct,
-      responseMs: stats.avgResponseMs || 420,
-      onlineUsers: stats.onlineUsers || 1
+      responseMs: stats.avgResponseMs || 0,
+      onlineUsers: stats.onlineUsers || 0
     }
   });
 });
@@ -451,13 +457,38 @@ router.post('/datav/bump', function (req, res) {
   res.json({ success: true, revision: store.getDataRevision() });
 });
 
+function clientIp(req) {
+  return (req.headers['x-forwarded-for'] || '').split(',')[0].trim() ||
+    req.socket.remoteAddress || '';
+}
+
 router.post('/track/visit', function (req, res) {
-  store.bumpVisit((req.body && req.body.page) || '');
+  const page = (req.body && req.body.page) || '';
+  store.bumpVisit(page, {
+    ip: clientIp(req),
+    page: page
+  });
   res.json({ success: true });
+});
+
+router.post('/track/heartbeat', function (req, res) {
+  const body = req.body || {};
+  const info = store.touchHeartbeat({
+    userId: body.userId || body.user_id || 'guest',
+    userName: body.userName || body.email || '',
+    ip: clientIp(req),
+    sourcePage: body.page || body.sourcePage || '',
+    connectionId: body.connectionId || ''
+  });
+  res.json({ success: true, data: info });
 });
 
 router.post('/datav/operation-log', function (req, res) {
   const body = req.body || {};
+  body.meta = Object.assign({}, body.meta || {}, {
+    ip: clientIp(req),
+    page: (body.meta && body.meta.page) || ''
+  });
   const row = store.logOperationFromClient(body);
   res.json({ success: true, id: row && row.id });
 });
@@ -471,3 +502,7 @@ router.post('/datav/pufa-read', function (req, res) {
 module.exports = router;
 module.exports.store = store;
 module.exports.auth = auth;
+
+const realtimeHub = require('./admin-realtime-hub');
+store.setRealtimeHub(realtimeHub);
+module.exports.realtimeHub = realtimeHub;

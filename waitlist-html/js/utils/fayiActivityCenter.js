@@ -3,9 +3,12 @@
  */
 (function (global) {
   var REALTIME_URL = 'http://localhost:3002/api/admin/datav/realtime';
+  var WS_URL = 'ws://localhost:3002/api/admin/ws';
   var cache = null;
   var cacheAt = 0;
   var CACHE_MS = 4000;
+  var ws = null;
+  var wsListeners = [];
 
   var CAT_LABELS = {
     labor: '劳动纠纷',
@@ -177,6 +180,9 @@
       stats: stats,
       events: events,
       charts30: data.charts30 || data.charts || chartSeriesFromEvents(events, 30),
+      userGrowth30: data.userGrowth30 ||
+        (data.charts30 && data.charts30.userGrowth) ||
+        chartSeriesFromEvents(events, 30),
       charts: data.charts || chartSeriesFromEvents(events, 7),
       categories: data.categories && data.categories.length
         ? data.categories
@@ -187,18 +193,19 @@
       risks: data.risks && data.risks.length
         ? data.risks
         : riskFromEvents(events),
-      feed: formatFeed(events, 40),
+      feed: formatFeed(data.feed, events, 40),
       moduleUsage: data.moduleUsage && data.moduleUsage.length
         ? data.moduleUsage
         : moduleUsageFromEvents(events),
       hourlyHeatmap: hourlyFromEvents(events),
       userGrowth30: userGrowthFromEvents(events, 30),
-      regionTop: regionFromEvents(events),
-      dwellSeries: dwellFromEvents(events),
-      funnel: funnelFromEvents(events),
-      riskEvents: riskEventsList(events, 12),
-      insights: [],
-      portrait: userPortrait(events, stats)
+      dwellSeries: data.dwellSeries && data.dwellSeries.values
+        ? data.dwellSeries
+        : dwellFromEvents(events),
+      riskEvents: (data.riskEvents && data.riskEvents.length)
+        ? data.riskEvents
+        : riskEventsList(events, 12),
+      insights: data.insights || []
     });
   }
 
@@ -215,7 +222,7 @@
       return (e.payload && e.payload.riskLevel) === 'high';
     }).length;
     return {
-      onlineUsers: base.onlineUsers || 1,
+      onlineUsers: base.onlineUsers != null ? base.onlineUsers : 0,
       todayActive: countUniqueUsers(events.filter(function (e) { return dayKey(e.createdAt) === today; })),
       newUsersWeek: newWeek || base.newUsersWeek || 0,
       consultToday: countTypeToday(events, ['ai_chat', 'ai_case']) || base.consultToday || 0,
@@ -223,8 +230,8 @@
       documentToday: countTypeToday(events, ['ai_wenshi']) || base.documentToday || 0,
       ocrToday: countTypeToday(events, ['ocr']) || base.ocrToday || 0,
       systemStatus: base.systemStatus || 'healthy',
-      avgResponseMs: base.avgResponseMs || 420,
-      riskAlerts: riskHigh || base.riskHigh || 0,
+      avgResponseMs: base.avgResponseMs || 0,
+      riskAlerts: base.riskAlerts != null ? base.riskAlerts : (riskHigh || base.riskHigh || 0),
       totalUsers: base.totalUsers || 0,
       aiCallsToday: base.aiCallsToday || 0
     };
@@ -236,7 +243,7 @@
       var id = (e.payload && (e.payload.userId || e.payload.email)) || '';
       if (id) set[id] = 1;
     });
-    return Math.max(1, Object.keys(set).length);
+    return Object.keys(set).length;
   }
 
   function chartSeriesFromEvents(events, days) {
@@ -352,20 +359,6 @@
     return { labels: labels, values: values };
   }
 
-  function regionFromEvents(events) {
-    var provinces = [
-      '北京', '上海', '广东', '浙江', '江苏', '四川', '湖北', '山东', '河南', '福建'
-    ];
-    var freq = {};
-    events.forEach(function (e, i) {
-      var r = (e.payload && e.payload.region) || provinces[i % provinces.length];
-      freq[r] = (freq[r] || 0) + 1;
-    });
-    return Object.keys(freq).sort(function (a, b) { return freq[b] - freq[a]; })
-      .slice(0, 12)
-      .map(function (k) { return { name: k, value: freq[k] }; });
-  }
-
   function dwellFromEvents(events) {
     var labels = [];
     var values = [];
@@ -386,32 +379,42 @@
     return { labels: labels, values: values };
   }
 
-  function funnelFromEvents(events) {
-    var consult = events.filter(function (e) { return e.type === 'ai_chat' || e.type === 'ai_case'; }).length;
-    var reg = events.filter(function (e) { return e.type === 'ai_fagui'; }).length;
-    var doc = events.filter(function (e) { return e.type === 'ai_wenshi'; }).length;
-    return [
-      { name: '法律咨询', value: Math.max(consult, 1) },
-      { name: '法规检索', value: Math.max(reg, Math.floor(consult * 0.6)) },
-      { name: '文书生成', value: Math.max(doc, 1) }
-    ];
-  }
-
   function riskEventsList(events, limit) {
     return events.filter(function (e) {
       return (e.payload && e.payload.riskLevel) === 'high' ||
         /仲裁|违约|刑事|诈骗/.test(JSON.stringify(e.payload || {}));
     }).slice(-limit).reverse().map(function (e) {
+      var TYPE_LABEL = {
+        ai_chat: '法律咨询', ai_wenshi: '文书生成', ai_fagui: '法规检索',
+        ai_case: '案件分析', user_login: '用户登录', user_register: '用户注册'
+      };
+      var p = e.payload || {};
       return {
         id: e.id,
-        title: (e.payload && e.payload.preview) || e.type,
+        title: p.preview || p.title || TYPE_LABEL[e.type] || e.type,
         time: e.createdAt,
-        level: (e.payload && e.payload.riskLevel) || 'high'
+        level: p.riskLevel || 'high',
+        type: TYPE_LABEL[e.type] || e.type || '风险事件',
+        user: p.email || p.userId || '访客'
       };
     });
   }
 
-  function formatFeed(events, limit) {
+  function formatFeed(serverFeed, events, limit) {
+    if (serverFeed && serverFeed.length) {
+      return serverFeed.slice(0, limit).map(function (f) {
+        return {
+          id: f.id,
+          time: f.time,
+          message: f.message || '',
+          user: f.user,
+          ip: f.ip,
+          sourcePage: f.sourcePage,
+          result: f.result,
+          riskLevel: f.result === 'failed' ? 'high' : 'low'
+        };
+      });
+    }
     var TYPE_LABEL = {
       ai_chat: '法律咨询', ai_wenshi: '文书生成', ai_fagui: '法规检索',
       ocr: 'OCR', law_edu_visit: '普法浏览', user_login: '登录',
@@ -426,6 +429,7 @@
         id: e.id,
         time: e.createdAt,
         message: formatFeedMessage(e, msg, user),
+        user: user,
         riskLevel: p.riskLevel || 'low'
       };
     });
@@ -468,26 +472,37 @@
     if (s.consultToday > 0) {
       insights.push('今日平台已完成 ' + s.consultToday + ' 次法律咨询，服务链路运行正常。');
     }
-    if (data.portrait && data.portrait.peakHour) {
-      insights.push('用户活跃高峰出现在 ' + data.portrait.peakHour + ' 时段，可在此区间配置在线答疑资源。');
+    var heat = data.hourlyHeatmap || hourlyFromEvents([]);
+    var peakH = 0;
+    var peak = 0;
+    heat.forEach(function (v, i) { if (v > peak) { peak = v; peakH = i; } });
+    if (peak > 0) {
+      insights.push('用户活跃高峰出现在 ' + peakH + ':00 时段（共 ' + peak + ' 条行为记录）。');
     }
     if (s.riskAlerts > 0) {
       insights.push('当前有 ' + s.riskAlerts + ' 条高风险事件待关注，请在风险预警中心复核。');
-    }
-    if (data.funnel && data.funnel[0] && data.funnel[2]) {
-      var rate = data.funnel[2].value / Math.max(1, data.funnel[0].value);
-      insights.push('咨询转文书转化率约 ' + Math.round(rate * 100) + '%，' +
-        (rate < 0.2 ? '可优化文书入口引导。' : '转化表现良好。'));
     }
     return insights.length ? insights : ['暂无足够行为数据，请在前台产生真实操作后查看分析。'];
   }
 
   function load(force) {
     return fetchRealtime(force).then(function (data) {
-      data.insights = generateInsights(data);
+      if (!data.insights || !data.insights.length) {
+        data.insights = generateInsights(data);
+      }
       cache = data;
       return data;
     });
+  }
+
+  function loadStats(force) {
+    return load(force).then(function (data) {
+      return { stats: data.stats, insights: data.insights };
+    });
+  }
+
+  function loadCharts(force) {
+    return load(force);
   }
 
   function invalidate() {
@@ -495,9 +510,39 @@
     cacheAt = 0;
   }
 
+  function connectWebSocket(onData) {
+    if (!global.WebSocket) return;
+    try {
+      if (ws) { try { ws.close(); } catch (e) {} ws = null; }
+      ws = new WebSocket(WS_URL);
+      ws.onmessage = function (ev) {
+        try {
+          var json = JSON.parse(ev.data);
+          var payload = json.data || json;
+          if (!payload) return;
+          cache = mergePayload(payload, readLocal());
+          cacheAt = Date.now();
+          wsListeners.forEach(function (fn) { fn(cache); });
+          if (onData) onData(cache);
+        } catch (e) { /* ignore */ }
+      };
+      ws.onclose = function () {
+        window.setTimeout(function () { connectWebSocket(onData); }, 5000);
+      };
+    } catch (e) { /* ignore */ }
+  }
+
+  function onRealtime(fn) {
+    wsListeners.push(fn);
+    connectWebSocket(fn);
+  }
+
   global.FayiActivityCenter = {
     load: load,
+    loadStats: loadStats,
+    loadCharts: loadCharts,
     invalidate: invalidate,
+    onRealtime: onRealtime,
     getCached: function () { return cache; },
     CAT_LABELS: CAT_LABELS
   };

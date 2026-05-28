@@ -69,7 +69,7 @@
       var num = parseFloat((text && text.textContent) || el.textContent);
       if (!isNaN(num)) countUp(el, num, { suffix: '' });
     });
-    root.querySelectorAll('.adm-v3-metric__val, .ocr-stat-card__val').forEach(function (el) {
+    root.querySelectorAll('.adm-v3-metric__val').forEach(function (el) {
       if (el.getAttribute('data-count')) return;
       var num = parseFloat(el.textContent);
       if (!isNaN(num)) countUp(el, num);
@@ -94,12 +94,12 @@
     var sys = (h.system) || {};
     return [
       { label: '系统', value: s.systemStatus === 'healthy' ? '运行正常' : '观察中', live: true },
-      { label: '在线', value: (s.onlineUsers || 1) + ' 人' },
+      { label: '在线', value: (s.onlineUsers || 0) + ' 人' },
       { label: '今日咨询', value: (s.consultToday || 0) + ' 次' },
-      { label: 'OCR', value: (s.ocrToday || 0) + ' 次' },
+      { label: '法规检索', value: (s.faguiToday || 0) + ' 次' },
       { label: 'CPU', value: (sys.cpuPercent != null ? sys.cpuPercent : '—') + (sys.cpuPercent != null ? '%' : '') },
       { label: '内存', value: (sys.memPercent != null ? sys.memPercent : '—') + (sys.memPercent != null ? '%' : '') },
-      { label: '响应', value: (s.avgResponseMs || 420) + ' ms' },
+      { label: '响应', value: (s.avgResponseMs || 0) + ' ms' },
       { label: '同步', value: fmtTime(s.serverTime || new Date().toISOString()) }
     ];
   }
@@ -280,6 +280,25 @@
     });
   }
 
+  function pollHealth() {
+    var url = 'http://localhost:3002/api/admin/datav/health';
+    var req = global.FayiHttp
+      ? FayiHttp.get(url, { silent: true })
+      : fetch(url, { cache: 'no-store' }).then(function (r) { return r.json(); });
+    req.then(function (json) {
+      var sys = (json && json.system) || {};
+      var cached = global.FayiActivityCenter && FayiActivityCenter.getCached
+        ? FayiActivityCenter.getCached()
+        : null;
+      var stats = (cached && cached.stats) || {};
+      renderStatusBar(Object.assign({}, stats, {
+        avgResponseMs: sys.responseMs != null ? sys.responseMs : stats.avgResponseMs,
+        onlineUsers: sys.onlineUsers != null ? sys.onlineUsers : stats.onlineUsers,
+        serverTime: json.time
+      }), { system: sys });
+    }).catch(function () {});
+  }
+
   function pollActivity() {
     if (!global.FayiActivityCenter) return;
     FayiActivityCenter.load(true).then(ingestActivity).catch(function () {});
@@ -289,7 +308,9 @@
     bindUi();
     seedMessages();
     pollActivity();
-    notifyTimer = window.setInterval(pollActivity, 12000);
+    pollHealth();
+    notifyTimer = window.setInterval(pollActivity, 30000);
+    window.setInterval(pollHealth, 10000);
 
     document.querySelectorAll('[data-route-jump]').forEach(function (el) {
       el.addEventListener('click', function (e) {

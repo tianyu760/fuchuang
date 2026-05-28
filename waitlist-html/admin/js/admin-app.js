@@ -9,12 +9,9 @@
   var TITLES = {
     overview: '运营总览',
     users: '用户管理',
-    consultations: '法律咨询管理',
-    documents: '文书生成记录',
-    ocr: 'OCR 识别中心',
-    regulations: '法规库管理',
-    logs: '系统日志',
-    'law-education': '普法内容管理'
+    consultations: '法律咨询',
+    documents: '文书生成',
+    'law-education': '普法内容'
   };
 
   var CAT_LABELS = {
@@ -75,6 +72,7 @@
 
   function route() {
     var hash = (location.hash || '#overview').slice(1);
+    if (hash === 'regulations' || hash === 'risk' || hash === 'ocr' || hash === 'logs') hash = 'overview';
     if (!TITLES[hash]) hash = 'overview';
     state.route = hash;
     document.querySelectorAll('#adm-nav a').forEach(function (a) {
@@ -230,109 +228,6 @@
           $('doc-pg').appendChild(paginate(res.data.total, res.data.page, res.data.pageSize, load));
         });
       }
-      load(1);
-    },
-
-    ocr: function (root) {
-      if (global.AdminOcrCenter && AdminOcrCenter.mount) {
-        AdminOcrCenter.mount(root);
-        return;
-      }
-      root.innerHTML = '<p class="adm-error">OCR 模块未加载，请刷新页面。</p>';
-    },
-
-    regulations: function (root) {
-      root.innerHTML =
-        '<div class="adm-toolbar"><button class="adm-btn adm-btn--primary adm-btn--sm" id="reg-add">新增法规</button></div>' +
-        '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>标题</th><th>分类</th><th>更新</th><th>操作</th></tr></thead><tbody id="reg-tb"></tbody></table></div>' +
-        '<div id="reg-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:100;align-items:center;justify-content:center">' +
-        '<div class="adm-card" style="width:min(520px,92vw)"><h3 id="reg-modal-title">法规</h3>' +
-        '<div class="adm-field"><label>标题</label><input id="reg-title" class="adm-input"></div>' +
-        '<div class="adm-field"><label>分类</label><input id="reg-cat" class="adm-input"></div>' +
-        '<div class="adm-field"><label>内容</label><textarea id="reg-content" class="adm-input" rows="6"></textarea></div>' +
-        '<div style="display:flex;gap:10px;justify-content:flex-end"><button class="adm-btn adm-btn--ghost" id="reg-cancel">取消</button><button class="adm-btn adm-btn--primary" id="reg-save">保存</button></div></div></div>';
-      var editingId = null;
-      function openModal(item) {
-        editingId = item ? item.id : null;
-        $('reg-modal-title').textContent = item ? '编辑法规' : '新增法规';
-        $('reg-title').value = item ? item.title : '';
-        $('reg-cat').value = item ? item.category : '';
-        $('reg-content').value = item ? item.content : '';
-        $('reg-modal').style.display = 'flex';
-      }
-      function load() {
-        FayiAdminApi.regulations().then(function (res) {
-          var tb = $('reg-tb');
-          tb.innerHTML = '';
-          (res.data || []).forEach(function (r) {
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + r.title + '</td><td>' + (r.category || '') + '</td><td>' + (r.updatedAt || '').slice(0, 10) + '</td><td class="reg-act"></td>';
-            var ed = el('button', 'adm-btn adm-btn--ghost adm-btn--sm', '编辑');
-            ed.onclick = function () { openModal(r); };
-            var del = el('button', 'adm-btn adm-btn--danger adm-btn--sm', '删除');
-            del.style.marginLeft = '6px';
-            del.onclick = function () {
-              if (!confirm('删除该法规？')) return;
-              FayiAdminApi.deleteRegulation(r.id).then(load);
-            };
-            tr.querySelector('.reg-act').appendChild(ed);
-            tr.querySelector('.reg-act').appendChild(del);
-            tb.appendChild(tr);
-          });
-        });
-      }
-      $('reg-add').onclick = function () { openModal(null); };
-      $('reg-cancel').onclick = function () { $('reg-modal').style.display = 'none'; };
-      $('reg-save').onclick = function () {
-        var data = {
-          title: $('reg-title').value.trim(),
-          category: $('reg-cat').value.trim(),
-          content: $('reg-content').value
-        };
-        FayiAdminApi.saveRegulation(data, editingId).then(function () {
-          $('reg-modal').style.display = 'none';
-          load();
-        });
-      };
-      load();
-    },
-
-    logs: function (root) {
-      root.innerHTML =
-        '<div class="adm-toolbar"><input class="adm-input" style="max-width:240px" id="log-type" placeholder="类型筛选">' +
-        '<button class="adm-btn adm-btn--primary adm-btn--sm" id="log-search-btn">筛选</button></div>' +
-        '<div class="adm-card adm-table-wrap"><table class="adm-table"><thead><tr><th>类型</th><th>消息</th><th>时间</th></tr></thead><tbody id="logs-tb"></tbody></table></div><div id="logs-pg"></div>';
-      var q = { page: 1, type: '' };
-      function load(page) {
-        FayiAdminApi.logs({ page: page, pageSize: 20 }).then(function (res) {
-          var data = (res && res.data) || {};
-          var list = data.list || [];
-          if (q.type) list = list.filter(function (r) { return (r.type || '').indexOf(q.type) >= 0; });
-          var tb = $('logs-tb');
-          if (!tb) return;
-          tb.innerHTML = '';
-          if (!list.length) {
-            tb.innerHTML = '<tr><td colspan="3" style="color:#94a3b8;text-align:center;padding:24px">暂无日志记录</td></tr>';
-          } else {
-            list.forEach(function (r) {
-              var tr = document.createElement('tr');
-              tr.innerHTML = '<td>' + (r.type || '—') + '</td><td>' + (r.message || '').slice(0, 100) + '</td><td>' + ((r.createdAt || '').slice(0, 16).replace('T', ' ') || '—') + '</td>';
-              tb.appendChild(tr);
-            });
-          }
-          var pg = $('logs-pg');
-          if (pg) {
-            pg.innerHTML = '';
-            pg.appendChild(paginate(data.total || list.length, data.page || page, data.pageSize || 20, load));
-          }
-        }).catch(function (e) {
-          var tb = $('logs-tb');
-          if (tb) {
-            tb.innerHTML = '<tr><td colspan="3" style="color:#f87171;text-align:center;padding:24px">' + (e.message || '加载失败') + '</td></tr>';
-          }
-        });
-      }
-      $('log-search-btn').onclick = function () { q.type = $('log-type').value.trim(); load(1); };
       load(1);
     },
 

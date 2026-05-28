@@ -2,8 +2,39 @@
  * 管理端 API（/api/admin）— 经 FayiHttp 统一拦截
  */
 (function (global) {
-  var API = 'http://localhost:3002/api/admin';
   var TOKEN_KEY = 'fayi_admin_token';
+
+  function resolveServerOrigin() {
+    if (global.FayiEnv && FayiEnv.apiBase) return FayiEnv.apiBase;
+    if (global.FAYI_API_BASE) return String(global.FAYI_API_BASE).replace(/\/$/, '');
+    var metaApi = typeof document !== 'undefined'
+      ? document.querySelector('meta[name="fayi-api-base"]')
+      : null;
+    if (metaApi && metaApi.getAttribute('content')) {
+      return metaApi.getAttribute('content').replace(/\/$/, '');
+    }
+    var loc = typeof location !== 'undefined' ? location : {};
+    if (loc.port === '3002') return loc.protocol + '//' + loc.host;
+    var host = loc.hostname || '127.0.0.1';
+    return 'http://' + host + ':3002';
+  }
+
+  function resolveAdminApiBase() {
+    if (global.FayiEnv && FayiEnv.adminApiBase) return FayiEnv.adminApiBase;
+    if (global.FAYI_ADMIN_API_BASE) {
+      return String(global.FAYI_ADMIN_API_BASE).replace(/\/$/, '');
+    }
+    var meta = typeof document !== 'undefined'
+      ? document.querySelector('meta[name="fayi-admin-api"]')
+      : null;
+    if (meta && meta.getAttribute('content')) {
+      return meta.getAttribute('content').replace(/\/$/, '');
+    }
+    return resolveServerOrigin() + '/api/admin';
+  }
+
+  var API = resolveAdminApiBase();
+  var SERVER_ORIGIN = resolveServerOrigin();
   var INFO_KEY = 'fayi_admin_info';
   var VERIFIED_KEY = 'fayi_admin_permission_verified';
   var FIXED_ADMIN_CODE = 'manager';
@@ -155,21 +186,6 @@
       return request('GET', '/documents?page=' + (q.page || 1) + '&pageSize=' + (q.pageSize || 10));
     },
     deleteDocument: function (id) { return request('DELETE', '/documents/' + id); },
-    ocr: function (q) {
-      q = q || {};
-      var qs = '?page=' + (q.page || 1) + '&pageSize=' + (q.pageSize || 12);
-      if (q.search) qs += '&search=' + encodeURIComponent(q.search);
-      if (q.status && q.status !== 'all') qs += '&status=' + encodeURIComponent(q.status);
-      if (q.ocrType && q.ocrType !== 'all') qs += '&ocrType=' + encodeURIComponent(q.ocrType);
-      if (q.dateFrom) qs += '&dateFrom=' + encodeURIComponent(q.dateFrom);
-      if (q.dateTo) qs += '&dateTo=' + encodeURIComponent(q.dateTo);
-      return request('GET', '/ocr' + qs);
-    },
-    ocrStats: function () { return request('GET', '/ocr/stats'); },
-    ocrDetail: function (id) { return request('GET', '/ocr/' + encodeURIComponent(id)); },
-    ocrAiCorrect: function (id) {
-      return request('POST', '/ocr/' + encodeURIComponent(id) + '/ai-correct', {});
-    },
     regulations: function () { return request('GET', '/regulations'); },
     saveRegulation: function (data, id) {
       if (id) return request('PUT', '/regulations/' + id, data);
@@ -186,8 +202,9 @@
     },
     deleteLawArticle: function (id) { return request('DELETE', '/law-education/articles/' + id); },
     lawStats: function () { return request('GET', '/law-education/stats'); },
-    logs: function (q) {
-      return request('GET', '/logs?page=' + (q.page || 1) + '&pageSize=' + (q.pageSize || 20));
+    getApiBase: function () { return API; },
+    getServerOrigin: function () {
+      return SERVER_ORIGIN;
     }
   };
 })(window);
