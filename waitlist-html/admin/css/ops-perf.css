@@ -1,0 +1,53 @@
+@import url('ops-midplatform-theme.css');
+@import url('ops-micro-interactions.css');
+
+/* 性能优化 · 全局骨架屏 */
+.ops-page-skeleton {
+  animation: ops-fade-in 0.2s ease;
+}
+
+.ops-page-skeleton__bar {
+  height: 32px;
+  width: 40%;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.04) 100%);
+  background-size: 200% 100%;
+  animation: ops-stat-shimmer 1.2s ease-in-out infinite;
+}
+
+.ops-page-skeleton__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ops-page-skeleton__card {
+  height: 72px;
+  border-radius: 12px;
+  border: 1px solid var(--ops-border);
+  animation: ops-stat-shimmer 1.2s ease-in-out infinite;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 100%);
+  background-size: 200% 100%;
+}
+
+.ops-page-skeleton__list { display: flex; flex-direction: column; gap: 10px; }
+
+.ops-page-skeleton__row {
+  height: 88px;
+  border-radius: 12px;
+  border: 1px solid var(--ops-border);
+  animation: ops-stat-shimmer 1.2s ease-in-out infinite;
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 100%);
+  background-size: 200% 100%;
+}
+
+@keyframes ops-fade-in {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
+
+html.ops-shell-ready .ops-content {
+  contain: layout style;
+}

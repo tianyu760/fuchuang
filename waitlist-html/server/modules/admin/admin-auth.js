@@ -1,12 +1,72 @@
 const store = require('./admin-store');
 const crypto = require('crypto');
 
-const adminTokens = new Map();
+const SESSION_SECRET = process.env.ADMIN_SESSION_SECRET || 'fayi_admin_session_dev_2026';
+const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+function b64urlEncode(buf) {
+  return Buffer.from(buf).toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
+function b64urlDecode(str) {
+  var s = String(str || '').replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  return Buffer.from(s, 'base64');
+}
+
+function sessionFromAdmin(admin) {
+  return {
+    id: admin.id,
+    email: admin.email,
+    role: admin.role,
+    name: admin.name,
+    identityCode: admin.identityCode,
+    adminLevel: admin.adminLevel || (admin.role === 'super_admin' ? 'super' : 'standard'),
+    userType: admin.userType
+  };
+}
+
+function signSession(session) {
+  var payload = Object.assign({}, session, { exp: Date.now() + TOKEN_TTL_MS });
+  var body = b64urlEncode(JSON.stringify(payload));
+  var sig = crypto.createHmac('sha256', SESSION_SECRET).update(body).digest('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+  return body + '.' + sig;
+}
+
+function verifySessionToken(token) {
+  if (!token || typeof token !== 'string') return null;
+  var parts = token.split('.');
+  if (parts.length !== 2) return null;
+  var body = parts[0];
+  var sig = parts[1];
+  var expected = crypto.createHmac('sha256', SESSION_SECRET).update(body).digest('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+  var sigBuf = Buffer.from(sig);
+  var expBuf = Buffer.from(expected);
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return null;
+  }
+  try {
+    var data = JSON.parse(b64urlDecode(body).toString('utf8'));
+    if (!data || !data.exp || data.exp < Date.now()) return null;
+    var session = Object.assign({}, data);
+    delete session.exp;
+    return session;
+  } catch (e) {
+    return null;
+  }
+}
 
 function issueToken(admin) {
-  const token = crypto.randomBytes(24).toString('hex');
-  adminTokens.set(token, { id: admin.id, email: admin.email, role: admin.role, name: admin.name });
-  return token;
+  return signSession(sessionFromAdmin(admin));
 }
 
 function login(email, password) {
@@ -17,15 +77,14 @@ function login(email, password) {
 }
 
 function loginPlatformUser(user) {
-  const token = crypto.randomBytes(24).toString('hex');
-  adminTokens.set(token, {
+  return issueToken({
     id: user.id,
     email: user.email,
     name: user.name,
     role: 'platform_admin',
-    userType: 'admin'
+    userType: 'admin',
+    identityCode: user.identityCode
   });
-  return token;
 }
 
 const FIXED_ADMIN_CODE = 'manager';
@@ -57,8 +116,11 @@ function loginByCode(identityCode) {
 
 function requireAdmin(req, res, next) {
   const auth = req.headers.authorization || '';
-  const token = auth.replace(/^Bearer\s+/i, '').trim();
-  const session = adminTokens.get(token);
+  let token = auth.replace(/^Bearer\s+/i, '').trim();
+  if (!token && req.query && req.query.access_token) {
+    token = String(req.query.access_token).trim();
+  }
+  const session = verifySessionToken(token);
   if (!session) {
     return res.status(401).json({
       code: 401,
@@ -77,5 +139,6 @@ module.exports = {
   loginByCode,
   requireAdmin,
   issueToken,
+  verifySessionToken,
   FIXED_ADMIN_CODE
 };

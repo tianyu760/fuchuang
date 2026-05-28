@@ -1,0 +1,330 @@
+/**
+ * 企业 AI 中台 · 轻量视觉层（仅渲染，不改布局结构）
+ */
+
+@keyframes ops-mp-grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(48px, 48px); }
+}
+
+@keyframes ops-mp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ops-mp-risk-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251, 113, 133, 0); }
+  50% { box-shadow: 0 0 0 1px rgba(251, 113, 133, 0.22); }
+}
+
+@keyframes ops-mp-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── 全局背景（底层，不遮挡内容） ── */
+.ops-app {
+  background: linear-gradient(180deg, #0f172a 0%, #111827 45%, #0b1020 100%) !important;
+}
+
+.ops-ambient {
+  opacity: 0.85;
+}
+
+.ops-main {
+  position: relative;
+  background: transparent !important;
+}
+
+.ops-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.04;
+  animation: ops-mp-grid-move 30s linear infinite;
+}
+
+.ops-content,
+.ops-topbar {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 页面进入：见 ops-micro-interactions.css ── */
+
+/* ── 字体微调 ── */
+.ops-page-title {
+  font-size: calc(1em + 2px);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.ops-page-sub {
+  opacity: 0.72;
+}
+
+.ops-card__head h3,
+.ops-settings-card h3,
+.ops-analytics-insight__head h3 {
+  font-size: 15px;
+}
+
+.ops-num,
+.ops-kpi__value,
+.ops-analytics-kpi-card strong,
+.ops-risk-kpi strong,
+.ops-log-kpi strong,
+.ops-pufa-kpi strong,
+.ops-consult-stat strong,
+.ops-doc-stats strong,
+.ops-users-summary strong {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 卡片玻璃拟态 + hover ── */
+.ops-card,
+.ops-kpi,
+.ops-metric-tile,
+.ops-analytics-kpi-card,
+.ops-risk-kpi,
+.ops-log-kpi,
+.ops-pufa-kpi,
+.ops-consult-stat,
+.ops-doc-stats > *,
+.ops-users-summary .ops-card,
+.ops-users-summary > .ops-card,
+.ops-settings-preview,
+.ops-admin-card--compact {
+  background: rgba(17, 25, 40, 0.72) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+}
+
+.ops-card:hover,
+.ops-kpi:hover,
+.ops-metric-tile:hover,
+.ops-analytics-kpi-card:hover,
+.ops-risk-kpi:hover,
+.ops-log-kpi:hover,
+.ops-pufa-kpi:hover,
+.ops-consult-stat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+/* KPI 顶部状态线 */
+.ops-kpi,
+.ops-analytics-kpi-card,
+.ops-risk-kpi,
+.ops-log-kpi,
+.ops-pufa-kpi,
+.ops-consult-stat,
+.ops-doc-stats > *,
+.ops-users-summary .ops-card,
+.ops-metric-tile {
+  position: relative;
+  overflow: hidden;
+}
+
+.ops-kpi::before,
+.ops-analytics-kpi-card::before,
+.ops-risk-kpi::before,
+.ops-log-kpi::before,
+.ops-pufa-kpi::before,
+.ops-consult-stat::before,
+.ops-doc-stats > *::before,
+.ops-users-summary .ops-card::before,
+.ops-metric-tile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.35), transparent);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* 趋势色 */
+.ops-kpi__delta,
+.ops-trend-up,
+[class*="delta--up"] {
+  color: #5eead4 !important;
+}
+
+.ops-trend-down,
+[class*="delta--down"],
+.ops-kpi__delta.is-down {
+  color: #fdba74 !important;
+}
+
+/* ── 侧栏（结构不变） ── */
+.ops-side {
+  background: rgba(15, 23, 42, 0.72) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.ops-nav--compact .ops-nav__group-label {
+  font-size: 10px;
+}
+
+.ops-nav--compact .ops-nav__link {
+  font-size: 13px;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.ops-nav--compact .ops-nav__link:hover {
+  transform: translateX(2px);
+}
+
+.ops-nav--compact .ops-nav__link.is-active {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0.04) 100%) !important;
+  border-left-color: var(--ops-cyan) !important;
+}
+
+/* ── 顶栏 ── */
+.ops-topbar {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ── 表格 ── */
+.ops-table-wrap {
+  border-radius: var(--ops-radius);
+  overflow: hidden;
+}
+
+.ops-table th {
+  background: rgba(15, 23, 42, 0.85) !important;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.ops-table tbody tr {
+  transition: background 0.18s ease;
+}
+
+.ops-table tbody tr:hover td {
+  background: rgba(56, 189, 248, 0.06) !important;
+}
+
+/* ── 图表容器 ── */
+.ops-chart,
+.ops-pufa-chart,
+.ops-risk-chart,
+.ops-users-heat__chart {
+  border-radius: 10px;
+  background: rgba(8, 14, 28, 0.35);
+}
+
+/* ── 风险预警（克制） ── */
+.ops-risk-kpi--high,
+.ops-risk-kpi--warn {
+  animation: ops-mp-risk-breathe 3.5s ease-in-out infinite;
+}
+
+.ops-tag--risk-high {
+  transition: filter 0.2s ease;
+}
+
+/* ── 普法运营 ── */
+.ops-pufa-hot-list li {
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ops-pufa-hot-list li:hover {
+  transform: translateX(2px);
+}
+
+.ops-pufa-chart {
+  transition: opacity 0.3s ease;
+}
+
+/* ── Skeleton / Shimmer ── */
+.ops-page-skeleton__bar,
+.ops-page-skeleton__card,
+.ops-page-skeleton__row,
+.ops-chart-skeleton,
+.ops-risk-skeleton .ops-risk-kpi,
+.ops-risk-skeleton .ops-risk-table tbody td {
+  background: linear-gradient(
+    90deg,
+    rgba(30, 41, 59, 0.45) 25%,
+    rgba(51, 65, 85, 0.55) 50%,
+    rgba(30, 41, 59, 0.45) 75%
+  ) !important;
+  background-size: 200% 100% !important;
+  animation: ops-mp-shimmer 1.2s ease-in-out infinite !important;
+}
+
+/* ── 表单控件（筛选条 / 工具栏，避免白底） ── */
+.ops-reg-filters input,
+.ops-reg-filters select,
+.ops-toolbar input,
+.ops-toolbar select,
+.ops-consult-toolbar input,
+.ops-consult-toolbar select,
+.ops-doc-toolbar input,
+.ops-doc-toolbar select,
+.ops-ocr-toolbar input,
+.ops-ocr-toolbar select,
+.ops-users-toolbar input,
+.ops-users-toolbar select,
+.ops-settings-form input,
+.ops-settings-form select,
+.ops-settings-form textarea {
+  border-radius: var(--ops-input-radius, 8px) !important;
+  border: 1px solid var(--ops-input-border) !important;
+  background: var(--ops-input-bg) !important;
+  color: var(--ops-title) !important;
+}
+
+.ops-reg-filters input::placeholder,
+.ops-toolbar input::placeholder,
+.ops-consult-toolbar input::placeholder {
+  color: var(--ops-text-secondary);
+}
+
+.ops-reg-filters select,
+.ops-toolbar select,
+.ops-consult-toolbar select,
+.ops-doc-toolbar select,
+.ops-ocr-toolbar select {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* ── 减少动画偏好 ── */
+@media (prefers-reduced-motion: reduce) {
+  .ops-main::before,
+  .ops-risk-kpi--high,
+  .ops-risk-kpi--warn,
+  #ops-page-root.ops-mp-page-in,
+  .ops-mp-page-in .ops-table tbody tr {
+    animation: none !important;
+  }
+
+  .ops-card:hover,
+  .ops-nav--compact .ops-nav__link:hover {
+    transform: none;
+  }
+}

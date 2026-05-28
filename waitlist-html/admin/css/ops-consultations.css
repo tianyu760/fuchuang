@@ -1,0 +1,290 @@
+/* 法律咨询管理中心 · 指标单行 */
+.ops-consult-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: var(--ops-gap);
+}
+
+.ops-consult-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 0 !important;
+  padding: 10px 14px !important;
+  border-radius: var(--ops-radius);
+  background: var(--ops-card-solid);
+  border: 1px solid var(--ops-border);
+  box-shadow: none;
+}
+
+.ops-consult-stat label {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ops-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ops-consult-stat strong {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ops-title);
+}
+
+.ops-consult-stat--loading .ops-stat-skeleton {
+  flex-shrink: 0;
+  height: 20px;
+  width: 48px;
+  margin: 0;
+}
+
+.ops-consult-stat--loading .ops-stat-skeleton,
+.ops-stat-card--loading .ops-stat-skeleton {
+  display: block;
+  height: 28px;
+  width: 72px;
+  margin-top: 4px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  background-size: 200% 100%;
+  animation: ops-stat-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes ops-stat-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.ops-consult-toast {
+  display: none;
+  margin-bottom: var(--ops-gap);
+  padding: 10px 14px;
+  border-radius: var(--ops-radius);
+  background: rgba(40, 85, 255, 0.15);
+  border: 1px solid rgba(40, 85, 255, 0.35);
+  color: var(--ops-cyan);
+  font-size: 13px;
+  animation: ops-pulse-banner 2s ease infinite;
+}
+
+.ops-consult-toast.is-show { display: block; }
+
+@keyframes ops-pulse-banner {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
+
+.ops-consult-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ops-gap);
+}
+
+.ops-consult-item {
+  padding: 16px 18px;
+  border-radius: var(--ops-radius-lg);
+  background: linear-gradient(145deg, rgba(18, 30, 56, 0.96) 0%, rgba(12, 22, 45, 0.92) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--ops-shadow-card);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.ops-consult-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.ops-consult-item__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ops-consult-item__user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+}
+
+.ops-consult-item__avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #2855ff, #1e3a8a);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ops-consult-item__user h4 {
+  margin: 0 0 2px;
+  font-size: 14px;
+  color: var(--ops-title);
+}
+
+.ops-consult-item__uid {
+  font-size: 10px;
+  color: var(--ops-text-secondary);
+  font-family: ui-monospace, monospace;
+}
+
+.ops-consult-item__title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ops-title);
+  line-height: 1.45;
+}
+
+.ops-consult-item__summary {
+  margin: 0 0 10px;
+  font-size: 12px;
+  color: var(--ops-text);
+  line-height: 1.6;
+}
+
+.ops-consult-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--ops-text-secondary);
+}
+
+.ops-consult-item__time strong {
+  color: var(--ops-cyan);
+  font-weight: 500;
+}
+
+.ops-consult-item__actions {
+  flex-shrink: 0;
+}
+
+.ops-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--ops-gap-lg);
+  padding: 12px;
+}
+
+.ops-pagination__btn,
+.ops-pagination__page {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid var(--ops-border);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ops-text);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.ops-pagination__btn:hover:not(:disabled),
+.ops-pagination__page:hover {
+  background: var(--ops-accent-soft);
+  color: var(--ops-cyan);
+  border-color: rgba(40, 85, 255, 0.35);
+}
+
+.ops-pagination__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ops-pagination__page.is-active {
+  background: var(--ops-accent);
+  border-color: var(--ops-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.ops-pagination__info {
+  margin-left: 12px;
+  font-size: 12px;
+  color: var(--ops-text-secondary);
+}
+
+.ops-drawer--consult {
+  width: 520px !important;
+  max-width: 96vw;
+  background: rgba(10, 18, 38, 0.94) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.ops-drawer--consult .ops-drawer__section h4 {
+  color: var(--ops-cyan);
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.ops-drawer--consult .ops-drawer__section {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ops-border);
+}
+
+.ops-consult-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ops-consult-timeline li {
+  position: relative;
+  padding: 6px 0 6px 14px;
+  border-left: 2px solid rgba(40, 85, 255, 0.35);
+  margin-left: 4px;
+  font-size: 12px;
+  color: var(--ops-text);
+}
+
+@media (max-width: 900px) {
+  .ops-consult-stats {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+
+  .ops-consult-stat {
+    flex: 1 0 140px;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ops-consult-item__top { flex-direction: column; }
+}

@@ -5,7 +5,7 @@
   var FIXED_ADMIN_CODE = 'manager';
 
   if (window.FayiAdminAuth && FayiAdminAuth.isLoggedIn()) {
-    window.location.replace('admin-dashboard.html');
+    window.location.replace('admin/dashboard.html');
     return;
   }
 
@@ -95,7 +95,7 @@
     localStorage.removeItem('fayi_token');
     localStorage.removeItem('fayi_current_user');
 
-    window.location.href = 'admin-dashboard.html';
+    window.location.href = 'admin/dashboard.html';
   }
 
   if (!form) return;
@@ -156,7 +156,7 @@
         enterDashboard(token, admin);
       })
       .catch(function (err) {
-        var msg = err.message || '登录失败，请确认服务已启动（端口 3002）';
+        var msg = err.message || '登录失败，请确认管理端服务已启动（端口 3003，npm run server:admin）';
         showError(msg);
         if (/验证码/.test(msg)) {
           shakeEl(identityInput);

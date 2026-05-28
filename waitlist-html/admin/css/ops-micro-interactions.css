@@ -1,0 +1,241 @@
+/**
+ * 轻量微交互层 · 仅 transform/opacity，不改结构
+ */
+
+@keyframes ops-mi-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ops-mi-trend-up {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes ops-mi-trend-down {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+@keyframes ops-mi-dot-breathe {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.12); }
+}
+
+@keyframes ops-mi-risk-num {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* ── 页面切换 0.3s ── */
+#ops-page-root.ops-mp-page-in {
+  animation: ops-mi-fade-up 0.3s ease both;
+}
+
+.ops-mp-page-in .ops-card,
+.ops-mp-page-in .ops-reg-item,
+.ops-mp-page-in .ops-consult-item,
+.ops-mp-page-in .ops-doc-item,
+.ops-mp-page-in .ops-ocr-item,
+.ops-mp-page-in .ops-user-card,
+.ops-mp-page-in .ops-analytics-card {
+  animation: ops-mi-fade-up 0.32s ease both;
+}
+
+.ops-mp-page-in .ops-card:nth-child(1),
+.ops-mp-page-in .ops-reg-item:nth-child(1) { animation-delay: 0.03s; }
+.ops-mp-page-in .ops-card:nth-child(2),
+.ops-mp-page-in .ops-reg-item:nth-child(2) { animation-delay: 0.05s; }
+.ops-mp-page-in .ops-card:nth-child(3),
+.ops-mp-page-in .ops-reg-item:nth-child(3) { animation-delay: 0.07s; }
+.ops-mp-page-in .ops-card:nth-child(4),
+.ops-mp-page-in .ops-reg-item:nth-child(4) { animation-delay: 0.09s; }
+
+/* ── 卡片 hover（补充列表项） ── */
+.ops-reg-item,
+.ops-consult-item,
+.ops-doc-item,
+.ops-ocr-item,
+.ops-user-card,
+.ops-reg-stats,
+.ops-reg-filters,
+.ops-analytics-card,
+.ops-risk-panel {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.2s ease;
+}
+
+.ops-card:hover,
+.ops-kpi:hover,
+.ops-metric-tile:hover,
+.ops-analytics-kpi-card:hover,
+.ops-risk-kpi:hover,
+.ops-log-kpi:hover,
+.ops-pufa-kpi:hover,
+.ops-consult-stat:hover,
+.ops-reg-item:hover,
+.ops-consult-item:hover,
+.ops-doc-item:hover,
+.ops-ocr-item:hover,
+.ops-user-card:hover {
+  transform: translateY(-2px) !important;
+}
+
+/* ── 按钮反馈 ── */
+.ops-btn,
+.ops-topbar-action,
+.ops-icon-btn,
+.ops-reg-stats__chip,
+.ops-pagination button,
+.ops-pagination a {
+  transition: transform 0.2s ease, filter 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+}
+
+.ops-btn:hover,
+.ops-topbar-action:hover,
+.ops-icon-btn:hover,
+.ops-reg-stats__chip:hover {
+  filter: brightness(1.05);
+}
+
+.ops-btn:active,
+.ops-topbar-action:active,
+.ops-icon-btn:active,
+.ops-reg-stats__chip:active {
+  transform: scale(0.98);
+}
+
+/* ── 趋势箭头 ── */
+.ops-trend-up,
+.ops-kpi__delta:not(.is-down),
+[class*="delta--up"] {
+  display: inline-block;
+  animation: ops-mi-trend-up 2.2s ease-in-out infinite;
+}
+
+.ops-trend-down,
+.ops-kpi__delta.is-down,
+[class*="delta--down"] {
+  display: inline-block;
+  animation: ops-mi-trend-down 2.2s ease-in-out infinite;
+}
+
+/* ── 表格行 + Tag ── */
+.ops-table tbody tr {
+  transition: background 0.18s ease;
+}
+
+.ops-mp-page-in .ops-table tbody tr {
+  animation: ops-mi-fade-up 0.28s ease both;
+}
+
+.ops-mp-page-in .ops-table tbody tr:nth-child(1) { animation-delay: 0.02s; }
+.ops-mp-page-in .ops-table tbody tr:nth-child(2) { animation-delay: 0.04s; }
+.ops-mp-page-in .ops-table tbody tr:nth-child(3) { animation-delay: 0.06s; }
+.ops-mp-page-in .ops-table tbody tr:nth-child(4) { animation-delay: 0.08s; }
+.ops-mp-page-in .ops-table tbody tr:nth-child(5) { animation-delay: 0.1s; }
+
+.ops-tag,
+.ops-meta-chip {
+  transition: filter 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.ops-tag:hover,
+.ops-meta-chip:hover {
+  filter: brightness(1.08);
+}
+
+/* ── 侧栏激活条 ── */
+.ops-nav--compact .ops-nav__link {
+  position: relative;
+}
+
+.ops-nav--compact .ops-nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--ops-cyan);
+  opacity: 0;
+  transform: scaleY(0.2);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.ops-nav--compact .ops-nav__link.is-active::after {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* ── 顶栏状态灯 / 数字刷新 ── */
+.ops-status-dot--ok,
+.ops-topbar__pill .ops-status-dot {
+  animation: ops-mi-dot-breathe 2.8s ease-in-out infinite;
+}
+
+.ops-topbar__pill strong,
+#ops-stat-online,
+#ops-stat-risk,
+#ops-clock {
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+html.ops-mp-stat-flash #ops-stat-online,
+html.ops-mp-stat-flash #ops-stat-risk {
+  opacity: 0.85;
+}
+
+/* ── 风险数字微动 ── */
+.ops-risk-kpi--high strong,
+.ops-risk-kpi--warn strong {
+  display: inline-block;
+}
+
+.ops-risk-kpi--high strong.ops-num,
+.ops-risk-kpi--high > strong {
+  animation: ops-mi-risk-num 2.8s ease-in-out infinite;
+}
+
+/* ── 副标题层次 ── */
+.ops-page-sub,
+.ops-card__head p,
+.ops-reg-item__summary {
+  opacity: 0.88;
+}
+
+/* ── 图表容器过渡 ── */
+.ops-chart,
+.ops-pufa-chart,
+.ops-risk-chart {
+  transition: opacity 0.35s ease;
+}
+
+.ops-mp-page-in .ops-chart,
+.ops-mp-page-in .ops-pufa-chart {
+  animation: ops-mi-fade-up 0.35s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ops-page-root.ops-mp-page-in,
+  .ops-mp-page-in .ops-card,
+  .ops-mp-page-in .ops-table tbody tr,
+  .ops-status-dot--ok,
+  .ops-trend-up,
+  .ops-trend-down,
+  .ops-risk-kpi--high strong {
+    animation: none !important;
+  }
+
+  .ops-btn:active,
+  .ops-reg-item:hover {
+    transform: none !important;
+  }
+}

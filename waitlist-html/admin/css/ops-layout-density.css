@@ -1,0 +1,226 @@
+/**
+ * 管理端布局密度 · 侧栏加宽 / 内容铺满 / 中台控制中心感
+ */
+
+#ops-page-root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.ops-content > .ops-risk-dash,
+.ops-content > .ops-analytics-toolbar,
+.ops-content > * {
+  max-width: none !important;
+}
+
+/* ── KPI 区：每行 3~4 个，加高 ── */
+.ops-dash-kpi,
+.ops-pufa-kpi-row,
+.ops-ocr-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: var(--ops-gap) !important;
+}
+
+/* 法律咨询 / 文书 / 风险预警 / 用户中心 / 系统日志：5 项指标单行 */
+.ops-consult-stats,
+.ops-doc-stats,
+.ops-risk-kpi-row,
+.ops-users-summary,
+.ops-log-kpi-row {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+}
+
+/* 数据分析：6 项指标单行 */
+.ops-analytics-kpi {
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.ops-metrics-panel .ops-metric-tile {
+  min-height: 0 !important;
+}
+
+.ops-dash-kpi .ops-kpi,
+.ops-risk-kpi,
+.ops-log-kpi-row .ops-log-kpi,
+.ops-pufa-kpi-row .ops-pufa-kpi,
+[class*="ops-"][class*="-kpi"]:not(.ops-kpi) {
+  min-height: var(--ops-kpi-min-h);
+}
+
+.ops-dash-mini-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.ops-pufa-kpi-row {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+/* ── 主图表区高度 ── */
+.ops-chart:not(.ops-chart--xs):not(.ops-chart--sm):not(.ops-chart--loading) {
+  height: var(--ops-chart-h) !important;
+  min-height: var(--ops-chart-h) !important;
+}
+
+.ops-analytics-card .ops-chart,
+.ops-analytics-card .ops-chart--tall,
+.ops-risk-chart,
+.ops-risk-chart--sm,
+.ops-pufa-chart {
+  height: var(--ops-chart-h) !important;
+  min-height: var(--ops-chart-h) !important;
+}
+
+.ops-analytics-grid {
+  gap: var(--ops-gap) !important;
+}
+
+/* ── 表格可视区 ── */
+.ops-table-wrap {
+  max-height: min(58vh, 560px);
+}
+
+.ops-risk-table-scroll,
+.ops-analytics-card .ops-table-wrap {
+  max-height: min(52vh, 480px);
+}
+
+/* ── 模块 grid：3 列更宽 ── */
+.ops-users-grid,
+.ops-modules-grid,
+.ops-consult-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: var(--ops-gap) !important;
+}
+
+.ops-analytics-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* ── 大屏拉满 ── */
+@media (min-width: 1440px) {
+  .ops-dash-kpi {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .ops-dash-row3 {
+    grid-template-columns: 1.2fr 1fr 0.95fr;
+  }
+
+  .ops-dash-split {
+    grid-template-columns: 1.08fr 0.92fr;
+  }
+
+  .ops-users-grid {
+    grid-template-columns: repeat(3, minmax(320px, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1680px) {
+  .ops-analytics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ── 中屏 ── */
+@media (max-width: 1200px) {
+  .ops-dash-kpi,
+  .ops-pufa-kpi-row,
+  .ops-ocr-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .ops-analytics-kpi {
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  }
+
+  .ops-consult-stats,
+  .ops-doc-stats,
+  .ops-risk-kpi-row,
+  .ops-users-summary,
+  .ops-log-kpi-row {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+
+  .ops-users-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .ops-analytics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── KPI / 统计块紧凑 ── */
+.ops-kpi {
+  padding: 10px 12px !important;
+}
+
+.ops-kpi__label {
+  font-size: 11px !important;
+  margin-bottom: 4px !important;
+}
+
+.ops-kpi__value {
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+}
+
+.ops-kpi__unit {
+  font-size: 11px !important;
+}
+
+.ops-kpi__delta {
+  font-size: 10px !important;
+  margin-top: 2px !important;
+}
+
+.ops-dash-kpi--secondary .ops-kpi {
+  min-height: 72px !important;
+}
+
+.ops-dash-kpi--secondary .ops-kpi__value {
+  font-size: 18px !important;
+}
+
+.ops-analytics-kpi .ops-analytics-kpi-card {
+  min-height: 88px !important;
+  padding: 14px 16px !important;
+}
+
+.ops-risk-kpi,
+.ops-log-kpi-row .ops-log-kpi,
+.ops-pufa-kpi-row .ops-pufa-kpi,
+.ops-ocr-stats > *,
+.ops-doc-stats > *,
+.ops-consult-stats > *,
+.ops-users-summary > * {
+  padding: 10px 12px !important;
+}
+
+.ops-risk-kpi strong {
+  font-size: 18px !important;
+}
+
+.ops-dash-kpi,
+.ops-risk-kpi-row,
+.ops-pufa-kpi-row,
+.ops-ocr-stats,
+.ops-doc-stats,
+.ops-consult-stats,
+.ops-users-summary,
+.ops-log-kpi-row {
+  gap: 8px !important;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --ops-side-w: 260px;
+  }
+
+  .ops-dash-kpi {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

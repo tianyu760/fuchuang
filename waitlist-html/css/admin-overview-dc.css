@@ -112,12 +112,22 @@
   color: rgba(220, 235, 255, 0.55);
 }
 
-/* 主图区 70% / 30% */
-.adm-v3-hero-row {
+/* 主图区：增长通栏 + 分类/词云并列（同高、同宽） */
+.adm-v3-main-charts {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
   align-items: stretch;
+}
+
+.adm-v3-mod--growth-wide {
+  grid-column: 1 / -1;
+}
+
+.adm-v3-mod--growth-wide,
+.adm-v3-mod--pie,
+.adm-v3-mod--keywords {
+  min-height: 460px;
 }
 
 .adm-v3-biz-row {
@@ -214,11 +224,6 @@
   width: 100%;
   height: 100%;
   min-height: 360px;
-}
-
-.adm-v3-mod--hero,
-.adm-v3-mod--pie {
-  min-height: 460px;
 }
 
 /* 业务双栏 300px */
@@ -387,12 +392,17 @@
 }
 
 @media (max-width: 1280px) {
-  .adm-v3-hero-row {
+  .adm-v3-main-charts {
     grid-template-columns: 1fr;
   }
 
+  .adm-v3-mod--growth-wide {
+    grid-column: 1;
+  }
+
   .adm-v3-mod--hero,
-  .adm-v3-mod--pie {
+  .adm-v3-mod--pie,
+  .adm-v3-mod--keywords {
     min-height: 0;
   }
 

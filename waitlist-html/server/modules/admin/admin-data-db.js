@@ -194,6 +194,31 @@ function listRiskWarnings(opts) {
   return list.slice(0, opts.limit || 50);
 }
 
+function upsertRiskWarning(row) {
+  const list = readTable(TABLES.riskWarningLogs, []);
+  const id = row && row.id;
+  if (!id) return appendRiskWarning(row);
+  const idx = list.findIndex(function (r) { return r.id === id; });
+  const entry = Object.assign({
+    id: newId('rsk'),
+    userId: 'guest',
+    level: 'mid',
+    title: '',
+    source: 'auto',
+    status: 'pending',
+    keywords: [],
+    createdAt: new Date().toISOString()
+  }, row || {});
+  if (idx >= 0) {
+    list[idx] = Object.assign({}, list[idx], entry, { updatedAt: new Date().toISOString() });
+  } else {
+    list.unshift(entry);
+    trimList(list, MAX.risk);
+  }
+  writeTable(TABLES.riskWarningLogs, list);
+  return entry;
+}
+
 function appendMonitor(row) {
   const list = readTable(TABLES.systemMonitorLogs, []);
   const entry = Object.assign({
@@ -266,6 +291,18 @@ function countOnlineUsers(wsConnections) {
   return Math.max(fromHeartbeat, wsCount);
 }
 
+/** userId -> 最近心跳时间戳 */
+function getPresenceMap() {
+  const map = {};
+  const data = readTable(TABLES.onlinePresence, { sessions: [] });
+  (data.sessions || []).forEach(function (s) {
+    if (!s.userId || s.userId === 'guest') return;
+    const at = s.at || 0;
+    if (!map[s.userId] || at > map[s.userId]) map[s.userId] = at;
+  });
+  return map;
+}
+
 function readOcrRecords() {
   return readTable(TABLES.ocrRecords, []);
 }
@@ -280,11 +317,13 @@ module.exports = {
   appendDocumentGenerate: appendDocumentGenerate,
   listDocumentGenerate: listDocumentGenerate,
   appendRiskWarning: appendRiskWarning,
+  upsertRiskWarning: upsertRiskWarning,
   listRiskWarnings: listRiskWarnings,
   appendMonitor: appendMonitor,
   listMonitor: listMonitor,
   touchPresence: touchPresence,
   countOnlineUsers: countOnlineUsers,
+  getPresenceMap: getPresenceMap,
   readOcrRecords: readOcrRecords,
   readTable: readTable,
   writeTable: writeTable

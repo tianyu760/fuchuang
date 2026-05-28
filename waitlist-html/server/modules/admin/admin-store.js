@@ -8,6 +8,7 @@ const analytics = require('./analytics-engine');
 const dataDb = require('./admin-data-db');
 const metrics = require('./admin-metrics');
 const cache = require('./admin-cache');
+const settingsRuntime = require('./settings-runtime');
 const { fixFileName, ensureUtf8String } = require('../../lib/encoding-utils');
 let realtimeHub = null;
 
@@ -178,6 +179,7 @@ function migrateLegacyTablesOnce() {
 }
 
 function recordBehaviorFromEvent(module, action, payload, extra) {
+  if (!settingsRuntime.isOperationTrackingEnabled()) return null;
   extra = extra || {};
   const p = payload || {};
   const actionMap = {
@@ -278,6 +280,7 @@ function mapTypeToModuleAction(type) {
     case 'user_register': return { module: 'auth', action: 'register' };
     case 'admin_login': return { module: 'auth', action: 'admin_login' };
     case 'page_visit': return { module: 'page', action: 'visit' };
+    case 'risk_handle': return { module: 'risk', action: 'update' };
     default: return { module: 'system', action: String(type || 'unknown') };
   }
 }
@@ -355,6 +358,15 @@ function appendSystemEvent(entry, silent) {
 }
 
 function logEvent(type, payload, reqMeta) {
+  settingsRuntime.maybePruneLogs();
+  if (!settingsRuntime.isSystemLogEnabled()) {
+    return {
+      id: 'log_skipped',
+      timestamp: new Date().toISOString(),
+      skipped: true,
+      reason: 'system_log_disabled'
+    };
+  }
   const enriched = analytics.enrichEvent(type, payload || {});
   const ma = mapTypeToModuleAction(type);
   const row = appendSystemEvent({
@@ -542,7 +554,7 @@ function appendOcrRecord(rec) {
   });
   if (row.status === 'failed') {
     recordSystemError('ocr_error', row.errorMessage || 'OCR failed', { userId: row.userId });
-  } else {
+  } else if (settingsRuntime.isAutoAnalysisEnabled()) {
     metrics.detectAndLogRisk(row.fullText || row.textPreview || '', {
       userId: row.userId,
       source: 'ocr',
@@ -677,14 +689,21 @@ function statsOverview() {
   const riskMid = (risk.find(function (r) { return r.name === 'mid'; }) || {}).value || 0;
   const today = new Date().toISOString().slice(0, 10);
   const visits = readJson(FILES.visits, { daily: {}, total: 0 });
+  const consultCount = dataDb.listConsult({}).length;
+  const documentCount = dataDb.listDocumentGenerate({}).length;
+  const ocrCount = dataDb.readOcrRecords().length;
+  const faguiCount = metrics.faguiTotalFromBehavior();
+  const aiCalls = consultCount + faguiCount + documentCount + ocrCount;
   return Object.assign({}, core, {
     riskMid: riskMid,
     todayVisits: visits.daily[today] || 0,
+    aiCalls: aiCalls,
     aiCallsToday: (core.consultToday || 0) + (core.faguiToday || 0) +
       (core.documentToday || 0) + (core.ocrToday || 0),
-    documentCount: dataDb.listDocumentGenerate({}).length,
-    consultCount: dataDb.listConsult({}).length,
-    ocrCount: dataDb.readOcrRecords().length,
+    documentCount: documentCount,
+    consultCount: consultCount,
+    ocrCount: ocrCount,
+    faguiCount: faguiCount,
     pufaReadsToday: pub.todayReads || 0,
     pufaReadsTotal: pub.totalReads || 0,
     revision: getDataRevision(),
@@ -708,17 +727,25 @@ function riskBreakdown() {
 }
 
 function keywordCloud(limit) {
+  const merged = metrics.keywordCloudFromData(limit || 48);
+  if (merged.length) return merged;
   const events = readEventStream();
   const freq = {};
+  const bump = function (k, n) {
+    if (!k || String(k).length < 2) return;
+    const key = String(k).trim();
+    freq[key] = (freq[key] || 0) + (n || 1);
+  };
   events.forEach(function (e) {
-    const keys = (e.payload && e.payload.keywords) || [];
-    keys.forEach(function (k) {
-      if (k && k.length >= 2) freq[k] = (freq[k] || 0) + 1;
-    });
+    const p = e.payload || {};
+    (p.keywords || []).forEach(function (k) { bump(k, 2); });
+    const text = [p.preview, p.keyword, p.title].filter(Boolean).join(' ');
+    (text.match(/[\u4e00-\u9fa5]{2,6}/g) || []).forEach(function (w) { bump(w, 1); });
+    if (p.keyword) String(p.keyword).split(/[\s,，、；;]+/).forEach(function (k) { bump(k, 2); });
   });
   return Object.keys(freq)
     .sort(function (a, b) { return freq[b] - freq[a]; })
-    .slice(0, limit || 40)
+    .slice(0, limit || 48)
     .map(function (k) { return { name: k, value: freq[k] }; });
 }
 
@@ -819,14 +846,15 @@ function buildRealtimePayload(lawStore, range) {
   const categories = metrics.categoryBreakdownFromConsult();
   const moduleUsage = metrics.moduleUsageFromBehavior();
   const insights = metrics.generateInsights(stats, charts7, categories);
-  const riskEvents = dataDb.listRiskWarnings({ limit: 16 }).map(function (r) {
+  const riskEvents = metrics.listEnhancedRisks(20).map(function (r) {
     return {
       id: r.id,
       title: r.title,
       time: r.createdAt,
       level: r.level,
-      type: r.category || r.type || '风险预警',
-      user: r.userId || r.source || '系统监测'
+      type: r.type || '风险预警',
+      user: r.user || r.userId || '系统监测',
+      source: r.source
     };
   });
   return {
@@ -843,11 +871,12 @@ function buildRealtimePayload(lawStore, range) {
     consultHotspots: categories.slice(0, 6),
     moduleUsage: moduleUsage,
     risks: metrics.riskBreakdownFromLogs(),
-    keywords: metrics.keywordCloudFromData(36),
+    keywords: keywordCloud(48),
     topQuestions: topQuestions(10),
     feed: metrics.behaviorFeed(40),
     insights: insights,
     riskEvents: riskEvents,
+    regulationHeat: metrics.regulationHeatFromBehavior(24),
     publicity: {
       todayReads: publicity.todayReads,
       hotTopics: publicity.hotTopics,
@@ -1025,5 +1054,6 @@ module.exports = {
   riskBreakdown, keywordCloud, topQuestions,
   bumpPufaRead, getMergedPublicityStats, logOperationFromClient,
   setRealtimeHub, recordBehavior, touchHeartbeat, recordApiMonitor, recordSystemError,
+  formatEventMessage: formatEventMessage,
   dataDb: dataDb
 };

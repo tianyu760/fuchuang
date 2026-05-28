@@ -1,0 +1,31 @@
+{
+  "system": {
+    "platformName": "法绎法律科技",
+    "logoUrl": "",
+    "themeColor": "#38bdf8",
+    "defaultLanguage": "zh-CN",
+    "timezone": "Asia/Shanghai"
+  },
+  "ai": {
+    "ocrEnabled": true,
+    "documentAiEnabled": true,
+    "riskSensitivity": "high",
+    "regulationRecommend": true,
+    "autoAnalysis": true
+  },
+  "data": {
+    "logRetentionDays": 30,
+    "cacheTtlMinutes": 5,
+    "systemLogEnabled": true,
+    "operationTracking": true,
+    "allowDataExport": true
+  },
+  "security": {
+    "loginCaptcha": true,
+    "adminLevel": "standard",
+    "ipWhitelist": "",
+    "confirmSensitiveOps": true,
+    "sensitiveOpLog": true
+  },
+  "updatedAt": "2026-05-28T17:04:22.836Z"
+}

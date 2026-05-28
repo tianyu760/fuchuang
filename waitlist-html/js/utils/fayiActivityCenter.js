@@ -2,8 +2,21 @@
  * 法绎 · FayiActivityCenter 数据中心（本地日志 + 服务端实时聚合）
  */
 (function (global) {
-  var REALTIME_URL = 'http://localhost:3002/api/admin/datav/realtime';
-  var WS_URL = 'ws://localhost:3002/api/admin/ws';
+  function apiOrigin() {
+    if (global.FayiEnv && FayiEnv.apiBase) return FayiEnv.apiBase;
+    if (global.FAYI_API_BASE) return String(global.FAYI_API_BASE).replace(/\/$/, '');
+    if (typeof document !== 'undefined') {
+      var meta = document.querySelector('meta[name="fayi-api-base"]');
+      if (meta && meta.getAttribute('content')) {
+        return meta.getAttribute('content').trim().replace(/\/$/, '');
+      }
+    }
+    return 'http://127.0.0.1:3003';
+  }
+  function realtimeUrl() { return apiOrigin() + '/api/admin/datav/realtime'; }
+  function wsUrl() {
+    return apiOrigin().replace(/^http/i, 'ws') + '/api/admin/ws';
+  }
   var cache = null;
   var cacheAt = 0;
   var CACHE_MS = 4000;
@@ -122,8 +135,8 @@
       return Promise.resolve(cache);
     }
     var req = global.FayiHttp
-      ? FayiHttp.get(REALTIME_URL, { silent: true })
-      : fetch(REALTIME_URL, { cache: 'no-store' }).then(function (r) {
+      ? FayiHttp.get(realtimeUrl(), { silent: true })
+      : fetch(realtimeUrl(), { cache: 'no-store' }).then(function (r) {
           var ct = (r.headers.get('content-type') || '').toLowerCase();
           if (ct.indexOf('application/json') < 0) throw new Error('non-json');
           return r.json();
@@ -514,7 +527,7 @@
     if (!global.WebSocket) return;
     try {
       if (ws) { try { ws.close(); } catch (e) {} ws = null; }
-      ws = new WebSocket(WS_URL);
+      ws = new WebSocket(wsUrl());
       ws.onmessage = function (ev) {
         try {
           var json = JSON.parse(ev.data);

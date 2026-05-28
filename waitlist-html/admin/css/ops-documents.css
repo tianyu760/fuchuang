@@ -1,0 +1,340 @@
+/* 文书系统 · 指标单行 */
+.ops-doc-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: var(--ops-gap);
+}
+
+.ops-doc-stat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 0;
+  padding: 10px 14px;
+  text-align: left;
+  cursor: pointer;
+  border: 1px solid var(--ops-border);
+  border-radius: var(--ops-radius);
+  background: var(--ops-card-solid);
+  box-shadow: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.ops-doc-stat-card:hover {
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(40, 85, 255, 0.06);
+}
+
+.ops-doc-stat-card.is-active {
+  border-color: var(--ops-cyan);
+  background: rgba(14, 165, 233, 0.12);
+}
+
+.ops-doc-stat-card label {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ops-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.ops-doc-stat-card strong {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ops-doc-stat-card--loading .ops-stat-skeleton {
+  flex-shrink: 0;
+  display: block;
+  height: 20px;
+  width: 48px;
+  margin: 0;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  background-size: 200% 100%;
+  animation: ops-stat-shimmer 1.2s ease-in-out infinite;
+}
+
+.ops-doc-list.is-loading {
+  opacity: 0.55;
+  pointer-events: none;
+  position: relative;
+}
+
+@keyframes ops-stat-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.ops-doc-list-wrap {
+  position: relative;
+  min-height: 120px;
+}
+
+.ops-doc-list-wrap.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 15, 30, 0.45);
+  border-radius: 12px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ops-doc-list-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: var(--ops-cyan);
+  font-size: 13px;
+  display: none;
+}
+
+.ops-doc-list-wrap.is-loading .ops-doc-list-loading {
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .ops-doc-stats {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+
+  .ops-doc-stat-card {
+    flex: 1 0 140px;
+    min-width: 140px;
+  }
+}
+
+/* 列表 · 问答展示 */
+.ops-doc-qa {
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--ops-border);
+}
+
+.ops-doc-qa--empty {
+  font-size: 12px;
+  color: var(--ops-text-secondary);
+  white-space: pre-wrap;
+}
+
+.ops-doc-qa__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ops-text);
+}
+
+.ops-doc-qa__row + .ops-doc-qa__row {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.ops-doc-qa__tag {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.ops-doc-qa__tag--q {
+  color: var(--ops-cyan);
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.ops-doc-qa__tag--a {
+  color: var(--ops-success);
+  background: rgba(52, 211, 153, 0.12);
+}
+
+.ops-doc-qa__text {
+  flex: 1;
+  min-width: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ops-doc-qa-detail {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ops-text);
+  white-space: pre-wrap;
+}
+
+.ops-doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ops-doc-item {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--ops-border);
+  background: rgba(15, 23, 42, 0.45);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.ops-doc-item:hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  background: rgba(30, 41, 59, 0.65);
+}
+
+.ops-doc-item__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.ops-doc-item__title {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ops-title);
+  font-weight: 600;
+}
+
+.ops-doc-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ops-text-secondary);
+}
+
+.ops-drawer--doc {
+  width: min(560px, 96vw);
+}
+
+.ops-doc-drawer__loading {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--ops-text-secondary);
+}
+
+.ops-doc-card {
+  border-radius: 10px;
+  border: 1px solid var(--ops-border);
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.ops-doc-card h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ops-cyan);
+}
+
+.ops-doc-card p {
+  margin: 4px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ops-text);
+}
+
+.ops-doc-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 6px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ops-title);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ops-doc-scroll.is-collapsed {
+  max-height: 120px;
+  mask-image: linear-gradient(#000 70%, transparent);
+}
+
+.ops-doc-toggle {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ops-cyan);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.ops-doc-timeline {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--ops-text);
+}
+
+.ops-doc-timeline li {
+  margin-bottom: 6px;
+}
+
+.ops-doc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ops-border);
+  margin-top: 8px;
+}
+
+.ops-doc-actions .ops-btn--primary {
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color: #fff;
+  border: none;
+}
+
+.ops-doc-law-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+}
+
+.ops-doc-law-list li { margin-bottom: 4px; }
+
+.ops-doc-empty {
+  color: var(--ops-text-secondary);
+  font-size: 13px;
+  font-style: italic;
+}

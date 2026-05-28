@@ -1,0 +1,330 @@
+/**
+ * 左侧导航 · 紧凑布局（导航可滚动，底部操作区固定可见）
+ */
+
+.ops-side {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ops-side .ops-nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px 8px 6px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+}
+
+.ops-side .ops-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ops-side .ops-nav::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 2px;
+}
+
+/* 压缩品牌区 */
+.ops-brand-v4--compact {
+  padding: 10px 12px 8px !important;
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--ops-border);
+}
+
+.ops-brand-v4--compact .ops-brand-v4__sub {
+  display: none;
+}
+
+.ops-brand-v4__titles {
+  min-width: 0;
+}
+
+.ops-brand-v4--compact .ops-brand-v4__title {
+  font-size: 13px !important;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.ops-brand-v4--compact .ops-brand-v4__title span {
+  display: none;
+}
+
+.ops-brand-v4__tag {
+  margin: 2px 0 0;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ops-cyan);
+  opacity: 0.85;
+}
+
+.ops-logo-mark--sm {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 10px !important;
+}
+
+.ops-logo-mark--sm iconify-icon {
+  font-size: 17px !important;
+}
+
+/* 分组导航 */
+.ops-nav--compact .ops-nav__group {
+  margin-bottom: 2px;
+  flex-shrink: 0;
+}
+
+.ops-nav--compact .ops-nav__group + .ops-nav__group {
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding-top: 4px;
+  margin-top: 2px;
+}
+
+.ops-nav--compact .ops-nav__group-label {
+  margin: 0;
+  padding: 4px 10px 2px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ops-text-secondary);
+  line-height: 1.2;
+}
+
+.ops-nav--compact .ops-nav__group-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ops-nav--compact .ops-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 6px 10px;
+  margin: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ops-text);
+  border-left: 2px solid transparent;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+
+.ops-nav--compact .ops-nav__link iconify-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--ops-text-secondary);
+}
+
+.ops-nav--compact .ops-nav__text {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.ops-nav--compact .ops-nav__link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--ops-title);
+}
+
+.ops-nav--compact .ops-nav__link:hover iconify-icon {
+  color: var(--ops-cyan);
+}
+
+.ops-nav--compact .ops-nav__link.is-active {
+  background: var(--ops-accent-soft);
+  color: var(--ops-cyan);
+  font-weight: 600;
+  border-left-color: var(--ops-cyan);
+}
+
+.ops-nav--compact .ops-nav__link.is-active iconify-icon {
+  color: var(--ops-cyan);
+}
+
+/* 系统状态（固定在底部用户区上方，不挤压退出按钮） */
+.ops-side-status {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 5px 8px 4px;
+  border-top: 1px solid var(--ops-border);
+  background: rgba(8, 14, 28, 0.65);
+  max-height: 132px;
+  overflow: hidden;
+}
+
+.ops-side-status__title {
+  margin: 0 0 4px;
+  padding: 0 4px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ops-text-secondary);
+}
+
+.ops-side-status__list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 6px;
+}
+
+.ops-side-status__row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 9px;
+  line-height: 1.25;
+  color: var(--ops-text);
+}
+
+.ops-side-status__row .ops-status-dot {
+  width: 5px;
+  height: 5px;
+  flex-shrink: 0;
+}
+
+.ops-side-status__text {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 底部：用户 + 退出（始终贴底可见） */
+.ops-side-foot {
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  margin-top: 0;
+  padding: 6px 8px 10px;
+  border-top: 1px solid var(--ops-border);
+  background: rgba(10, 16, 32, 0.98);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 2;
+}
+
+.ops-side-logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 36px;
+  padding: 8px 10px;
+  border: 1px solid rgba(251, 113, 133, 0.55);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(251, 113, 133, 0.2) 0%, rgba(190, 24, 93, 0.12) 100%);
+  color: #fecdd3;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(251, 113, 133, 0.1);
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ops-side-logout:hover {
+  background: linear-gradient(180deg, rgba(251, 113, 133, 0.35) 0%, rgba(190, 24, 93, 0.22) 100%);
+  border-color: rgba(251, 113, 133, 0.85);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(251, 113, 133, 0.22);
+}
+
+.ops-side-logout iconify-icon {
+  font-size: 14px;
+}
+
+.ops-side-foot__status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 6px;
+  font-size: 10px;
+  color: var(--ops-text-secondary);
+}
+
+.ops-side-foot__status-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ops-admin-card--compact {
+  margin: 0 !important;
+  padding: 8px 8px !important;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--ops-border);
+}
+
+.ops-admin-card--compact .ops-admin-card__avatar {
+  width: 32px !important;
+  height: 32px !important;
+  font-size: 12px !important;
+  border-radius: 8px !important;
+}
+
+.ops-admin-card--compact .ops-admin-card__name {
+  font-size: 12px !important;
+}
+
+.ops-admin-card--compact .ops-admin-card__role {
+  font-size: 10px !important;
+}
+
+.ops-admin-card__meta {
+  min-width: 0;
+  flex: 1;
+}
+
+/* 隐藏旧版侧栏占用空间的模块 */
+.ops-side .ops-status-hub,
+.ops-side .ops-side-panel,
+.ops-side .ops-side-panel--summary,
+.ops-nav--primary > .ops-nav__label:first-child {
+  display: none !important;
+}
+
+/* 通用 nav 规则在紧凑模式下不叠加过大间距 */
+.ops-side .ops-nav a:not(.ops-nav__link) {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+@media (max-height: 720px) {
+  .ops-nav--compact .ops-nav__link {
+    min-height: 32px;
+    padding: 5px 9px;
+    font-size: 11px;
+  }
+
+  .ops-nav--compact .ops-nav__group-label {
+    font-size: 9px;
+    padding-top: 2px;
+  }
+
+  .ops-brand-v4--compact {
+    padding: 8px 10px 6px !important;
+  }
+}

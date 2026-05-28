@@ -11,6 +11,8 @@
     "serve": "npx http-server . -p 8080 -c-1 --cors -o /welcome.html",
     "server:3002": "npm --prefix server start",
     "server:3002:dev": "npm --prefix server run dev",
+    "server:admin": "npm --prefix server run start:admin",
+    "server:admin:dev": "npm --prefix server run dev:admin",
     "datav": "npm run server:3002"
   },
   "devDependencies": {

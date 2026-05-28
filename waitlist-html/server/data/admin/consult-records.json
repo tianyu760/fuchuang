@@ -1376,5 +1376,123 @@
     "category": "other",
     "riskLevel": "low",
     "createdAt": "2026-05-26T16:38:54.061Z"
+  },
+  {
+    "id": "cst_1779974234808_82d8ff82",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n本案初步判断为民间借贷纠纷。用户提供的案情信息显示，李某（出借人）与张某（借款人）之间存在明确的借款合意（约定借款50000元，三个月后归还）及资金交付事实（转账记录），因借款人张某未按约定期限还款并拖延，导致纠纷发生。",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "本案初步判断",
+      "为民间借贷纠",
+      "用户提供的案",
+      "情信息显示",
+      "李某",
+      "出借人",
+      "与张某",
+      "借款人"
+    ],
+    "category": "fraud",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-28T13:17:14.771Z"
+  },
+  {
+    "id": "cst_1779974236127_43de6e38",
+    "userId": "guest",
+    "question": "图片：屏幕截图 2026-05-24 162845.png",
+    "keywords": [
+      "图片",
+      "屏幕截图"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-28T13:17:16.097Z"
+  },
+  {
+    "id": "cst_1779976421424_9882beb3",
+    "userId": "1776096155583ciny",
+    "question": "",
+    "keywords": [],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-28T13:53:41.342Z"
+  },
+  {
+    "id": "cst_1779976422346_7fa800fb",
+    "userId": "guest",
+    "question": "租房押金纠纷证据材料.docx",
+    "keywords": [
+      "租房押金纠纷",
+      "证据材料"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-28T13:53:42.303Z"
+  },
+  {
+    "id": "cst_1779980898028_14b5142c",
+    "userId": "1776096155583ciny",
+    "question": "​一、纠纷类型判断\n根据用户提供的案情信息，本案为典型的民间借贷纠纷。出借人李某与借款人张某之间存在明确的借款合意、款项交付事实以及还款期限约定，符合民间借贷法律关系的基本特征。\n二、主要法律风险\n点\n1. **证据证明力风险**：现有证据",
+    "keywords": [
+      "民间借贷",
+      "纠纷类型判断",
+      "根据用户提供",
+      "的案情信息",
+      "本案为典型的",
+      "民间借贷纠纷",
+      "出借人李某与",
+      "借款人张某之",
+      "间存在明确的",
+      "借款合意"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-28T15:08:17.975Z"
+  },
+  {
+    "id": "cst_1779980899673_9362fced",
+    "userId": "guest",
+    "question": "图片：屏幕截图 2026-05-24 162845.png",
+    "keywords": [
+      "图片",
+      "屏幕截图"
+    ],
+    "category": "other",
+    "riskLevel": "mid",
+    "createdAt": "2026-05-28T15:08:19.620Z"
+  },
+  {
+    "id": "cst_1779985951153_1464ce31",
+    "userId": "1779972346887oygj",
+    "question": "中华人民共和国公司法",
+    "keywords": [
+      "中华人民共和国公司法"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-28T16:32:31.078Z"
+  },
+  {
+    "id": "cst_1779986829618_f0a0e655",
+    "userId": "1779972346887oygj",
+    "question": "北京市大气污染防治条例",
+    "keywords": [
+      "北京市大气污染防治条例"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-28T16:47:09.550Z"
+  },
+  {
+    "id": "cst_1779987955524_0a6f558c",
+    "userId": "1779972346887oygj",
+    "question": "北京市大气污染防治条例",
+    "keywords": [
+      "北京市大气污染防治条例"
+    ],
+    "category": "other",
+    "riskLevel": "low",
+    "createdAt": "2026-05-28T17:05:55.457Z"
   }
 ]

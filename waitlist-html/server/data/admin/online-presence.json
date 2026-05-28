@@ -3,10 +3,18 @@
     {
       "userId": "guest",
       "userName": "manager1",
-      "ip": "::1",
-      "sourcePage": "admin-dashboard.html",
-      "at": 1779969280537,
+      "ip": "::ffff:127.0.0.1",
+      "sourcePage": "settings.html",
+      "at": 1779990739656,
       "connectionId": "web_guest"
+    },
+    {
+      "userId": "1776096155583ciny",
+      "userName": "3837498182@qq.com",
+      "ip": "::1",
+      "sourcePage": "app",
+      "at": 1779990758924,
+      "connectionId": ""
     }
   ]
 }

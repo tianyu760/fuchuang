@@ -5,7 +5,9 @@
   "main": "multimodal-server.js",
   "scripts": {
     "start": "node multimodal-server.js",
+    "start:admin": "node start-admin.js",
     "dev": "nodemon multimodal-server.js",
+    "dev:admin": "nodemon start-admin.js",
     "contact": "node contact-server.js",
     "utf8": "node ../scripts/ensure-utf8-no-bom.js"
   },

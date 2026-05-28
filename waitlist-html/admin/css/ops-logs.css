@@ -1,0 +1,139 @@
+/* 系统日志中心 */
+.ops-log-dash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ops-gap);
+}
+
+.ops-log-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.ops-log-kpi {
+  min-width: 0;
+  padding: 10px 12px;
+  min-height: 56px;
+  border-radius: var(--ops-radius);
+  border: 1px solid var(--ops-border);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+@media (max-width: 900px) {
+  .ops-log-kpi-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ops-log-kpi {
+    flex: 0 0 min(140px, 28vw);
+  }
+}
+
+.ops-log-kpi label {
+  font-size: 11px;
+  color: var(--ops-text-secondary);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.ops-log-kpi strong {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ops-title);
+}
+
+.ops-log-kpi--total strong { color: var(--ops-cyan); }
+.ops-log-kpi--today strong { color: var(--ops-gold); }
+.ops-log-kpi--ok strong { color: var(--ops-success); }
+.ops-log-kpi--fail strong { color: var(--ops-risk); }
+.ops-log-kpi--mod strong { font-size: 14px; }
+
+.ops-log-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.ops-log-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.ops-log-table th,
+.ops-log-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--ops-border);
+  text-align: left;
+}
+
+.ops-log-table tbody tr {
+  cursor: pointer;
+}
+
+.ops-log-table tbody tr:hover {
+  background: rgba(56, 189, 248, 0.05);
+}
+
+.ops-log-st--ok { color: var(--ops-success); font-weight: 600; }
+.ops-log-st--fail { color: var(--ops-risk); font-weight: 600; }
+
+.ops-log-empty {
+  text-align: center;
+  padding: 32px;
+  color: var(--ops-text-secondary);
+}
+
+.ops-drawer--log {
+  width: min(520px, 100vw);
+}
+
+.ops-log-detail-section {
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ops-border);
+}
+
+.ops-log-detail-section h4 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--ops-title);
+}
+
+.ops-log-code {
+  font-size: 11px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--ops-border);
+  border-radius: 6px;
+  padding: 10px;
+  overflow: auto;
+  max-height: 160px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--ops-text);
+}
+
+.ops-log-detail-loading {
+  padding: 24px;
+  text-align: center;
+  color: var(--ops-text-secondary);
+}
+
+.ops-log-skeleton .ops-log-kpi {
+  min-height: 64px;
+  animation: ops-log-shimmer 1.2s ease-in-out infinite;
+  background: linear-gradient(90deg, rgba(30,41,59,.9) 25%, rgba(51,65,85,.5) 50%, rgba(30,41,59,.9) 75%);
+  background-size: 200% 100%;
+}
+
+@keyframes ops-log-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

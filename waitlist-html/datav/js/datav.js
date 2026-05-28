@@ -73,6 +73,23 @@
       if (!Array.isArray(arr)) return labels.map(function () { return 0; });
       return arr.map(function (x) { return Number(x) || 0; });
     }
+    var consultCount = Number(stats.consultCount) || 0;
+    var documentCount = Number(stats.documentCount) || 0;
+    var ocrCount = Number(stats.ocrCount) || 0;
+    var faguiCount = Number(stats.faguiCount) || 0;
+    var aiCalls = stats.aiCalls;
+    if (aiCalls == null || aiCalls === '' || isNaN(Number(aiCalls))) {
+      aiCalls = consultCount + faguiCount + documentCount + ocrCount;
+    } else {
+      aiCalls = Number(aiCalls) || 0;
+    }
+    stats = Object.assign({}, stats, {
+      aiCalls: aiCalls,
+      consultCount: consultCount,
+      documentCount: documentCount,
+      ocrCount: ocrCount,
+      faguiCount: faguiCount
+    });
     return {
       revision: d.revision || { seq: 0, at: 0 },
       serverTime: d.serverTime || new Date().toISOString(),
@@ -194,16 +211,21 @@
     return inst;
   }
 
+  function kpiDisplayVal(v) {
+    if (v == null || v === '' || (typeof v === 'number' && isNaN(v))) return 0;
+    return v;
+  }
+
   function renderKpiRow(stats) {
     var row = $('kpi-row');
     if (!row) return;
     var cards = [
-      { label: '累计 AI 调用', val: stats.aiCalls, unit: '次' },
-      { label: '今日总调用', val: stats.aiCallsToday, unit: '次' },
-      { label: 'OCR 识别总量', val: stats.ocrCount, unit: '次' },
-      { label: 'OCR 成功率', val: stats.ocrSuccessRate, unit: '%' },
-      { label: '文书生成总量', val: stats.documentCount, unit: '份' },
-      { label: '普法今日阅读', val: stats.pufaReadsToday, unit: '次' }
+      { label: '累计 AI 调用', val: kpiDisplayVal(stats.aiCalls), unit: '次' },
+      { label: '今日总调用', val: kpiDisplayVal(stats.aiCallsToday), unit: '次' },
+      { label: 'OCR 识别总量', val: kpiDisplayVal(stats.ocrCount), unit: '次' },
+      { label: 'OCR 成功率', val: kpiDisplayVal(stats.ocrSuccessRate), unit: '%' },
+      { label: '文书生成总量', val: kpiDisplayVal(stats.documentCount), unit: '份' },
+      { label: '普法今日阅读', val: kpiDisplayVal(stats.pufaReadsToday), unit: '次' }
     ];
     row.innerHTML = cards.map(function (c, i) {
       return '<div class="datav-kpi-card" style="animation-delay:' + (i * 0.06) + 's">' +

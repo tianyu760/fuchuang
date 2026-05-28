@@ -1,6 +1,6 @@
 /**
  * 多模态 AI 代理服务（Node.js）
- * 端口：3002
+ * 端口：默认 3002（用户端）；管理端可用 PORT=3003 或 start-admin.js
  * 职责：
  *   - 接收前端文件上传（图片/文档），提取内容
  *   - 接收对话请求，代理转发给 OpenAI GPT-4o（流式）
@@ -48,6 +48,8 @@ const {
 } = require('./lib/yuanqi-ai');
 const adminRouter = require('./modules/admin');
 const logsRouter = require('./modules/logs-router');
+const settingsRouter = require('./modules/settings-router');
+const settingsRuntime = require('./modules/admin/settings-runtime');
 const adminAnalytics = adminRouter.store;
 const SYSTEM_CONFIG = require('./lib/system-config');
 let lawEducationRouter;
@@ -86,7 +88,7 @@ try { pdfParse = require('pdf-parse'); } catch (e) { console.warn('[warn] pdf-pa
 try { mammoth  = require('mammoth');   } catch (e) { console.warn('[warn] mammoth 未安装，DOCX 解析不可用'); }
 
 // ─── 常量 ─────────────────────────────────────────────────────────────────
-const PORT = 3002;
+const PORT = parseInt(process.env.PORT, 10) || 3002;
 
 function buildOcrRecord(file, extra) {
   const base = {
@@ -1203,6 +1205,9 @@ app.delete('/api/knowledge/:id', (req, res) => {
 // ── POST /api/ocr  接收图片文件，调用腾讯云 GeneralBasicOCR，返回识别文字 ──────
 app.post('/api/ocr', upload.single('file'), async (req, res) => {
   try {
+    if (!settingsRuntime.isOcrEnabled()) {
+      return res.status(503).json({ success: false, message: 'OCR 识别功能已由管理员关闭' });
+    }
     if (!req.file) {
       return res.status(400).json({ success: false, message: '请上传图片文件，字段名：file' });
     }
@@ -1274,6 +1279,9 @@ app.post('/api/ocr', upload.single('file'), async (req, res) => {
 // ── POST /api/process-image  OCR识别 + 腾讯元器AI法律分析，完整闭环 ──────
 app.post('/api/process-image', upload.single('file'), async (req, res) => {
   try {
+    if (!settingsRuntime.isOcrEnabled()) {
+      return res.status(503).json({ success: false, error: 'OCR 识别功能已由管理员关闭' });
+    }
     if (!req.file) {
       return res.status(400).json({ success: false, error: '请上传图片文件，字段名：file' });
     }
@@ -1306,10 +1314,15 @@ app.post('/api/process-image', upload.single('file'), async (req, res) => {
     const imageUser = getTokenUser(req);
     const userId = (imageUser && imageUser.id) ? imageUser.id : 'fayi_image_user';
 
-    const analysis = await chatPassthrough({
-      messages: [{ role: 'user', content: buildPassthroughUserContent('', [{ label: 'OCR/' + imgFileName, text: ocr_text || PLACEHOLDER.image }]) }],
-      userId: userId
-    });
+    let analysis = '';
+    if (settingsRuntime.isAutoAnalysisEnabled()) {
+      analysis = await chatPassthrough({
+        messages: [{ role: 'user', content: buildPassthroughUserContent('', [{ label: 'OCR/' + imgFileName, text: ocr_text || PLACEHOLDER.image }]) }],
+        userId: userId
+      });
+    } else {
+      analysis = '自动法律分析已关闭，仅返回 OCR 识别文本。';
+    }
     console.log(`[/api/process-image] 接口返回：{ success: true, ocr_text长度: ${ocr_text.length}, analysis长度: ${analysis.length} }`);
 
     adminAnalytics.appendOcrRecord(buildOcrRecord(req.file, {
@@ -1330,13 +1343,15 @@ app.post('/api/process-image', upload.single('file'), async (req, res) => {
       ocrText: ensureUtf8String(ocr_text.slice(0, 500)),
       source: 'process_image'
     });
-    adminAnalytics.logEvent('ai_case', {
-      userId: userId,
-      risk: '中',
-      preview: ensureUtf8String((ocr_text || '图片法律分析').slice(0, 80)),
-      analysis: (analysis || '').slice(0, 400),
-      source: 'process_image'
-    });
+    if (settingsRuntime.isAutoAnalysisEnabled()) {
+      adminAnalytics.logEvent('ai_case', {
+        userId: userId,
+        risk: '中',
+        preview: ensureUtf8String((ocr_text || '图片法律分析').slice(0, 80)),
+        analysis: (analysis || '').slice(0, 400),
+        source: 'process_image'
+      });
+    }
 
     res.json({ success: true, ocr_text, analysis });
 
@@ -1358,6 +1373,10 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
       const ext = path.extname(req.file.originalname || '').toLowerCase();
       const isImg = ['.jpg', '.jpeg', '.png', '.bmp', '.gif', '.webp'].includes(ext);
       const isDoc = ['.pdf', '.docx', '.doc', '.txt'].includes(ext);
+
+      if (isImg && !settingsRuntime.isOcrEnabled()) {
+        return res.status(503).json({ success: false, error: 'OCR 识别功能已由管理员关闭' });
+      }
 
       if (isImg && tencentOcrClient) {
         const caseOcrStarted = Date.now();
@@ -1424,6 +1443,12 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
 
     const caseUser = getTokenUser(req);
     const userId = (req.body && req.body.conversationId) || (caseUser && caseUser.id) || 'fayi_case_user';
+    if (!settingsRuntime.isAutoAnalysisEnabled()) {
+      return res.status(503).json({
+        success: false,
+        error: '自动法律分析已关闭，请联系管理员或仅使用 OCR 文本结果'
+      });
+    }
     const content = await chatPassthrough({
       messages: [{ role: 'user', content: buildPassthroughUserContent(userText, [{ label: '案件材料', text: extractedText }]) }],
       userId: userId
@@ -1469,6 +1494,9 @@ app.post('/api/process-case', upload.single('file'), async (req, res) => {
 // ── POST /api/wenshi/generate  法律文书生成（直连 Qwen，纯文本）──────────────────
 app.post('/api/wenshi/generate', async (req, res) => {
   try {
+    if (!settingsRuntime.isDocumentAiEnabled()) {
+      return res.status(503).json(apiError('AI 文书生成功能已由管理员关闭', 'feature_disabled'));
+    }
     const question = (req.body && req.body.question) ? String(req.body.question).trim() : '';
     if (!question) {
       return res.status(400).json(apiError('问题不能为空'));
@@ -1511,6 +1539,9 @@ app.post('/api/wenshi/generate', async (req, res) => {
 // ── POST /api/legal/search  法律法规检索（直连 Qwen，无历史上下文）───────────────
 async function handleLegalSearch(req, res) {
   try {
+    if (!settingsRuntime.isRegulationRecommendEnabled()) {
+      return res.status(503).json(apiError('法规检索功能已由管理员关闭', 'feature_disabled'));
+    }
     const query = (req.body && req.body.query) ? String(req.body.query).trim() : '';
     if (!query) {
       return res.status(400).json(apiError('检索词不能为空'));
@@ -1552,8 +1583,117 @@ const { installAdminJsonEnvelope, installApiErrorHandlers } = require('./lib/api
 installAdminJsonEnvelope(adminRouter);
 app.use('/api/admin', adminRouter);
 
+// 文书系统 API 别名（与 /api/admin/documents 等价，需管理员鉴权）
+const adminAuth = require('./modules/admin/admin-auth');
+const documentCenterApi = require('./modules/admin/document-center');
+const regulationCenterApi = require('./modules/admin/regulation-center');
+
+app.get('/api/regulations/list', adminAuth.requireAdmin, function (req, res) {
+  res.json({
+    success: true,
+    data: regulationCenterApi.list({
+      page: req.query.page,
+      pageSize: req.query.pageSize,
+      category: req.query.category,
+      region: req.query.region,
+      keyword: req.query.keyword || req.query.search
+    })
+  });
+});
+
+app.get('/api/regulations/detail/:id', adminAuth.requireAdmin, function (req, res) {
+  const detail = regulationCenterApi.getDetail(req.params.id);
+  if (!detail) return res.status(404).json({ success: false, message: '法规不存在' });
+  res.json({ success: true, data: detail });
+});
+
+app.get('/api/document/statistics', adminAuth.requireAdmin, function (req, res) {
+  res.json({ success: true, data: documentCenterApi.computeStatistics() });
+});
+
+app.get('/api/document/list', adminAuth.requireAdmin, function (req, res) {
+  res.json({
+    success: true,
+    data: documentCenterApi.list({
+      page: req.query.page,
+      pageSize: req.query.pageSize,
+      search: req.query.search,
+      docType: req.query.docType,
+      status: req.query.status,
+      date: req.query.date
+    })
+  });
+});
+
+app.get('/api/document/detail/:id', adminAuth.requireAdmin, function (req, res) {
+  const detail = documentCenterApi.getDetail(req.params.id);
+  if (!detail) return res.status(404).json({ success: false, message: '文书不存在' });
+  res.json({ success: true, data: detail });
+});
+app.post('/api/document/regenerate', adminAuth.requireAdmin, async function (req, res) {
+  const id = (req.body && req.body.id) ? String(req.body.id) : '';
+  if (!id) return res.status(400).json({ success: false, message: '缺少文书 ID' });
+  try {
+    const detail = await documentCenterApi.regenerate(id);
+    if (!detail) return res.status(404).json({ success: false, message: '文书不存在' });
+    res.json({ success: true, data: detail, message: '文书已重新生成' });
+  } catch (e) {
+    res.status(e.statusCode || 500).json({ success: false, message: e.message || '重新生成失败' });
+  }
+});
+const ocrCenterApi = require('./modules/admin/ocr-center');
+
+app.get('/api/ocr/list', adminAuth.requireAdmin, function (req, res) {
+  res.json({
+    success: true,
+    data: ocrCenterApi.list({
+      page: req.query.page,
+      pageSize: req.query.pageSize,
+      search: req.query.search,
+      status: req.query.status,
+      ocrType: req.query.ocrType,
+      riskLevel: req.query.riskLevel
+    }, req)
+  });
+});
+
+app.get('/api/ocr/detail/:id', adminAuth.requireAdmin, function (req, res) {
+  const detail = ocrCenterApi.getDetail(req.params.id, req);
+  if (!detail) return res.status(404).json({ success: false, message: 'OCR 记录不存在' });
+  res.json({ success: true, data: detail });
+});
+
+app.get('/api/ocr/image/:id', adminAuth.requireAdmin, function (req, res) {
+  const fp = ocrCenterApi.getImagePath(req.params.id);
+  if (!fp) return res.status(404).json({ success: false, message: '图片不存在' });
+  res.sendFile(fp);
+});
+
+app.get('/api/legal-consultation/statistics', adminAuth.requireAdmin, function (req, res) {
+  const consultCenter = require('./modules/admin/consult-center');
+  res.json({ success: true, data: consultCenter.computeStatistics() });
+});
+
+app.get('/api/document/pdf/:id', adminAuth.requireAdmin, function (req, res) {
+  if (!settingsRuntime.isDataExportAllowed()) {
+    return res.status(403).json({ success: false, message: '数据导出功能已由管理员关闭' });
+  }
+  const detail = documentCenterApi.getDetail(req.params.id);
+  if (!detail) return res.status(404).json({ success: false, message: '文书不存在' });
+  res.json({
+    success: true,
+    data: {
+      id: detail.id,
+      title: detail.title,
+      hint: '请在前端使用 OpsDocumentPdf.generateDocumentPDF 生成并下载 PDF'
+    }
+  });
+});
+
 installAdminJsonEnvelope(logsRouter);
 app.use('/api/logs', logsRouter);
+installAdminJsonEnvelope(settingsRouter);
+app.use('/api/settings', settingsRouter);
 
 // ── 公共数字看板 API（/api/dashboard/*）──────────────────────────────────────
 app.get('/api/dashboard/realtime', (req, res) => {

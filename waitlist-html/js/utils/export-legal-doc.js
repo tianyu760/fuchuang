@@ -33,6 +33,15 @@
     return cleaned.slice(0, 80);
   }
 
+  function ensureExportAllowed() {
+    var ps = global.FayiPublicSettings;
+    if (ps && ps.features && ps.features.allowDataExport === false) {
+      if (global.FayiToast) FayiToast('数据导出功能已由管理员关闭', 'error');
+      return false;
+    }
+    return true;
+  }
+
   function buildBaseFilename(data) {
     var title = sanitizeFilenamePart(data && data.title, '法律文书');
     var d = new Date();
@@ -164,6 +173,7 @@
   }
 
   function exportLegalDocument(data, options) {
+    if (!ensureExportAllowed()) return Promise.reject(new Error('export_disabled'));
     options = options || {};
     if (typeof htmlDocx === 'undefined') {
       if (global.FayiToast) FayiToast('Word 导出库未加载', 'error');
@@ -265,6 +275,7 @@
   }
 
   function exportLegalPdf(data, options) {
+    if (!ensureExportAllowed()) return Promise.reject(new Error('export_disabled'));
     options = options || {};
     if (typeof html2canvas === 'undefined' || typeof jspdf === 'undefined') {
       if (global.FayiToast) FayiToast('PDF 导出库未加载', 'error');

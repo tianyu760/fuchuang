@@ -204,7 +204,7 @@ window.FayiAdminPanel = (function () {
           tb.innerHTML = '';
           res.data.list.forEach(function (r) {
             var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + r.type + '</td><td>' + (r.preview || r.reply || '—') + '</td><td>' + (r.risk || '—') + '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
+            tr.innerHTML = '<td>' + (r.legalType || r.typeCode || '—') + '</td><td>' + (r.title || r.preview || '—') + '</td><td>' + (r.riskLabel || r.riskLevel || '—') + '</td><td>' + (r.createdAt || '').slice(0, 16).replace('T', ' ') + '</td>';
             tb.appendChild(tr);
           });
           $('cons-pg').innerHTML = '';

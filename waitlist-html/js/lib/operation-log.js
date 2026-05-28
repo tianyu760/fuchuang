@@ -122,6 +122,22 @@
     } catch (e) { /* ignore */ }
 
     syncServer(entry);
+
+    if (global.FayiSystemLog && FayiSystemLog.logAction) {
+      var modMap = {
+        consult: 'consult', case: 'consult', document: 'document',
+        law_search: 'regulation', ocr: 'ocr', pufa: 'operation',
+        upload: 'ocr', page: 'system', login: 'system', register: 'system'
+      };
+      FayiSystemLog.logAction({
+        actionType: t === 'login' || t === 'register' ? 'login' : 'create',
+        module: modMap[t] || t || 'system',
+        actionName: content || modLabel,
+        description: content,
+        status: 'success'
+      });
+    }
+
     return entry;
   }
 

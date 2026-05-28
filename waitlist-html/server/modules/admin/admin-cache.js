@@ -3,6 +3,14 @@
  */
 const DEFAULT_TTL_MS = 30000;
 
+function resolveDefaultTtl() {
+  try {
+    return require('./settings-runtime').getCacheTtlMs();
+  } catch (e) {
+    return DEFAULT_TTL_MS;
+  }
+}
+
 const mem = new Map();
 
 function key(parts) {
@@ -22,7 +30,7 @@ function get(k) {
 function set(k, value, ttlMs) {
   mem.set(k, {
     value: value,
-    expiresAt: Date.now() + (ttlMs || DEFAULT_TTL_MS)
+    expiresAt: Date.now() + (ttlMs != null ? ttlMs : resolveDefaultTtl())
   });
 }
 

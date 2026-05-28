@@ -241,18 +241,30 @@ function categoryBreakdownFromConsult() {
 
 function keywordCloudFromData(limit) {
   const freq = {};
+  const bump = function (k, n) {
+    if (!k || String(k).length < 2) return;
+    const key = String(k).trim();
+    if (key.length < 2) return;
+    freq[key] = (freq[key] || 0) + (n || 1);
+  };
+
   dataDb.listConsult({}).forEach(function (c) {
-    (c.keywords || []).forEach(function (k) {
-      if (k && k.length >= 2) freq[k] = (freq[k] || 0) + 1;
-    });
+    (c.keywords || []).forEach(function (k) { bump(k, 1); });
     const q = String(c.question || '');
-    (q.match(/[\u4e00-\u9fa5]{2,8}/g) || []).forEach(function (w) {
-      if (w.length >= 2) freq[w] = (freq[w] || 0) + 1;
-    });
+    (q.match(/[\u4e00-\u9fa5]{2,8}/g) || []).forEach(function (w) { bump(w, 1); });
   });
+
+  dataDb.listBehavior({ limit: 6000 }).forEach(function (b) {
+    if (b.module !== 'consult' && b.module !== 'regulation') return;
+    const meta = b.meta || {};
+    (meta.keywords || []).forEach(function (k) { bump(k, 1); });
+    const text = String(meta.preview || meta.keyword || b.action || '');
+    (text.match(/[\u4e00-\u9fa5]{2,6}/g) || []).forEach(function (w) { bump(w, 1); });
+  });
+
   return Object.keys(freq)
     .sort(function (a, b) { return freq[b] - freq[a]; })
-    .slice(0, limit || 36)
+    .slice(0, limit || 48)
     .map(function (k) { return { name: k, value: freq[k] }; });
 }
 
@@ -306,11 +318,23 @@ function riskBreakdownFromLogs() {
   ];
 }
 
-function funnelFromTables() {
-  const consult = dataDb.listConsult({}).length;
-  const reg = dataDb.listBehavior({ limit: 8000 }).filter(function (b) {
+function faguiTotalFromBehavior() {
+  return dataDb.listBehavior({ limit: 50000 }).filter(function (b) {
     return b.action === 'regulation_search' || b.action === 'ai_fagui';
   }).length;
+}
+
+/** 累计 AI 调用 = 咨询 + 法规检索 + 文书 + OCR */
+function totalAiCalls() {
+  return dataDb.listConsult({}).length +
+    faguiTotalFromBehavior() +
+    dataDb.listDocumentGenerate({}).length +
+    dataDb.readOcrRecords().length;
+}
+
+function funnelFromTables() {
+  const consult = dataDb.listConsult({}).length;
+  const reg = faguiTotalFromBehavior();
   const doc = dataDb.listDocumentGenerate({}).length;
   return [
     { name: '法律咨询', value: consult },
@@ -446,6 +470,87 @@ function formatBehaviorMessage(b) {
     ' [' + (b.result === 'success' ? '成功' : '失败') + ']';
 }
 
+function regulationHeatFromBehavior(limit) {
+  const freq = {};
+  const bump = function (term, n) {
+    const k = String(term || '').trim();
+    if (k.length < 2) return;
+    freq[k] = (freq[k] || 0) + (n || 1);
+  };
+  dataDb.listBehavior({ limit: 8000 }).forEach(function (b) {
+    if (b.module !== 'regulation' && b.action !== 'ai_fagui' && b.action !== 'regulation_search') return;
+    const meta = b.meta || {};
+    bump(meta.keyword || meta.query || meta.preview, 2);
+    const text = String(b.detail || b.action || '');
+    (text.match(/[\u4e00-\u9fa5]{2,10}/g) || []).forEach(function (w) { bump(w, 1); });
+  });
+  dataDb.listConsult({}).forEach(function (c) {
+    if (c.category === 'contract' || /合同|法规|条例/.test(String(c.question || ''))) {
+      (c.keywords || []).forEach(function (k) { bump(k, 1); });
+    }
+  });
+  return Object.keys(freq).sort(function (a, b) { return freq[b] - freq[a]; })
+    .slice(0, limit || 20)
+    .map(function (k) {
+      return { keyword: k, label: k, searchCount: freq[k], value: freq[k] };
+    });
+}
+
+const AUTO_RISK_RULES = [
+  { id: 'amount', label: '金额较大', re: /(\d+(?:\.\d+)?)\s*万|百万|千万|赔偿.*\d{4,}/ },
+  { id: 'labor', label: '劳动仲裁', re: /劳动仲裁|仲裁申请|辞退|工伤|拖欠工资/ },
+  { id: 'complaint', label: '多次投诉', re: /多次投诉|反复投诉|第[二三四五]次/ },
+  { id: 'contract', label: '合同违约', re: /合同违约|根本违约|解除合同|违约金/ },
+  { id: 'keywords', label: '高风险关键词', re: /刑事|诈骗|拘留|高利贷|非法集资|暴力|威胁/ }
+];
+
+function scanAutoRisks(events) {
+  const found = [];
+  const seen = {};
+  (events || []).forEach(function (e) {
+    const text = JSON.stringify(e.payload || {}) + (e.payload && e.payload.preview) || '';
+    AUTO_RISK_RULES.forEach(function (rule) {
+      if (!rule.re.test(text)) return;
+      const key = e.id + '_' + rule.id;
+      if (seen[key]) return;
+      seen[key] = 1;
+      found.push({
+        id: 'auto_' + key,
+        title: rule.label + '：' + String((e.payload && e.payload.preview) || e.type || '').slice(0, 60),
+        level: rule.id === 'keywords' || rule.id === 'amount' ? 'high' : 'mid',
+        type: rule.label,
+        user: (e.payload && (e.payload.nickname || e.payload.email)) || e.userId || '—',
+        time: e.createdAt,
+        source: 'auto',
+        relatedId: e.id
+      });
+    });
+  });
+  return found;
+}
+
+function listEnhancedRisks(limit) {
+  const fromDb = dataDb.listRiskWarnings({ limit: limit || 40 }).map(function (r) {
+    return {
+      id: r.id,
+      title: r.title,
+      level: r.level || 'mid',
+      type: r.category || r.type || '风险预警',
+      user: r.userId || r.source || '系统',
+      time: r.createdAt,
+      source: 'db',
+      keywords: r.keywords || []
+    };
+  });
+  const store = require('./admin-store');
+  const auto = scanAutoRisks(store.listLogs({}));
+  const merged = auto.concat(fromDb);
+  merged.sort(function (a, b) {
+    return String(b.time).localeCompare(String(a.time));
+  });
+  return merged.slice(0, limit || 50);
+}
+
 module.exports = {
   parseRange: parseRange,
   buildStats: buildStats,
@@ -455,6 +560,8 @@ module.exports = {
   hourlyHeatmap: hourlyHeatmap,
   moduleUsageFromBehavior: moduleUsageFromBehavior,
   riskBreakdownFromLogs: riskBreakdownFromLogs,
+  faguiTotalFromBehavior: faguiTotalFromBehavior,
+  totalAiCalls: totalAiCalls,
   funnelFromTables: funnelFromTables,
   dwellFromBehavior: dwellFromBehavior,
   generateInsights: generateInsights,
@@ -462,5 +569,8 @@ module.exports = {
   behaviorFeed: behaviorFeed,
   detectAndLogRisk: detectAndLogRisk,
   ocrStatsForDay: ocrStatsForDay,
-  avgApiResponseMs: avgApiResponseMs
+  avgApiResponseMs: avgApiResponseMs,
+  regulationHeatFromBehavior: regulationHeatFromBehavior,
+  listEnhancedRisks: listEnhancedRisks,
+  scanAutoRisks: scanAutoRisks
 };

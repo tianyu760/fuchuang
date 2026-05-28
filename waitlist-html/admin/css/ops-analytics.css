@@ -1,0 +1,423 @@
+/* 数据分析 · AI 分析中台 */
+.ops-analytics-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.ops-analytics-hint {
+  font-size: 11px;
+  color: var(--ops-text-secondary);
+  margin-right: auto;
+}
+
+/* 核心指标 · 单行 6 项 */
+.ops-analytics-kpi-panel {
+  margin-bottom: var(--ops-gap);
+  padding: 14px 16px 16px;
+  border-radius: var(--ops-radius-lg);
+  border: 1px solid var(--ops-border);
+  background: linear-gradient(165deg, rgba(12, 20, 38, 0.98) 0%, rgba(17, 28, 52, 0.92) 100%);
+  box-shadow: var(--ops-shadow-card);
+}
+
+.ops-analytics-kpi {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ops-analytics-kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 88px;
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.12);
+  border-radius: var(--ops-radius);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.45));
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ops-analytics-kpi-card:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.ops-analytics-kpi-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ops-analytics-kpi-card label {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ops-text-secondary);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ops-analytics-kpi-card__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--ops-cyan);
+}
+
+.ops-analytics-kpi-card__icon iconify-icon {
+  font-size: 17px;
+}
+
+.ops-analytics-kpi-card strong {
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--ops-cyan);
+  font-variant-numeric: tabular-nums;
+}
+
+.ops-analytics-kpi-card--consult .ops-analytics-kpi-card__icon { background: rgba(56, 189, 248, 0.12); color: #38bdf8; }
+.ops-analytics-kpi-card--document .ops-analytics-kpi-card__icon { background: rgba(129, 140, 248, 0.12); color: #a5b4fc; }
+.ops-analytics-kpi-card--document strong { color: #a5b4fc; }
+.ops-analytics-kpi-card--ocr .ops-analytics-kpi-card__icon { background: rgba(52, 211, 153, 0.12); color: #34d399; }
+.ops-analytics-kpi-card--ocr strong { color: #34d399; }
+.ops-analytics-kpi-card--regulation .ops-analytics-kpi-card__icon { background: rgba(251, 191, 36, 0.12); color: #fbbf24; }
+.ops-analytics-kpi-card--regulation strong { color: #fbbf24; }
+.ops-analytics-kpi-card--users .ops-analytics-kpi-card__icon { background: rgba(244, 114, 182, 0.12); color: #f472b6; }
+.ops-analytics-kpi-card--users strong { color: #f472b6; }
+.ops-analytics-kpi-card--today .ops-analytics-kpi-card__icon { background: rgba(45, 212, 191, 0.12); color: #2dd4bf; }
+.ops-analytics-kpi-card--today strong { color: #2dd4bf; }
+
+@media (max-width: 1280px) {
+  .ops-analytics-kpi-card {
+    min-height: 80px;
+    padding: 12px 14px;
+  }
+
+  .ops-analytics-kpi-card strong {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .ops-analytics-kpi {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ops-analytics-kpi-card {
+    flex: 0 0 min(148px, 32vw);
+  }
+}
+
+.ops-analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ops-gap);
+  margin-bottom: var(--ops-gap);
+}
+
+/* 法规热点：独占一行全宽，避免右侧留白 */
+.ops-analytics-grid .ops-analytics-card[data-chart="law"] {
+  grid-column: 1 / -1;
+}
+
+.ops-analytics-grid .ops-analytics-card[data-chart="law"] .ops-chart {
+  height: min(320px, 38vh) !important;
+  min-height: 280px !important;
+}
+
+@media (max-width: 1000px) {
+  .ops-analytics-grid { grid-template-columns: 1fr; }
+
+  .ops-analytics-grid .ops-analytics-card[data-chart="law"] {
+    grid-column: auto;
+  }
+}
+
+.ops-analytics-card .ops-chart {
+  height: var(--ops-chart-h);
+  min-height: var(--ops-chart-h);
+}
+
+.ops-chart--tall {
+  height: 300px;
+  min-height: 300px;
+}
+
+.ops-analytics-chart-cap {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ops-cyan);
+  background: rgba(56, 189, 248, 0.06);
+  border-radius: 8px;
+  border-left: 3px solid var(--ops-cyan);
+}
+
+.ops-chart--loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ops-chart-skeleton {
+  width: 90%;
+  height: 70%;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(30, 41, 59, 0.5) 25%, rgba(51, 65, 85, 0.6) 50%, rgba(30, 41, 59, 0.5) 75%);
+  background-size: 200% 100%;
+  animation: ops-chart-shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes ops-chart-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* AI 解读区 */
+.ops-analytics-insight {
+  margin-bottom: var(--ops-gap);
+  padding: 16px 18px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--ops-radius);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 95, 0.35));
+}
+
+.ops-analytics-insight__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ops-analytics-insight__head h3 {
+  margin: 0;
+  font-size: 15px;
+  color: var(--ops-title);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ops-analytics-insight__summary {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ops-title);
+}
+
+.ops-analytics-insight__body.is-collapsed {
+  display: none;
+}
+
+.ops-analytics-insight__list {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  color: var(--ops-text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.ops-analytics-insight__list li {
+  margin-bottom: 6px;
+}
+
+.ops-analytics-suggest h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--ops-gold);
+}
+
+.ops-analytics-suggest ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: var(--ops-text-secondary);
+  line-height: 1.5;
+}
+
+/* 高级分析区 */
+.ops-analytics-advanced {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--ops-gap);
+}
+
+.ops-analytics-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 900px) {
+  .ops-analytics-split { grid-template-columns: 1fr; }
+}
+
+.ops-analytics-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ops-border);
+}
+
+.ops-analytics-metric {
+  font-size: 12px;
+  color: var(--ops-text-secondary);
+}
+
+.ops-analytics-metric strong {
+  color: var(--ops-cyan);
+  margin-left: 4px;
+}
+
+/* 异常卡片 */
+.ops-analytics-anomaly {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ops-anomaly-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--ops-border);
+  background: rgba(15, 23, 42, 0.6);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.ops-anomaly-card:hover {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.ops-anomaly-card--high {
+  border-color: rgba(251, 113, 133, 0.45);
+  background: rgba(127, 29, 29, 0.15);
+}
+
+.ops-anomaly-card--medium {
+  border-color: rgba(251, 191, 36, 0.35);
+}
+
+.ops-anomaly-card__badge {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--ops-cyan);
+}
+
+.ops-anomaly-card--high .ops-anomaly-card__badge {
+  background: rgba(251, 113, 133, 0.25);
+  color: var(--ops-risk);
+}
+
+.ops-anomaly-card--medium .ops-anomaly-card__badge {
+  background: rgba(251, 191, 36, 0.2);
+  color: var(--ops-gold);
+}
+
+.ops-anomaly-card__body p {
+  margin: 0 0 4px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ops-title);
+}
+
+.ops-anomaly-card__time {
+  font-size: 11px;
+  color: var(--ops-text-secondary);
+}
+
+/* Drill-down 抽屉 */
+.ops-analytics-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(360px, 92vw);
+  height: 100vh;
+  z-index: 1200;
+  background: rgba(15, 23, 42, 0.98);
+  border-left: 1px solid var(--ops-border);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.45);
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.ops-analytics-drawer.is-open {
+  transform: translateX(0);
+}
+
+.ops-analytics-drawer__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--ops-border);
+}
+
+.ops-analytics-drawer__head h4 {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ops-title);
+}
+
+.ops-analytics-drawer__body {
+  padding: 16px;
+  font-size: 13px;
+  color: var(--ops-text);
+  overflow-y: auto;
+}
+
+.ops-analytics-drawer__body .ops-btn {
+  margin-top: 12px;
+}
+
+.ops-btn--ghost {
+  background: transparent;
+  border: 1px solid var(--ops-border);
+  color: var(--ops-text-secondary);
+}
+
+.ops-btn--ghost:hover {
+  border-color: var(--ops-cyan);
+  color: var(--ops-cyan);
+}

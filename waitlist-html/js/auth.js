@@ -174,7 +174,7 @@
 
   function guardUserPages() {
     var path = (window.location.pathname || '').split('/').pop() || '';
-    var adminPages = ['admin-dashboard.html', 'admin-login.html'];
+    var adminPages = ['admin-dashboard.html', 'admin-login.html', '/admin/'];
     if (adminPages.indexOf(path) >= 0) return;
     if (isAdminUser() && getToken() && perm() && !perm().isAdminVerified()) {
       window.location.replace('login.html');
@@ -354,7 +354,7 @@
         if (isAdminRoleUser(user)) {
           completeAdminLogin(res.data);
           FayiToast('管理员验证成功', 'success');
-          window.location.href = 'admin-dashboard.html';
+          window.location.href = 'admin/dashboard.html';
           return;
         }
 

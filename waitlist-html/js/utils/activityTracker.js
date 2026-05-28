@@ -4,9 +4,18 @@
 (function (global) {
   var LOG_KEY = 'fayi_logs';
   var MAX_LOGS = 8000;
-  var SYNC_API = 'http://localhost:3002/api/admin/datav/operation-log';
-  var VISIT_API = 'http://localhost:3002/api/admin/track/visit';
-  var HEARTBEAT_API = 'http://localhost:3002/api/admin/track/heartbeat';
+  function apiOrigin() {
+    if (global.FayiEnv && FayiEnv.apiBase) return FayiEnv.apiBase;
+    if (global.FAYI_API_BASE) return String(global.FAYI_API_BASE).replace(/\/$/, '');
+    if (typeof document !== 'undefined') {
+      var meta = document.querySelector('meta[name="fayi-api-base"]');
+      if (meta && meta.getAttribute('content')) {
+        return meta.getAttribute('content').trim().replace(/\/$/, '');
+      }
+    }
+    return 'http://127.0.0.1:3002';
+  }
+  function adminApi(path) { return apiOrigin() + path; }
 
   var TYPE_TO_SERVER = {
     login: 'user_login',
@@ -123,7 +132,7 @@
       })
     };
     try {
-      fetch(SYNC_API, {
+      fetch(adminApi('/api/admin/datav/operation-log'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
         body: JSON.stringify(body)
@@ -136,7 +145,7 @@
     pageEnterAt = Date.now();
     track('page_view', 'page', '访问页面：' + currentPage, { meta: { page: currentPage } });
     try {
-      fetch(VISIT_API, {
+      fetch(adminApi('/api/admin/track/visit'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json; charset=utf-8' },
         body: JSON.stringify({ page: currentPage })
@@ -163,7 +172,7 @@
       connectionId: 'web_' + (u && u.id ? u.id : 'guest')
     };
     try {
-      fetch(HEARTBEAT_API, {
+      fetch(adminApi('/api/admin/track/heartbeat'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json; charset=utf-8' },
         body: JSON.stringify(body)
