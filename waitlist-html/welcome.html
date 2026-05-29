@@ -13,6 +13,7 @@
 <body class="welcome-page">
 
 <div class="welcome-bg" aria-hidden="true">
+    <div class="welcome-bg__gradient"></div>
     <img
         class="welcome-bg-img"
         src="./assets/images/welcome-bg-justice.png"
@@ -30,9 +31,6 @@
     <div class="welcome-fx__edge welcome-fx__edge--left"></div>
     <div class="welcome-fx__edge welcome-fx__edge--right"></div>
     <div class="welcome-fx__scan"></div>
-    <div class="welcome-fx__particles">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
     <div class="welcome-fx__scales"></div>
 </div>
 
@@ -52,6 +50,35 @@
         </div>
     </div>
 </main>
+
+<!-- 中间偏下：粒子区 + 两个抠图玩偶 -->
+<div class="welcome-mascot-zone" id="welcome-mascot-stage" aria-hidden="true">
+    <canvas class="welcome-mascot-zone__canvas" id="welcome-mascot-particles"></canvas>
+    <div class="welcome-mascot-slot welcome-mascot-slot--bl">
+        <div class="welcome-mascot__body">
+            <img
+                class="welcome-mascot__img"
+                src="./assets/images/welcome-mascot-2-cutout.png?v=4"
+                alt=""
+                width="300"
+                height="300"
+                decoding="async"
+            >
+        </div>
+    </div>
+    <div class="welcome-mascot-slot welcome-mascot-slot--tr">
+        <div class="welcome-mascot__body">
+            <img
+                class="welcome-mascot__img"
+                src="./assets/images/welcome-mascot-1-cutout.png?v=4"
+                alt=""
+                width="320"
+                height="320"
+                decoding="async"
+            >
+        </div>
+    </div>
+</div>
 
 <script src="./js/welcome-page.js"></script>
 </body>

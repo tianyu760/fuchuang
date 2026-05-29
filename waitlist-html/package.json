@@ -13,6 +13,7 @@
     "server:3002:dev": "npm --prefix server run dev",
     "server:admin": "npm --prefix server run start:admin",
     "server:admin:dev": "npm --prefix server run dev:admin",
+    "server:contact": "npm --prefix server run contact",
     "datav": "npm run server:3002"
   },
   "devDependencies": {

@@ -22,6 +22,7 @@
         info.userType === 'admin' ||
         info.role === 'admin' ||
         info.role === 'super_admin' ||
+        info.role === 'platform_admin' ||
         info.identityCode === 'manager'
       );
       if (!okRole) {
@@ -61,7 +62,8 @@
       if (admin && admin.id) FayiAdminAuth.setAdminInfo(admin);
       finishBoot(admin);
     }).catch(function () {
-      /* onUnauthorized 会跳转登录页 */
+      FayiAdminAuth.clearToken();
+      window.location.replace(LOGIN);
     });
     return;
   }

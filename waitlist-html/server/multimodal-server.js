@@ -32,6 +32,7 @@ const {
 const { searchLegalByQwen } = require('./lib/qwen-legal-search');
 const { formatLegalSearchResult } = require('./lib/legal-search-formatter');
 const { generateLegalDocumentByQwen } = require('./lib/qwen-legal-document');
+const WENSHI_QWEN_READY = !!((process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY || '').trim());
 const {
   detectIntent,
   isKeywordConflict,
@@ -1774,5 +1775,8 @@ server.listen(PORT, () => {
   const keyOk = YUANQI_API_KEY && YUANQI_API_KEY.length > 10;
   console.log(keyOk ? '  ✅ 腾讯元器 API Key 已配置' : '  ⚠️  腾讯元器 API Key 未配置');
   console.log(`  智能体 ID: ${YUANQI_ASSISTANT_ID}`);
+  console.log(WENSHI_QWEN_READY
+    ? '  ✅ 文书生成服务已就绪（Qwen / DashScope）'
+    : '  ⚠️  文书生成未配置：请在 server/.env 设置 DASHSCOPE_API_KEY');
   console.log('');
 });

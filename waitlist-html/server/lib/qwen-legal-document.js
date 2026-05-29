@@ -20,7 +20,7 @@ function getConfig() {
     apiKey: (process.env.DASHSCOPE_API_KEY || process.env.QWEN_API_KEY || '').trim(),
     baseURL: process.env.QWEN_LEGAL_DOC_BASE_URL || 'https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions',
     model: process.env.QWEN_LEGAL_DOC_MODEL || 'qwen-plus',
-    timeout: Number(process.env.QWEN_LEGAL_DOC_TIMEOUT_MS || 30000)
+    timeout: Number(process.env.QWEN_LEGAL_DOC_TIMEOUT_MS || 120000)
   };
 }
 

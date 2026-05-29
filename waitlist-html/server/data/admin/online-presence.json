@@ -5,16 +5,8 @@
       "userName": "manager1",
       "ip": "::ffff:127.0.0.1",
       "sourcePage": "settings.html",
-      "at": 1779990739656,
+      "at": 1780040604069,
       "connectionId": "web_guest"
-    },
-    {
-      "userId": "1776096155583ciny",
-      "userName": "3837498182@qq.com",
-      "ip": "::1",
-      "sourcePage": "app",
-      "at": 1779990758924,
-      "connectionId": ""
     }
   ]
 }

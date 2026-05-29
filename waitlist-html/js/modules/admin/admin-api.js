@@ -41,6 +41,32 @@
   var VERIFIED_KEY = 'fayi_admin_permission_verified';
   var FIXED_ADMIN_CODE = 'manager';
 
+  function adminLoginUrl() {
+    var p = typeof location !== 'undefined' ? (location.pathname || '') : '';
+    if (/\/admin(\/|$)/.test(p)) return '../admin-login.html';
+    return 'admin-login.html';
+  }
+
+  function isAdminPage() {
+    var p = typeof location !== 'undefined' ? (location.pathname || '') : '';
+    var h = typeof location !== 'undefined' ? (location.href || '') : '';
+    return /\/admin(\/|$)/.test(p) ||
+      /admin-dashboard\.html/.test(p) ||
+      /admin-dashboard\.html/.test(h);
+  }
+
+  function redirectToLogin(message) {
+    clearToken();
+    if (message && global.FayiToast) {
+      FayiToast(message, 'error');
+      window.setTimeout(function () {
+        window.location.replace(adminLoginUrl());
+      }, 600);
+      return;
+    }
+    window.location.replace(adminLoginUrl());
+  }
+
   function getToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
   function setToken(t) {
     if (t) localStorage.setItem(TOKEN_KEY, t);
@@ -78,15 +104,10 @@
   }
 
   function onUnauthorized() {
-    clearToken();
-    var onAdminPage = /admin-dashboard\.html/.test(location.pathname) ||
-      /\/admin\//.test(location.pathname) ||
-      /admin-dashboard\.html/.test(location.href);
-    if (onAdminPage && global.FayiToast) {
-      FayiToast('登录已过期，请重新登录', 'error');
-      window.setTimeout(function () {
-        window.location.replace('admin-login.html');
-      }, 800);
+    if (isAdminPage()) {
+      redirectToLogin('登录已过期，请重新登录');
+    } else {
+      clearToken();
     }
   }
 
@@ -159,17 +180,21 @@
       var info = getAdminInfo();
       var verified = localStorage.getItem(VERIFIED_KEY) === '1';
       return !!getToken() && verified && info && (
-        info.userType === 'admin' || info.role === 'admin' || info.role === 'super_admin'
+        info.userType === 'admin' ||
+        info.role === 'admin' ||
+        info.role === 'super_admin' ||
+        info.role === 'platform_admin' ||
+        info.identityCode === FIXED_ADMIN_CODE
       );
     },
     requireAuth: function () {
       if (!getToken()) {
-        window.location.replace('admin-login.html');
+        window.location.replace(adminLoginUrl());
         return false;
       }
       if (localStorage.getItem(VERIFIED_KEY) !== '1') {
         clearToken();
-        window.location.replace('admin-login.html');
+        window.location.replace(adminLoginUrl());
         return false;
       }
       var info = getAdminInfo();
@@ -177,18 +202,19 @@
         info.userType === 'admin' ||
         info.role === 'admin' ||
         info.role === 'super_admin' ||
-        info.identityCode === 'manager'
+        info.role === 'platform_admin' ||
+        info.identityCode === FIXED_ADMIN_CODE
       );
       if (!okRole) {
         clearToken();
-        window.location.replace('admin-login.html');
+        window.location.replace(adminLoginUrl());
         return false;
       }
       return true;
     },
     logout: function () {
       clearToken();
-      window.location.href = 'admin-login.html';
+      window.location.href = adminLoginUrl();
     }
   };
 
